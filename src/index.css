@@ -4,6 +4,18 @@ body {
   font-family: sans-serif;
 }
 
-.main-nav a {
+.header {
+  background-color: #d6edfc;
+}
+
+.header-nav a {
   margin-left: 10px;
+}
+
+.main {
+  background-color: #effce3;;
+}
+
+.footer {
+  background-color: #fcf0d6;
 }
