@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class Posters extends Component {
+class Register extends Component {
    render () {
       return (
          <div>
-            <h3>The Posters Component</h3>
+            <h3>The Register Component</h3>
          </div>
       )
    }
 }
 
-export default Posters;
+export default Register;
