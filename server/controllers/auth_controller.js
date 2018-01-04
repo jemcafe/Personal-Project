@@ -6,7 +6,7 @@ module.exports = {
         const { session } = req;                    // The session
         const { username, password } = req.body;    // The request body
 
-        // Compares the usernames and passwords for a match
+        // Compares the usernames and passwords to find the user
         const user = users.find( e => e.username === username && e.password === password );
         
         // If the user exists, the session object is returned
@@ -37,6 +37,6 @@ module.exports = {
         res.status(200).send( req.session );       // This line is just for unit testing
     },
     getUser: ( req, res, next ) => {
-        res.send(200).send( req.session.user );    // Gets the session user object
+        res.status(200).send( req.session.user );  // Gets the session user object. Needed for get user's 
     }
 }

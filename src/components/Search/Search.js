@@ -10,6 +10,11 @@ class Search extends Component {
                         <option value="">Category 2</option>
                         <option value="">Category 3</option>
                     </select>
+                    <select>
+                        <option value="">Category 1</option>
+                        <option value="">Category 2</option>
+                        <option value="">Category 3</option>
+                    </select>
                     <input className="search"/>
                     <button className="search-btn">search</button>
                 </span>

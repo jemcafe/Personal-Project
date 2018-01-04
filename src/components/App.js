@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import router from '../router';
 
 import Search from './Search/Search';
+import SignOut from './SignOut/SignOut';
 
 class App extends Component {
   render() {
@@ -17,7 +18,8 @@ class App extends Component {
                      <Link to="/games">Games</Link>
                      <Link to="/books">Books</Link>
                      <Link to="/posters">Posters</Link>
-                     <Link to="/signin">Sign In</Link> {/* The signin link will need to change to the user link after logging in */}
+                     <Link to="/signin">Sign In</Link>
+                     <SignOut />
                   </div>
                </nav>
             </div>
