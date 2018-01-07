@@ -18,7 +18,7 @@ const app = express();
 
 app.use( bodyParser.json() );
 app.use( cors() );
-app.use( session({   // Keeps track of logged in users
+app.use( session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true
@@ -33,11 +33,11 @@ app.post('/api/signout', authCntrl.signout);
 app.get('/api/user', authCntrl.getUser);
 
 app.get('/api/games/genres', searchGamesCntrl.getGenres);
-
 app.get('/api/books/subjects', searchBooksCntrl.getSubjects);
-app.get('/api/books/volumes', searchBooksCntrl.getVolumes);
-
 app.get('/api/posters/categories', searchPostersCntrl.getCategories);
+
+app.get('/api/games/games', searchGamesCntrl.getGames);
+app.get('/api/books/volumes', searchBooksCntrl.getVolumes);
 
 
 const port = process.env.PORT || 3000;

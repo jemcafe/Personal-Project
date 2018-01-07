@@ -7,7 +7,7 @@ class Search extends Component {
       super();
       this.state = {
          categoryONE: 'All',
-			categoryTWO: 'All',
+			categoryTWO: '',
 			categoryONElist: ['All', 'Games', 'Books', 'Posters'],
 			categoryTWOlist: [],
 			gameGenres: [],
@@ -42,8 +42,8 @@ class Search extends Component {
 	}
 
    handleCategoryChange ( property, val ) {
-      console.log(val);
-		this.setState({ property: val });
+      // console.log( val );
+      this.setState({ [property]: val });
 		
 		const { gameGenres, bookSubjects, posterCategories } = this.state;
 
@@ -61,7 +61,19 @@ class Search extends Component {
    }
 
    search () {
-      axios.get('/api/search?category');
+      let { categoryONE, userInput } = this.state;
+      // console.log( categoryONE );
+
+      if ( categoryONE === 'Games' ) {
+         axios.get(`http://localhost:3005/api/games/games`).then( res => {
+            console.log( res.data );
+         }).catch( console.log() ); 
+      }
+      if ( categoryONE === 'Books') {
+         axios.get(`http://localhost:3005/api/books/volumes?search=${ userInput }`).then( res => {
+            console.log( res.data );
+         }).catch( console.log() );
+      }
    }
 
    render () {
@@ -78,16 +90,18 @@ class Search extends Component {
       return (
          <div>
                <span>
-                  <select onChange={ (e) => this.handleCategoryChange('categoryONE', e.target.value) }>
+                  <select onChange={ (e) => this.handleCategoryChange("categoryONE", e.target.value) }>
                      { categories1 }
                   </select>
 
-                  <select onChange={ (e) => this.handleCategoryChange('categoryTWO', e.target.value) }>
+                  <select onChange={ (e) => this.handleCategoryChange("categoryTWO", e.target.value) }>
                      { categories2 }
                   </select>
 
-                  <input className="search-bar" onChange={ (e) => this.handleInputChange(e.target.value) }/>
-                  <Link to="/search"><button className="search-btn">Search</button></Link>
+                  <input className="search-bar" placeholder={ 'Search' } onChange={ (e) => this.handleInputChange(e.target.value) }/>
+                  <Link to="/search">
+                     <button className="search-btn" onClick={ () => this.search() }>Search</button>
+                  </Link>
                </span>
          </div>
       )
