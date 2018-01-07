@@ -60,6 +60,10 @@ class Search extends Component {
 		}
    }
 
+   search () {
+      axios.get('/api/search?category');
+   }
+
    render () {
 		const { categoryONElist, categoryTWOlist } = this.state;
 

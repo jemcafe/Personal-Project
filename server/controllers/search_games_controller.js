@@ -6,7 +6,7 @@ module.exports = {
       axios.get(`https://www.giantbomb.com/api/genres/?api_key=${process.env.GIANT_BOMB_KEY}&format=json`).then( resp => {
          const gameGenres = resp.data.results.map( e => e.name ).sort();
          const genres = ['All', ...gameGenres];
-         res.json( genres );
+         res.status(200).json( genres );
       }).catch( err => console.error(err) );
-   },
+   }
 }

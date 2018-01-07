@@ -14,7 +14,7 @@ module.exports = {
          session.user.username = username;       // The session ooject's username is updated
          res.status(200).json( session.user );   // The updated session user object is returned
       } else {
-         res.status(500).json('Unauthorized');   // A message if the user doesn't exist
+         res.status(401).json( 'Unauthorized' );   // A message if the user doesn't exist
       }
    },
    register ( req, res, next ) {
@@ -40,6 +40,10 @@ module.exports = {
    getUser ( req, res, next ) {
       const { session } = req;
       
-      res.status(200).json( session.user );  // Gets the session user object. Needed for get user's 
+      if ( session.user.username !== '' ) {
+         res.status(200).json( session.user );  // Gets the session user object. Needed for get user's 
+      } else {
+         res.status(404).json( 'Not Found' );
+      }
    }
 }
