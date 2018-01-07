@@ -2,14 +2,14 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 // Components
-import SignIn from './components/SignIn/SignIn';
-import Register from './components/Register/Register';
-// import UserAccount from './components/User/UserAccount/UserAccount';
 import HomePage from './components/HomePage/HomePage';
 import GamesPage from './components/GamesPage/GamesPage';
 import BooksPage from './components/BooksPage/BooksPage';
 import PostersPage from './components/PostersPage/PostersPage';
 import SearchPage from './components/SearchPage/SearchPage';
+import SignIn from './components/SignIn/SignIn';
+import Register from './components/Register/Register';
+// import UserAccount from './components/User/UserAccount/UserAccount';
 
 export default (
     <Switch>

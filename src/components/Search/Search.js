@@ -12,7 +12,7 @@ class Search extends Component {
 			categoryTWOlist: [],
 			gameGenres: [],
 			bookSubjects: [],
-			posterTypes: ['Traditional Art', 'Digital Art', 'Photography'],
+			posterCategories: [],
 			userInput: ''
       }
    }
@@ -30,10 +30,11 @@ class Search extends Component {
 			this.setState({ bookSubjects: res.data });
       }).catch( console.log() );
 		
-		// axios.get('http://localhost:3005/api/books/volumes').then( res => {
-		// 	console.log( res.data );
-		// 	// this.setState({ bookSubjects: res.data });
-      // }).catch( console.log() );
+		// Gets Poster Categories
+		axios.get('http://localhost:3005/api/posters/categories').then( res => {
+			console.log( res.data );
+			this.setState({ posterCategories: res.data });
+      }).catch( console.log() );
 	}
 	
 	handleInputChange ( val ) {
@@ -44,7 +45,7 @@ class Search extends Component {
       console.log(val);
 		this.setState({ property: val });
 		
-		const { gameGenres, bookSubjects, posterTypes } = this.state;
+		const { gameGenres, bookSubjects, posterCategories } = this.state;
 
 		if ( property === 'categoryONE' ) {
 			if ( val === 'Games' ) {
@@ -52,7 +53,7 @@ class Search extends Component {
 			} else if ( val === 'Books' ) {
 				this.setState({ categoryTWOlist: bookSubjects });
 			} else if ( val === 'Posters' ) {
-				this.setState({ categoryTWOlist: posterTypes });
+				this.setState({ categoryTWOlist: posterCategories });
 			} else {
 				this.setState({ categoryTWOlist: [] });
 			}

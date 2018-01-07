@@ -11,7 +11,7 @@ class App extends Component {
       return (
          <div>
             <div className= "header">
-               <nav className="header-nav">
+               <div className="header-nav">
                   <h2 className="header-title">MY SITE</h2>
                   <div>
                      <Search />
@@ -24,7 +24,7 @@ class App extends Component {
                      <SignOut />
                      <LinkChange />
                   </div>
-               </nav>
+               </div>
             </div>
 
             <div className="main">

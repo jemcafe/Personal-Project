@@ -12,6 +12,7 @@ const checkForSession = require('./middlewares/checkForSession');
 const authCntrl = require('./controllers/auth_controller');
 const searchGamesCntrl = require('./controllers/search_games_controller');
 const searchBooksCntrl = require('./controllers/search_books_controller');
+const searchPostersCntrl = require('./controllers/search_posters_controller');
 
 const app = express();
 
@@ -34,7 +35,9 @@ app.get('/api/user', authCntrl.getUser);
 app.get('/api/games/genres', searchGamesCntrl.getGenres);
 
 app.get('/api/books/subjects', searchBooksCntrl.getSubjects);
-app.get('/api/books/volumes/:search', searchBooksCntrl.getVolumes);
+app.get('/api/books/volumes', searchBooksCntrl.getVolumes);
+
+app.get('/api/posters/categories', searchPostersCntrl.getCategories);
 
 
 const port = process.env.PORT || 3000;
