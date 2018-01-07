@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class Search extends Component {
    constructor () {
@@ -29,10 +30,10 @@ class Search extends Component {
 			this.setState({ bookSubjects: res.data });
       }).catch( console.log() );
 		
-		axios.get('http://localhost:3005/api/books/volumes').then( res => {
-			console.log( res.data );
-			// this.setState({ bookSubjects: res.data });
-      }).catch( console.log() );
+		// axios.get('http://localhost:3005/api/books/volumes').then( res => {
+		// 	console.log( res.data );
+		// 	// this.setState({ bookSubjects: res.data });
+      // }).catch( console.log() );
 	}
 	
 	handleInputChange ( val ) {
@@ -61,7 +62,7 @@ class Search extends Component {
    render () {
 		const { categoryONElist, categoryTWOlist } = this.state;
 
-		// List of category options
+		// List of category options ( The list isn't changing, so using i for key is fine )
 		const categories1 = categoryONElist.map( (e, i) => {
 			return <option key={ i } value={ e }>{ e }</option>
 		});
@@ -81,7 +82,7 @@ class Search extends Component {
                   </select>
 
                   <input className="search-bar" onChange={ (e) => this.handleInputChange(e.target.value) }/>
-                  <button className="search-btn">Search</button>
+                  <Link to="/search"><button className="search-btn">Search</button></Link>
                </span>
          </div>
       )
