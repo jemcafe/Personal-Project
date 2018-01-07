@@ -4,9 +4,10 @@ import router from '../router';
 
 import Search from './Search/Search';
 import SignOut from './SignOut/SignOut';
+import LinkChange from './SignIn/LinkChange/LinkChange';
 
 class App extends Component {
-  render() {
+   render() {
       return (
          <div>
             <div className= "header">
@@ -19,7 +20,9 @@ class App extends Component {
                      <Link to="/books">Books</Link>
                      <Link to="/posters">Posters</Link>
                      <Link to="/signin">Sign In</Link>
+                     {/* <Link to="/useraccount">User Account</Link> */}
                      <SignOut />
+                     <LinkChange />
                   </div>
                </nav>
             </div>
@@ -33,7 +36,7 @@ class App extends Component {
             </div>
          </div>
       );
-  }
+   }
 }
 
 export default App;

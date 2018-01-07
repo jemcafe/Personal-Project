@@ -10,6 +10,8 @@ const checkForSession = require('./middlewares/checkForSession');
 
 // Controllers
 const authCntrl = require('./controllers/auth_controller');
+const searchGamesCntrl = require('./controllers/search_games_controller');
+const searchBooksCntrl = require('./controllers/search_books_controller');
 
 const app = express();
 
@@ -23,12 +25,16 @@ app.use( session({   // Keeps track of logged in users
 app.use( checkForSession );
 
 
-
+// Requests
 app.post('/api/signin', authCntrl.signin);
 app.post('/api/register', authCntrl.register);
 app.post('/api/signout', authCntrl.signout);
 app.get('/api/user', authCntrl.getUser);
 
+app.get('/api/games/genres', searchGamesCntrl.getGenres);
+
+app.get('/api/books/subjects', searchBooksCntrl.getSubjects);
+app.get('/api/books/volumes/:search', searchBooksCntrl.getVolumes);
 
 
 const port = process.env.PORT || 3000;

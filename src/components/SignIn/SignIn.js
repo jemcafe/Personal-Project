@@ -6,8 +6,7 @@ class SignIn extends Component {
    constructor () {
       super();
       this.state = {
-         username: '',
-         password: ''
+         username: ''
       }
    }
 
@@ -15,11 +14,12 @@ class SignIn extends Component {
       this.setState({ [property]: value });
    }
 
-   login () {
+   signin () {
       const body = { username: this.state.username, password: this.state.password };
       axios.post(`http://localhost:3005/api/signin`, body).then( res => {
          console.log( res.data );
-      }).catch( console.log() ); 
+         this.setState({ username: res.data.username });
+      }).catch( console.log() );
    }
 
    render () {
@@ -29,7 +29,7 @@ class SignIn extends Component {
             <div>
                <input className="login-input" placeholder="username" onChange={ (e) => this.handleChange('username', e.target.value) } />
                <input className="login-input" placeholder="password" onChange={ (e) => this.handleChange('password', e.target.value) } />
-               <button className="signin-btn" onClick={ () => this.login() }>Sign In</button>
+               <button className="signin-btn" onClick={ () => this.signin() }>Sign In</button>
                <Link to="/register"><button className="register-btn">Create Account</button></Link>
             </div>
          </div>

@@ -8,6 +8,7 @@ import Books from './components/Books/Books';
 import Posters from './components/Posters/Posters';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
+// import UserAccount from './components/User/UserAccount/UserAccount';
 
 export default (
     <Switch>
@@ -17,5 +18,6 @@ export default (
         <Route path="/posters" component={ Posters } />
         <Route path="/signin" component={ SignIn }/>
         <Route path="/register" component={ Register } />
+        {/* <Route path="/useraccount" component={ UserAccount } /> */}
     </Switch>
 )
