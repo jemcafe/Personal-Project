@@ -61,8 +61,7 @@ class Search extends Component {
    }
 
    search () {
-      let { categoryONE, userInput } = this.state;
-      // console.log( categoryONE );
+      let { categoryONE, categoryTWO, userInput } = this.state;
 
       if ( categoryONE === 'Games' ) {
          axios.get(`http://localhost:3005/api/games/games`).then( res => {
@@ -70,7 +69,7 @@ class Search extends Component {
          }).catch( console.log() ); 
       }
       if ( categoryONE === 'Books') {
-         axios.get(`http://localhost:3005/api/books/volumes?search=${ userInput }`).then( res => {
+         axios.get(`http://localhost:3005/api/books/volumes?search=${ userInput }&subject=${ categoryTWO }`).then( res => {
             console.log( res.data );
          }).catch( console.log() );
       }
