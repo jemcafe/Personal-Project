@@ -15,14 +15,13 @@ module.exports = {
 
       if ( search === '' ) {
          axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&field_list=name&limit=10`).then( resp => {
-            // const gameNames = resp.data.results.map( e => e.name );
-            res.status(200).json( resp.data.results );
+            const names = resp.data.results.map( e => e.name );
+            res.status(200).json( names );
          }).catch( err => console.error(err) );
       } else {
          axios.get(`https://www.giantbomb.com/api/search/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&query=${ search }&field_list=name&limit=10`).then( resp => {
-            // const gameNames = resp.data.results.map( e => e.name );
-            // res.status(200).json( gameNames );
-            res.status(200).json( resp.data.results );
+            const names = resp.data.results.map( e => e.name );
+            res.status(200).json( names );
          }).catch( err => console.error(err) );
       }
    }

@@ -4,11 +4,11 @@ import List from './List/List';
 class SearchPage extends Component {
    render () {
       return (
-         <div>
+         <div className="search-page">
             <h3>The Search Page</h3>
 
             <div className="search-results-wrapper">
-               <h5>Search Results</h5>
+               <h4>Search Results:</h4>
                <List />
             </div>
          </div>

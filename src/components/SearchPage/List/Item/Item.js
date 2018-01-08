@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-// import Item from '../Item/Item';
 
 function List (props) {
    const { searchResults } = props;
@@ -11,11 +9,8 @@ function List (props) {
    });
 
    return (
-      <div className="list-wrapper">
-         <h5>The List Component</h5>
-         <ul>
-            { list }
-         </ul>
+      <div className="item-wrapper">
+         
       </div>
    )
 }

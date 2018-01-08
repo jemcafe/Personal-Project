@@ -16,6 +16,21 @@ body {
   background-color: #effce3;;
 }
 
+.signin-wrapper {
+  max-width: 500px;
+  background-color: #fce3e3;
+}
+
+.register-wrapper {
+  max-width: 500px;
+  background-color: #fbe3fc;;
+}
+
+.list-wrapper {
+  max-width: 500px;
+  background-color: #fce3fa;
+}
+
 .footer {
   background-color: #fcf0d6;
 }

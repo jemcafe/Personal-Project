@@ -24,7 +24,7 @@ class SignIn extends Component {
 
    render () {
       return (
-         <div>
+         <div className="signin-wrapper">
             <h3>The SignIn Component</h3>
             <div>
                <input className="login-input" placeholder="username" onChange={ (e) => this.handleChange('username', e.target.value) } />

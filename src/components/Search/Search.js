@@ -81,12 +81,13 @@ class Search extends Component {
             console.log( this.props.searchResults );
          }).catch( console.log() );
       }
+      // else if ( categoryONE === 'Posters' ) {  }
    }
 
    render () {
       const { categoryONElist, categoryTWOlist } = this.state;
 
-		// List of category options ( The list isn't changing, so using i for the key is fine )
+		// List of category options ( The list order isn't changing, so using i for the key is fine )
 		const categories1 = categoryONElist.map( (e, i) => {
 			return <option key={ i } value={ e }>{ e }</option>
 		});

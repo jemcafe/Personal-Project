@@ -13,7 +13,6 @@ const authCntrl = require('./controllers/auth_controller');
 const searchGamesCntrl = require('./controllers/search_games_controller');
 const searchBooksCntrl = require('./controllers/search_books_controller');
 const searchPostersCntrl = require('./controllers/search_posters_controller');
-// const searchCntrl = require('./controllers/search_controller');
 
 const app = express();
 
