@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+import { updateSearchResults } from '../../ducks/reducer';
+
 class Search extends Component {
    constructor () {
       super();
@@ -62,12 +65,16 @@ class Search extends Component {
 
    search () {
       let { categoryONE, categoryTWO, userInput } = this.state;
+      const { updateSearchResults } = this.props;
 
       if ( categoryONE === 'Games' ) {
          axios.get(`http://localhost:3005/api/games/games?search=${ userInput }`).then( res => {
             console.log( res.data );
+            updateSearchResults( res.data );
+            console.log(this.props.searchResults);
          }).catch( console.log() ); 
-      } else if ( categoryONE === 'Books') {
+      }
+      else if ( categoryONE === 'Books') {
          axios.get(`http://localhost:3005/api/books/volumes?search=${ userInput }&subject=${ categoryTWO }`).then( res => {
             console.log( res.data );
          }).catch( console.log() );
@@ -75,7 +82,8 @@ class Search extends Component {
    }
 
    render () {
-		const { categoryONElist, categoryTWOlist } = this.state;
+      const { categoryONElist, categoryTWOlist } = this.state;
+      const { updateSearchResults } = this.props;
 
 		// List of category options ( The list isn't changing, so using i for the key is fine )
 		const categories1 = categoryONElist.map( (e, i) => {
@@ -106,4 +114,8 @@ class Search extends Component {
    }
 }
 
-export default Search;
+const mapStateToProps = ( state ) => {
+   return { searchResults: state.searchResults };
+};
+
+export default connect( mapStateToProps, { updateSearchResults } )( Search );
