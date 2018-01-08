@@ -32,7 +32,7 @@ app.post('/api/register', authCntrl.register);
 app.post('/api/signout', authCntrl.signout);
 app.get('/api/user', authCntrl.getUser);
 
-app.get('/api/games/genres', searchGamesCntrl.getGenres);
+app.get('/api/games/platforms', searchGamesCntrl.getPlatforms);
 app.get('/api/books/subjects', searchBooksCntrl.getSubjects);
 app.get('/api/posters/categories', searchPostersCntrl.getCategories);
 

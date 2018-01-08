@@ -10,49 +10,48 @@ class Search extends Component {
       super();
       this.state = {
          categoryONE: 'All',
-			categoryTWO: '',
-			categoryONElist: ['All', 'Games', 'Books', 'Posters'],
-			categoryTWOlist: [],
-			gameGenres: [],
-			bookSubjects: [],
-			posterCategories: [],
-			userInput: ''
+         categoryTWO: '',
+         categoryONElist: ['All', 'Games', 'Books', 'Posters'],
+         categoryTWOlist: [],
+         gamePlatforms: [],
+         bookSubjects: [],
+         posterCategories: [],
+         userInput: ''
       }
    }
 
    componentDidMount () {
-      // Gets the game genres list
-      // axios.get('http://localhost:3005/api/games/genres').then( res => {
-		// 	console.log( res.data );
-		// 	this.setState({ gameGenres: res.data });
-		// }).catch( console.log() );
-		
-		// Gets the book subjects list
-		axios.get('http://localhost:3005/api/books/subjects').then( res => {
-			console.log( res.data );
-			this.setState({ bookSubjects: res.data });
+      // Gets the game list of platform names
+      axios.get('http://localhost:3005/api/games/platforms').then( res => {
+         console.log( res.data );
+         // this.setState({ gamePlatforms: res.data });
       }).catch( console.log() );
 		
-		// Gets Poster Categories
-		axios.get('http://localhost:3005/api/posters/categories').then( res => {
-			console.log( res.data );
-			this.setState({ posterCategories: res.data });
+      // Gets the list book subjects
+      axios.get('http://localhost:3005/api/books/subjects').then( res => {
+         console.log( res.data );
+         this.setState({ bookSubjects: res.data });
       }).catch( console.log() );
-	}
+		
+      // Gets the list of poster categories
+      axios.get('http://localhost:3005/api/posters/categories').then( res => {
+         console.log( res.data );
+         this.setState({ posterCategories: res.data });
+      }).catch( console.log() );
+   }
 	
 	handleInputChange ( val ) {
 		this.setState({ userInput: val });
 	}
 
    handleCategoryChange ( property, val ) {
-      // console.log( val );
       this.setState({ [property]: val });
 		
-		const { gameGenres, bookSubjects, posterCategories } = this.state;
+		const { gamePlatforms, bookSubjects, posterCategories } = this.state;
 
 		if ( property === 'categoryONE' ) {
 			if ( val === 'Games' ) {
-				this.setState({ categoryTWOlist: gameGenres });
+				this.setState({ categoryTWOlist: gamePlatforms });
 			} else if ( val === 'Books' ) {
 				this.setState({ categoryTWOlist: bookSubjects });
 			} else if ( val === 'Posters' ) {
@@ -68,17 +67,19 @@ class Search extends Component {
       const { updateSearchResults } = this.props;
 
       if ( categoryONE === 'Games' ) {
-         axios.get(`http://localhost:3005/api/search/games?search=${ userInput }`).then( res => {
-            // console.log( res.data );
+         axios.get(`http://localhost:3005/api/search/games?search=${ userInput }&platform=${ categoryTWO }`).then( res => {
+
             updateSearchResults( res.data );
             console.log( this.props.searchResults );
+
          }).catch( console.log() ); 
       }
       else if ( categoryONE === 'Books') {
          axios.get(`http://localhost:3005/api/search/books?search=${ userInput }&subject=${ categoryTWO }`).then( res => {
-            // console.log( res.data );
+
             updateSearchResults( res.data );
             console.log( this.props.searchResults );
+
          }).catch( console.log() );
       }
       // else if ( categoryONE === 'Posters' ) {  }

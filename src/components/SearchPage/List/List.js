@@ -9,7 +9,7 @@ function List (props) {
    let list = searchResults.map( (e, i) => {
       return (
         <li key={ e.id }>
-            <Item title={ e.name } image={ e.image } description={ e.deck } />
+            <Item title={ e.name } image={ e.image } description={ e.description } />
         </li>
       )
 	});
@@ -19,9 +19,11 @@ function List (props) {
 			<h5>The List Component</h5>
 			<div className="items-wrapper">
 				<ul>
-					{ list.length === 0 ? 'No results' : list }
+					{/* { list.length === 0 ? 'No results' : list } */}
 				</ul>
 			</div>
+			<button className="previous-btn">Previous</button>
+			<button className="next-btn">Next</button>
 		</div>
 	)
 }

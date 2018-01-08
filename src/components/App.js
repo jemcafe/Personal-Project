@@ -13,7 +13,7 @@ class App extends Component {
             <div className= "header">
                <div className="header-wrapper panel">
                   <h2 className="header-title">MY SITE</h2>
-                  <div classname="nav">
+                  <div className="nav">
                      <Search />
                      <Link to="/">Home</Link>
                      <Link to="/games">Games</Link>
