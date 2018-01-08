@@ -10,7 +10,7 @@ class Search extends Component {
       super();
       this.state = {
          categoryONE: 'All',
-         categoryTWO: '',
+         categoryTWO: 'All',
          categoryONElist: ['All', 'Games', 'Books', 'Posters'],
          categoryTWOlist: [],
          gamePlatforms: [],

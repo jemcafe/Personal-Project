@@ -16,12 +16,11 @@ module.exports = {
    getGames ( req, res, next ) {
       const { search, platform } = req.query;
 
-      // Find the platform from the list of platforms then get the id to filter the search by platform (Giant Bomb uses ids instead of names)
+      // Giant Bomb uses ids instead of names to filter by platforms. Got the id from the list I made.
       const plat = gamePlatforms.find( e => e.platform === platform );
-      const platformId = plat.id;
-      const platformFilter = platform === '' ? '' : `&filter=platforms:${ plat.id }`;
+      const platformId = platform === 'All' ? '' : `${ plat.id }`;
 
-      axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json${ platformFilter }&limit=15&offest=0`).then( resp => {
+      axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=name:${ search },platforms:${ platformId }&limit=15&offest=0`).then( resp => {
       //    const data = [];
       //    resp.data.results.forEach( e => {
       //       data.push({
