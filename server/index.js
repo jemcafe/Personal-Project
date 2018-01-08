@@ -13,6 +13,7 @@ const authCntrl = require('./controllers/auth_controller');
 const searchGamesCntrl = require('./controllers/search_games_controller');
 const searchBooksCntrl = require('./controllers/search_books_controller');
 const searchPostersCntrl = require('./controllers/search_posters_controller');
+// const searchCntrl = require('./controllers/search_controller');
 
 const app = express();
 
@@ -36,8 +37,8 @@ app.get('/api/games/genres', searchGamesCntrl.getGenres);
 app.get('/api/books/subjects', searchBooksCntrl.getSubjects);
 app.get('/api/posters/categories', searchPostersCntrl.getCategories);
 
-app.get('/api/games/games', searchGamesCntrl.getGames);
-app.get('/api/books/volumes', searchBooksCntrl.getVolumes);
+app.get('/api/search/games', searchGamesCntrl.getGames);
+app.get('/api/search/books', searchBooksCntrl.getVolumes);
 
 
 const port = process.env.PORT || 3000;

@@ -68,22 +68,23 @@ class Search extends Component {
       const { updateSearchResults } = this.props;
 
       if ( categoryONE === 'Games' ) {
-         axios.get(`http://localhost:3005/api/games/games?search=${ userInput }`).then( res => {
-            console.log( res.data );
+         axios.get(`http://localhost:3005/api/search/games?search=${ userInput }`).then( res => {
+            // console.log( res.data );
             updateSearchResults( res.data );
-            console.log(this.props.searchResults);
+            console.log( this.props.searchResults );
          }).catch( console.log() ); 
       }
       else if ( categoryONE === 'Books') {
-         axios.get(`http://localhost:3005/api/books/volumes?search=${ userInput }&subject=${ categoryTWO }`).then( res => {
-            console.log( res.data );
+         axios.get(`http://localhost:3005/api/search/books?search=${ userInput }&subject=${ categoryTWO }`).then( res => {
+            // console.log( res.data );
+            updateSearchResults( res.data );
+            console.log( this.props.searchResults );
          }).catch( console.log() );
       }
    }
 
    render () {
       const { categoryONElist, categoryTWOlist } = this.state;
-      const { updateSearchResults } = this.props;
 
 		// List of category options ( The list isn't changing, so using i for the key is fine )
 		const categories1 = categoryONElist.map( (e, i) => {
