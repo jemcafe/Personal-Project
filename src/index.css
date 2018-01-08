@@ -4,6 +4,13 @@ body {
   font-family: sans-serif;
 }
 
+/* Keeps components in the center of the window when it stretches to far */
+.panel {
+  width: 900px;
+  margin: 0 auto;
+  background-color: #ffecf1;;
+}
+
 .header {
   background-color: #d6edfc;
 }
@@ -26,9 +33,22 @@ body {
   background-color: #fbe3fc;;
 }
 
-.list-wrapper {
+.search-page .results-list {
   max-width: 600px;
-  background-color: #fce3fa;
+  background-color: #d6edfc;
+}
+.search-page .results-list ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.search-page .items-wrapper {
+  width: 90%;
+  background-color: #f7dfff;
+  margin: 0 auto;
+}
+.search-page .results-item {
+  background-color: #fffcf0;
 }
 
 .footer {

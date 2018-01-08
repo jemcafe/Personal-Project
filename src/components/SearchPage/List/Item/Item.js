@@ -4,9 +4,9 @@ function Item (props) {
    const { title, image, description } = props;
 
    return (
-      <div className="item">
-         <div className="image-wrapper">
-            <img src={ image } alt="Cover image"/>
+      <div className="results-item">
+         <div className="image">
+            <img src={ image } alt="cover"/>
          </div>
          <p>Title: { title }</p>
          <p>{ description }</p>

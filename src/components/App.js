@@ -11,9 +11,9 @@ class App extends Component {
       return (
          <div>
             <div className= "header">
-               <div className="header-nav">
+               <div className="header-wrapper panel">
                   <h2 className="header-title">MY SITE</h2>
-                  <div>
+                  <div classname="nav">
                      <Search />
                      <Link to="/">Home</Link>
                      <Link to="/games">Games</Link>
@@ -28,11 +28,15 @@ class App extends Component {
             </div>
 
             <div className="main">
-               { router }
+                <div className="main-wrapper panel">
+                    { router }
+                </div>
             </div>
             
             <div className="footer">
-               <p>&copy; 2018 My Site</p>
+                <div className="footer-wrapper panel">
+                    <p>&copy; 2018 My Site</p>
+                </div>
             </div>
          </div>
       );
