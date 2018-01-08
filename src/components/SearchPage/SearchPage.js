@@ -9,7 +9,7 @@ class SearchPage extends Component {
 
             <div className="search-results-wrapper">
                <h4>Search Results:</h4>
-               <List />
+               {/* <List /> */}
             </div>
          </div>
       )

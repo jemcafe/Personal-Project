@@ -24,7 +24,7 @@ class Search extends Component {
       // Gets the game list of platform names
       axios.get('http://localhost:3005/api/games/platforms').then( res => {
          console.log( res.data );
-         // this.setState({ gamePlatforms: res.data });
+         this.setState({ gamePlatforms: res.data });
       }).catch( console.log() );
 		
       // Gets the list book subjects
