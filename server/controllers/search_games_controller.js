@@ -13,16 +13,20 @@ module.exports = {
    getGames ( req, res, next ) {
       const { search } = req.query;
 
-      if ( search === '' ) {
-         axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&field_list=name&limit=10`).then( resp => {
-            const names = resp.data.results.map( e => e.name );
-            res.status(200).json( names );
-         }).catch( err => console.error(err) );
-      } else {
-         axios.get(`https://www.giantbomb.com/api/search/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&query=${ search }&field_list=name&limit=10`).then( resp => {
-            const names = resp.data.results.map( e => e.name );
-            res.status(200).json( names );
-         }).catch( err => console.error(err) );
-      }
+      axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&limit=15&filter=name:${ search }`).then( resp => {
+         const data = [];
+         resp.data.results.forEach( e => {
+               data.push({
+                  id: e.id,
+                  name: e.name,
+                  image: e.image.thumb_url,
+                  deck: e.deck,
+                  description: e.description,
+                  releaseDate: e.original_release_date
+               });
+         });
+
+         res.status(200).json( data );
+      }).catch( err => console.error(err) );
    }
 }

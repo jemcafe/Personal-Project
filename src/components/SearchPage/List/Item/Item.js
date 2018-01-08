@@ -1,18 +1,17 @@
 import React from 'react';
 
-function List (props) {
-   const { searchResults } = props;
-
-   // List of category options ( The list order isn't changing, so using i for the key is fine )
-   let list = searchResults.map( (e, i) => {
-      return <li key={ i }>{ e }</li>;
-   });
+function Item (props) {
+   const { title, image, description } = props;
 
    return (
-      <div className="item-wrapper">
-         
+      <div className="item">
+         <div className="image-wrapper">
+            <img src={ image } alt="Cover image"/>
+         </div>
+         <p>Title: { title }</p>
+         <p>{ description }</p>
       </div>
    )
 }
 
-export default connect( state => state )( List );
+export default Item;

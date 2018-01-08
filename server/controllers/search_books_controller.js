@@ -13,7 +13,7 @@ module.exports = {
       
       let sub = subject === 'All' ? '' : subject;  // Google Books doesn't have an 'All' category, so it must be empty to search everything
 
-      axios.get(`https://www.googleapis.com/books/v1/volumes?q=${ search }+subject:${ sub }&maxResults=10&startIndex=0`).then( resp => {
+      axios.get(`https://www.googleapis.com/books/v1/volumes?q=${ search }+subject:${ sub }&maxResults=15&startIndex=0`).then( resp => {
          const volumeInfo = resp.data.items.map( (e) => e.volumeInfo.title );
          res.status(200).json( volumeInfo );
       }).catch( err => console.error(err) );
