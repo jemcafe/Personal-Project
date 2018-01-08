@@ -24,7 +24,6 @@ module.exports = [
     'Mathematics',
     'Medical',
     'Nature',
-    'Performing Art',
     'Philosophy',
     'Political Science',
     'Religion',

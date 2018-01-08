@@ -1,31 +1,21 @@
 const initialState = {
     username: '',
-    searchCategoryONEList: [],
-    searchCategoryTWOList: [],
-    searchCategoryONE: '',
-    searchCategoryTWO: ''
+    searchResults: []
 };
 
 // Action types
 const UPDATE_USERNAME = 'UPDATE_USERNAME';
-const UPDATE_SEARCH_CATEGORY_1_LIST = 'UPDATE_SEARCH_CATEGORY_1_LSIT';
-const UPDATE_SEARCH_CATEGORY_2_LIST = 'UPDATE_SEARCH_CATEGORY_2_LSIT';
-const UPDATE_SEARCH_CATEGORY_1 = 'UPDATE_SEARCH_CATEGORY_1';
-const UPDATE_SEARCH_CATEGORY_2 = 'UPDATE_SEARCH_CATEGORY_2';
+const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS';
 
 // reducer
 function reducer ( state = initialSate, action ) {
-    switch ( action.type ) {
+    let { type, payload } = action;
+
+    switch ( type ) {
         case UPDATE_USERNAME:
-            return { ...state, username: action.payload };
-        case UPDATE_SEARCH_CATEGORY_1_LIST:
-            return { ...state, searchCategoryONEList: action.payload };
-        case UPDATE_SEARCH_CATEGORY_2_LIST:
-            return { ...state, searchCategoryTWOList: action.payload };
-        case UPDATE_SEARCH_CATEGORY_1:
-            return { ...state, searchCategoryONE: action.payload };
-        case UPDATE_SEARCH_CATEGORY_2:
-            return { ...state, searchCategoryTWO: action.payload };
+            return { ...state, username: payload };
+        case UPDATE_SEARCH_RESULTS:
+            return { ...sate, searchResults: payload};
         default:
             return state;
     }
@@ -39,30 +29,9 @@ export function updateUsername ( username ) {
     }
 }
 
-export function updateSearchCategoryONEList ( searchCategoryONEList ) {
+export function updateSearchResults ( searchResults ) {
     return {
-        type: UPDATE_SEARCH_CATEGORY_1_LIST,
-        payload: searchCategoryONEList
-    }
-}
-
-export function updateSearchCategoryTWOList ( searchCategoryTWOList ) {
-    return {
-        type: UPDATE_SEARCH_CATEGORY_2_LIST,
-        payload: searchCategoryTWOList
-    }
-}
-
-export function updateSearchCategoryONE ( searchCategoryONE ) {
-    return {
-        type: UPDATE_SEARCH_CATEGORY_1,
-        payload: searchCategoryONE
-    }
-}
-
-export function updateSearchCategoryTWO ( searchCategoryTWO ) {
-    return {
-        type: UPDATE_SEARCH_CATEGORY_2,
-        payload: searchCategoryTWO
+        type: UPDATE_SEARCH_RESULTS,
+        payload: searchResults
     }
 }
