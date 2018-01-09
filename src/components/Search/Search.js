@@ -11,7 +11,7 @@ class Search extends Component {
       this.state = {
          categoryONE: 'All',
          categoryTWO: 'All',
-         categoryONElist: ['All', 'Games', 'Books', 'Posters'],
+         categoryONElist: ['All','Games', 'Books', 'Posters'],
          categoryTWOlist: [],
          gamePlatforms: [],
          bookSubjects: [],
@@ -97,21 +97,21 @@ class Search extends Component {
 		});
 
       return (
-         <div>
-               <span>
-                  <select onChange={ (e) => this.handleCategoryChange("categoryONE", e.target.value) }>
-                     { categories1 }
-                  </select>
+         <div className="search">
+            <span>
+            <select onChange={ (e) => this.handleCategoryChange("categoryONE", e.target.value) }>
+                { categories1 }
+            </select>
 
-                  <select onChange={ (e) => this.handleCategoryChange("categoryTWO", e.target.value) }>
-                     { categories2 }
-                  </select>
+            <select onChange={ (e) => this.handleCategoryChange("categoryTWO", e.target.value) }>
+                { categories2 }
+            </select>
 
-                  <input className="search-bar" placeholder={ 'Search' } onChange={ (e) => this.handleInputChange(e.target.value) }/>
-                  <Link to="/search">
-                     <button className="search-btn" onClick={ () => this.search() }>Search</button>
-                  </Link>
-               </span>
+            <input className="search-bar" placeholder={ 'Search' } onChange={ (e) => this.handleInputChange(e.target.value) }/>
+            <Link to="/search">
+                <button className="search-btn" onClick={ () => this.search() }>Search</button>
+            </Link>
+            </span>
          </div>
       )
    }

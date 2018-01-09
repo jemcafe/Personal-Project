@@ -20,19 +20,19 @@ module.exports = {
       const plat = gamePlatforms.find( e => e.platform === platform );
       const platformId = platform === 'All' ? '' : `${ plat.id }`;
 
-      axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=name:${ search },platforms:${ platformId }&limit=15&offest=0`).then( resp => {
-      //    const data = [];
-      //    resp.data.results.forEach( e => {
-      //       data.push({
-      //       id: e.id,
-      //       name: e.name,
-      //       image: e.image.thumb_url,
-      //       description: e.deck,
-      //       releaseDate: e.original_release_date
-      //       });
-      //    });
+      axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=name:${ search },platforms:${ platformId }&limit=18&offest=0`).then( resp => {
+         const data = [];
+         resp.data.results.forEach( e => {
+               data.push({
+               id: e.id,
+               name: e.name,
+               image: e.image.thumb_url,
+               description: e.deck,
+               releaseDate: e.original_release_date
+            });
+         });
 
-         res.status(200).json( resp.data.results );
+         res.status(200).json( data );
       }).catch( err => console.error(err) );
    }
 }

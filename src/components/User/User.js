@@ -3,8 +3,10 @@ import React, { component } from 'react';
 class User extends Component {
    render () {
       return (
-         <div>
-            <h3>The User Component</h3>
+         <div className="user">
+            <div className="user-container">
+                <div>The User Component</div>
+            </div>
          </div>
       )
    }

@@ -5,11 +5,11 @@ class SearchPage extends Component {
    render () {
       return (
          <div className="search-page">
-            <h3>The Search Page</h3>
+            <div className="search-page-container">
+                <div>The Search Page</div>
 
-            <div className="search-results-wrapper">
-               <h4>Search Results:</h4>
-               {/* <List /> */}
+                <div>Search Results:</div>
+                <List />
             </div>
          </div>
       )

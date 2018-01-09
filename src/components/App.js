@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './App.css';
 import { Link } from 'react-router-dom';
 import router from '../router';
 
@@ -9,18 +10,19 @@ import Search from './Search/Search';
 class App extends Component {
    render() {
       return (
-         <div>
+         <div className="App">
+
             <div className= "header">
-               <div className="header-wrapper panel">
-                  <h2 className="header-title">MY SITE</h2>
+               <div className="header-container panel">
+                  <div className="title">SITE NAME</div>
+                  <Search />
                   <div className="nav">
-                     <Search />
                      <Link to="/">Home</Link>
                      <Link to="/games">Games</Link>
                      <Link to="/books">Books</Link>
                      <Link to="/posters">Posters</Link>
                      <Link to="/signin">Sign In</Link>
-                     {/* <Link to="/useraccount">User Account</Link> */}
+                     {/* <Link to="/user">User</Link> */}
                      {/* <SignOut />
                      <LinkChange /> */}
                   </div>
@@ -28,16 +30,17 @@ class App extends Component {
             </div>
 
             <div className="main">
-                <div className="main-wrapper panel">
+                <div className="main-container panel">
                     { router }
                 </div>
             </div>
             
             <div className="footer">
-                <div className="footer-wrapper panel">
-                    <p>&copy; 2018 My Site</p>
+                <div className="footer-container panel">
+                    <div>&copy; 2018 My Site</div>
                 </div>
             </div>
+
          </div>
       );
    }

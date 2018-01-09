@@ -15,15 +15,17 @@ function List (props) {
 	});
 
 	return (
-		<div className="results-list">
-			<h5>The List Component</h5>
-			<div className="items-wrapper">
-				<ul>
-					{/* { list.length === 0 ? 'No results' : list } */}
-				</ul>
+		<div className="results">
+			<div className="results-container">
+				<div>The List Component</div>
+				<div className="list">
+					{ list.length === 0 ? 'No results' : <ul>{ list }</ul> }
+				</div>
+				<div className="prev-next-btn">
+					<button className="previous-btn">Previous</button>
+					<button className="next-btn">Next</button>
+				</div>
 			</div>
-			<button className="previous-btn">Previous</button>
-			<button className="next-btn">Next</button>
 		</div>
 	)
 }

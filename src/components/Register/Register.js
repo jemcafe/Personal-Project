@@ -23,12 +23,14 @@ class Register extends Component {
 
    render () {
       return (
-         <div className="register-wrapper">
-            <h3>The Register Component</h3>
-            <div>
-               <input className="register-input" placeholder="username" onChange={ (e) => this.handleChange('username', e.target.value) } />
-               <input className="register-input" placeholder="password" onChange={ (e) => this.handleChange('password', e.target.value) } />
-               <button className="register-btn" onClick={ () => this.register() }>Create Account</button>
+         <div className="register">
+            <div className="register-container">
+                <div>The Register Component</div>
+                <div>
+                <input className="register-input" placeholder="username" onChange={ (e) => this.handleChange('username', e.target.value) } />
+                <input className="register-input" placeholder="password" onChange={ (e) => this.handleChange('password', e.target.value) } />
+                <button className="register-btn" onClick={ () => this.register() }>Create Account</button>
+                </div>
             </div>
          </div>
       )

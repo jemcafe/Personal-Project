@@ -4,7 +4,9 @@ class PostersPage extends Component {
     render () {
         return (
             <div className="posters-page">
-                <h3>The Posters Page</h3>
+                <div className="posters-page-container">
+                    <div>The Posters Page</div>
+                </div>
             </div>
         )
     }

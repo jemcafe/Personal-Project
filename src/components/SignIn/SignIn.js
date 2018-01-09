@@ -24,13 +24,15 @@ class SignIn extends Component {
 
    render () {
       return (
-         <div className="signin-wrapper">
-            <h3>The SignIn Component</h3>
-            <div>
-               <input className="login-input" placeholder="username" onChange={ (e) => this.handleChange('username', e.target.value) } />
-               <input className="login-input" placeholder="password" onChange={ (e) => this.handleChange('password', e.target.value) } />
-               <button className="signin-btn" onClick={ () => this.signin() }>Sign In</button>
-               <Link to="/register"><button className="register-btn">Create Account</button></Link>
+         <div className="signin">
+            <div className="signin-container">
+               <div>The SignIn Component</div>
+               <div>
+                  <input className="login-input" placeholder="username" onChange={ (e) => this.handleChange('username', e.target.value) } />
+                  <input className="login-input" placeholder="password" onChange={ (e) => this.handleChange('password', e.target.value) } />
+                  <button className="signin-btn" onClick={ () => this.signin() }>Sign In</button>
+                  <Link to="/register"><button className="register-btn">Create Account</button></Link>
+               </div>
             </div>
          </div>
       )

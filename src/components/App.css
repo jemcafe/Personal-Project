@@ -1,0 +1,101 @@
+.App {
+    text-align: center;
+}
+
+.panel {
+  width: 900px;
+  margin: 0 auto;
+  background-color: rgb(252, 247, 201);
+}
+
+/*  Header  */
+
+.header {
+  background-color: #fccbd3;
+}
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  background-color: #faeac8;
+}
+.header .title {
+  background: #cbf8d6;
+}
+.header .search {
+  background-color: #f4cbfc;
+}
+.header .nav {
+  background-color: #ddecfd;
+}
+.header .nav a {
+  margin-left: 10px;
+}
+
+/*  Main Content  */
+
+.main {
+  /* min-height: 100vh; */
+  background-color: #cbf8d6;
+}
+
+.signin-container {
+  background-color: #fce3e3;
+}
+
+.register-container {
+  background-color: #fbe3fc;
+}
+
+.search-page .results {
+  /* display: flex;
+  justify-content: center; */
+  padding: 25px 100px;
+  box-sizing: border-box;
+  background-color: #f1cefa;
+}
+.search-page .results-container {
+  padding: 25px 35px;
+  background-color: #cefae9;
+}
+.search-page .list {
+  background-color: #f0d1ae;
+}
+.search-page .list ul {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 15px 25px;
+  margin: 0;
+}
+.search-page .item {
+  width: 175px;
+  height: 250px;
+  border: 1px solid gray;
+  margin: 8px;
+  background-color: #fcf6de;
+}
+.search-page .item-container {
+  background-color: #fcf6de;
+}
+.search-page .image {
+  background-color: #ebb3dd;
+}
+.search-page .info {
+  height: 65px;
+  background-color: #c8e2f8;
+}
+.search-page .prev-next-btn {
+  display: flex;
+  justify-content: center;
+  padding: 5px 10px;
+  background-color: #ebc3f5;
+}
+
+/*  Footer  */
+
+.footer {
+  background-color: #cbe4fc;
+}
