@@ -8,7 +8,7 @@ function Item (props) {
         <div className="item-container">
 
             <div className="image">
-                <img src={ image } alt="cover"/>
+                <img src={ image } alt="cover" />
             </div>
             <div className="info">
                 {/* <p>{ title }</p>

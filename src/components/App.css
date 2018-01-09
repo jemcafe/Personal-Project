@@ -40,8 +40,27 @@
   background-color: #cbf8d6;
 }
 
-.signin-container {
+.signin {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
   background-color: #fce3e3;
+}
+.signin-container {
+  padding: 20px 20px;
+  background-color: #d1d0f7;
+}
+.signin .signin-input {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #d0ecf7;
+}
+.signin .btn {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 .register-container {

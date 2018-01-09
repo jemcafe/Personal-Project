@@ -27,11 +27,13 @@ class SignIn extends Component {
          <div className="signin">
             <div className="signin-container">
                <div>The SignIn Component</div>
-               <div>
+               <div className="signin-input">
                   <input className="login-input" placeholder="username" onChange={ (e) => this.handleChange('username', e.target.value) } />
                   <input className="login-input" placeholder="password" onChange={ (e) => this.handleChange('password', e.target.value) } />
-                  <button className="signin-btn" onClick={ () => this.signin() }>Sign In</button>
-                  <Link to="/register"><button className="register-btn">Create Account</button></Link>
+                  <div className="btn">
+                    <button className="signin-btn" onClick={ () => this.signin() }>Sign In</button>
+                    <Link to="/register"><button className="register-btn">Create Account</button></Link>
+                  </div>
                </div>
             </div>
          </div>
