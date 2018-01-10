@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { updateSearchResults } from '../../ducks/reducer';
+import { updateSearchResults } from '../../redux/reducer';
 
 class Search extends Component {
    constructor () {

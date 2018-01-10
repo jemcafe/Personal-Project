@@ -17,6 +17,7 @@ function List (props) {
 	return (
 		<div className="results">
 			<div className="results-container">
+
 				<div>The List Component</div>
 				<div className="list">
 					{ list.length === 0 ? 'No results' : <ul>{ list }</ul> }
@@ -25,6 +26,7 @@ function List (props) {
 					<button className="previous-btn">Previous</button>
 					<button className="next-btn">Next</button>
 				</div>
+				
 			</div>
 		</div>
 	)

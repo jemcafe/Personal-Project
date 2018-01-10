@@ -7,12 +7,14 @@ function Item (props) {
       <div className="item">
         <div className="item-container">
 
-            <div className="image">
+            <div className="image-container">
                 <img src={ image } alt="cover" />
             </div>
             <div className="info">
-                {/* <p>{ title }</p>
-                <p>{ description }</p> */}
+                <div>Title</div>
+                <div>Rating</div>
+                <div>Date</div>
+                {/* <p>{ title }</p> */}
             </div>
 
         </div>
