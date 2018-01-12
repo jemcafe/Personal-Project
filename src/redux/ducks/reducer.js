@@ -1,10 +1,10 @@
 const initialState = {
-   username: '',
+   user: {},            // Will be the user session object
    searchResults: []
 };
 
 // Action types
-const UPDATE_USERNAME = 'UPDATE_USERNAME';
+const UPDATE_USER = 'UPDATE_USER';
 const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS';
 
 // Reducer
@@ -12,8 +12,8 @@ export default function reducer ( state = initialState, action ) {
    let { type, payload } = action;
 
    switch ( type ) {
-      case UPDATE_USERNAME:
-         return { ...state, username: payload };
+      case UPDATE_USER:
+         return { ...state, user: payload };
       case UPDATE_SEARCH_RESULTS:
          return { ...state, searchResults: payload };
       default:
@@ -22,10 +22,10 @@ export default function reducer ( state = initialState, action ) {
 }
 
 // Action creators
-export function updateUsername ( username ) {
+export function updateUsername ( user ) {
    return {
-      type: UPDATE_USERNAME,
-      payload: username
+      type: UPDATE_USER,
+      payload: user
    };
 }
 

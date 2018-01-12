@@ -5,11 +5,11 @@ import Item from './Item/Item';
 function List (props) {
    const { searchResults } = props;
 
-   // List of category options ( The list order isn't changing, so using i for the key is fine )
+   // List of category options
    let list = searchResults.map( (e, i) => {
       return (
         <li key={ e.id }>
-            <Item title={ e.name } image={ e.image } description={ e.description } />
+            <Item title={ e.name } image={ e.image } />
         </li>
       )
 	});
@@ -18,7 +18,7 @@ function List (props) {
 		<div className="results">
 			<div className="results-container">
 
-				<div>The List Component</div>
+				{/* <div>The List Component</div> */}
 				<div className="list">
 					{ list.length === 0 ? 'No results' : <ul>{ list }</ul> }
 				</div>

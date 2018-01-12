@@ -3,9 +3,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { updateSearchResults } from '../../redux/reducer';
+import { updateSearchResults } from '../../redux/ducks/reducer';
 
-class Search extends Component {
+class SearchBar extends Component {
    constructor () {
       super();
       this.state = {
@@ -21,22 +21,26 @@ class Search extends Component {
    }
 
    componentDidMount () {
-      // Gets the game list of platform names
-      axios.get('http://localhost:3005/api/games/platforms').then( res => {
+      // Gets the game platform names
+      axios.get('http://localhost:3030/api/game-platforms').then( res => {
          console.log( res.data );
          this.setState({ gamePlatforms: res.data });
       }).catch( console.log() );
 		
-      // Gets the list book subjects
-      axios.get('http://localhost:3005/api/books/subjects').then( res => {
+      // Gets the book subject names
+      axios.get('http://localhost:3030/api/book-subjects').then( res => {
          console.log( res.data );
          this.setState({ bookSubjects: res.data });
       }).catch( console.log() );
 		
-      // Gets the list of poster categories
-      axios.get('http://localhost:3005/api/posters/categories').then( res => {
+      // Gets the poster category names
+      axios.get('http://localhost:3030/api/poster-categories').then( res => {
          console.log( res.data );
          this.setState({ posterCategories: res.data });
+      }).catch( console.log() );
+
+      axios.get('http://localhost:3030/api/search/posters').then( res => {
+         console.log( res.data );
       }).catch( console.log() );
    }
 	
@@ -67,7 +71,7 @@ class Search extends Component {
       const { updateSearchResults } = this.props;
 
       if ( categoryONE === 'Games' ) {
-         axios.get(`http://localhost:3005/api/search/games?search=${ userInput }&platform=${ categoryTWO }`).then( res => {
+         axios.get(`http://localhost:3030/api/search/games?search=${ userInput }&platform=${ categoryTWO }`).then( res => {
 
             updateSearchResults( res.data );
             console.log( this.props.searchResults );
@@ -75,14 +79,20 @@ class Search extends Component {
          }).catch( console.log() ); 
       }
       else if ( categoryONE === 'Books') {
-         axios.get(`http://localhost:3005/api/search/books?search=${ userInput }&subject=${ categoryTWO }`).then( res => {
+         axios.get(`http://localhost:3030/api/search/books?search=${ userInput }&subject=${ categoryTWO }`).then( res => {
 
             updateSearchResults( res.data );
             console.log( this.props.searchResults );
 
          }).catch( console.log() );
+      } else if ( categoryONE === 'Posters' ) {
+         axios.get(`http://localhost:3030/api/search/posters?&category=${ categoryTWO }`).then( res => {
+
+            updateSearchResults( res.data );
+            console.log( this.props.searchResults );
+            
+         }).catch( console.log() );
       }
-      // else if ( categoryONE === 'Posters' ) {  }
    }
 
    render () {
@@ -99,11 +109,11 @@ class Search extends Component {
       return (
          <div className="search">
             <span>
-            <select onChange={ (e) => this.handleCategoryChange("categoryONE", e.target.value) }>
+            <select className="category-1" onChange={ (e) => this.handleCategoryChange("categoryONE", e.target.value) }>
                 { categories1 }
             </select>
 
-            <select onChange={ (e) => this.handleCategoryChange("categoryTWO", e.target.value) }>
+            <select className="category-2" onChange={ (e) => this.handleCategoryChange("categoryTWO", e.target.value) }>
                 { categories2 }
             </select>
 
@@ -121,4 +131,8 @@ const mapStateToProps = ( state ) => {
    return { searchResults: state.searchResults };
 };
 
-export default connect( mapStateToProps, { updateSearchResults } )( Search );
+const mapDispatchToProps = {
+    updateSearchResults: updateSearchResults
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( SearchBar );

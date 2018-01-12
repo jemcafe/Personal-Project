@@ -3,7 +3,7 @@ import './App.css';
 import { Link } from 'react-router-dom';
 import router from '../router';
 
-import Search from './Search/Search';
+import SearchBar from './SearchBar/SearchBar';
 // import SignOut from './SignOut/SignOut';
 // import LinkChange from './SignIn/LinkChange/LinkChange';
 
@@ -15,14 +15,14 @@ class App extends Component {
             <div className= "header">
                <div className="header-container panel">
                   <div className="title">SITE NAME</div>
-                  <Search />
+                  <SearchBar />
                   <div className="nav">
                      <Link to="/">Home</Link>
                      <Link to="/games">Games</Link>
                      <Link to="/books">Books</Link>
                      <Link to="/posters">Posters</Link>
                      <Link to="/signin">Sign In</Link>
-                     {/* <Link to="/user">User</Link> */}
+                     <Link to="/user">User Account</Link>
                      {/* <SignOut />
                      <LinkChange /> */}
                   </div>
