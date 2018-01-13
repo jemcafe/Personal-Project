@@ -6,7 +6,7 @@ const session = require('express-session');
 require('dotenv').config();
 
 // Middleware
-const checkForSession = require('./middlewares/checkForSession');
+// const checkForSession = require('./middlewares/checkForSession');
 
 // Controllers
 const authCntrl = require('./controllers/auth_controller');
@@ -16,23 +16,23 @@ const searchPostersCntrl = require('./controllers/search_posters_controller');
 
 const app = express();
 
-// massive( process.env.CONNECTION_STRING ).then( db => app.set('db', db) ).catch( err => console.log( 'error', err ) );
-
 app.use( bodyParser.json() );
 app.use( cors() );
 app.use( session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
-}));;
-app.use( checkForSession );
+}));
+// massive( process.env.CONNECTION_STRING ).then( db => app.set('db', db) ).catch( err => console.log( 'error', err ) );
+
+// app.use( checkForSession );
 
 
 
 // Requests
-app.post('/api/signin', authCntrl.signin);
+app.post('/api/login', authCntrl.login);
 app.post('/api/register', authCntrl.register);
-app.post('/api/signout', authCntrl.signout);
+app.post('/api/logout', authCntrl.logout);
 app.get('/api/user', authCntrl.getUser);
 
 app.get('/api/game-platforms', searchGamesCntrl.getPlatforms);

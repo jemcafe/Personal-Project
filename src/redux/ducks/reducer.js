@@ -4,7 +4,7 @@ const initialState = {
 };
 
 // Action types
-const UPDATE_USER = 'UPDATE_USER';
+const LOGIN = 'LOGIN';
 const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS';
 
 // Reducer
@@ -12,7 +12,7 @@ export default function reducer ( state = initialState, action ) {
    let { type, payload } = action;
 
    switch ( type ) {
-      case UPDATE_USER:
+      case LOGIN:
          return { ...state, user: payload };
       case UPDATE_SEARCH_RESULTS:
          return { ...state, searchResults: payload };
@@ -22,9 +22,9 @@ export default function reducer ( state = initialState, action ) {
 }
 
 // Action creators
-export function updateUsername ( user ) {
+export function login ( user ) {
    return {
-      type: UPDATE_USER,
+      type: 'LOGIN',
       payload: user
    };
 }

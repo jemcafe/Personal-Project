@@ -2,7 +2,7 @@ const users = require('../db_temp/users');
 let id = 1;
 
 module.exports = {
-   signin ( req, res, next ) {
+   login ( req, res, next ) {
       const { session } = req;                    // The session
       const { username, password } = req.body;    // The request body
 
@@ -31,7 +31,7 @@ module.exports = {
       session.user.username = username;
       res.status(200).json( session.user );
    },
-   signout ( req, res, next ) {
+   logout ( req, res, next ) {
       const { session } = req;
 
       session.destroy();                     // Ends the session

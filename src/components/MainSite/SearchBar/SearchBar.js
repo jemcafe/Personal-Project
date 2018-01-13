@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { updateSearchResults } from '../../redux/ducks/reducer';
+import { updateSearchResults } from '../../../redux/ducks/reducer';
 
 class SearchBar extends Component {
    constructor () {
@@ -39,6 +39,7 @@ class SearchBar extends Component {
          this.setState({ posterCategories: res.data });
       }).catch( console.log() );
 
+      // Gets all poster ( for test purposes )
       axios.get('http://localhost:3030/api/search/posters').then( res => {
          console.log( res.data );
       }).catch( console.log() );
@@ -90,7 +91,7 @@ class SearchBar extends Component {
 
             updateSearchResults( res.data );
             console.log( this.props.searchResults );
-            
+
          }).catch( console.log() );
       }
    }
