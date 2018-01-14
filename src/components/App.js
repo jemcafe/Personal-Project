@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import router from '../router/router';
 
 import MainSite from './MainSite/MainSite';
 
@@ -8,7 +9,7 @@ class App extends Component {
       return (
          <div className="App">
 
-            <MainSite />
+            { router }
 
          </div>
       );

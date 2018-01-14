@@ -62,13 +62,18 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding: 10px;
   background-color: #d0ecf7;
+}
+.login-input > div {
+  padding: 5px 0;
 }
 .login .btn {
   display: flex;
   justify-content: space-between;
-  padding: 5px;
+  /* padding: 5px; */
   box-sizing: border-box;
+  margin-top: 5px;
 }
 
 .register-container {
