@@ -117,7 +117,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 180px;
+  height: 183px;
   background-color: #ebb3dd;
 }
 .search-page .image-container img {  /*  The image stays within the container  */
@@ -145,6 +145,31 @@
   padding: 5px 200px;
   background-color: #ebc3f5;
 }
+
+.useraccount .header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  background-color: #fccbd9;
+}
+.useraccount .nav {
+  background-color: #ddecfd;
+}
+.useraccount .nav a {
+  margin-left: 10px;
+}
+.useraccount .main {
+  background-color: #cbf8d6;
+}
+.useraccount .profile-container {
+  background-color: #cbe4fc;
+}
+.useraccount .profile-pic {
+  max-width: 100px;
+  max-height: 100px;
+}=
 
 /*  Footer  */
 

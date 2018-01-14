@@ -1,15 +1,46 @@
 import React, { Component } from 'react';
 import './App.css';
-import router from '../router/router';
+import { Link } from 'react-router-dom';
+import routes from '../router/router';
 
-import MainSite from './MainSite/MainSite';
+import SearchBar from './SearchBar/SearchBar';
 
 class App extends Component {
    render() {
       return (
          <div className="App">
 
-            { router }
+            <header className= "header">
+                <div className="header-container panel">
+
+                    <Link to="/"><div className="title">SITE NAME</div></Link>
+                    <SearchBar />
+                    <div className="nav">
+                        <Link to="/">Home</Link>
+                        <Link to="/games">Games</Link>
+                        <Link to="/books">Books</Link>
+                        <Link to="/posters">Posters</Link>
+                        <Link to="/login">Login</Link>
+                    </div>
+
+                </div>
+            </header>
+
+            <main className="main">
+                <div className="main-container panel">
+
+                    { routes }
+
+                </div>
+            </main>
+            
+            <footer className="footer">
+                <div className="footer-container panel">
+
+                    <div>&copy; 2018 My Site</div>
+
+                </div>
+            </footer>
 
          </div>
       );
