@@ -10,35 +10,35 @@
 
 /*  Header  */
 
-.header {
+.main-header {
   background-color: #fccbd3;
 }
-.header-container {
+.main-header-container {
   display: flex;
   justify-content: space-between;
   padding: 10px 20px;
   box-sizing: border-box;
   background-color: #f8e4ba;
 }
-.header .title {
+.main-header .title {
   background: #cbf8d6;
 }
-.header .search {
+.main-header .search {
   background-color: #f4cbfc;
 }
-.header .search .category-1 {
+.main-header .search .category-1 {
   width: 75px;
 }
-.header .search .category-2 {
+.main-header .search .category-2 {
   width: 125px;
 }
-.header .search .search-bar {
+.main-header .search .search-bar {
   width: 150px;
 }
-.header .nav {
+.main-header .nav {
   background-color: #ddecfd;
 }
-.header .nav a {
+.main-header .nav a {
   margin-left: 10px;
 }
 
@@ -148,7 +148,7 @@
 
 .useraccount .header-container {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   padding: 10px 20px;
   box-sizing: border-box;
@@ -163,13 +163,26 @@
 .useraccount .main {
   background-color: #cbf8d6;
 }
-.useraccount .profile-container {
-  background-color: #cbe4fc;
-}
 .useraccount .profile-pic {
   max-width: 100px;
   max-height: 100px;
-}=
+  border-radius: 50%;
+}
+.useraccount .profile-container {
+  background-color: #cbe4fc;
+}
+.useraccount .posts-container {
+  background-color: #cbe4fc;
+}
+.useraccount .following-container {
+  background-color: #cbe4fc;
+}
+.useraccount .cart-container {
+  background-color: #cbe4fc;
+}
+.useraccount .settings-container {
+  background-color: #cbe4fc;
+}
 
 /*  Footer  */
 

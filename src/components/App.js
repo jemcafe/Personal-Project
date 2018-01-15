@@ -10,8 +10,8 @@ class App extends Component {
       return (
          <div className="App">
 
-            <header className= "header">
-                <div className="header-container panel">
+            <header className="main-header">
+                <div className="main-header-container panel">
 
                     <Link to="/"><div className="title">SITE NAME</div></Link>
                     <SearchBar />
@@ -21,6 +21,7 @@ class App extends Component {
                         <Link to="/books">Books</Link>
                         <Link to="/posters">Posters</Link>
                         <Link to="/login">Login</Link>
+                        <Link to="/user">UserAccount</Link>  {/* The login and account link will toggle */}
                     </div>
 
                 </div>

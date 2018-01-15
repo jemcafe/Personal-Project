@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function Item (props) {
    const { title, image } = props;
 
-   let shortTitle = title.length > 22 ? `${title.slice(0,22).trim()}...` : title;
+   let shortTitle = title.length > 20 ? `${title.slice(0,20).trim()}...` : title;
 
    return (
       <div className="item">

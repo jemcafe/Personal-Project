@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Item from './Item/Item';
 
 function List (props) {
@@ -17,8 +16,8 @@ function List (props) {
 	return (
 		<div className="results">
 			<div className="results-container">
+			{/* <div>The List Component</div> */}
 
-				{/* <div>The List Component</div> */}
 				<div className="list">
 					{ list.length === 0 ? 'No results' : <ul>{ list }</ul> }
 				</div>
@@ -32,4 +31,4 @@ function List (props) {
 	)
 }
 
-export default connect( state => state )( List );
+export default List;

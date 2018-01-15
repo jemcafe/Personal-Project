@@ -6,7 +6,7 @@ const session = require('express-session');
 require('dotenv').config();
 
 // Middleware
-// const checkForSession = require('./middlewares/checkForSession');
+const checkForSession = require('./middlewares/checkForSession');
 
 // Controllers
 const authCntrl = require('./controllers/auth_controller');
@@ -25,11 +25,10 @@ app.use( session({
 }));
 // massive( process.env.CONNECTION_STRING ).then( db => app.set('db', db) ).catch( err => console.log( 'error', err ) );
 
-// app.use( checkForSession );
+app.use( checkForSession );
 
 
-
-// Requests
+// Auth
 app.post('/api/login', authCntrl.login);
 app.post('/api/register', authCntrl.register);
 app.post('/api/logout', authCntrl.logout);
