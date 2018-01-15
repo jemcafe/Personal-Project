@@ -16,12 +16,21 @@ class App extends Component {
                     <Link to="/"><div className="title">SITE NAME</div></Link>
                     <SearchBar />
                     <div className="nav">
-                        <Link to="/">Home</Link>
-                        <Link to="/games">Games</Link>
-                        <Link to="/books">Books</Link>
-                        <Link to="/posters">Posters</Link>
-                        <Link to="/login">Login</Link>
-                        <Link to="/user">UserAccount</Link>  {/* The login and account link will toggle */}
+                        <Link to="/" className="link">Home</Link>
+                        <Link to="/games" className="link">Games</Link>
+                        <Link to="/books" className="link">Books</Link>
+                        <Link to="/posters" className="link">Posters</Link>
+                        <Link to="/login" className="link">Login</Link>
+                        <div className="dropdown link">
+                            <Link to="/user" className="droplink">UserAccount</Link>  {/* The login and account link will toggle */}
+                            <div className="dropdown-content">
+                                <Link to="/user">Profile</Link>
+                                <Link to="/user/posts">Posts</Link>
+                                <Link to="/user/following">Following</Link>
+                                <Link to="/user/cart">Cart</Link>
+                                <Link to="/user/settings">Settings</Link>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

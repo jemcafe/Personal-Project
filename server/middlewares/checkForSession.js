@@ -1,7 +1,13 @@
 module.exports = ( req, res, next ) => {
-   if ( !req.session.user ) {  // Check if the session has a user object
-      req.session.user = { username: '', cart: [] };
-   }
+    if ( !req.session.user ) {  // Check if the session object exists
+        req.session.user = { 
+            username: '',
+            posts: [],
+            following: [],
+            cart: [],
+            settings: {}
+        };
+    }
 
-   next();  // Move on to the next middleware
+    next();  // Move on
 }

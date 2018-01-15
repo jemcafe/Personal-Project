@@ -11,9 +11,11 @@ class UserAccount extends Component {
                 <div className="header">
                     <div className="header-container">
 
-                        <img className="profile-pic" src="http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png" alt="User pic"/>
+                        <div className="profile-pic">
+                            <img className="picture" src="http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png" alt="User pic"/>
+                            <div>USERNAME</div>
+                        </div>
                         <div className="nav">
-                            <Link to="/user">Profile</Link>
                             <Link to="/user/posts">Posts</Link>
                             <Link to="/user/following">Following</Link>
                             <Link to="/user/cart">Cart</Link>

@@ -22,17 +22,24 @@ class Login extends Component {
 
    login () {
       const body = { username: this.state.username, password: this.state.password };
-      axios.post(`http://localhost:3030/api/login`, body).then( res => {
+      axios.post(`/api/login`, body).then( res => {
          console.log( res.data );
          // this.setState({ username: res.data.username });
       }).catch( console.log() );
    }
 
-   // getUser () {
-   //    axios.get(`http://localhost:3030/api/user`).then( res => {
-   //       console.log( res.data );
-   //    }).catch( console.log() );
-   // }
+   logout () {
+      axios.post(`/api/logout`).then( res => {
+         console.log( res.data );
+         // this.setState({ username: res.data.username });
+      }).catch( console.log() );
+   }
+
+   getUser () {
+      axios.get(`/api/user`).then( res => {
+         console.log( res.data );
+      }).catch( console.log() );
+   }
 
    render () {
       return (
@@ -44,10 +51,11 @@ class Login extends Component {
                   <div><input className="username" placeholder="username" onChange={ (e) => this.handleChange('username', e.target.value) } /></div>
                   <div><input className="password" placeholder="password" onChange={ (e) => this.handleChange('password', e.target.value) } /></div>
                   <div className="btn">
-                     {/* <button className="login-btn" onClick={ () => this.login() }>Sign In</button> */}
-                     <button className="login-btn">Sign In</button>
+                     <button className="login-btn" onClick={ () => this.login() }>Sign In</button>
+                     {/* <button className="login-btn">Sign In</button> */}
                      <Link to="/register"><button className="register-btn">Create Account</button></Link>
-                     {/* <button className="check-btn" onClick={ () => this.getUser() }>Check for User</button> */}
+                     <button className="check-btn" onClick={ () => this.logout() }>logout</button>
+                     <button className="check-btn" onClick={ () => this.getUser() }>Check for User</button>
                   </div>
                </div>
 

@@ -5,17 +5,19 @@ let id = 1;
 
 module.exports = {
     login ( req, res, next ) {
-        const { username, password } = req.body;    // The request body
+        const { session } = req;
+        // Request body
+        const { username, password } = req.body;
 
         // Compares the usernames and passwords to find the user
         const user = users.find( e => e.username === username && e.password === password );
         
         // If the user exists, the session object is returned
         if ( user ) {
-            req.session.user.username = username;
-            res.status(200).json( req.session.user );   // The updated session user object is returned
+            session.user.username = username;
+            res.status(200).json( session.user );   // The updated session user object is returned
         } else {
-            res.status(401).json( 'Unauthorized' );   // A message if the user doesn't exist
+            res.status(401).json( 'Unauthorized' ); // A message if the user doesn't exist
         }
     },
 
@@ -37,8 +39,8 @@ module.exports = {
     logout ( req, res, next ) {
         const { session } = req;
 
-        session.destroy();                     // Ends the session
-        res.status(200).json( session );       // This line is just for unit testing
+        session.destroy();                         // Ends the session
+        res.status(200).json( session );           // This line is just for unit testing
     },
 
     getUser ( req, res, next ) {

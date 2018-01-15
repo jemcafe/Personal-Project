@@ -16,7 +16,7 @@ class Register extends Component {
 
    register () {
       const body = { username: this.state.username, password: this.state.password };
-      axios.post(`http://localhost:3005/api/register`, body).then( res => {
+      axios.post(`/api/register`, body).then( res => {
          console.log( res.data );
       }).catch( console.log() );
    }

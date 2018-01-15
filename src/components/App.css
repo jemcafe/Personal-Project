@@ -16,7 +16,7 @@
 .main-header-container {
   display: flex;
   justify-content: space-between;
-  padding: 10px 20px;
+  align-items: center;
   box-sizing: border-box;
   background-color: #f8e4ba;
 }
@@ -36,10 +36,49 @@
   width: 150px;
 }
 .main-header .nav {
+  display: flex;
+  justify-content: space-between;
   background-color: #ddecfd;
 }
+/* Removes link underlines */
 .main-header .nav a {
-  margin-left: 10px;
+  text-decoration: none;
+}
+/* Each link will have this style */
+.link {
+  background-color: #4CAF50;
+  color: white;
+  padding: 6px;
+  border: none;
+}
+/* The container <div> - needed to position the dropdown content */
+.main-header .dropdown {
+  position: relative;
+  display: inline-block;
+}
+/* Dropdown Content (Hidden by Default) */
+.main-header .dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+/* Links inside the dropdown */
+.main-header .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  display: block;
+}
+/* Color change on hover for links */
+.main-header .dropdown-content a:hover {
+  background-color: #f1f1f1
+}
+/* Show the dropdown menu on hover */
+.main-header .dropdown:hover .dropdown-content {
+  display: block;
 }
 
 /*  Main Content  */
@@ -163,10 +202,14 @@
 .useraccount .main {
   background-color: #cbf8d6;
 }
-.useraccount .profile-pic {
+.useraccount .profile-pic .picture {
   max-width: 100px;
   max-height: 100px;
+  border: 1px solid gray;
   border-radius: 50%;
+}
+.useraccount .profile-pic {
+  background-color: #cbfcde;
 }
 .useraccount .profile-container {
   background-color: #cbe4fc;
