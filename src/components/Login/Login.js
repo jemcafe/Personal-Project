@@ -24,14 +24,11 @@ class Login extends Component {
         const body = { username: this.state.username, password: this.state.password };
         axios.post(`/api/login`, body).then( res => {
             console.log( res.data );
-            this.props.login( res.data );
-        }).catch( console.log() );
-    }
-
-    logout () {
-        axios.post(`/api/logout`).then( res => {
-            console.log( res.data );
-            // this.setState({ username: res.data.username });
+            // If there is user data, update user in redux and got to home page
+            if ( res.data ) {
+                this.props.login( res.data );
+                this.props.history.push('/');
+            }
         }).catch( console.log() );
     }
 
@@ -55,7 +52,6 @@ class Login extends Component {
                         <button className="login-btn" onClick={ () => this.login() }>Sign In</button>
                         {/* <button className="login-btn">Sign In</button> */}
                         <Link to="/register"><button className="register-btn">Create Account</button></Link>
-                        {/* <button className="logout-btn" onClick={ () => this.logout() }>logout</button> */}
                         <button className="check-btn" onClick={ () => this.getUser() }>Check for User</button>
                     </div>
                 </div>

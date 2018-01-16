@@ -1,21 +1,28 @@
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS GamePlatforms;
+DROP TABLE IF EXISTS BookSubjects;
+DROP TABLE IF EXISTS PosterCategories;
+-- DROP TABLE IF EXISTS Posters;
+-- DROP TABLE IF EXISTS Cart;
+DROP TABLE IF EXISTS Posts;
+-- DROP TABLE IF EXISTS Comments;
+
 CREATE TABLE Users (
-    id SERIAL,
-    username VARCHAR UNIQUE,
-    password VARCHAR,
+    id SERIAL PRIMARY KEY,
+    username TEXT,
+    password TEXT,
     auth_id TEXT,
-    pictureURL TEXT,
-    email TEXT,
-    name TEXT
+    name TEXT,
+    imageURL TEXT
 );
-INSERT INTO Users (username, password, auth_id, pictureURL, email, name)
-VALUES
-('a', 'b', null, null, email@email.com, 'A')
+INSERT INTO Users (username, password, auth_id, name, imageURL) VALUES
+('a', 'b', null, 'A', null);
 
 
 CREATE TABLE GamePlatforms (
-    id SERIAL,
+    id SERIAL PRIMARY KEY,
     gbId INTEGER,
-    platform TEXT,
+    platform TEXT
 );
 INSERT INTO GamePlatforms (gbId, platform) VALUES
 (117, 'Nintendo 3Ds'),
@@ -34,8 +41,8 @@ INSERT INTO GamePlatforms (gbId, platform) VALUES
 
 
 CREATE TABLE BookSubjects (
-    id SERIAL,
-    subject TEXT,
+    id SERIAL PRIMARY KEY,
+    subject TEXT
 );
 INSERT INTO BookSubjects (subject) VALUES
 ('Art'),
@@ -46,7 +53,6 @@ INSERT INTO BookSubjects (subject) VALUES
 ('Botany'),
 ('British'),
 ('Computers'),
-('Comics & Graphic Novels'),
 ('Cosmic physics'),
 ('Education'),
 ('Family & Relationships'),
@@ -73,8 +79,8 @@ INSERT INTO BookSubjects (subject) VALUES
 
 
 CREATE TABLE PosterCategories (
-    id SERIAL,
-    category TEXT,
+    id SERIAL PRIMARY KEY,
+    category TEXT
 );
 INSERT INTO PosterCategories (category) VALUES
 ('Digital Art'),
@@ -82,34 +88,39 @@ INSERT INTO PosterCategories (category) VALUES
 ('Photography');
 
 
-CREATE TABLE Posters (
-    id SERIAL,
-    name TEXT,
-    imageURL TEXT,
-    description TEXT,
-    categoryId INTEGER REFERENCES poster_categories (id),
-    price DECIMAL,
-    userId INTEGER REFERENCES users (id)
-);
+-- CREATE TABLE Posters (
+--     id SERIAL PRIMARY KEY,
+--     name TEXT,
+--     imageURL TEXT,
+--     description TEXT,
+--     categoryId INTEGER REFERENCES PosterCategories (id),
+--     price DECIMAL,
+--     datePosted TEXT,
+--     userId INTEGER REFERENCES Users (id)
+-- );
+
+-- CREATE TABLE Cart (
+--     id SERIAL PRIMARY KEY,
+--     name TEXT,
+--     price DECIMAL,
+--     imageURL TEXT,
+--     quantity INTEGER,
+--     userId INTEGER REFERENCES Users (id)
+-- );
 
 CREATE TABLE Posts (
-    id SERIAL,
+    id SERIAL PRIMARY KEY,
     title TEXT,
     text TEXT,
     imageURL TEXT,
     datePosted TEXT,
-    userId INTEGER REFERENCES users (id)
+    userId INTEGER REFERENCES Users (id)
 );
 
-CREATE TABLE Comments (
-    id SERIAL,
-    text TEXT,
-    datePosted TEXT,
-    postId INTEGER REFERENCES posts (id),
-    userId INTEGER REFERENCES users (id)
-)
-
-CREATE TABLE Cart (
-    id SERIAL,
-    userId INTEGER REFERENCES users (id)
-)
+-- CREATE TABLE Comments (
+--     id SERIAL PRIMARY KEY,
+--     text TEXT,
+--     datePosted TEXT,
+--     postId INTEGER REFERENCES Posts (id),
+--     userId INTEGER REFERENCES Users (id)
+-- );

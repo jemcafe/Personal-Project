@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Login from '../Login/Login';
 
 class UserAccount extends Component {
-
     render () {
+        const { user } = this.props;
+
+        // const accessAccount = null;
+
         return (
             <div className="useraccount">
                 <div className="useraccount-container">
@@ -40,4 +45,4 @@ class UserAccount extends Component {
     }
 }
 
-export default UserAccount;
+export default connect( state => state )( UserAccount );

@@ -19,7 +19,7 @@ module.exports = {
                data.push({
                   id: e.id,
                   name: e.volumeInfo.title,
-                  image: e.volumeInfo.imageLinks.thumbnail,
+                  image: e.volumeInfo.imageLinks.thumbnail || null,
                   description: e.volumeInfo.description,
                   publishedDate: e.volumeInfo.publishedDate
                });

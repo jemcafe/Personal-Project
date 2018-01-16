@@ -17,21 +17,23 @@ class MainHeader extends Component {
 
     render () {
         const { user } = this.props;
+        
+        // If there is a user, the login link changes to the account link
         const linkChange = !user ? (
-            <Link to="/login" className="link">Login</Link>
-        ) : (
-            <div className="dropdown link">
-                <Link to="/user" className="droplink">UserAccount</Link>
-                <div className="dropdown-content">
-                    <Link to="/user">Profile</Link>
-                    <Link to="/user/posts">Posts</Link>
-                    <Link to="/user/following">Following</Link>
-                    <Link to="/user/cart">Cart</Link>
-                    <Link to="/user/settings">Settings</Link>
-                    <Link to="/login" onClick={ () => this.logout() }>Signout</Link>
-                </div>
-            </div>
-        );
+                                <Link to="/login" className="link">Login</Link>
+                            ) : (
+                                <div className="dropdown link">
+                                    <Link to="/user" className="droplink">UserAccount</Link>
+                                    <div className="dropdown-content">
+                                        <Link to="/user">Profile</Link>
+                                        <Link to="/user/posts">Posts</Link>
+                                        <Link to="/user/following">Following</Link>
+                                        <Link to="/user/cart">Cart</Link>
+                                        <Link to="/user/settings">Settings</Link>
+                                        <Link to="/login" onClick={ () => this.logout() }>Signout</Link>
+                                    </div>
+                                </div>
+                            );
 
         return (
             <header className="main-header">

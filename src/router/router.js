@@ -31,11 +31,11 @@ export default (
         
         <Route path="/user" render={ () => (
             <UserAccount>
-                <Route exact path="/user" component= { Profile } />
-                <Route path="/user/posts" component= { Posts } />
-                <Route path="/user/following" component= { Following } />
-                <Route path="/user/cart" component= { Cart } />
-                <Route path="/user/settings" component= { Settings } />
+                <Route exact path="/user" component={ Profile } />
+                <Route path="/user/posts" component={ Posts } />
+                <Route path="/user/following" component={ Following } />
+                <Route path="/user/cart" component={ Cart } />
+                <Route path="/user/settings" component={ Settings } />
             </UserAccount>
         ) } />
     </Switch>
