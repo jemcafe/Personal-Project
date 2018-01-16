@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { updateSearchResults } from '../../redux/ducks/reducer';
+import { updateSearchResults } from '../../../redux/ducks/reducer';
 
 class SearchBar extends Component {
    constructor () {
@@ -22,25 +22,25 @@ class SearchBar extends Component {
 
    componentDidMount () {
       // Gets the game platform names
-      axios.get('http://localhost:3030/api/game-platforms').then( res => {
+      axios.get('/api/game-platforms').then( res => {
          console.log( res.data );
          this.setState({ gamePlatforms: res.data });
       }).catch( console.log() );
 		
       // Gets the book subject names
-      axios.get('http://localhost:3030/api/book-subjects').then( res => {
+      axios.get('/api/book-subjects').then( res => {
          console.log( res.data );
          this.setState({ bookSubjects: res.data });
       }).catch( console.log() );
 		
       // Gets the poster category names
-      axios.get('http://localhost:3030/api/poster-categories').then( res => {
+      axios.get('/api/poster-categories').then( res => {
          console.log( res.data );
          this.setState({ posterCategories: res.data });
       }).catch( console.log() );
 
       // Gets all poster ( for test purposes )
-      axios.get('http://localhost:3030/api/search/posters').then( res => {
+      axios.get('/api/search/posters').then( res => {
          console.log( res.data );
       }).catch( console.log() );
    }
@@ -72,7 +72,7 @@ class SearchBar extends Component {
       const { updateSearchResults } = this.props;
 
       if ( categoryONE === 'Games' ) {
-         axios.get(`http://localhost:3030/api/search/games?search=${ userInput }&platform=${ categoryTWO }`).then( res => {
+         axios.get(`/api/search/games?search=${ userInput }&platform=${ categoryTWO }`).then( res => {
 
             updateSearchResults( res.data );
             console.log( this.props.searchResults );
@@ -80,14 +80,14 @@ class SearchBar extends Component {
          }).catch( console.log() ); 
       }
       else if ( categoryONE === 'Books') {
-         axios.get(`http://localhost:3030/api/search/books?search=${ userInput }&subject=${ categoryTWO }`).then( res => {
+         axios.get(`/api/search/books?search=${ userInput }&subject=${ categoryTWO }`).then( res => {
 
             updateSearchResults( res.data );
             console.log( this.props.searchResults );
 
          }).catch( console.log() );
       } else if ( categoryONE === 'Posters' ) {
-         axios.get(`http://localhost:3030/api/search/posters?&category=${ categoryTWO }`).then( res => {
+         axios.get(`/api/search/posters?&category=${ categoryTWO }`).then( res => {
 
             updateSearchResults( res.data );
             console.log( this.props.searchResults );
@@ -119,9 +119,7 @@ class SearchBar extends Component {
             </select>
 
             <input className="search-bar" placeholder={ 'Search' } onChange={ (e) => this.handleInputChange(e.target.value) }/>
-            <Link to="/search">
-                <button className="search-btn" onClick={ () => this.search() }>Search</button>
-            </Link>
+            <Link to="/search"><button className="search-btn" onClick={ () => this.search() }>Search</button></Link>
             </span>
          </div>
       )

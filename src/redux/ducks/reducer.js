@@ -1,5 +1,5 @@
 const initialState = {
-   user: {},            // Will be the user session object
+   user: null,            // Will be the user session object
    searchResults: []
 };
 

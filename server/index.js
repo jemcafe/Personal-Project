@@ -10,7 +10,7 @@ const checkForSession = require('./middlewares/checkForSession');
 
 // Controllers
 const authCntrl = require('./controllers/auth_controller');
-const blogPostsCntrl = require('./controllers/blog_posts_controller');
+const postsCntrl = require('./controllers/posts_controller');
 const searchGamesCntrl = require('./controllers/search_games_controller');
 const searchBooksCntrl = require('./controllers/search_books_controller');
 const searchPostersCntrl = require('./controllers/search_posters_controller');
@@ -35,11 +35,11 @@ app.post('/api/register', authCntrl.register);
 app.post('/api/logout', authCntrl.logout);
 app.get('/api/user', authCntrl.getUser);
 
-// User
-app.post('/api/newpost', blogPostsCntrl.createPost);
-// app.put('/api/editpost', blogPostsCntrl.editPost);
-// app.delete('/api/deletepost', blogPostsCntrl.deletePost);
-// app.get('/api/posts', blogPostsCntrl.getPosts);
+// User posts
+// app.post('/api/newpost', postsCntrl.createPost);
+// app.put('/api/editpost/:id', postsCntrl.editPost);
+// app.delete('/api/deletepost', postsCntrl.deletePost);
+// app.get('/api/posts', postsCntrl.getPosts);
 
 // Site Search
 app.get('/api/game-platforms', searchGamesCntrl.getPlatforms);

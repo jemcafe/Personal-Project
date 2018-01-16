@@ -40,7 +40,7 @@ module.exports = {
         const { session } = req;
 
         session.destroy();                         // Ends the session
-        res.status(200).json( session );           // This line is just for unit testing
+        res.status(200).json( null );           // This line is just for unit testing
     },
 
     getUser ( req, res, next ) {

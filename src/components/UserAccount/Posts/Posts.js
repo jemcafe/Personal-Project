@@ -14,12 +14,25 @@ class Posts extends Component {
         this.setState({ [property]: value });
     }
 
-    post () {
+    createPost () {
         const body = { title: this.state.title , message: this.state.message };
         axios.post('/api/newpost', body).then( res => {
             console.log( res.data );
         }).catch( err => console.log( 'error', err) );
     }
+
+    // editPost () {
+    //     const body = { title: this.state.title , message: this.state.message };
+    //     axios.post(`/api/newpost/${  }`, body).then( res => {
+    //         console.log( res.data );
+    //     }).catch( err => console.log( 'error', err) );
+    // }
+
+   // deletePost () {
+    //     axios.post(`/api/newpost/${  }`).then( res => {
+    //         console.log( res.data );
+    //     }).catch( err => console.log( 'error', err) );
+    // }
 
     render () {
         return (
