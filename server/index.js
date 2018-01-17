@@ -11,9 +11,10 @@ const checkForSession = require('./middlewares/checkForSession');
 // Controllers
 const authCntrl = require('./controllers/auth_controller');
 const postsCntrl = require('./controllers/posts_controller');
-const searchGamesCntrl = require('./controllers/search_games_controller');
-const searchBooksCntrl = require('./controllers/search_books_controller');
-const searchPostersCntrl = require('./controllers/search_posters_controller');
+const srchProductsCntrl = require('./controllers/search_products_controller');
+// const searchGamesCntrl = require('./controllers/search_games_controller');
+// const searchBooksCntrl = require('./controllers/search_books_controller');
+// const searchPostersCntrl = require('./controllers/search_posters_controller');
 
 const app = express();
 
@@ -41,14 +42,14 @@ app.get('/api/user', authCntrl.getUser);
 // app.delete('/api/deletepost', postsCntrl.deletePost);
 // app.get('/api/posts', postsCntrl.getPosts);
 
-// Site Search
-app.get('/api/game-platforms', searchGamesCntrl.getPlatforms);
-app.get('/api/book-subjects', searchBooksCntrl.getSubjects);
-app.get('/api/poster-categories', searchPostersCntrl.getCategories);
+// Search Products
+app.get('/api/game-platforms', srchProductsCntrl.getPlatforms);
+app.get('/api/book-subjects', srchProductsCntrl.getSubjects);
+app.get('/api/poster-categories', srchProductsCntrl.getCategories);
 
-app.get('/api/search/games', searchGamesCntrl.getGames);
-app.get('/api/search/books', searchBooksCntrl.getVolumes);
-app.get('/api/search/posters', searchPostersCntrl.getPosters);
+app.get('/api/search/games', srchProductsCntrl.getGames);
+app.get('/api/search/books', srchProductsCntrl.getVolumes);
+app.get('/api/search/posters', srchProductsCntrl.getPosters);
 
 
 const port = process.env.SERVER_PORT || 3030;

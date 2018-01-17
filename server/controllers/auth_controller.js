@@ -54,7 +54,7 @@ module.exports = {
                 db.create_user( [username, password, null, name, image] ).then( newUser => {
                     // Nothing needs to happen to the data
                 }).catch( err => console.log(err) );
-                res.status(200).send('You are registered');
+                res.status(200).json( session.user );
             } else {
                 res.status(500).send('That user aleady exists');
             }
