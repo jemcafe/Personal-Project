@@ -24,7 +24,7 @@ app.use( session({
     resave: false,
     saveUninitialized: false
 }));
-// massive( process.env.CONNECTION_STRING ).then( db => app.set('db', db) ).catch( err => console.log( 'error', err ) );
+massive( process.env.CONNECTION_STRING ).then( db => app.set('db', db) ).catch( err => console.log( 'error', err ) );
 
 app.use( checkForSession );
 

@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS GamePlatforms;
 DROP TABLE IF EXISTS BookSubjects;
 DROP TABLE IF EXISTS PosterCategories;
@@ -6,10 +5,11 @@ DROP TABLE IF EXISTS PosterCategories;
 -- DROP TABLE IF EXISTS Cart;
 DROP TABLE IF EXISTS Posts;
 -- DROP TABLE IF EXISTS Comments;
+DROP TABLE IF EXISTS Users;
 
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
-    username TEXT,
+    username TEXT UNIQUE,
     password TEXT,
     auth_id TEXT,
     name TEXT,

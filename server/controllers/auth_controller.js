@@ -5,20 +5,36 @@ let id = 1;
 
 module.exports = {
     login ( req, res, next ) {
+        const db = req.app.get('db');
         const { session } = req;
-        // Request body
-        const { username, password } = req.body;
+        const { username, password } = req.body;    // Request body
 
-        // Compares the usernames and passwords to find the user
-        const user = users.find( e => e.username === username && e.password === password );
+        session.user = {
+            username: username,
+            cart: []
+        };
+
+        db.find_user( [username, password] ).then( user => {
+            if ( username === user[0].username && password === user[0].password) {
+                res.status(200).json( session.user );
+            } else {
+                res.status(401).json( 'Unauthorized' );
+            }
+        }).catch( err => {
+            console.log(err)
+            res.status(500).send(err);
+        });
+
+        // // Compares the usernames and passwords to find the user
+        // const user = users.find( e => e.username === username && e.password === password );
         
-        // If the user exists, the session object is returned
-        if ( user ) {
-            session.user.username = username;
-            res.status(200).json( session.user );   // The updated session user object is returned
-        } else {
-            res.status(401).json( 'Unauthorized' ); // A message if the user doesn't exist
-        }
+        // // If the user exists, the session object is returned
+        // if ( user ) {
+        //     session.user.username = username;
+        //     res.status(200).json( session.user );   // The updated session user object is returned
+        // } else {
+        //     res.status(401).json( 'Unauthorized' ); // A message if the user doesn't exist
+        // }
     },
 
     register ( req, res, next ) {
