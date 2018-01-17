@@ -49,7 +49,9 @@ module.exports = {
                 // The session id value is the user's id
                 session.user.id = user[0].id
                 // The user is created
-                db.create_user( [username, password, null, name, image] ).then().catch( err => console.log(err) );
+                db.create_user( [username, password, null, name, image] ).then(
+                    // Nothing happens to the data
+                ).catch( err => console.log(err) );
                 // The session object is sent
                 res.status(200).json( session.user );
             } else {

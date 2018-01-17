@@ -36,7 +36,7 @@ app.get('/api/user', authCntrl.getUser);
 // User posts
 app.post('/api/newpost', postsCntrl.createPost);
 // app.put('/api/editpost/:id', postsCntrl.editPost);
-// app.delete('/api/deletepost/:id', postsCntrl.deletePost);
+app.delete('/api/delete-post/:id', postsCntrl.deletePost);
 // app.get('/api/post/:id', postsCntrl.getPost);
 // app.get('/api/posts', postsCntrl.getPosts);
 

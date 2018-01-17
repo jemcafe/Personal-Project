@@ -41,10 +41,19 @@ module.exports = {
     deletePost ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
+        const { id } = req.params;
 
-        session.user.posts.splice( req.params.id, 1 );
-
-        res.status(200).json( session.user );
+        if ( session.user.id ) {
+            db.delete_post( [id, session.user.id] ).then(
+                // Nothing happens to the data
+            ).catch( err => {
+                console.log(err);
+                res.status(500).send('Not deleted');
+            });
+            res.status(200).json('Deleted');
+        } else {
+            res.status(500).send('No user');
+        }
     },
 
     getPosts (req, res ) {
