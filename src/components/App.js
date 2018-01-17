@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import routes from '../router/router';
+import routes from '../router';
 
 import MainHeader from './MainHeader/MainHeader';
 

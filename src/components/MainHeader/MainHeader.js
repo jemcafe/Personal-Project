@@ -18,7 +18,7 @@ class MainHeader extends Component {
     render () {
         const { user } = this.props;
         
-        // If there is a user, the login link changes to the account link
+        // If a user is logged in, the login link changes to the account link
         const linkChange = !user ? (
                                 <Link to="/login" className="link">Login</Link>
                             ) : (

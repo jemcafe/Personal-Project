@@ -1,16 +1,14 @@
-let id = 0;
-
 module.exports = {
     createPost ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
         const { title, message, image } = req.body;
 
-        const currentDate = new Date();
-        const dd = currentDate.getDate();
-        const mm = currentDate.getMonth() + 1; // Months start at 0
-        const yyyy = currentDate.getFullYear();
-        currentDate = `${mm}/${dd}/${yyyy}`;
+        const date = new Date();
+        const dd = date.getDate();
+        const mm = date.getMonth() + 1; // Months start at 0
+        const yyyy = date.getFullYear();
+        currentDate = `${mm} / ${dd} / ${yyyy}`;
 
         if ( session.user.id ) {
 
