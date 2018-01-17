@@ -10,31 +10,26 @@ module.exports = {
         const { username, password } = req.body;    // Request body
 
         session.user = {
-            username: username,
-            cart: []
+            id: null,
+            username: username
         };
 
         db.find_user( [username, password] ).then( user => {
-            if ( username === user[0].username && password === user[0].password) {
+
+            // If the user is found
+            if ( user.length ) {
+                // The session id value is the user's id
+                session.user.id = user[0].id
+                // The session object is sent
                 res.status(200).json( session.user );
             } else {
                 res.status(401).json( 'Unauthorized' );
             }
+
         }).catch( err => {
             console.log(err)
             res.status(500).send(err);
         });
-
-        // // Compares the usernames and passwords to find the user
-        // const user = users.find( e => e.username === username && e.password === password );
-        
-        // // If the user exists, the session object is returned
-        // if ( user ) {
-        //     session.user.username = username;
-        //     res.status(200).json( session.user );   // The updated session user object is returned
-        // } else {
-        //     res.status(401).json( 'Unauthorized' ); // A message if the user doesn't exist
-        // }
     },
 
     register ( req, res, next ) {
@@ -43,17 +38,19 @@ module.exports = {
         const { username, password, name, image } = req.body;
 
         session.user = {
-            username: username,
-            cart: []
+            id: null,
+            username: username
         };
 
         db.find_user( [username, password] ).then( user => {
             
             // If the user is not found
             if ( !user.length ) {
-                db.create_user( [username, password, null, name, image] ).then( newUser => {
-                    // Nothing needs to happen to the data
-                }).catch( err => console.log(err) );
+                // The session id value is the user's id
+                session.user.id = user[0].id
+                // The user is created
+                db.create_user( [username, password, null, name, image] ).then().catch( err => console.log(err) );
+                // The session object is sent
                 res.status(200).json( session.user );
             } else {
                 res.status(500).send('That user aleady exists');
@@ -63,16 +60,6 @@ module.exports = {
             console.log(err)
             res.status(500).send(err);
         });
-
-        // users.push({ 
-        //     id: id,
-        //     username: username,
-        //     password: password
-        // });
-        // id++;
-
-        // session.user.username = username;
-        // res.status(200).json( session.user );
     },
 
     logout ( req, res, next ) {

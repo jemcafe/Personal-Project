@@ -12,9 +12,6 @@ const checkForSession = require('./middlewares/checkForSession');
 const authCntrl = require('./controllers/auth_controller');
 const postsCntrl = require('./controllers/posts_controller');
 const srchProductsCntrl = require('./controllers/search_products_controller');
-// const searchGamesCntrl = require('./controllers/search_games_controller');
-// const searchBooksCntrl = require('./controllers/search_books_controller');
-// const searchPostersCntrl = require('./controllers/search_posters_controller');
 
 const app = express();
 
@@ -37,16 +34,17 @@ app.post('/api/logout', authCntrl.logout);
 app.get('/api/user', authCntrl.getUser);
 
 // User posts
-// app.post('/api/newpost', postsCntrl.createPost);
+app.post('/api/newpost', postsCntrl.createPost);
 // app.put('/api/editpost/:id', postsCntrl.editPost);
-// app.delete('/api/deletepost', postsCntrl.deletePost);
+// app.delete('/api/deletepost/:id', postsCntrl.deletePost);
+// app.get('/api/post/:id', postsCntrl.getPost);
 // app.get('/api/posts', postsCntrl.getPosts);
 
-// Search Products
+// Product Categories
 app.get('/api/game-platforms', srchProductsCntrl.getPlatforms);
 app.get('/api/book-subjects', srchProductsCntrl.getSubjects);
 app.get('/api/poster-categories', srchProductsCntrl.getCategories);
-
+// Products Search
 app.get('/api/search/games', srchProductsCntrl.getGames);
 app.get('/api/search/books', srchProductsCntrl.getVolumes);
 app.get('/api/search/posters', srchProductsCntrl.getPosters);

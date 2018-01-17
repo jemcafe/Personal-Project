@@ -2,19 +2,31 @@ let id = 0;
 
 module.exports = {
     createPost ( req, res ) {
+        const db = req.app.set('db');
         const { session } = req;
-        const { title, message } = req.body;
+        const { uid, title, message, image } = req.body;
 
-        session.user.posts.push({
-            title: title,
-            message: message
-        });
+        const currenttDate = new Date();
+        const dd = currenttDate.getDate();
+        const mm = currenttDate.getMonth() + 1; // Months start at 0
+        const yyyy = currenttDate.getFullYear();
+        currentDate = `${mm}/${dd}/${yyyy}`;
 
-        res.status(200).json( session.user.posts[id] );
-        id++;
+        if ( session.user.id ) {
+            db.create_post( [title, message, image, currentDate, session.user.id] ).then(
+                //Nothing happens to the data
+            ).catch( err => {
+                console.log(err);
+                res.status(500).send('Not posted');
+            });
+            res.status(200).send('Posted');
+        } else {
+            res.status(500).send('No user');
+        }
     },
 
     editPost (req, res ) {
+        const db = req.app.set('db');
         const { session } = req;
         const { title, message } = req.body;
 
@@ -27,6 +39,7 @@ module.exports = {
     },
 
     deletePost ( req, res ) {
+        const db = req.app.set('db');
         const { session } = req;
 
         session.user.posts.splice( req.params.id, 1 );
@@ -35,6 +48,7 @@ module.exports = {
     },
 
     getPosts (req, res ) {
+        const db = req.app.set('db');
         const { session } = req;
 
         res.status(200).json( session.user.posts );

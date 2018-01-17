@@ -1,0 +1,1 @@
+DELETE FROM Posts WHERE id = $1 AND userId = $2;
