@@ -4,22 +4,23 @@ module.exports = {
     createPost ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
-        const { uid, title, message, image } = req.body;
+        const { title, message, image } = req.body;
 
-        const currenttDate = new Date();
-        const dd = currenttDate.getDate();
-        const mm = currenttDate.getMonth() + 1; // Months start at 0
-        const yyyy = currenttDate.getFullYear();
+        const currentDate = new Date();
+        const dd = currentDate.getDate();
+        const mm = currentDate.getMonth() + 1; // Months start at 0
+        const yyyy = currentDate.getFullYear();
         currentDate = `${mm}/${dd}/${yyyy}`;
 
         if ( session.user.id ) {
-            db.create_post( [title, message, image, currentDate, session.user.id] ).then(
-                //Nothing happens to the data
-            ).catch( err => {
+
+            db.create_post( [title, message, image, currentDate, session.user.id] ).then( post => {
+                res.status(200).json( post );
+            }).catch( err => {
                 console.log(err);
                 res.status(500).send('Not posted');
             });
-            res.status(200).send('Posted');
+
         } else {
             res.status(500).send('No user');
         }
@@ -28,14 +29,21 @@ module.exports = {
     editPost (req, res ) {
         const db = req.app.set('db');
         const { session } = req;
-        const { title, message } = req.body;
+        const { title, message, image } = req.body;
+        const { id } = req.params;
 
-        session.user.posts[ req.params.id ] = {
-            title: title,
-            message: message
-        };
+        if ( session.user.id ) {
 
-        res.status(200).json( session.user.posts[ req.params.id ] );
+            db.update_post( [id, title, message, image, session.user.id] ).then( post => {
+                res.status(200).json( post );
+            }).catch( err => {
+                console.log(err);
+                res.status(500).send('Not edited');
+            });
+
+        } else {
+            res.status(500).send('No user');
+        }
     },
 
     deletePost ( req, res ) {
@@ -44,13 +52,34 @@ module.exports = {
         const { id } = req.params;
 
         if ( session.user.id ) {
-            db.delete_post( [id, session.user.id] ).then(
+
+            db.delete_post( [id, session.user.id] ).then( () => {
                 // Nothing happens to the data
-            ).catch( err => {
+                res.status(200).send('Deleted');
+            }).catch( err => {
                 console.log(err);
                 res.status(500).send('Not deleted');
             });
-            res.status(200).json('Deleted');
+
+        } else {
+            res.status(500).send('No user');
+        }
+    },
+
+    getPost (req, res ) {
+        const db = req.app.set('db');
+        const { session } = req;
+        const { id } = req.params;
+
+        if ( session.user.id ) {
+
+            db.read_post( [id, session.user.id] ).then( post => {
+                res.status(200).json( post );
+            }).catch( err => {
+                console.log(err);
+                res.status(500).send('Unable to get post');
+            });
+
         } else {
             res.status(500).send('No user');
         }
@@ -60,6 +89,11 @@ module.exports = {
         const db = req.app.set('db');
         const { session } = req;
 
-        res.status(200).json( session.user.posts );
+        db.read_posts( [session.user.id] ).then( posts => {
+            res.status(200).json( posts );
+        }).catch( err => {
+            console.log(err);
+            res.status(500).send('Unable to get posts');
+        });
     }
 }

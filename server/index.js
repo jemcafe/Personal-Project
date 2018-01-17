@@ -34,11 +34,11 @@ app.post('/api/logout', authCntrl.logout);
 app.get('/api/user', authCntrl.getUser);
 
 // User posts
-app.post('/api/newpost', postsCntrl.createPost);
-// app.put('/api/editpost/:id', postsCntrl.editPost);
+app.post('/api/new-post', postsCntrl.createPost);
+app.put('/api/edit-post/:id', postsCntrl.editPost);
 app.delete('/api/delete-post/:id', postsCntrl.deletePost);
-// app.get('/api/post/:id', postsCntrl.getPost);
-// app.get('/api/posts', postsCntrl.getPosts);
+app.get('/api/post/:id', postsCntrl.getPost);
+app.get('/api/posts', postsCntrl.getPosts);
 
 // Product Categories
 app.get('/api/game-platforms', srchProductsCntrl.getPlatforms);

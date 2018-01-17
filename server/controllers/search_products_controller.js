@@ -12,9 +12,9 @@ module.exports = {
 
         db.read_gamePlatforms().then( platform => {
             const platforms = platform.map( e => e.platform);
-            res.status(200).send( platforms );
+            res.status(200).json( platforms );
         }).catch( () => {
-            res.status(500).send();
+            res.status(500).send('No Platforms');
         });
     },
     getGames ( req, res, next ) {
@@ -45,9 +45,9 @@ module.exports = {
 
         db.read_bookSubjects().then( subject => {
             const subjects = subject.map( e => e.subject );
-            res.status(200).send( subjects );
+            res.status(200).json( subjects );
         }).catch( () => { 
-            res.status(500).send();
+            res.status(500).send('No Subjects');
         });
     },
     getVolumes ( req, res, next ) {
@@ -78,7 +78,7 @@ module.exports = {
             const categories = category.map( e => e.category );
             res.status(200).send( categories );
         }).catch( () => { 
-            res.status(500).send();
+            res.status(500).send('No Categories');
         });
     },
     getPosters ( req, res, next ) {
