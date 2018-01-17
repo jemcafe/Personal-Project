@@ -38,18 +38,41 @@ module.exports = {
     },
 
     register ( req, res, next ) {
+        const db = req.app.get('db');
         const { session } = req;
-        const { username, password } = req.body;
+        const { username, password, name, image } = req.body;
 
-        users.push({ 
-            id: id,
+        session.user = {
             username: username,
-            password: password
-        });
-        id++;
+            cart: []
+        };
 
-        session.user.username = username;
-        res.status(200).json( session.user );
+        db.find_user( [username, password] ).then( user => {
+            
+            // If the user is not found
+            if ( !user.length ) {
+                db.create_user( [username, password, null, name, image] ).then( newUser => {
+                    // Nothing needs to happen to the data
+                }).catch( err => console.log(err) );
+                res.status(200).send('You are registered');
+            } else {
+                res.status(500).send('That user aleady exists');
+            }
+
+        }).catch( err => {
+            console.log(err)
+            res.status(500).send(err);
+        });
+
+        // users.push({ 
+        //     id: id,
+        //     username: username,
+        //     password: password
+        // });
+        // id++;
+
+        // session.user.username = username;
+        // res.status(200).json( session.user );
     },
 
     logout ( req, res, next ) {
