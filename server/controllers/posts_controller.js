@@ -24,7 +24,7 @@ module.exports = {
         }
     },
 
-    editPost (req, res ) {
+    editPost ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
         const { title, text, image } = req.body;
@@ -90,7 +90,7 @@ module.exports = {
         if ( session.user.id ) {
             
             db.read_posts( [session.user.id] ).then( posts => {
-                res.status(200).json( posts );
+                res.status(200).json( posts.reverse() );
             }).catch( err => {
                 console.log(err);
                 res.status(500).send('Unable to get posts');

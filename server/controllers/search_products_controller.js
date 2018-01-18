@@ -1,9 +1,6 @@
 const axios = require('axios');
 require('dotenv').config();
 
-const bookSubjects = require('../db_temp/bookSubjects');
-const gamePlatforms = require('../db_temp/gamePlatforms');
-const posterCategories = require('../db_temp/posterCategories');
 const posters = require('../db_temp/posters');
 
 module.exports = {

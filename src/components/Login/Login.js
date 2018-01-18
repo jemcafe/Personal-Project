@@ -36,13 +36,6 @@ class Login extends Component {
         }).catch( console.log() );
     }
 
-    getUser () {
-        // axios.get(`/api/user`).then( res => {
-        //     console.log( res.data );
-        // }).catch( console.log() );
-        console.log(this.props.user);
-    }
-
     render () {
         return (
             <div className="login-reg">

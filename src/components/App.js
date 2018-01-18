@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios';
 import routes from '../router';
 
 import MainHeader from './MainHeader/MainHeader';
 
 class App extends Component {
+    
     render() {
         return (
             <div className="App">

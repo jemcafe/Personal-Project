@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+
 import { connect } from 'react-redux';
-import { login } from '../../redux/ducks/reducer';
+import { getUser, logout } from '../../redux/ducks/reducer';
 
 import SearchBar from './SearchBar/SearchBar';
 
 class MainHeader extends Component {
 
+    componentWillMount () {
+        getUser();  // The session is requested from the server so the user stays logged in
+    }
+    
     logout () {
         axios.post(`/api/logout`).then( res => {
             console.log( res.data );
-            this.props.login( res.data );
+            this.props.logout( res.data );
         }).catch( console.log() );
     }
 
@@ -20,7 +25,7 @@ class MainHeader extends Component {
         
         // If a user is logged in, the login link changes to the account link
         const linkChange = !user ? (
-                                <Link to="/login" className="link">Login</Link>
+                                <Link to="/login" className="link">Signin</Link>
                             ) : (
                                 <div className="dropdown link">
                                     <Link to="/user" className="droplink">UserAccount</Link>
@@ -60,7 +65,8 @@ const mapStateToProps = ( state ) => {
 };
 
 const mapDispatchToProps = {
-    login: login
+    getUser: getUser,
+    logout: logout
 };
 
 export default connect( mapStateToProps , mapDispatchToProps )( MainHeader );

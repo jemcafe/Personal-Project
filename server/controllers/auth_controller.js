@@ -9,17 +9,16 @@ module.exports = {
         const { session } = req;
         const { username, password } = req.body;    // Request body
 
-        session.user = {
-            id: null,
-            username: username
-        };
-
         db.find_user( [username, password] ).then( user => {
+
+            // The session id value is the user's id
+            session.user = {
+                id: user[0].id,
+                username: user[0].username
+            };
 
             // If the user is found
             if ( user.length ) {
-                // The session id value is the user's id
-                session.user.id = user[0].id
                 // The session object is sent
                 res.status(200).json( session.user );
             } else {
@@ -37,20 +36,20 @@ module.exports = {
         const { session } = req;
         const { username, password, name, image } = req.body;
 
-        session.user = {
-            id: null,
-            username: username
-        };
-
         db.find_user( [username, password] ).then( user => {
+
+            // The session id value is the user's id
+            session.user = {
+                id: user[0].id,
+                username: user[0].username
+            };
             
             // If the user is not found and the username aren't the same
             if ( !user.length && username !== user[0].username ) {
 
                 // The user is created
                 db.create_user( [username, password, null, name, image] ).then( newUser => {
-                    // The session id value is the new user's id
-                    session.user.id = newUser[0].id;
+                    // Nothing happens to the data
                 }).catch( err => console.log(err) );
 
                 // The session object is sent
@@ -74,11 +73,7 @@ module.exports = {
 
     getUser ( req, res, next ) {
         const { session } = req;
-        
-        if ( session.user.username !== '' ) {
-            res.status(200).json( session.user );
-        } else {
-            res.status(404).json( 'Not Found' );
-        }
+
+        res.status(200).json( session.user );
     }
 }

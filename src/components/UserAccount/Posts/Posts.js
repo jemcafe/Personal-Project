@@ -37,28 +37,42 @@ class Posts extends Component {
 
         axios.post('/api/new-post', body).then( res => {
             console.log( res.data );
-            // The new post is added to the list of posts
-            this.setState({ posts: [ ...this.state.posts, res.data[0] ] });
-        }).catch( err => console.log( 'error', err) );
+
+            axios.get('/api/posts').then( resp => {
+                this.setState({ posts: resp.data });
+            }).catch( err => console.log(err) );
+
+        }).catch( err => console.log( err ) );
     }
 
-    editPost ( postId, title, text, image ) {
+    editPost ( id, title, text, image ) {
         const body = {
-            title: this.state.title,
-            text: this.state.text,
-            image: this.state.image
+            title: title,
+            text: text,
+            image: image
         };
 
-        axios.post(`/api/edit-post/${ postId }`, body).then( res => {
+        axios.put(`/api/edit-post/${ id }`, body).then( res => {
             console.log( res.data );
-        }).catch( err => console.log( 'error', err) );
+
+            // Eventually this should only update one post instead of all of them
+            axios.get('/api/posts').then( resp => {
+                this.setState({ posts: resp.data });
+            }).catch( err => console.log( err ) );
+
+        }).catch( err => console.log( err ) );
     }
     
 
-    deletePost ( postId ) {
-        axios.delete(`/api/delete-post/${ postId }`).then( res => {
+    deletePost ( id ) {
+        axios.delete(`/api/delete-post/${ id }`).then( res => {
             console.log( res.data );
-        }).catch( err => console.log(err) );
+
+            axios.get('/api/posts').then( resp => {
+                this.setState({ posts: resp.data });
+            }).catch( err => console.log( err ) );
+
+        }).catch( err => console.log( err ) );
     }
 
     render () {
@@ -66,12 +80,7 @@ class Posts extends Component {
 
         const listOfPosts = posts.map( post => {
             return <Post key={ post.id } 
-                         id={ post.id } 
-                         title={post.title } 
-                         text={ post.text } 
-                         image={ post.imageurl }
-                         date={ post.dateposted }
-                         userId={ post.userId } 
+                         post={ post }
                          editPost={ this.editPost }
                          deletePost={ this.deletePost } />
         });
@@ -83,13 +92,15 @@ class Posts extends Component {
 
                     <div>
                         <input placeholder="Title" onChange={ (e) => this.handleChange('title', e.target.value) }/>
-                        <input placeholder="text" onChange={ (e) => this.handleChange('text', e.target.value) }/>
+                        <input placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }/>
                         <input placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
                         <button onClick={ () => this.createPost() }>Post</button>
                     </div>
 
                     <ul className="posts-list">
+
                         { listOfPosts }
+
                     </ul>
 
                 </div>

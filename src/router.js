@@ -10,7 +10,6 @@ import BooksPage from './components/BooksPage/BooksPage';
 import PostersPage from './components/PostersPage/PostersPage';
 import SearchPage from './components/SearchPage/SearchPage';
 import ItemPage from './components/ItemPage/ItemPage';
-
 import UserAccount from './components/UserAccount/UserAccount';
 
 export default (
