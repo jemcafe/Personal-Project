@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import List from './List/List';
-
 class Posts extends Component {
     constructor () {
         super();
@@ -36,7 +34,27 @@ class Posts extends Component {
 
         axios.post('/api/new-post', body).then( res => {
             console.log( res.data );
+            // The new post is added to the list of posts
+            this.setState({ posts: [ ...this.state.posts, res.data[0] ] });
         }).catch( err => console.log( 'error', err) );
+    }
+
+    // editPost ( postId ) {
+    //     const body = {
+    //         title: this.state.title,
+    //         message: this.state.message,
+    //         image: this.state.image
+    //     };
+
+    //     axios.post(`/api/edit-post/${ post.id }`, body).then( res => {
+    //         console.log( res.data );
+    //     }).catch( err => console.log( 'error', err) );
+    // }
+
+    deletePost ( postId ) {
+        axios.delete(`/api/delete-post/${ postId }`).then( res => {
+            console.log( res.data );
+        }).catch( err => console.log(err) );
     }
 
     render () {
@@ -50,6 +68,10 @@ class Posts extends Component {
                     <div>{ post.imageurl }</div>
                     <div>{ post.dateposted }</div>
                     <div>{ post.userid }</div>
+                    <span>
+                        {/* <button onClick={ () => this.editPost( post.id ) }>Edit</button> */}
+                        <button onClick={ () => this.deletePost( post.id ) }>Delete</button>
+                    </span>
                 </li>
             );
         });
@@ -66,7 +88,7 @@ class Posts extends Component {
                         <button onClick={ () => this.createPost() }>Post</button>
                     </div>
 
-                    <ul>
+                    <ul className="posts-list">
                         { listOfPosts }
                     </ul>
 

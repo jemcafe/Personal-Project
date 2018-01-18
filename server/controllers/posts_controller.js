@@ -8,7 +8,7 @@ module.exports = {
         const dd = date.getDate();
         const mm = date.getMonth() + 1; // Months start at 0
         const yyyy = date.getFullYear();
-        currentDate = `${mm} / ${dd} / ${yyyy}`;
+        const currentDate = `${mm} / ${dd} / ${yyyy}`;
 
         if ( session.user.id ) {
 
