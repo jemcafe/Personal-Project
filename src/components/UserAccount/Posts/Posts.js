@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import Post from './Post/Post';
+
 class Posts extends Component {
     constructor () {
         super();
         this.state = {
             posts: [],
             title: '',
-            message: '',
+            text: '',
             image: ''
         }
-        this.createPost = this.createPost.bind(this);
+        this.editPost = this.editPost.bind(this);
+        this.deletePost = this.deletePost.bind(this);
     }
 
     componentDidMount () {
@@ -28,7 +31,7 @@ class Posts extends Component {
     createPost () {
         const body = {
             title: this.state.title,
-            message: this.state.message,
+            text: this.state.text,
             image: this.state.image
         };
 
@@ -39,17 +42,18 @@ class Posts extends Component {
         }).catch( err => console.log( 'error', err) );
     }
 
-    // editPost ( postId ) {
-    //     const body = {
-    //         title: this.state.title,
-    //         message: this.state.message,
-    //         image: this.state.image
-    //     };
+    editPost ( postId, title, text, image ) {
+        const body = {
+            title: this.state.title,
+            text: this.state.text,
+            image: this.state.image
+        };
 
-    //     axios.post(`/api/edit-post/${ post.id }`, body).then( res => {
-    //         console.log( res.data );
-    //     }).catch( err => console.log( 'error', err) );
-    // }
+        axios.post(`/api/edit-post/${ postId }`, body).then( res => {
+            console.log( res.data );
+        }).catch( err => console.log( 'error', err) );
+    }
+    
 
     deletePost ( postId ) {
         axios.delete(`/api/delete-post/${ postId }`).then( res => {
@@ -61,19 +65,15 @@ class Posts extends Component {
         const { posts } = this.state;
 
         const listOfPosts = posts.map( post => {
-            return (
-                <li key={ post.id }>
-                    <div>{ post.title }</div>
-                    <div>{ post.text }</div>
-                    <div>{ post.imageurl }</div>
-                    <div>{ post.dateposted }</div>
-                    <div>{ post.userid }</div>
-                    <span>
-                        {/* <button onClick={ () => this.editPost( post.id ) }>Edit</button> */}
-                        <button onClick={ () => this.deletePost( post.id ) }>Delete</button>
-                    </span>
-                </li>
-            );
+            return <Post key={ post.id } 
+                         id={ post.id } 
+                         title={post.title } 
+                         text={ post.text } 
+                         image={ post.imageurl }
+                         date={ post.dateposted }
+                         userId={ post.userId } 
+                         editPost={ this.editPost }
+                         deletePost={ this.deletePost } />
         });
 
         return (
@@ -83,7 +83,7 @@ class Posts extends Component {
 
                     <div>
                         <input placeholder="Title" onChange={ (e) => this.handleChange('title', e.target.value) }/>
-                        <input placeholder="Message" onChange={ (e) => this.handleChange('message', e.target.value) }/>
+                        <input placeholder="text" onChange={ (e) => this.handleChange('text', e.target.value) }/>
                         <input placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
                         <button onClick={ () => this.createPost() }>Post</button>
                     </div>

@@ -44,14 +44,15 @@ module.exports = {
 
         db.find_user( [username, password] ).then( user => {
             
-            // If the user is not found
-            if ( !user.length ) {
-                // The session id value is the user's id
-                session.user.id = user[0].id
+            // If the user is not found and the username aren't the same
+            if ( !user.length && username !== user[0].username ) {
+
                 // The user is created
-                db.create_user( [username, password, null, name, image] ).then(
-                    // Nothing happens to the data
-                ).catch( err => console.log(err) );
+                db.create_user( [username, password, null, name, image] ).then( newUser => {
+                    // The session id value is the new user's id
+                    session.user.id = newUser[0].id;
+                }).catch( err => console.log(err) );
+
                 // The session object is sent
                 res.status(200).json( session.user );
             } else {
@@ -67,15 +68,15 @@ module.exports = {
     logout ( req, res, next ) {
         const { session } = req;
 
-        session.destroy();                         // Ends the session
-        res.status(200).json( null );           // This line is just for unit testing
+        session.destroy();
+        res.status(200).json( null );
     },
 
     getUser ( req, res, next ) {
         const { session } = req;
         
         if ( session.user.username !== '' ) {
-            res.status(200).json( session.user );  // Gets the session user object. Needed for get user's 
+            res.status(200).json( session.user );
         } else {
             res.status(404).json( 'Not Found' );
         }

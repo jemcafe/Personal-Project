@@ -5,6 +5,7 @@ const initialState = {
 
 // Action types
 const LOGIN = 'LOGIN';
+const REGISTER = 'REGISTER';
 const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS';
 
 // Reducer
@@ -13,6 +14,8 @@ export default function reducer ( state = initialState, action ) {
 
    switch ( type ) {
       case LOGIN:
+         return { ...state, user: payload };
+      case REGISTER:
          return { ...state, user: payload };
       case UPDATE_SEARCH_RESULTS:
          return { ...state, searchResults: payload };
@@ -25,6 +28,13 @@ export default function reducer ( state = initialState, action ) {
 export function login ( user ) {
    return {
       type: 'LOGIN',
+      payload: user
+   };
+}
+
+export function register ( user ) {
+   return {
+      type: 'REGISTER',
       payload: user
    };
 }

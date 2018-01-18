@@ -2,7 +2,7 @@ module.exports = {
     createPost ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
-        const { title, message, image } = req.body;
+        const { title, text, image } = req.body;
 
         const date = new Date();
         const dd = date.getDate();
@@ -12,7 +12,7 @@ module.exports = {
 
         if ( session.user.id ) {
 
-            db.create_post( [title, message, image, currentDate, session.user.id] ).then( post => {
+            db.create_post( [title, text, image, currentDate, session.user.id] ).then( post => {
                 res.status(200).json( post );
             }).catch( err => {
                 console.log(err);
@@ -27,12 +27,12 @@ module.exports = {
     editPost (req, res ) {
         const db = req.app.set('db');
         const { session } = req;
-        const { title, message, image } = req.body;
+        const { title, text, image } = req.body;
         const { id } = req.params;
 
         if ( session.user.id ) {
 
-            db.update_post( [id, title, message, image, session.user.id] ).then( post => {
+            db.update_post( [id, title, text, image, session.user.id] ).then( post => {
                 res.status(200).json( post );
             }).catch( err => {
                 console.log(err);
@@ -87,11 +87,17 @@ module.exports = {
         const db = req.app.set('db');
         const { session } = req;
 
-        db.read_posts( [session.user.id] ).then( posts => {
-            res.status(200).json( posts );
-        }).catch( err => {
-            console.log(err);
-            res.status(500).send('Unable to get posts');
-        });
+        if ( session.user.id ) {
+            
+            db.read_posts( [session.user.id] ).then( posts => {
+                res.status(200).json( posts );
+            }).catch( err => {
+                console.log(err);
+                res.status(500).send('Unable to get posts');
+            });
+
+        } else {
+            res.status(500).send('No user');
+        }
     }
 }

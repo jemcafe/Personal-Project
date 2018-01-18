@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+
+import { connect } from 'react-redux';
+import { register } from '../../redux/ducks/reducer';
 
 class Register extends Component {
     constructor () {
@@ -10,6 +14,8 @@ class Register extends Component {
             name: '',
             image: ''
         }
+        this.register = this.register.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange ( property, value ) {
@@ -21,13 +27,13 @@ class Register extends Component {
                 username: this.state.username,
                 password: this.state.password,
                 name: this.state.name,
-                image: this.state.image
+                image: this.state.image || null
             };
 
         axios.post(`/api/register`, body).then( res => {
             console.log( res.data );
             if ( res.data ) {
-                this.props.login( res.data );
+                this.props.register( res.data );
                 this.props.history.push('/user');
             }
         }).catch( console.log() );
@@ -67,4 +73,12 @@ class Register extends Component {
     }
 }
 
-export default Register;
+const mapStateToProps = ( state ) => {
+    return { user: state.user };
+};
+
+const mapDispatchToProps = {
+    register: register
+};
+
+export default connect( mapStateToProps , mapDispatchToProps )( Register );
