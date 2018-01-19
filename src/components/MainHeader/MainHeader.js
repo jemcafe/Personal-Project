@@ -3,19 +3,11 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { connect } from 'react-redux';
-import { getUser, logout } from '../../redux/ducks/reducer';
+import { logout } from '../../redux/ducks/reducer';
 
 import SearchBar from './SearchBar/SearchBar';
 
 class MainHeader extends Component {
-
-    componentDidMount () {
-        // CHeck if user is logged in
-        axios.get('/api/user').then( res => {
-            console.log( res.data );
-            this.props.getUser( res.data );
-        }).catch( err => console.log(err) );
-    }
     
     logout () {
         axios.post(`/api/logout`).then( res => {
@@ -64,13 +56,8 @@ class MainHeader extends Component {
     }
 }
 
-const mapStateToProps = ( state ) => {
-    return { user: state.user };
-};
-
 const mapDispatchToProps = {
-    getUser: getUser,
     logout: logout
 };
 
-export default connect( mapStateToProps , mapDispatchToProps )( MainHeader );
+export default connect( state => state , mapDispatchToProps )( MainHeader );

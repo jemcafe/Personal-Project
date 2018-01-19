@@ -1,1 +1,3 @@
-SELECT * FROM Posts WHERE userId = $1;
+SELECT * FROM Posts 
+WHERE userId = $1 
+ORDER BY id DESC;

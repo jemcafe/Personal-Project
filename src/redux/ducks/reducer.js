@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 const initialState = {
    user: {},            // Will be the user session object
    searchResults: []

@@ -38,7 +38,7 @@ class Post extends Component {
         return (
             <li className="post">
                 { !this.state.editMode ? (
-                    <div>
+                    <div className="post-container">
                         <div>{ title }</div>
                         <div>{ text }</div>
                         <div>{ imageurl }</div>
@@ -49,7 +49,7 @@ class Post extends Component {
                         </span>
                     </div>
                 ) : (
-                    <div>
+                    <div className="post-container">
                         <div><input placeholder="Title" defaultValue={ title } onChange={ (e) => this.handleChange('title', e.target.value) }/></div>
                         <div><input placeholder="Text" defaultValue={ text } onChange={ (e) => this.handleChange('text', e.target.value) }/></div>
                         <div><input placeholder="Url" defaultValue={ imageurl } onChange={ (e) => this.handleChange('image', e.target.value) }/></div>

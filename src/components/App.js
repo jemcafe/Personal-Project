@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
+import { connect } from 'react-redux';
+import { getUser } from '../redux/ducks/reducer';
 import axios from 'axios';
+
 import routes from '../router';
 
 import MainHeader from './MainHeader/MainHeader';
 
 class App extends Component {
+
+    componentDidMount () {
+        // Check if the user is logged in
+        axios.get('/api/user').then( res => {
+            console.log( res.data );
+            this.props.getUser( res.data );
+        }).catch( err => console.log(err) );
+    }
     
     render() {
         return (
@@ -34,4 +45,12 @@ class App extends Component {
     }
 }
 
-export default App;
+// const mapStateToProps = ( state ) => {
+//     return { user: state.user };
+// };
+
+const mapDispatchToProps = {
+    getUser: getUser
+};
+
+export default connect( null , mapDispatchToProps, null, { pure: false } )( App );

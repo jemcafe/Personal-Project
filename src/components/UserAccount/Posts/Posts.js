@@ -18,9 +18,9 @@ class Posts extends Component {
 
     componentDidMount () {
         axios.get('/api/posts').then( res => {
-            console.log( res.data );
+            // console.log( res.data );
             this.setState({ posts: res.data });
-            console.log(this.state.posts);
+            // console.log(this.state.posts);
         }).catch( err => console.log(err) );
     }
 
@@ -87,22 +87,24 @@ class Posts extends Component {
 
         return (
             <div className="posts">
-                {/* <div>POSTS COMPONENT</div> */}
+                <div className="posts-container">
+                    {/* <div>POSTS COMPONENT</div> */}
 
-                <div className="new-post">
-                    <div>New Post</div>
-                    <input placeholder="Title" onChange={ (e) => this.handleChange('title', e.target.value) }/>
-                    <input placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }/>
-                    <input placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
-                    <button onClick={ () => this.createPost() }>Post</button>
+                    <div className="new-post">
+                        <div>New Post</div>
+                        <input placeholder="Title" onChange={ (e) => this.handleChange('title', e.target.value) }/>
+                        <input placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }/>
+                        <input placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
+                        <button onClick={ () => this.createPost() }>Post</button>
+                    </div>
+                    
+                    <ul className="posts-list">
+
+                        { listOfPosts }
+
+                    </ul>
+
                 </div>
-                
-                <ul className="posts-list">
-
-                    { listOfPosts }
-
-                </ul>
-
             </div>
         )
     }

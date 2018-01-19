@@ -90,7 +90,7 @@ module.exports = {
         if ( session.user.id ) {
             
             db.read_posts( [session.user.id] ).then( posts => {
-                res.status(200).json( posts.reverse() );
+                res.status(200).json( posts );
             }).catch( err => {
                 console.log(err);
                 res.status(500).send('Unable to get posts');
