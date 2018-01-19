@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const initialState = {
-   user: null,            // Will be the user session object
+   user: {},            // Will be the user session object
    searchResults: []
 };
 
@@ -54,18 +54,16 @@ export function logout ( user ) {
    };
 }
 
-export function getUser () {
+export function getUser ( user ) {
    return {
       type: 'GET_USER',
-      payload: axios.get('/api/user').then( res => {
-            return res.data
-      }).catch( err => console.log(err) )
+      payload: user
    };
 }
 
 export function updateSearchResults ( searchResults ) {
    return {
-      type: UPDATE_SEARCH_RESULTS,
+      type: 'UPDATE_SEARCH_RESULTS',
       payload: searchResults
    };
 }

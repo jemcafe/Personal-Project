@@ -68,12 +68,12 @@ module.exports = {
         const { session } = req;
 
         session.destroy();
-        res.status(200).json( null );
+        res.status(200).json( {} );
     },
 
     getUser ( req, res, next ) {
         const { session } = req;
-
+        
         res.status(200).json( session.user );
     }
 }

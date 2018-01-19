@@ -9,8 +9,12 @@ import SearchBar from './SearchBar/SearchBar';
 
 class MainHeader extends Component {
 
-    componentWillMount () {
-        getUser();  // The session is requested from the server so the user stays logged in
+    componentDidMount () {
+        // The user's session is requested from the server so the user stays logged in when page refreshes
+        axios.get('/api/user').then( res => {
+            console.log( res.data );
+            this.props.getUser( res.data );
+        }).catch( err => console.log(err) );
     }
     
     logout () {
@@ -24,8 +28,8 @@ class MainHeader extends Component {
         const { user } = this.props;
         
         // If a user is logged in, the login link changes to the account link
-        const linkChange = !user ? (
-                                <Link to="/login" className="link">Signin</Link>
+        const linkChange = !user.username ? (
+                                <Link to="/login" className="link">Sign in</Link>
                             ) : (
                                 <div className="dropdown link">
                                     <Link to="/user" className="droplink">UserAccount</Link>

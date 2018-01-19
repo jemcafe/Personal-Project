@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { getUser } from '../../redux/ducks/reducer';
 
 // Routes
 import Profile from './Profile/Profile';
@@ -12,17 +11,13 @@ import Cart from './Cart/Cart';
 import Settings from './Settings/Settings';
 
 class UserAccount extends Component {
-    
-    componentDidMount () {
-        getUser();  // The session is requested from the server so the user stays logged in
-    }
 
     render () {
         const { user } = this.props;
 
         return (
             <div className="useraccount">
-                {/* { user ? */}
+                { user.username ?
 
                 <div className="useraccount-container">
                     {/* <div>The UserAccount Component</div> */}
@@ -39,9 +34,7 @@ class UserAccount extends Component {
                                 <Link to="/user/following">Following</Link>
                                 <Link to="/user/cart">Cart</Link>
                                 <Link to="/user/settings">Settings</Link>
-                            </div>
-                            <button className="btn" onClick={ () => this.getUser() }>Check for User</button>
-                            
+                            </div>                            
                         </div>
                     </div>
 
@@ -59,7 +52,7 @@ class UserAccount extends Component {
 
                 </div>
 
-                {/* : this.props.history.push('/login') } */}
+                : this.props.history.push('/login') }
             </div>
         )
     }

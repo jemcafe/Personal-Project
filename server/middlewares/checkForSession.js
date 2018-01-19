@@ -5,6 +5,5 @@ module.exports = ( req, res, next ) => {
             username: ''
         };
     }
-
-    next();  // Move on
+    next();
 }
