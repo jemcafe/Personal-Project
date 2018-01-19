@@ -15,26 +15,32 @@ module.exports = {
         });
     },
     getGames ( req, res, next ) {
+        const db = req.app.set('db');
         const { search, platform } = req.query;
 
-        // Giant Bomb uses ids instead of names to filter by platforms. Got the id from the list I made.
-        const plat = gamePlatforms.find( e => e.platform === platform );
-        const platformId = platform === 'All' ? '' : `${ plat.id }`;
+        db.read_gamePlatforms().then( plat => {
 
-        axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=name:${ search },platforms:${ platformId }&limit=27&offest=0`).then( resp => {
-            const data = [];
-            resp.data.results.forEach( e => {
-                    data.push({
-                    id: e.id,
-                    name: e.name,
-                    image: e.image.thumb_url,
-                    description: e.deck,
-                    releaseDate: e.original_release_date
+            // Giant Bomb uses ids instead of names to filter by platform. Got the id from the list I made.
+            const findPlatform = plat.find( e => e.platform === platform);
+            const platformGbId = findPlatform.gbid;
+
+            axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=name:${ search },platforms:${ platformGbId }&limit=27&offest=0`).then( resp => {
+                const data = [];
+                resp.data.results.forEach( e => {
+                        data.push({
+                        id: e.id,
+                        name: e.name,
+                        image: e.image.thumb_url,
+                        description: e.deck,
+                        releaseDate: e.original_release_date
+                    });
                 });
-            });
+                res.status(200).json( data );
+            }).catch( err => console.error(err) );
 
-            res.status(200).json( data );
-        }).catch( err => console.error(err) );
+        }).catch( () => {
+            res.status(500).send('No Platforms');
+        });
     },
 
     getSubjects ( req, res, next ) {

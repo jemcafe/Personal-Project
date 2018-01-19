@@ -1,23 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import List from './List/List';
+import Item from './Item/Item';
 
 class SearchPage extends Component {
-   render () {
-      const { searchResults } = this.props;
+    render () {
+        const { searchResults } = this.props;
 
-      return (
-         <div className="search-page">
-            <div className="search-page-container">
-                {/* <div>The Search Page</div> */}
+        // List of category options
+        let list = searchResults.map( (e, i) => {
+            return (
+            <li key={ e.id }>
+                <Item title={ e.name } image={ e.image } />
+            </li>
+            )
+        });
 
-                <div>Search Results:</div>
-                <List searchResults={ searchResults } />
+        return (
+            <div className="search-page">
+                <div className="search-page-container">
+                    {/* <div>The Search Page</div> */}
+                    <div>Search Results:</div>
+
+                    <div className="results">
+                        <div className="results-container">
+
+                            <div className="list">
+                                { list.length === 0 ? 'No results' : <ul>{ list }</ul> }
+                            </div>
+                            <div className="prev-next-btn">
+                                <button className="previous-btn">Previous</button>
+                                <button className="next-btn">Next</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
-         </div>
-      )
-   }
+        )
+    }
 }
 
 export default connect( state => state )( SearchPage );

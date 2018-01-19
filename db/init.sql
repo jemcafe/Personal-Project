@@ -99,6 +99,28 @@ INSERT INTO PosterCategories (category) VALUES
 --     userId INTEGER REFERENCES Users (id)
 -- );
 
+-- CREATE TABLE Games (
+--     id SERIAL PRIMARY KEY,
+--     name TEXT,
+--     imageURL TEXT,
+--     description TEXT,
+--     platformId INTEGER REFERENCES GamePlatforms (id),
+--     price DECIMAL,
+--     releaseDate TEXT,
+--     userId INTEGER REFERENCES Users (id)
+-- );
+
+-- CREATE TABLE Books (
+--     id SERIAL PRIMARY KEY,
+--     name TEXT,
+--     imageURL TEXT,
+--     description TEXT,
+--     subjectId INTEGER REFERENCES BookSubjects (id),
+--     price DECIMAL,
+--     publishedDate TEXT,
+--     userId INTEGER REFERENCES Users (id)
+-- );
+
 -- CREATE TABLE Cart (
 --     id SERIAL PRIMARY KEY,
 --     name TEXT,

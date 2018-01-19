@@ -225,6 +225,7 @@
 }
 .useraccount .posts-container {
   width: 500px;
+  background-color: green;
 }
     .posts .new-post {
       display: flex;
@@ -242,13 +243,30 @@
       background-color: #b9ece8;
     }
     .posts .post {
-      padding: 8px;
+      padding: 10px 12px;
       box-sizing: border-box;
       border: 1px dashed gray;
       background-color: #ecb9ea;
     }
     .posts .post-container {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      /* align-items: center; */
       background-color: #fcf4d9;
+    }
+    .posts .post-container > img {
+      max-width: 484px;
+    }
+    .posts .post-container {
+      /* display: flex;
+      margin: 8px 20px; */
+      /* background-color: #dffafc; */
+    }
+    .posts .post-container > div {
+      display: flex;
+      justify-content: space-between;
+      background-color: #dffafc;
     }
 .useraccount .following-container {
   background-color: #cbe4fc;

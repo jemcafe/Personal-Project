@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 function Item (props) {
    const { title, image } = props;
-
-   let shortTitle = title.length > 20 ? `${title.slice(0,20).trim()}...` : title;
+   
+   let shortenTitle = title.length > 20 ? `${title.slice(0,20).trim()}...` : title;
 
    return (
       <div className="item">
@@ -15,7 +15,7 @@ function Item (props) {
             </div>
 
             <div className="info-container">
-                <Link to="/item"><div className="title">{ shortTitle }</div></Link>
+                <Link to="/item"><div className="title">{ shortenTitle }</div></Link>
                 <div className="info">
                     <div>Rating</div>
                     <div>Date</div>

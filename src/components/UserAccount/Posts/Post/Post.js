@@ -32,37 +32,47 @@ class Post extends Component {
     }
 
     render () {
-        const { id, title, text, imageurl, dateposted, userId} = this.props.post;
+        const { id, title, text, imageurl, dateposted, username } = this.props.post;
         const { deletePost } = this.props;
+
+        // The image will be displayed if the input begins with the condition
+        const imageurlCheck = imageurl.slice(0,8) === 'https://' ? true : false;
 
         return (
             <li className="post">
                 { !this.state.editMode ? (
                     <div className="post-container">
-                        <div>{ title }</div>
-                        <div>{ text }</div>
-                        <div>{ imageurl }</div>
-                        <div>{ dateposted }</div>
-                        <div>{ userId }</div>
-                        <span>
-                            <button onClick={ () => this.toggleEdit() }>Edit</button>
-                        </span>
+                        { imageurlCheck && <img src={ imageurl } alt="Url not found"/> }
+                        <div>
+                            <div>Title: { title }</div>
+                            <div>Username: { username }</div>
+                        </div>
+                        <div>Text: { text }</div>
+                        <div>
+                            <div>Date: { dateposted }</div>
+                            <div><button onClick={ () => this.toggleEdit() }>Edit</button></div>
+                        </div>
                     </div>
                 ) : (
                     <div className="post-container">
-                        <div><input placeholder="Title" defaultValue={ title } onChange={ (e) => this.handleChange('title', e.target.value) }/></div>
-                        <div><input placeholder="Text" defaultValue={ text } onChange={ (e) => this.handleChange('text', e.target.value) }/></div>
-                        <div><input placeholder="Url" defaultValue={ imageurl } onChange={ (e) => this.handleChange('image', e.target.value) }/></div>
+                        { imageurlCheck && <img src={ imageurl } alt="Url not found"/> }
+                        <div>
+                            <input placeholder="Url" defaultValue={ imageurl } onChange={ (e) => this.handleChange('image', e.target.value) }/>
+                        </div>
+                        <div>
+                            <div>Title: <input placeholder="Title" defaultValue={ title } onChange={ (e) => this.handleChange('title', e.target.value) }/></div>
+                            <div>Username: { username }</div>
+                        </div>
+                        <div>Text: <input placeholder="Text" defaultValue={ text } onChange={ (e) => this.handleChange('text', e.target.value) }/></div>
                         <div>{ dateposted }</div>
-                        <div>{ userId }</div>
                         <span>
                             <button onClick={ () => this.toggleEdit() }>Cancel</button>
                             <button onClick={ () => this.saveEdit( id, this.state.title, this.state.text, this.state.image ) }>Save</button>
                             <button onClick={ () => deletePost( id ) }>Delete</button>
                         </span>
-                        <p>{ JSON.stringify( this.state.title ) }</p>
+                        {/* <p>{ JSON.stringify( this.state.title ) }</p>
                         <p>{ JSON.stringify( this.state.text ) }</p>
-                        <p>{ JSON.stringify( this.state.image ) }</p>
+                        <p>{ JSON.stringify( this.state.image ) }</p> */}
                     </div>
                 ) }
             </li>
