@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
+import axios from 'axios';
 
 import { connect } from 'react-redux';
+import { getUser } from '../../redux/ducks/reducer';
 
 // Routes
 import Profile from './Profile/Profile';
@@ -12,13 +14,24 @@ import Settings from './Settings/Settings';
 
 class UserAccount extends Component {
 
-    render () {
+    componentDidMount () {
+        // Check if user is logged in
+        axios.get('/api/user').then( res => {
+            this.props.getUser( res.data );
+        }).catch( err => console.log(err) );
+
+        // If not got to login
         const { user } = this.props;
+        if ( !user.username ) {
+            this.props.history.push('/login')
+        }
+    }
+
+    render () {
+        // const { user } = this.props;
 
         return (
             <div className="useraccount">
-                { user.username ?
-
                 <div className="useraccount-container">
                     {/* <div>The UserAccount Component</div> */}
                     
@@ -26,7 +39,7 @@ class UserAccount extends Component {
                         <div className="header-container">
 
                             <div className="profile-pic">
-                                <img className="picture" src="http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png" alt="User pic"/>
+                                <img className="image" src="http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png" alt="User pic"/>
                                 <div>USERNAME</div>
                             </div>
                             <div className="nav">
@@ -51,11 +64,17 @@ class UserAccount extends Component {
                     </div>
 
                 </div>
-
-                : this.props.history.push('/login') }
             </div>
         )
     }
 }
 
-export default connect( state => state )( UserAccount );
+const mapStateToProps = ( state ) => {
+    return { user: state.user };
+};
+
+const mapDispatchToProps = {
+    getUser: getUser
+};
+
+export default connect( mapStateToProps , mapDispatchToProps )( UserAccount );

@@ -87,23 +87,22 @@ class Posts extends Component {
 
         return (
             <div className="posts">
-                <div className="posts-container">
-                    <div>POSTS COMPONENT</div>
+                {/* <div>POSTS COMPONENT</div> */}
 
-                    <div>
-                        <input placeholder="Title" onChange={ (e) => this.handleChange('title', e.target.value) }/>
-                        <input placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }/>
-                        <input placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
-                        <button onClick={ () => this.createPost() }>Post</button>
-                    </div>
-
-                    <ul className="posts-list">
-
-                        { listOfPosts }
-
-                    </ul>
-
+                <div className="new-post">
+                    <div>New Post</div>
+                    <input placeholder="Title" onChange={ (e) => this.handleChange('title', e.target.value) }/>
+                    <input placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }/>
+                    <input placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
+                    <button onClick={ () => this.createPost() }>Post</button>
                 </div>
+                
+                <ul className="posts-list">
+
+                    { listOfPosts }
+
+                </ul>
+
             </div>
         )
     }

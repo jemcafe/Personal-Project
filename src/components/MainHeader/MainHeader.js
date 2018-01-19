@@ -10,7 +10,7 @@ import SearchBar from './SearchBar/SearchBar';
 class MainHeader extends Component {
 
     componentDidMount () {
-        // The user's session is requested from the server so the user stays logged in when page refreshes
+        // CHeck if user is logged in
         axios.get('/api/user').then( res => {
             console.log( res.data );
             this.props.getUser( res.data );

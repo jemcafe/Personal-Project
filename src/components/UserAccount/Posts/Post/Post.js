@@ -6,7 +6,7 @@ class Post extends Component {
         this.state = {
             title: this.props.post.title,
             text: this.props.post.text,
-            image: this.props.post.image,
+            image: this.props.post.imageurl,
             editMode: false
         }
     }
