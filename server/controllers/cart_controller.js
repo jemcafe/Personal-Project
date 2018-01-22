@@ -6,8 +6,35 @@ module.exports = {
 
         if ( session.user.id ) {
 
-            db.create_cart_item( [productId, name, price, productCategoryId, quantity, session.user.id, image] ).then( item => {
-                res.status(200).json( item );
+            db.read_cart( [session.user.id] ).then( cart => {
+
+
+                let newQuantity = 0;
+
+                for ( let i = 0; i < cart.length; i++ ) {
+                    if ( productId === cart[i].productid && productCategoryId === cart[i].productcategoryid ) {
+
+                        newQuantity += cart[i].quantity;
+
+                        db.delete_cart_item( [cart[i].id, session.user.id] ).then( item => {
+                            // Nothing happens to the data
+                        }).catch( err => {
+                            console.log(err);
+                            res.status(500).send('Item not deleted');
+                        });
+
+                    }
+                }
+                
+                newQuantity += quantity;
+
+                db.create_cart_item( [productId, name, price, productCategoryId, newQuantity, session.user.id, image] ).then( item => {
+                    res.status(200).json( item );
+                }).catch( err => {
+                    console.log(err);
+                    res.status(500).send('Item not added');
+                });
+
             }).catch( err => {
                 console.log(err);
                 res.status(500).send('Item not added');
