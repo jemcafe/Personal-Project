@@ -25,11 +25,31 @@ module.exports = {
 
         if ( session.user.id ) {
 
-            db.delete_cart_item( [id, session.user.id] ).then( cart => {
+            db.delete_cart_item( [id, session.user.id] ).then( item => {
                 res.status(200).json('Item deleted');
             }).catch( err => {
                 console.log(err);
                 res.status(500).send('Item not deleted');
+            });
+
+        } else {
+            res.status(404).send('No user');
+        }
+    },
+
+    updateQuantity ( req, res ) {
+        const db = req.app.set('db');
+        const { session } = req;
+        const { id } = req.params;
+        const { quantity } = req.body;
+
+        if ( session.user.id ) {
+
+            db.update_cart_item_quantity( [id, quantity, session.user.id] ).then( item => {
+                res.status(200).json( item );
+            }).catch( err => {
+                console.log(err);
+                res.status(500).send('Quantity not updated');
             });
 
         } else {

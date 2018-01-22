@@ -49,6 +49,7 @@ app.get('/api/user', authCntrl.getUser);
     // Cart
     app.post('/api/add-item', cartCntrl.addItem);
     app.delete('/api/remove-item/:id', cartCntrl.removeItem);
+    app.patch('/api/update-quantity/:id', cartCntrl.updateQuantity);
     app.get('/api/cart', cartCntrl.getCart);
 
 // Products
