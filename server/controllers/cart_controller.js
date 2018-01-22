@@ -8,32 +8,35 @@ module.exports = {
 
             db.read_cart( [session.user.id] ).then( cart => {
 
-
-                let newQuantity = 0;
+                let itemFound = false;
+                let newQuantity = quantity;
 
                 for ( let i = 0; i < cart.length; i++ ) {
+
                     if ( productId === cart[i].productid && productCategoryId === cart[i].productcategoryid ) {
 
                         newQuantity += cart[i].quantity;
 
-                        db.delete_cart_item( [cart[i].id, session.user.id] ).then( item => {
-                            // Nothing happens to the data
+                        db.update_cart_item_quantity( [cart[i].id, newQuantity, session.user.id] ).then( item => {
+                            res.status(200).json( item );
                         }).catch( err => {
                             console.log(err);
-                            res.status(500).send('Item not deleted');
+                            res.status(500).send('Quantity not updated');
                         });
 
+                        itemFound = true;
                     }
-                }
-                
-                newQuantity += quantity;
 
-                db.create_cart_item( [productId, name, price, productCategoryId, newQuantity, session.user.id, image] ).then( item => {
-                    res.status(200).json( item );
-                }).catch( err => {
-                    console.log(err);
-                    res.status(500).send('Item not added');
-                });
+                }
+
+                if ( !itemFound ) {
+                    db.create_cart_item( [productId, name, price, productCategoryId, newQuantity, session.user.id, image] ).then( item => {
+                        res.status(200).json( item );
+                    }).catch( err => {
+                        console.log(err);
+                        res.status(500).send('Item not added');
+                    });
+                }
 
             }).catch( err => {
                 console.log(err);
