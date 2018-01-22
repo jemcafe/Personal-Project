@@ -70,9 +70,6 @@ class Post extends Component {
                             <button onClick={ () => this.saveEdit( id, this.state.title, this.state.text, this.state.image ) }>Save</button>
                             <button onClick={ () => deletePost( id ) }>Delete</button>
                         </span>
-                        {/* <p>{ JSON.stringify( this.state.title ) }</p>
-                        <p>{ JSON.stringify( this.state.text ) }</p>
-                        <p>{ JSON.stringify( this.state.image ) }</p> */}
                     </div>
                 ) }
             </li>

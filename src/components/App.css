@@ -287,12 +287,40 @@ ul {
   box-sizing: border-box;
 }
     .cart-container {
-      background-color: #f9e5fd;
-    }
-    .cart-container .summary {
       display: flex;
       justify-content: space-around;
-      background-color: #d8fcfc;
+      background-color: #f9e5fd;
+    }
+    .cart-container .item {
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px dashed gray;
+      background-color: #f0eacb;
+    }
+    .cart-container .item-container {
+      display: flex;
+      align-items: center;
+      background-color: #f0fdea;
+    }
+    .cart-container .products {
+      flex: 3;
+      background-color: #dceef8;
+    }
+    .cart-container .item-img {
+      max-width: 100px;
+      /* background-color: #f9e5fd; */
+    }
+    .cart-container .item-info {
+      display: flex;
+      justify-content: space-between;
+      background-color: #e5f0fd;
+    }
+    .cart-container .total {
+      flex: 1;
+      background-color: #fadbc8;
+    }
+    .cart-container .total-summary {
+      background-color: #fdfbdf;
     }
 .useraccount .settings-container {
   background-color: #cbe4fc;

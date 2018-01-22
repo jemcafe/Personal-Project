@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
+
+// import Item from './Item/Item';
 
 class Cart extends Component {
     constructor () {
@@ -9,33 +11,66 @@ class Cart extends Component {
         }
     }
 
-    // componentDidMount () {
-    //     axios.get().then( res => {
-    //         this.setState({ items: res.data });
-    //     }).catch( err => console.log(err) );
-    // }
+    componentDidMount () {
+        axios.get('/api/cart').then( res => {
+            console.log( res.data );
+            this.setState({ items: res.data });
+        }).catch( err => console.log(err) );
+    }
 
     render () {
-        // const listOfItems = [];
+        const { items } = this.state;
+
+        const priceTotal = items.reduce( (acc, item) => {
+            return acc += parseFloat( item.price, 10 )
+        }, 0);
+
+        const listOfItems = items.map( item => {
+            return (
+                <li key={ item.id }>
+                    <div className="item">
+                        <div className="item-container">
+
+                            <div>
+                                <img className="item-img" src={ item.imageurl } alt="Product"/>
+                            </div>
+                            <div>
+                                <div className="item-name">{ item.name }</div>
+                                <div className="item-info">
+                                    <div>Category: { item.productcategory }</div>
+                                    <div>Quantity: { item.quantity }</div>
+                                    <div>Price: ${ item.price }</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+            );
+        });
 
         return (
             <div className="cart">
-                <div className="cart-container">
-                    <div className="title">CART</div>
-                    
-                    <div className="summary">
+                <div className="title">
+                    CART
+                    <div className="cart-container">
+
                         <div className="products">
-                            PRODUCTS
+                            <div>PRODUCTS</div>
                             <ul>
-                                
+                                { listOfItems }
                             </ul>
                         </div>
 
                         <div className="total">
-                            TOTAL
+                            <div>TOTAL</div>
+                            <div className="total-summary">
+                                <div>Total: ${ priceTotal }</div>
+                                <button className="checkout-btn">Checkout</button>
+                            </div>
                         </div>
+                        
                     </div>
-
                 </div>
             </div>
         )
