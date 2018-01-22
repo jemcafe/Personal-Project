@@ -27,7 +27,8 @@ class MainHeader extends Component {
                                     <Link to="/user" className="droplink">UserAccount</Link>
                                     <div className="dropdown-content">
                                         <Link to="/user">Profile</Link>
-                                        <Link to="/user/posts">Posts</Link>
+                                        <Link to="/user/posts">My Posts</Link>
+                                        <Link to="/user/posters">My Posters</Link>
                                         <Link to="/user/following">Following</Link>
                                         <Link to="/user/cart">Cart</Link>
                                         <Link to="/user/settings">Settings</Link>

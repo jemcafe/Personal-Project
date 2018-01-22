@@ -6,18 +6,12 @@ import { connect } from 'react-redux';
 // Components ( routes )
 import Profile from './Profile/Profile';
 import Posts from './Posts/Posts';
+import Posters from './Posters/Posters';
 import Following from './Following/Following';
 import Cart from './Cart/Cart';
 import Settings from './Settings/Settings';
 
 class UserAccount extends Component {
-
-    // componentDidMount () {
-    //     // Check if user is logged in
-    //     axios.get('/api/user').then( res => {
-    //         this.props.getUser( res.data );
-    //     }).catch( err => console.log(err) );
-    // }
 
     render () {
         const { user } = this.props;
@@ -38,6 +32,7 @@ class UserAccount extends Component {
                             </div>
                             <div className="nav">
                                 <Link to="/user/posts">Posts</Link>
+                                <Link to="/user/posters">Posters</Link>
                                 <Link to="/user/following">Following</Link>
                                 <Link to="/user/cart">Cart</Link>
                                 <Link to="/user/settings">Settings</Link>
@@ -50,6 +45,7 @@ class UserAccount extends Component {
 
                             <Route exact path="/user" component={ Profile } />
                             <Route path="/user/posts" component={ Posts } />
+                            <Route path="/user/posters" component={ Posters } />
                             <Route path="/user/following" component={ Following } />
                             <Route path="/user/cart" component={ Cart } />
                             <Route path="/user/settings" component={ Settings } />

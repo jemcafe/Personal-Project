@@ -272,12 +272,18 @@ ul {
 .useraccount .following-container {
   background-color: #cbe4fc;
 }
-.useraccount .cart-container {
-  background-color: #cbe4fc;
+.useraccount .cart {
+  background-color: #b7d5f1;
+  padding: 10px;
+  box-sizing: border-box;
 }
     .cart-container {
+      background-color: #f9e5fd;
+    }
+    .cart-container .summary {
       display: flex;
-      
+      justify-content: space-around;
+      background-color: #d8fcfc;
     }
 .useraccount .settings-container {
   background-color: #cbe4fc;

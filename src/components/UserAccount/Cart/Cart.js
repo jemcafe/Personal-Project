@@ -21,17 +21,19 @@ class Cart extends Component {
         return (
             <div className="cart">
                 <div className="cart-container">
-                    <div>CART</div>
+                    <div className="title">CART</div>
                     
-                    <div className="products">
-                        PRODUCTS
-                        <ul>
-                            { listOfItems }
-                        </ul>
-                    </div>
+                    <div className="summary">
+                        <div className="products">
+                            PRODUCTS
+                            <ul>
+                                
+                            </ul>
+                        </div>
 
-                    <div className="total">
-                        TOTAL
+                        <div className="total">
+                            TOTAL
+                        </div>
                     </div>
 
                 </div>

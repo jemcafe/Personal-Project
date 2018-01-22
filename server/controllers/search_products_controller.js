@@ -92,7 +92,7 @@ module.exports = {
 
         db.read_posterCategories().then( category => {
             const categories = category.map( e => e.category );
-            res.status(200).send( categories );
+            res.status(200).send( ['All', ...categories] );
         }).catch( err => { 
             console.log(err);
             res.status(500).send('No Categories');
@@ -102,16 +102,10 @@ module.exports = {
         const db = req.app.set('db');
         const { search, category } = req.query;
 
-        // let data = posters;
-        // // Can be searched by category but not by search input yet
-        // data = data.filter( e => e.category === category );
-
-        // res.status(200).send( data );
-
         db.read_posters().then( posters => {
 
             const filteredPosters = posters.filter( poster => poster.name.toLowerCase().includes( search.toLowerCase() ) ? poster : false )
-                                           .filter( poster => category === '' ? poster : category === poster.category ? poster : false);
+                                           .filter( poster => category === 'All' || category === '' ? poster : category === poster.category ? poster : false);
 
             res.status(200).json( filteredPosters );
 

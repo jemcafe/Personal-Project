@@ -23,7 +23,7 @@ INSERT INTO Users (username, password, authId, name, imageURL) VALUES
 ('a',      'b',        null, 'A',               null),
 ('b',      'c',        null, 'Carry',           ''),
 ('Goku',   'dbz',      null, 'Son Goku',        'https://i.pinimg.com/736x/ed/1d/73/ed1d7355a9bb9460f4085b5ef695740f.jpg'),
-('Ichigo', 'bleach',   null, 'Ichigo Kurosaki', 'https://en.wikipedia.org/wiki/Ichigo_Kurosaki#/media/File:IchigoKurosakiBleach.jpg'),
+('Ichigo', 'bleach',   null, 'Ichigo Kurosaki', 'https://pbs.twimg.com/profile_images/640284910326972416/IOChu2E1_400x400.jpg'),
 ('Luffy',  'onepiece', null, 'Monkey D. Luffy', 'https://vignette.wikia.nocookie.net/onepiece/images/6/61/Estatua_de_cera_de_Luffy.png/revision/latest?cb=20121231203632&path-prefix=es');
 
 
@@ -149,13 +149,15 @@ CREATE TABLE Posters (
     imageURL TEXT
 );
 INSERT INTO Posters (name, description, datePosted, price, posterCategoryId, productCategoryId, userId, imageURL) VALUES
-('Jin Saotome Typhoon',         'Fanart of Jin Saotome.',      '1 / 19 / 2018', 39.99, 1, 3, 4, 'https://cdnb.artstation.com/p/assets/images/images/004/752/517/large/jem-brown-jinsaotome-screenshot-04c-sml.jpg?1488844564'),
-('Jin Saotome',                 'Fanart of Jin Saotome.',      '1 / 19 / 2018', 39.99, 1, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/004/056/362/large/jem-brown-jinsaotome-screenshot-03c-sml-copy.jpg?1479897947'),
 ('Ulquiorra Cifer',             'Fanart of Ulquiorra Cifer.',  '1 / 19 / 2018', 49.99, 1, 3, 4, 'https://cdnb.artstation.com/p/assets/images/images/007/624/631/large/jem-brown-ulquiorra-screenshot-6-700x700.jpg?1507427752'),
 ('Kisame Hoshigaki',            'Fanart of Kisame Hoshigaki.', '1 / 19 / 2018', 49.99, 1, 3, 4, 'https://cdnb.artstation.com/p/assets/images/images/007/889/865/large/jem-brown-kisame-01-screenshot-smla.jpg?1509157762'),
 ('Zabuza Momochi',              'Fanart of Zabuza Momochi.',   '1 / 19 / 2018', 49.99, 1, 3, 4, 'https://cdnb.artstation.com/p/assets/images/images/006/050/959/large/jem-brown-zabuza-screenshot-02-sml.jpg?1495666567'),
 ('Garra of the Sand',           'Fanart of Garra.',            '1 / 19 / 2018', 49.99, 1, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/007/290/560/large/jem-brown-garra-screenshot-02-700x700-2.jpg?1505327332'),
-('Garra of the Sand (Neutral)', 'Fanart of Garra (neutral)',   '1 / 19 / 2018', 44.99, 1, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/007/291/402/large/jem-brown-garra-screenshot-03b-700x700.jpg?1505110523');
+('Garra of the Sand (Neutral)', 'Fanart of Garra (neutral)',   '1 / 19 / 2018', 44.99, 1, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/007/291/402/large/jem-brown-garra-screenshot-03b-700x700.jpg?1505110523'),
+('Ieyasu Tokugawa',             'Fanart of Ieyasu Tokugawa',   '1 / 22 / 2018', 49.99, 1, 3, 4, 'https://cdnb.artstation.com/p/assets/images/images/005/352/385/large/jem-brown-ieyasu-screenshot-5c.jpg?1506238580'),
+('Scar (Fullmetal Alchemist)',  'Fanart of Scar',              '1 / 22 / 2018', 49.99, 1, 3, 4, 'https://cdnb.artstation.com/p/assets/images/images/005/728/353/large/jem-brown-scar-screenshot-01e.jpg?1493320471'),
+('Jin Saotome Typhoon',         'Fanart of Jin Saotome.',      '1 / 18 / 2018', 39.99, 1, 3, 4, 'https://cdnb.artstation.com/p/assets/images/images/004/752/517/large/jem-brown-jinsaotome-screenshot-04c-sml.jpg?1488844564'),
+('Jin Saotome',                 'Fanart of Jin Saotome.',      '1 / 18 / 2018', 39.99, 1, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/004/056/362/large/jem-brown-jinsaotome-screenshot-03c-sml-copy.jpg?1479897947');
 
 
 
