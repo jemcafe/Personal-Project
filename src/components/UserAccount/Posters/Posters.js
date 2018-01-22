@@ -37,7 +37,7 @@ class Posters extends Component {
                     </div>
 
                     <ul className="posters-list">
-
+                        <li>LIST</li>
                     </ul>
 
                 </div>

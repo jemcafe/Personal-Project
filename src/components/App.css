@@ -269,6 +269,15 @@ ul {
       justify-content: space-between;
       background-color: #dffafc;
     }
+.useraccount .posters {
+  background-color: #cbe4fc;
+}
+    .posters-container .new-poster {
+      background-color: #f8e0b3;
+    }
+    .posters-container > ul {
+      background-color: #f4cbfa;
+    }
 .useraccount .following-container {
   background-color: #cbe4fc;
 }

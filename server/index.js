@@ -13,7 +13,7 @@ const authCntrl = require('./controllers/auth_controller');
 const srchProductsCntrl = require('./controllers/search_products_controller');
 const postsCntrl = require('./controllers/posts_controller');
 const postersCntrl = require('./controllers/posters_controller');
-// const cartCntrl = require('./controllers/cart_controller');
+const cartCntrl = require('./controllers/cart_controller');
 
 const app = express();
 
@@ -35,27 +35,31 @@ app.post('/api/logout', authCntrl.logout);
 app.get('/api/user', authCntrl.getUser);
 
 // User 
-    //posts
-app.post('/api/new-post', postsCntrl.createPost);
-app.put('/api/edit-post/:id', postsCntrl.updatePost);
-app.delete('/api/delete-post/:id', postsCntrl.deletePost);
-app.get('/api/post/:id', postsCntrl.getPost);
-app.get('/api/posts', postsCntrl.getPosts);
+    // posts
+    app.post('/api/new-post', postsCntrl.createPost);
+    app.put('/api/edit-post/:id', postsCntrl.updatePost);
+    app.delete('/api/delete-post/:id', postsCntrl.deletePost);
+    app.get('/api/post/:id', postsCntrl.getPost);
+    app.get('/api/posts', postsCntrl.getPosts);
     // posters
-app.post('/api/new-poster', postersCntrl.createPoster);
-app.put('/api/edit-poster/:id', postersCntrl.updatePoster);
-app.delete('/api/delete-poster/:id', postersCntrl.deletePoster);
-app.get('/api/posters', postersCntrl.readPosters);
+    app.post('/api/new-poster', postersCntrl.createPoster);
+    app.put('/api/edit-poster/:id', postersCntrl.updatePoster);
+    app.delete('/api/delete-poster/:id', postersCntrl.deletePoster);
+    app.get('/api/posters', postersCntrl.readPosters);
+    // Cart
+    app.post('/api/add-item', cartCntrl.addItem);
+    app.delete('/api/remove-item/:id', cartCntrl.removeItem);
+    app.get('/api/cart', cartCntrl.getCart);
 
-// Product
+// Products
     // Categories
-app.get('/api/game-platforms', srchProductsCntrl.getPlatforms);
-app.get('/api/book-subjects', srchProductsCntrl.getSubjects);
-app.get('/api/poster-categories', srchProductsCntrl.getCategories);
+    app.get('/api/game-platforms', srchProductsCntrl.getPlatforms);
+    app.get('/api/book-subjects', srchProductsCntrl.getSubjects);
+    app.get('/api/poster-categories', srchProductsCntrl.getCategories);
     // Search
-app.get('/api/search/games', srchProductsCntrl.getGames);
-app.get('/api/search/books', srchProductsCntrl.getVolumes);
-app.get('/api/search/posters', srchProductsCntrl.getPosters);
+    app.get('/api/search/games', srchProductsCntrl.getGames);
+    app.get('/api/search/books', srchProductsCntrl.getVolumes);
+    app.get('/api/search/posters', srchProductsCntrl.getPosters);
 
 // This is for getting the 3rd party api data to my database
 app.get('/api/getgames', srchProductsCntrl.getGamesForDatabase);

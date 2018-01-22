@@ -179,7 +179,7 @@ CREATE TABLE Cart (
     name TEXT,
     price DECIMAL,
     productCategoryId INTEGER REFERENCES ProductCategories (id),
-    customerId INTEGER REFERENCES Users (id),
     quantity INTEGER,
+    customerId INTEGER REFERENCES Users (id),
     imageURL TEXT
 );

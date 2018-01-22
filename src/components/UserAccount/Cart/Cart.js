@@ -16,7 +16,7 @@ class Cart extends Component {
     // }
 
     render () {
-        const listOfItems = [];
+        // const listOfItems = [];
 
         return (
             <div className="cart">

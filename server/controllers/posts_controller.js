@@ -83,7 +83,7 @@ module.exports = {
         }
     },
 
-    getPosts (req, res ) {
+    getPosts ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
 
