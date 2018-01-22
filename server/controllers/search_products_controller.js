@@ -8,9 +8,12 @@ module.exports = {
         const db = req.app.get('db');
 
         db.read_gamePlatforms().then( platform => {
+
             const platforms = platform.map( e => e.platform);
-            res.status(200).json( platforms );
-        }).catch( () => {
+            res.status(200).json( ['All', ...platforms] );
+
+        }).catch( err => {
+            console.log(err);
             res.status(500).send('No Platforms');
         });
     },
@@ -18,27 +21,31 @@ module.exports = {
         const db = req.app.set('db');
         const { search, platform } = req.query;
 
-        db.read_gamePlatforms().then( plat => {
+        db.read_gamePlatforms().then( platforms => {
 
             // Giant Bomb uses ids instead of names to filter by platform. Got the id from the list I made.
-            const findPlatform = plat.find( e => e.platform === platform);
-            const platformGbId = findPlatform.gbid;
+            const platform = platforms.find( e => e.platform === platform );
+            // const platformGbId = platform.gbid;
 
-            axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=name:${ search },platforms:${ platformGbId }&limit=27&offest=0`).then( resp => {
+            axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=name:${ search },platforms:${ platform.gbid }&limit=27&offest=0`).then( resp => {
                 const data = [];
                 resp.data.results.forEach( e => {
                         data.push({
                         id: e.id,
                         name: e.name,
-                        image: e.image.thumb_url,
                         description: e.deck,
-                        releaseDate: e.original_release_date
+                        releaseDate: e.original_release_date,
+                        price: parseFloat( Math.floor( Math.random() * (59 - 10) + 10 ) + '.99' ),
+                        platform: platform,
+                        productCategory: 1,
+                        image: e.image.thumb_url ? e.image.thumb_url : '',
                     });
                 });
                 res.status(200).json( data );
             }).catch( err => console.error(err) );
 
-        }).catch( () => {
+        }).catch( err => {
+            console.log(err);
             res.status(500).send('No Platforms');
         });
     },
@@ -47,9 +54,12 @@ module.exports = {
         const db = req.app.get('db');
 
         db.read_bookSubjects().then( subject => {
+
             const subjects = subject.map( e => e.subject );
-            res.status(200).json( subjects );
-        }).catch( () => { 
+            res.status(200).json( ['All', ...subjects] );
+
+        }).catch( err => {
+            console.log(err); 
             res.status(500).send('No Subjects');
         });
     },
@@ -64,10 +74,13 @@ module.exports = {
                     data.push({
                     id: e.id,
                     name: e.volumeInfo.title,
-                    image: e.volumeInfo.imageLinks.thumbnail || null,
                     description: e.volumeInfo.description,
-                    publishedDate: e.volumeInfo.publishedDate
-                    });
+                    publishedDate: e.volumeInfo.publishedDate,
+                    price: parseFloat( Math.floor( Math.random() * (30 - 10) + 10 ) + '.99' ),
+                    subject: subject,
+                    productCategory: 2,
+                    image: e.volumeInfo.imageLinks.thumbnail ? e.volumeInfo.imageLinks.thumbnail : ''
+                });
             });
             
             res.status(200).json( data );
@@ -80,17 +93,42 @@ module.exports = {
         db.read_posterCategories().then( category => {
             const categories = category.map( e => e.category );
             res.status(200).send( categories );
-        }).catch( () => { 
+        }).catch( err => { 
+            console.log(err);
             res.status(500).send('No Categories');
         });
     },
     getPosters ( req, res, next ) {
-        const { category } = req.query;
+        const db = req.app.set('db');
+        const { search, category } = req.query;
 
-        let data = posters;
-        // Can be searched by category but not by search input yet
-        data = data.filter( e => e.category === category );
+        // let data = posters;
+        // // Can be searched by category but not by search input yet
+        // data = data.filter( e => e.category === category );
 
-        res.status(200).send( data );
+        // res.status(200).send( data );
+
+        db.read_posters().then( posters => {
+
+            res.status(200).json( posters );
+
+        }).catch( err => {
+            console.log(err);
+            res.status(500).send('No posters');
+        });
+    },
+
+
+
+    // This is for getting the data to my database
+    getGamesForDatabase ( req, res, next ) {
+        axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&limit=50&offest=50&filter=name:${ 'tekken' }`).then( resp => {
+            res.status(200).json( resp.data.results );
+        }).catch( err => console.error(err) );
+    },
+    getBooksForDatabase ( req, res, next ) {
+        axios.get(`https://www.googleapis.com/books/v1/volumes?q=${ search }+subject:${ sub }&maxResults=50&startIndex=0`).then( resp => {
+            res.status(200).json( resp.data.items );
+        }).catch( err => console.error(err) );
     }
 }

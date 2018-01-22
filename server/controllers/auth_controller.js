@@ -1,8 +1,3 @@
-// const axios = require('axios');
-
-const users = require('../db_temp/users');
-let id = 1;
-
 module.exports = {
     login ( req, res, next ) {
         const db = req.app.get('db');

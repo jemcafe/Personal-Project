@@ -1,8 +1,8 @@
 module.exports = {
-    createPost ( req, res ) {
+    createPoster ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
-        const { title, text, image } = req.body;
+        const { name, description, price, category, image } = req.body;
 
         const date = new Date();
         const dd = date.getDate();
@@ -12,11 +12,11 @@ module.exports = {
 
         if ( session.user.id ) {
 
-            db.create_post( [title, text, currentDate, session.user.id, image] ).then( post => {
-                res.status(200).json( post );
+            db.create_poster( [name, description, currentDate, price, category, 3, session.user.id, image] ).then( poster => {
+                res.status(200).json( poster );
             }).catch( err => {
                 console.log(err);
-                res.status(500).send('Not posted');
+                res.status(500).send('Poster not created');
             });
 
         } else {
@@ -24,19 +24,19 @@ module.exports = {
         }
     },
 
-    updatePost ( req, res ) {
+    updatePoster ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
         const { id } = req.params;
-        const { title, text, image } = req.body;
+        const { name, description, price, category, image } = req.body;
 
         if ( session.user.id ) {
 
-            db.update_post( [id, title, text, session.user.id, image] ).then( post => {
-                res.status(200).json( post );
+            db.update_poster( [id, name, description, price, category, session.user.id, image] ).then( poster => {
+                res.status(200).send( poster );
             }).catch( err => {
                 console.log(err);
-                res.status(500).send('Not edited');
+                res.status(500).send('Poster not updated');
             });
 
         } else {
@@ -44,19 +44,19 @@ module.exports = {
         }
     },
 
-    deletePost ( req, res ) {
+    deletePoster ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
         const { id } = req.params;
 
         if ( session.user.id ) {
 
-            db.delete_post( [id, session.user.id] ).then( () => {
+            db.delete_poster( [id, session.user.id] ).then( () => {
                 // Nothing happens to the data
-                res.status(200).send('Post deleted');
+                res.status(200).send('Poster deleted');
             }).catch( err => {
                 console.log(err);
-                res.status(500).send('Post not deleted');
+                res.status(500).send('Poster not deleted');
             });
 
         } else {
@@ -64,18 +64,19 @@ module.exports = {
         }
     },
 
-    getPost (req, res ) {
+    readPoster ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
         const { id } = req.params;
 
         if ( session.user.id ) {
 
-            db.read_user_post( [id, session.user.id] ).then( post => {
-                res.status(200).json( post );
+            db.read_user_poster( [id, session.user.id] ).then( poster => {
+                // Nothing happens to the data
+                res.status(200).json( poster );
             }).catch( err => {
                 console.log(err);
-                res.status(500).send('Unable to get post');
+                res.status(404).send('No poster found');
             });
 
         } else {
@@ -83,17 +84,18 @@ module.exports = {
         }
     },
 
-    getPosts (req, res ) {
+    readPosters ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
 
         if ( session.user.id ) {
-            
-            db.read_user_posts( [session.user.id] ).then( posts => {
-                res.status(200).json( posts );
+
+            db.read_user_posters( [session.user.id] ).then( posters => {
+                // Nothing happens to the data
+                res.status(200).json( posters );
             }).catch( err => {
                 console.log(err);
-                res.status(500).send('Unable to get posts');
+                res.status(500).send('Poster not deleted');
             });
 
         } else {

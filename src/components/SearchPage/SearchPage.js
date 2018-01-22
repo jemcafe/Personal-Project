@@ -11,7 +11,9 @@ class SearchPage extends Component {
         let list = searchResults.map( (e, i) => {
             return (
             <li key={ e.id }>
-                <Item title={ e.name } image={ e.image } />
+                <Item title={ e.name } 
+                      image={ e.image }
+                      price={ e.price } />
             </li>
             )
         });

@@ -2,6 +2,12 @@
     text-align: center;
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
 .panel {
   width: 1000px;
   margin: 0 auto;
@@ -237,9 +243,6 @@
       background-color: #fcf0c8;
     }
     .posts ul {
-      margin: 0;
-      padding: 0;
-      list-style-type: none;
       background-color: #b9ece8;
     }
     .posts .post {
@@ -258,10 +261,8 @@
     .posts .post-container > img {
       max-width: 484px;
     }
-    .posts .post-container {
-      /* display: flex;
-      margin: 8px 20px; */
-      /* background-color: #dffafc; */
+    .posts .post-container > div > input {
+      width: 100%;
     }
     .posts .post-container > div {
       display: flex;
@@ -274,6 +275,10 @@
 .useraccount .cart-container {
   background-color: #cbe4fc;
 }
+    .cart-container {
+      display: flex;
+      
+    }
 .useraccount .settings-container {
   background-color: #cbe4fc;
 }

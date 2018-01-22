@@ -49,7 +49,7 @@ class Login extends Component {
                     </div>
                     <div className="input">
                         <div className="info">Password</div>
-                        <input className="password" placeholder="password" onChange={ (e) => this.handleChange('password', e.target.value) } />
+                        <input className="password" type="password" placeholder="password" onChange={ (e) => this.handleChange('password', e.target.value) } />
                     </div>
                     <div className="btns">
                         <button className="btn" onClick={ () => this.login() }>Sign In</button>

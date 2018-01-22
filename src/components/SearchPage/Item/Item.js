@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Item (props) {
-   const { title, image } = props;
+   const { title, image, price } = props;
    
    let shortenTitle = title.length > 20 ? `${title.slice(0,20).trim()}...` : title;
 
@@ -19,6 +19,7 @@ function Item (props) {
                 <div className="info">
                     <div>Rating</div>
                     <div>Date</div>
+                    <div>${ price }</div>
                 </div>
             </div>
 
