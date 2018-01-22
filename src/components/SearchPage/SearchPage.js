@@ -12,7 +12,7 @@ class SearchPage extends Component {
             return (
             <li key={ e.id }>
                 <Item title={ e.name } 
-                      image={ e.image }
+                      image={ e.imageurl }
                       price={ e.price } />
             </li>
             )

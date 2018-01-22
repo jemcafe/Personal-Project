@@ -34,11 +34,11 @@ module.exports = {
                         id: e.id,
                         name: e.name,
                         description: e.deck,
-                        releaseDate: e.original_release_date,
+                        releasedate: e.original_release_date,
                         price: parseFloat( Math.floor( Math.random() * (59 - 10) + 10 ) + '.99' ),
                         platform: platform,
-                        productCategory: 1,
-                        image: e.image.thumb_url ? e.image.thumb_url : '',
+                        productcategory: 1,
+                        imageurl: e.image.thumb_url ? e.image.thumb_url : '',
                     });
                 });
                 res.status(200).json( data );
@@ -75,11 +75,11 @@ module.exports = {
                     id: e.id,
                     name: e.volumeInfo.title,
                     description: e.volumeInfo.description,
-                    publishedDate: e.volumeInfo.publishedDate,
+                    publisheddate: e.volumeInfo.publishedDate,
                     price: parseFloat( Math.floor( Math.random() * (30 - 10) + 10 ) + '.99' ),
                     subject: subject,
-                    productCategory: 2,
-                    image: e.volumeInfo.imageLinks.thumbnail ? e.volumeInfo.imageLinks.thumbnail : ''
+                    productcategory: 2,
+                    imageurl: e.volumeInfo.imageLinks.thumbnail ? e.volumeInfo.imageLinks.thumbnail : ''
                 });
             });
             
@@ -110,7 +110,10 @@ module.exports = {
 
         db.read_posters().then( posters => {
 
-            res.status(200).json( posters );
+            const filteredPosters = posters.filter( poster => poster.name.toLowerCase().includes( search.toLowerCase() ) ? poster : false )
+                                           .filter( poster => category === '' ? poster : category === poster.category ? poster : false);
+
+            res.status(200).json( filteredPosters );
 
         }).catch( err => {
             console.log(err);
