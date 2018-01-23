@@ -28,11 +28,12 @@ class Cart extends Component {
     removeItem ( id ) {
         const { updateCartItems } = this.props;
 
-        axios.delete(`/api/remove-items/${ id }`).then( res => {
+        axios.delete(`/api/remove-item/${ id }`).then( res => {
             console.log( res.data );
             
             axios.get('/api/cart').then( resp => {
                 updateCartItems( resp.data );
+                console.log( resp.data );
             }).catch( err => console.log(err) );
 
         }).catch( err => console.log(err) );
@@ -72,8 +73,8 @@ class Cart extends Component {
                                     <div>Price: ${ item.price }</div>
                                 </div>
                             </div>
-                            {/* <button className="remove-btn" onClick={ () => this.removeItem( item.id ) }>Remove</button> */}
-                            <button className="remove-btn">Remove</button>
+                            <button className="remove-btn" onClick={ () => this.removeItem( item.id ) }>Remove</button>
+                            {/* <button className="remove-btn">Remove</button> */}
 
                         </div>
                     </div>
