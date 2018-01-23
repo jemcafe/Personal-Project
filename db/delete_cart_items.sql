@@ -1,0 +1,1 @@
+DELETE * FROM Cart WHERE customerId = $1;

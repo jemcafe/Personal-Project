@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateCartItems } from '../../../redux/ducks/reducer';
 
@@ -74,7 +75,6 @@ class Cart extends Component {
                                 </div>
                             </div>
                             <button className="remove-btn" onClick={ () => this.removeItem( item.id ) }>Remove</button>
-                            {/* <button className="remove-btn">Remove</button> */}
 
                         </div>
                     </div>
@@ -91,7 +91,7 @@ class Cart extends Component {
                         <div className="products">
                             <div>PRODUCTS</div>
                             <ul>
-                                { listOfItems }
+                                { listOfItems.length ? listOfItems : <li>This cart's boring.</li> }
                             </ul>
                         </div>
 
@@ -99,7 +99,7 @@ class Cart extends Component {
                             <div>TOTAL</div>
                             <div className="total-summary">
                                 <div>Total: ${ priceTotal }</div>
-                                <button className="checkout-btn">Checkout</button>
+                                { priceTotal > 0 && <Link to="/checkout"><button className="checkout-btn">Checkout</button></Link> }
                             </div>
                         </div>
                         
