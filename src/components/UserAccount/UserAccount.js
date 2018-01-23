@@ -27,16 +27,19 @@ class UserAccount extends Component {
                         <div className="header-container">
 
                             <div className="profile-pic">
-                                <img className="image" src={ user.imageurl || 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png'} alt="User pic"/>
-                                <div>{ user.username }</div>
+                                <img src={ user.imageurl || 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png'} alt="User pic"/>
                             </div>
+
+                            <div>{ user.username }</div>
+
                             <div className="nav">
                                 <Link to="/user/posts">Posts</Link>
                                 <Link to="/user/posters">Posters</Link>
                                 <Link to="/user/following">Following</Link>
                                 <Link to="/user/cart">Cart</Link>
                                 <Link to="/user/settings">Settings</Link>
-                            </div>                            
+                            </div>
+
                         </div>
                     </div>
 

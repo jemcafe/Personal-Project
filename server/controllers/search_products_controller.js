@@ -3,12 +3,29 @@ require('dotenv').config();
 let bookId = 1;
 
 module.exports = {
-    getPlatforms ( req, res, next ) {
+    getProductCategories ( req, res, next ) {
+        const db = req.app.get('db');
+
+        db.read_productCategories().then( category => {
+
+            const categories = category.map( e => e.productcategory );
+            res.status(200).json( categories );
+
+        }).catch( err => {
+            console.log(err);
+            res.status(500).send('No Platforms');
+        });
+    },
+
+    // Games
+    getGamePlatforms ( req, res, net ) {
         const db = req.app.get('db');
 
         db.read_gamePlatforms().then( platform => {
-            const platforms = platform.map( e => e.platform);
+
+            const platforms = platform.map( e => e.platform );
             res.status(200).json( ['All', ...platforms] );
+
         }).catch( err => {
             console.log(err);
             res.status(500).send('No Platforms');
@@ -49,7 +66,8 @@ module.exports = {
         });
     },
 
-    getSubjects ( req, res, next ) {
+    // Books
+    getBookSubjects ( req, res, next ) {
         const db = req.app.get('db');
 
         db.read_bookSubjects().then( subject => {
@@ -86,13 +104,23 @@ module.exports = {
             res.status(200).json( data );
         }).catch( err => console.error(err) );
     },
+    getBookRatings( req, res, next ) {
+        axios.get(`https://www.googleapis.com/books/v1/volumes?q=ghost&maxResults=10&startIndex=0`).then( resp => {
+            const averageRatings = resp.data.items.map( e => e.volumeInfo.averageRating );
+            res.status(200).json( averageRatings );
+        }).catch( err => console.error(err) );
+    },
 
-    getCategories ( req, res, next ) {
+
+    // Posters
+    getPosterCategories ( req, res, next ) {
         const db = req.app.get('db');
 
         db.read_posterCategories().then( category => {
+
             const categories = category.map( e => e.category );
             res.status(200).send( ['All', ...categories] );
+
         }).catch( err => { 
             console.log(err);
             res.status(500).send('No Categories');
@@ -117,15 +145,17 @@ module.exports = {
 
 
 
+
     // This is for getting the data to my database
     getGamesForDatabase ( req, res, next ) {
-        axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&limit=50&offest=50&filter=name:${ 'tekken' }`).then( resp => {
+        axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&limit=50&offest=0&filter=name:${ 'tekken' }`).then( resp => {
             res.status(200).json( resp.data.results );
         }).catch( err => console.error(err) );
     },
     getBooksForDatabase ( req, res, next ) {
-        axios.get(`https://www.googleapis.com/books/v1/volumes?q=${ search }+subject:${ sub }&maxResults=50&startIndex=0`).then( resp => {
-            res.status(200).json( resp.data.items );
+        axios.get(`https://www.googleapis.com/books/v1/volumes?q=ghost&maxResults=50&startIndex=0`).then( resp => {
+            const volumes = resp.data.items.map( e => e.volumeInfo );
+            res.status(200).json( volumes );
         }).catch( err => console.error(err) );
     }
 }

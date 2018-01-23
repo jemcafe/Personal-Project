@@ -20,6 +20,7 @@ class Cart extends Component {
             console.log( res.data );
             this.props.updateCartItems( res.data );
         }).catch( err => console.log(err) );
+        console.log( this.props.cartItems );
     }
 
     handleChange ( property, value ) {
@@ -54,7 +55,7 @@ class Cart extends Component {
     render () {
         const { cartItems } = this.props;
 
-        const priceTotal = cartItems.reduce( (acc, item) => acc += parseFloat( item.price, 10 ), 0);
+        const priceTotal = cartItems.reduce( (acc, item) => acc += parseFloat(item.price), 0 ).toFixed(2);
 
         const listOfItems = cartItems.map( item => {
             return (

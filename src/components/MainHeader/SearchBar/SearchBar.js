@@ -9,9 +9,9 @@ class SearchBar extends Component {
     constructor () {
         super();
         this.state = {
-            categoryONE: 'Games',
-            categoryTWO: 'All',
-            categoryONElist: ['Games', 'Books', 'Posters'],
+            categoryONE: '',
+            categoryTWO: '',
+            categoryONElist: [],
             categoryTWOlist: [],
             gamePlatforms: [],
             bookSubjects: [],
@@ -21,6 +21,12 @@ class SearchBar extends Component {
     }
 
     componentDidMount () {
+        // Gets the product categories
+        axios.get('/api/product-categories').then( res => {
+            console.log( res.data );
+            this.setState({ categoryONElist: res.data });
+        }).catch( console.log() );
+
         // Gets the game platform names
         axios.get('/api/game-platforms').then( res => {
             console.log( res.data );
@@ -53,6 +59,10 @@ class SearchBar extends Component {
         // axios.get('/api/getbooks').then( res => {
         //     console.log( res.data );
         // }).catch( err => console.log(err) );
+
+        // axios.get('/api/getGameRatingBoards').then( res => {
+        //     console.log( res.data );
+        // }).catch( console.log() );
     }
         
     handleInputChange ( val ) {
@@ -60,21 +70,21 @@ class SearchBar extends Component {
     }
 
     handleCategoryChange ( property, val ) {
-        this.setState({ [property]: val });
-            
-            const { gamePlatforms, bookSubjects, posterCategories } = this.state;
+        const { gamePlatforms, bookSubjects, posterCategories } = this.state;
 
-            if ( property === 'categoryONE' ) {
-                if ( val === 'Games' ) {
-                    this.setState({ categoryTWOlist: gamePlatforms });
-                } else if ( val === 'Books' ) {
-                    this.setState({ categoryTWOlist: bookSubjects });
-                } else if ( val === 'Posters' ) {
-                    this.setState({ categoryTWOlist: posterCategories });
-                } else {
-                    this.setState({ categoryTWOlist: [] });
+        if ( property === 'categoryONE' ) {
+            if ( val === 'Games' ) {
+                this.setState({ categoryTWOlist: gamePlatforms });
+            } else if ( val === 'Books' ) {
+                this.setState({ categoryTWOlist: bookSubjects });
+            } else if ( val === 'Posters' ) {
+                this.setState({ categoryTWOlist: posterCategories });
+            } else {
+                this.setState({ categoryTWOlist: [] });
             }
         }
+        
+        this.setState({ [property]: val });
     }
 
     search () {

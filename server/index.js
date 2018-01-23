@@ -51,17 +51,21 @@ app.get('/api/user', authCntrl.getUser);
     app.delete('/api/remove-item/:id', cartCntrl.removeItem);
     app.patch('/api/update-quantity/:id', cartCntrl.updateQuantity);
     app.get('/api/cart', cartCntrl.getCart);
-    // app.delete('/api/remove-all-items', cartCntrl.removeAllItem);
+    // app.delete('/api/remove-all-items', cartCntrl.removeAllItems);
 
 // Products
     // Categories
-    app.get('/api/game-platforms', srchProductsCntrl.getPlatforms);
-    app.get('/api/book-subjects', srchProductsCntrl.getSubjects);
-    app.get('/api/poster-categories', srchProductsCntrl.getCategories);
+    app.get('/api/product-categories', srchProductsCntrl.getProductCategories);
+    // Subcategories
+    app.get('/api/game-platforms', srchProductsCntrl.getGamePlatforms);
+    app.get('/api/book-subjects', srchProductsCntrl.getBookSubjects);
+    app.get('/api/poster-categories', srchProductsCntrl.getPosterCategories);
     // Search
     app.get('/api/search/games', srchProductsCntrl.getGames);
     app.get('/api/search/books', srchProductsCntrl.getVolumes);
     app.get('/api/search/posters', srchProductsCntrl.getPosters);
+    // Ratings
+    app.get('/api/book-ratings', srchProductsCntrl.getBookRatings);
 
 // This is for getting the 3rd party api data to my database
 app.get('/api/getgames', srchProductsCntrl.getGamesForDatabase);

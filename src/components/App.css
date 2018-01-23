@@ -197,6 +197,28 @@ ul {
   background-color: #ebc3f5;
 }
 
+.checkout {
+  background-color: #ddecfd;
+  padding: 50px 25%;
+  box-sizing: border-box;
+}
+    .checkout-container {
+      padding: 25px 0;
+      background-color: #ffdfe8;
+    }
+
+    .checkout-container > div {
+      padding: 15px 0;
+      /* margin: 25px 0; */
+      background-color: #fdf0dc;
+    }
+
+    .checkout .shipping-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
 .useraccount .header-container {
   display: flex;
   /* justify-content: space-between; */
@@ -214,15 +236,21 @@ ul {
 .useraccount .main {
   background-color: #cbf8d6;
 }
-.useraccount .profile-pic .image {
-  max-width: 100px;
-  max-height: 100px;
-  border: 1px solid gray;
-  border-radius: 50%;
-}
-.useraccount .profile-pic {
-  background-color: #cbfcde;
-}
+    /* Fills the thumbnail div with the image */
+  .useraccount .profile-pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+  }
+  .useraccount .profile-pic img {
+    flex-shrink: 0;
+    max-width: 100%;
+    min-height: 100%;
+  }
 .useraccount .profile-container {
   background-color: #cbe4fc;
 }
@@ -276,11 +304,40 @@ ul {
 .useraccount .posters {
   background-color: #cbe4fc;
 }
+    .posters-container {
+      display: flex;
+    }
     .posters-container .new-poster {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       background-color: #f8e0b3;
     }
     .posters-container > ul {
+      flex: 3;
       background-color: #f4cbfa;
+    }
+    .posters-list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .poster {
+      background-color: #e1d0ec;
+    }
+      /* Fills the thumbnail div with the image */
+    .poster .thumbnail {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      width: 187.5px;
+      height: 187.5px;
+    }
+    .poster .thumbnail img {  /*  When height is greater than width  */
+      flex-shrink: 0;
+      max-width: 100%;
+      min-height: 100%;
     }
 .useraccount .following-container {
   background-color: #cbe4fc;
