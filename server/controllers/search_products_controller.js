@@ -1,8 +1,6 @@
 const axios = require('axios');
 require('dotenv').config();
 
-const posters = require('../db_temp/posters');
-
 module.exports = {
     getPlatforms ( req, res, next ) {
         const db = req.app.get('db');
@@ -37,7 +35,7 @@ module.exports = {
                         releasedate: e.original_release_date,
                         price: parseFloat( Math.floor( Math.random() * (59 - 10) + 10 ) + '.99' ),
                         platform: platform,
-                        productcategory: 1,
+                        productcategoryid: 1,
                         imageurl: e.image.thumb_url ? e.image.thumb_url : '',
                     });
                 });
@@ -78,7 +76,7 @@ module.exports = {
                     publisheddate: e.volumeInfo.publishedDate,
                     price: parseFloat( Math.floor( Math.random() * (30 - 10) + 10 ) + '.99' ),
                     subject: subject,
-                    productcategory: 2,
+                    productcategoryid: 2,
                     imageurl: e.volumeInfo.imageLinks.thumbnail ? e.volumeInfo.imageLinks.thumbnail : ''
                 });
             });

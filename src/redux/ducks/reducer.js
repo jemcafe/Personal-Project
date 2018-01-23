@@ -1,6 +1,7 @@
 const initialState = {
    user: {},            // Will be the user session object
-   searchResults: []
+   searchResults: [],
+   cartItems: [],
 };
 
 // Action types
@@ -9,6 +10,7 @@ const LOGOUT = 'LOGOUT';
 const REGISTER = 'REGISTER';
 const GET_USER = 'GET_USER';
 const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS';
+const UPDATE_CART_ITEMS = 'UPDATE_CART_ITEMS';
 
 // Reducer
 export default function reducer ( state = initialState, action ) {
@@ -25,6 +27,8 @@ export default function reducer ( state = initialState, action ) {
          return { ...state, user: payload };
       case UPDATE_SEARCH_RESULTS:
          return { ...state, searchResults: payload };
+      case UPDATE_CART_ITEMS:
+         return { ...state, cartItems: payload };
       default:
          return state;
    }
@@ -63,5 +67,12 @@ export function updateSearchResults ( searchResults ) {
    return {
       type: 'UPDATE_SEARCH_RESULTS',
       payload: searchResults
+   };
+}
+
+export function updateCartItems ( cartItems ) {
+   return {
+      type: 'UPDATE_CART_ITEMS',
+      payload: cartItems
    };
 }

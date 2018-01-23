@@ -1,19 +1,51 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
+import { updateCartItems } from '../../redux/ducks/reducer';
 
 import Item from './Item/Item';
 
 class SearchPage extends Component {
+    constructor () {
+        super();
+        this.state = {}
+        this.addItem = this.addItem.bind(this);
+    }
+
+    addItem ( productId, name, price, productCategoryId, quantity, image) {
+        const { updateCartItems } = this.props;
+
+        const body = {
+            productId: productId,
+            name: name,
+            price: price,
+            productCategoryId: productCategoryId,
+            quantity: quantity,
+            image: image
+        };
+
+        axios.post('/api/add-item', body).then( res => {
+            console.log( res.data );
+            
+            axios.get('/api/cart').then( resp => {
+
+                updateCartItems( resp.data );
+                console.log( this.props.cartItems );
+
+            }).catch( err => console.log(err) );
+
+        }).catch( err => console.log(err) );
+    }
+
     render () {
         const { searchResults } = this.props;
 
         // List of category options
-        let list = searchResults.map( (e, i) => {
+        const list = searchResults.map( result => {
             return (
-            <li key={ e.id }>
-                <Item title={ e.name } 
-                      image={ e.imageurl }
-                      price={ e.price } />
+            <li key={ result.id }>
+                <Item result={ result } 
+                      addItem={ this.addItem } />
             </li>
             )
         });
@@ -44,4 +76,15 @@ class SearchPage extends Component {
     }
 }
 
-export default connect( state => state )( SearchPage );
+const mapStateToProps = ( state ) => {
+    return {
+        searchResults: state.searchResults,
+        cartItems: state.cartItems
+    };
+};
+
+const mapDispatchToProps = {
+    updateCartItems: updateCartItems
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( SearchPage );

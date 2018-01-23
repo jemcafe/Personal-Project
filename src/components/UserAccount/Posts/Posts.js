@@ -28,11 +28,11 @@ class Posts extends Component {
         this.setState({ [property]: value });
     }
 
-    createPost () {
+    createPost ( title, text, image ) {
         const body = {
-            title: this.state.title,
-            text: this.state.text,
-            image: this.state.image
+            title: title,
+            text: text,
+            image: image
         };
 
         axios.post('/api/new-post', body).then( res => {
@@ -95,7 +95,7 @@ class Posts extends Component {
                         <input placeholder="Title" onChange={ (e) => this.handleChange('title', e.target.value) }/>
                         <input placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }/>
                         <input placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
-                        <button onClick={ () => this.createPost() }>Post</button>
+                        <button onClick={ () => this.createPost(this.state.title, this.state.text, this.state.image) }>Post</button>
                     </div>
                     
                     <ul className="posts-list">

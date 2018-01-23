@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { updateCartItems } from '../../../redux/ducks/reducer';
 
 // import Item from './Item/Item';
 
@@ -7,41 +9,71 @@ class Cart extends Component {
     constructor () {
         super();
         this.state = {
-            items: []
+            userInput: '',
+            quantity: ''
         }
     }
 
     componentDidMount () {
         axios.get('/api/cart').then( res => {
             console.log( res.data );
-            this.setState({ items: res.data });
+            this.props.updateCartItems( res.data );
+        }).catch( err => console.log(err) );
+    }
+
+    handleChange ( property, value ) {
+        this.setState({ [property]: value });
+    }
+
+    removeItem ( id ) {
+        const { updateCartItems } = this.props;
+
+        axios.delete(`/api/remove-items/${ id }`).then( res => {
+            console.log( res.data );
+            
+            axios.get('/api/cart').then( resp => {
+                updateCartItems( resp.data );
+            }).catch( err => console.log(err) );
+
+        }).catch( err => console.log(err) );
+    }
+
+    updateQuantity ( id, quantity ) {
+        axios.patch(`/api/update-quantity/${ id }`, { quantity }).then( res => {
+            console.log( res.data );
+            
+            axios.get('/api/cart').then( resp => {
+                this.props.updateCartItems( resp.data );
+            }).catch( err => console.log(err) );
+
         }).catch( err => console.log(err) );
     }
 
     render () {
-        const { items } = this.state;
+        const { cartItems } = this.props;
 
-        const priceTotal = items.reduce( (acc, item) => {
-            return acc += parseFloat( item.price, 10 )
-        }, 0);
+        const priceTotal = cartItems.reduce( (acc, item) => acc += parseFloat( item.price, 10 ), 0);
 
-        const listOfItems = items.map( item => {
+        const listOfItems = cartItems.map( item => {
             return (
                 <li key={ item.id }>
                     <div className="item">
                         <div className="item-container">
 
-                            <div>
-                                <img className="item-img" src={ item.imageurl } alt="Product"/>
+                            <div className="item-img">
+                                <img className="image" src={ item.imageurl } alt="Product"/>
                             </div>
-                            <div>
-                                <div className="item-name">{ item.name }</div>
-                                <div className="item-info">
+
+                            <div className="item-info">
+                                <div className="name">{ item.name }</div>
+                                <div className="info">
                                     <div>Category: { item.productcategory }</div>
                                     <div>Quantity: { item.quantity }</div>
                                     <div>Price: ${ item.price }</div>
                                 </div>
                             </div>
+                            {/* <button className="remove-btn" onClick={ () => this.removeItem( item.id ) }>Remove</button> */}
+                            <button className="remove-btn">Remove</button>
 
                         </div>
                     </div>
@@ -77,4 +109,12 @@ class Cart extends Component {
     }
 }
 
-export default Cart;
+const mapStateToProps = ( state ) => {
+    return { cartItems: state.cartItems };
+    };
+    
+    const mapDispatchToProps = {
+        updateCartItems: updateCartItems
+    }
+
+export default connect( mapStateToProps, mapDispatchToProps )( Cart );
