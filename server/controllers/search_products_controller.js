@@ -1,15 +1,14 @@
 const axios = require('axios');
 require('dotenv').config();
+let bookId = 1;
 
 module.exports = {
     getPlatforms ( req, res, next ) {
         const db = req.app.get('db');
 
         db.read_gamePlatforms().then( platform => {
-
             const platforms = platform.map( e => e.platform);
             res.status(200).json( ['All', ...platforms] );
-
         }).catch( err => {
             console.log(err);
             res.status(500).send('No Platforms');
@@ -19,13 +18,14 @@ module.exports = {
         const db = req.app.set('db');
         const { search, platform } = req.query;
 
+        let plat = platform === 'All' ? '' : platform;
+
         db.read_gamePlatforms().then( platforms => {
 
             // Giant Bomb uses ids instead of names to filter by platform. Got the id from the list I made.
-            const platform = platforms.find( e => e.platform === platform );
-            // const platformGbId = platform.gbid;
+            const p = platforms.filter( e => e.platform === plat );
 
-            axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=name:${ search },platforms:${ platform.gbid }&limit=27&offest=0`).then( resp => {
+            axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=name:${ search },platforms:${ p.gbid }&limit=27&offest=0`).then( resp => {
                 const data = [];
                 resp.data.results.forEach( e => {
                         data.push({
@@ -33,9 +33,10 @@ module.exports = {
                         name: e.name,
                         description: e.deck,
                         releasedate: e.original_release_date,
-                        price: parseFloat( Math.floor( Math.random() * (59 - 10) + 10 ) + '.99' ),
+                        price: Math.floor( Math.random() * (59 - 10) + 10 ) + 0.99,
                         platform: platform,
                         productcategoryid: 1,
+                        productcategory: 'Games',
                         imageurl: e.image.thumb_url ? e.image.thumb_url : '',
                     });
                 });
@@ -70,17 +71,18 @@ module.exports = {
             const data = [];
             resp.data.items.forEach( e => {
                     data.push({
-                    id: e.id,
+                    id: bookId,
                     name: e.volumeInfo.title,
                     description: e.volumeInfo.description,
                     publisheddate: e.volumeInfo.publishedDate,
-                    price: parseFloat( Math.floor( Math.random() * (30 - 10) + 10 ) + '.99' ),
+                    price: Math.floor( Math.random() * (30 - 10) + 10 ) + 0.99,
                     subject: subject,
                     productcategoryid: 2,
+                    productcategory: 'Books',
                     imageurl: e.volumeInfo.imageLinks.thumbnail ? e.volumeInfo.imageLinks.thumbnail : ''
                 });
+                bookId++;
             });
-            
             res.status(200).json( data );
         }).catch( err => console.error(err) );
     },

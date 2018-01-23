@@ -74,6 +74,7 @@ class Cart extends Component {
                                     <div>Price: ${ item.price }</div>
                                 </div>
                             </div>
+                            
                             <button className="remove-btn" onClick={ () => this.removeItem( item.id ) }>Remove</button>
 
                         </div>
