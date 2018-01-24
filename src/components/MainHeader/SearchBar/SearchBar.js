@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import { updateSearchResults } from '../../../redux/ducks/reducer';
 
 class SearchBar extends Component {
-    constructor (props) {
-        super(props);
+    constructor () {
+        super();
         this.state = {
             categoryONE: 'Game',
             categoryTWO: 'All',
@@ -17,30 +17,6 @@ class SearchBar extends Component {
     }
 
     componentWillMount () {
-        // // Gets the product categories
-        // axios.get('/api/product-categories').then( res => {
-        //     console.log( res.data );
-        //     this.setState({ categoryONElist: res.data });
-        // }).catch( console.log() );
-
-        // // Gets the game platform names
-        // axios.get('/api/game-platforms').then( res => {
-        //     console.log( res.data );
-        //     this.setState({ gamePlatforms: res.data });
-        // }).catch( console.log() );
-            
-        // // Gets the book subject names
-        // axios.get('/api/book-subjects').then( res => {
-        //     console.log( res.data );
-        //     this.setState({ bookSubjects: res.data });
-        // }).catch( console.log() );
-            
-        // // Gets the poster category names
-        // axios.get('/api/poster-categories').then( res => {
-        //     console.log( res.data );
-        //     this.setState({ posterCategories: res.data });
-        // }).catch( console.log() );
-
         // Gets all poster ( for test purposes )
         // axios.get('/api/search/posters').then( res => {
         //     console.log( res.data );
@@ -61,24 +37,22 @@ class SearchBar extends Component {
         // }).catch( console.log() );
     }
         
-    handleInputChange ( val ) {
-        this.setState({ userInput: val });
+    handleInputChange ( value ) {
+        this.setState({ userInput: value });
     }
 
-    handleCategoryChange ( property, val ) {
+    handleCategoryChange ( property, value ) {
         const { productSubcategories } = this.props;
 
-        this.setState({ [property]: val });
+        this.setState({ [property]: value });
 
         if ( property === 'categoryONE' ) {
-            if ( val === 'Games' ) {
-                this.setState({ categoryTWOlist: productSubcategories[0] });
-            } else if ( val === 'Books' ) {
-                this.setState({ categoryTWOlist: productSubcategories[1] });
-            } else if ( val === 'Posters' ) {
-                this.setState({ categoryTWOlist: productSubcategories[2] });
-            } else {
-                this.setState({ categoryTWOlist: [] });
+            if ( value === 'Games' ) {
+                this.setState({ categoryTWO: productSubcategories[0][0], categoryTWOlist: productSubcategories[0] });
+            } else if ( value === 'Books' ) {
+                this.setState({ categoryTWO: productSubcategories[1][0], categoryTWOlist: productSubcategories[1] });
+            } else if ( value === 'Posters' ) {
+                this.setState({ categoryTWO: productSubcategories[2][0], categoryTWOlist: productSubcategories[2] });
             }
         }
     }

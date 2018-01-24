@@ -9,10 +9,10 @@ const height = 400;
 const radius = Math.min(width, height) / 2 ;
 
 const color = scaleOrdinal()
-    .range(['#cbf8d6','#ddecfd','#cbf8d6','#ddecfd','#cbf8d6']);
+    .range(['#cbf8d6','#ddecfd','#cbf8d6','#ddecfd','#cbf8d6','#cbf8d6','#ddecfd','#cbf8d6','#ddecfd','#cbf8d6']);
 
 const dataArc = arc()
-    .outerRadius(radius -10)
+    .outerRadius(radius - 30)
     .innerRadius();
 
 const labelArc = arc()
@@ -35,13 +35,13 @@ function RatingsGraph ({ data }) {
                     <g key={ i } className="arc">
                         <path
                             d={ dataArc(d) } 
-                            fill={ color(d.data.label) }
+                            fill={ color(d.data.title) }
                         />
 
                         <text
                             dy=".35em"
                             transform={ `translate(${ labelArc.centroid(d) })`}
-                        >{ d.data.text }</text>
+                        >{ d.data.title }</text>
                     </g>
                 ) ) }
 

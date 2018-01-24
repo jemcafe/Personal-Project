@@ -16,6 +16,7 @@ module.exports = {
             res.status(500).send('No Platforms');
         });
     },
+
     getProductSubcategories ( req, res, next ) {
         const db = req.app.get('db');
 
@@ -32,32 +33,18 @@ module.exports = {
 
                 }).catch( err => {
                     console.log(err);
-                    res.status(500).send('No Platforms');
+                    res.status(500).send('No poster categories');
                 });
             }).catch( err => {
                 console.log(err);
-                res.status(500).send('No Platforms');
+                res.status(500).send('No book subjects');
             });
         }).catch( err => {
             console.log(err);
-            res.status(500).send('No Platforms');
+            res.status(500).send('No game platforms');
         });
     },
-
-    // Games
-    getGamePlatforms ( req, res, net ) {
-        const db = req.app.get('db');
-
-        db.read_gamePlatforms().then( platform => {
-
-            const platforms = platform.map( e => e.platform );
-            res.status(200).json( ['All', ...platforms] );
-
-        }).catch( err => {
-            console.log(err);
-            res.status(500).send('No Platforms');
-        });
-    },
+    
     getGames ( req, res, next ) {
         const db = req.app.set('db');
         const { search, platform } = req.query;
@@ -68,9 +55,12 @@ module.exports = {
 
             // Giant Bomb uses ids instead of names to filter by platform. Got the id from the list I made.
             let platformGbid = platforms.filter( e => e.platform === plat ).map( e => e.gbid )[0];
-            let p = platform ? `,platforms:${ platformGbid }` : '';
+            // This checks the request values and updates the url with the proper Giant Bomb search fields 
+            let gameSearch = search && plat ? `name:${ search },platforms:${ platformGbid }` :
+                                       plat ? `platforms:${ platformGbid }` :
+                                     search ? `name:${ search }` : '';
 
-            axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=name:${ search }${ p }&limit=27&offest=0`).then( resp => {
+            axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=${ gameSearch }&limit=27&offest=0`).then( resp => {
                 const data = [];
                 resp.data.results.forEach( e => {
                         data.push({
@@ -93,21 +83,7 @@ module.exports = {
             res.status(500).send('No Platforms');
         });
     },
-
-    // Books
-    getBookSubjects ( req, res, next ) {
-        const db = req.app.get('db');
-
-        db.read_bookSubjects().then( subject => {
-
-            const subjects = subject.map( e => e.subject );
-            res.status(200).json( ['All', ...subjects] );
-
-        }).catch( err => {
-            console.log(err); 
-            res.status(500).send('No Subjects');
-        });
-    },
+    
     getVolumes ( req, res, next ) {
         const { search, subject } = req.query;
         
@@ -139,21 +115,6 @@ module.exports = {
         }).catch( err => console.error(err) );
     },
 
-
-    // Posters
-    getPosterCategories ( req, res, next ) {
-        const db = req.app.get('db');
-
-        db.read_posterCategories().then( category => {
-
-            const categories = category.map( e => e.category );
-            res.status(200).send( ['All', ...categories] );
-
-        }).catch( err => { 
-            console.log(err);
-            res.status(500).send('No Categories');
-        });
-    },
     getPosters ( req, res, next ) {
         const db = req.app.set('db');
         const { search, category } = req.query;

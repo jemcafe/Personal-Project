@@ -14,6 +14,7 @@ const srchProductsCntrl = require('./controllers/search_products_controller');
 const postsCntrl = require('./controllers/posts_controller');
 const postersCntrl = require('./controllers/posters_controller');
 const cartCntrl = require('./controllers/cart_controller');
+const stripeCntrl = require('./controllers/stripe_controller');
 
 const app = express();
 
@@ -57,16 +58,16 @@ app.get('/api/user', authCntrl.getUser);
     // Categories
     app.get('/api/product-categories', srchProductsCntrl.getProductCategories);
     app.get('/api/product-subcategories', srchProductsCntrl.getProductSubcategories);
-    // Subcategories
-    app.get('/api/game-platforms', srchProductsCntrl.getGamePlatforms);
-    app.get('/api/book-subjects', srchProductsCntrl.getBookSubjects);
-    app.get('/api/poster-categories', srchProductsCntrl.getPosterCategories);
     // Search
     app.get('/api/search/games', srchProductsCntrl.getGames);
     app.get('/api/search/books', srchProductsCntrl.getVolumes);
     app.get('/api/search/posters', srchProductsCntrl.getPosters);
     // Ratings
     app.get('/api/book-ratings', srchProductsCntrl.getBookRatings);
+
+// Stripe payment
+    app.post('/save-stripe-token', stripeCntrl.paymentApi);
+
 
 // This is for getting the 3rd party api data to my database
 app.get('/api/getgames', srchProductsCntrl.getGamesForDatabase);

@@ -23,6 +23,8 @@ class Posters extends Component {
 
     handleChange ( property, value ) {
         this.setState({ [property]: value });
+
+        console.log( this.state.category );
     }
 
     render () {
@@ -50,22 +52,22 @@ class Posters extends Component {
                 <div className="posters-container">
                     {/* <div>POSTERS</div> */}
 
-                    <ul className="posters-list">
-                        { listOfPosters.length > 0 ? listOfPosters : <li>No posters created</li> }
-                    </ul>
-
                     <div className="new-poster">
                         <div>New Poster</div>
                         <input placeholder="Name" onChange={ (e) => this.handleChange('name', e.target.value) }/>
                         <input placeholder="Description" onChange={ (e) => this.handleChange('description', e.target.value) }/>
                         <input placeholder="Price" onChange={ (e) => this.handleChange('price', e.target.value) }/>
                         <input placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
-                        <select onChange={ (e) => this.handleChange('cateogry', e.target.value) }>
+                        <select onChange={ (e) => this.handleChange("cateogry", e.target.value) }>
                             <option value={ 'Digital Art' }>Digital Art</option>
                             <option value={ 'Traditional Art' }>Traditional Art</option>
                             <option value={ 'Photography' }>Photography</option>
                         </select>
                     </div>
+
+                    <ul className="posters-list">
+                        { listOfPosters.length > 0 ? listOfPosters : <li>No posters created</li> }
+                    </ul>
 
                 </div>
             </div>

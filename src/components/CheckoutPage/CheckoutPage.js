@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 import { connect } from 'react-redux';
 import { updateCartItems } from '../../redux/ducks/reducer';
+
+import Checkout from './Checkout/Checkout';
 
 class CheckoutPage extends Component {
 
@@ -17,13 +20,13 @@ class CheckoutPage extends Component {
         const priceTotal = cartItems.reduce( (acc, item) => acc += parseFloat(item.price, 10), 0 ).toFixed(2);
 
         return (
-            <div className="checkout">
+            <div className="checkout-page">
 
                 { user.username &&
-                <div className="checkout-container">
+                <div className="checkout-page-container">
                     {/* <div>Checkout Page</div> */}
 
-                    <div className="shipping-info">
+                    {/* <div className="shipping-info">
                         <div>Shipping Address</div>
                         <input placeholder="Name"/>
                         <input placeholder="Address"/>
@@ -38,11 +41,16 @@ class CheckoutPage extends Component {
                             <option>Visa</option>
                             <option>Master</option>
                         </select>
-                    </div>
+                    </div> */}
 
                     <div className="total">Total: ${ priceTotal }</div>
 
-                    <div><button>Place Order</button></div>
+                    {/* <div><button>Place Order</button></div> */}
+
+                    <Checkout name={ 'Products' } 
+                              description={ 'Various products' } 
+                              amount={ priceTotal } 
+                              customer={ user.id } />
 
                 </div>
                 }
