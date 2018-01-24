@@ -16,6 +16,33 @@ module.exports = {
             res.status(500).send('No Platforms');
         });
     },
+    getProductSubcategories ( req, res, next ) {
+        const db = req.app.get('db');
+
+        db.read_gamePlatforms().then( platform => {
+            db.read_bookSubjects().then( subject => {
+                db.read_posterCategories().then( pCategory => {
+
+                    const platforms = platform.map( e => e.platform );
+                    const subjects = subject.map( e => e.subject );
+                    const pCategories = pCategory.map( e => e.category );
+
+                    const subCategories = [['All', ...platforms], ['All', ...subjects], ['All', ...pCategories]];
+                    res.status(200).json( subCategories );
+
+                }).catch( err => {
+                    console.log(err);
+                    res.status(500).send('No Platforms');
+                });
+            }).catch( err => {
+                console.log(err);
+                res.status(500).send('No Platforms');
+            });
+        }).catch( err => {
+            console.log(err);
+            res.status(500).send('No Platforms');
+        });
+    },
 
     // Games
     getGamePlatforms ( req, res, net ) {
@@ -40,9 +67,10 @@ module.exports = {
         db.read_gamePlatforms().then( platforms => {
 
             // Giant Bomb uses ids instead of names to filter by platform. Got the id from the list I made.
-            const p = platforms.filter( e => e.platform === plat );
+            let platformGbid = platforms.filter( e => e.platform === plat ).map( e => e.gbid )[0];
+            let p = platform ? `,platforms:${ platformGbid }` : '';
 
-            axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=name:${ search },platforms:${ p.gbid }&limit=27&offest=0`).then( resp => {
+            axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=name:${ search }${ p }&limit=27&offest=0`).then( resp => {
                 const data = [];
                 resp.data.results.forEach( e => {
                         data.push({
@@ -105,8 +133,8 @@ module.exports = {
         }).catch( err => console.error(err) );
     },
     getBookRatings( req, res, next ) {
-        axios.get(`https://www.googleapis.com/books/v1/volumes?q=ghost&maxResults=10&startIndex=0`).then( resp => {
-            const averageRatings = resp.data.items.map( e => e.volumeInfo.averageRating );
+        axios.get(`https://www.googleapis.com/books/v1/volumes?q=Harry%20Potter&maxResults=10&startIndex=0`).then( resp => {
+            const averageRatings = resp.data.items.map( e => e.volumeInfo );
             res.status(200).json( averageRatings );
         }).catch( err => console.error(err) );
     },
@@ -134,8 +162,9 @@ module.exports = {
 
             const filteredPosters = posters.filter( poster => poster.name.toLowerCase().includes( search.toLowerCase() ) ? poster : false )
                                            .filter( poster => category === 'All' || category === '' ? poster : category === poster.category ? poster : false);
+            const allPosters = !category ? posters : filteredPosters;
 
-            res.status(200).json( filteredPosters );
+            res.status(200).json( allPosters );
 
         }).catch( err => {
             console.log(err);

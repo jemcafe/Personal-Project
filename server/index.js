@@ -56,6 +56,7 @@ app.get('/api/user', authCntrl.getUser);
 // Products
     // Categories
     app.get('/api/product-categories', srchProductsCntrl.getProductCategories);
+    app.get('/api/product-subcategories', srchProductsCntrl.getProductSubcategories);
     // Subcategories
     app.get('/api/game-platforms', srchProductsCntrl.getGamePlatforms);
     app.get('/api/book-subjects', srchProductsCntrl.getBookSubjects);

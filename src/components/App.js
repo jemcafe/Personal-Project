@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import { getUser } from '../redux/ducks/reducer';
+import { getUser, getProductCategories, getProductSubcategories } from '../redux/ducks/reducer';
 import axios from 'axios';
 
 import routes from '../router';
@@ -11,11 +11,23 @@ import MainHeader from './MainHeader/MainHeader';
 class App extends Component {
 
     componentDidMount () {
+        const { getUser, getProductCategories, getProductSubcategories } = this.props;
+
         // Check if the user is logged in
         axios.get('/api/user').then( res => {
-            console.log( res.data );
-            this.props.getUser( res.data );
+            getUser( res.data );
         }).catch( err => console.log(err) );
+
+        // Get the product categories
+        axios.get('/api/product-categories').then( res => {
+            getProductCategories( res.data );
+        }).catch( console.log() );
+
+        // Get the product subcategories
+        axios.get('/api/product-subcategories').then( res => {
+            getProductSubcategories( res.data );
+            console.log( this.props.productSubcategories );
+        }).catch( console.log() );
     }
     
     render() {
@@ -45,12 +57,18 @@ class App extends Component {
     }
 }
 
-// const mapStateToProps = ( state ) => {
-//     return { user: state.user };
-// };
-
-const mapDispatchToProps = {
-    getUser: getUser
+const mapStateToProps = ( state ) => {
+    return {
+        user: state.user,
+        productCategories: state.productCategories,
+        productSubcategories: state.productSubcategories
+    };
 };
 
-export default connect( null , mapDispatchToProps, null, { pure: false } )( App );
+const mapDispatchToProps = {
+    getUser: getUser,
+    getProductCategories: getProductCategories,
+    getProductSubcategories: getProductSubcategories,
+};
+
+export default connect( mapStateToProps , mapDispatchToProps, null, { pure: false } )( App );

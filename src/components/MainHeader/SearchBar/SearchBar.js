@@ -6,44 +6,40 @@ import { connect } from 'react-redux';
 import { updateSearchResults } from '../../../redux/ducks/reducer';
 
 class SearchBar extends Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
         this.state = {
-            categoryONE: '',
-            categoryTWO: '',
-            categoryONElist: [],
-            categoryTWOlist: [],
-            gamePlatforms: [],
-            bookSubjects: [],
-            posterCategories: [],
+            categoryONE: 'Game',
+            categoryTWO: 'All',
+            categoryTWOlist: ['All'],
             userInput: ''
         }
     }
 
-    componentDidMount () {
-        // Gets the product categories
-        axios.get('/api/product-categories').then( res => {
-            console.log( res.data );
-            this.setState({ categoryONElist: res.data });
-        }).catch( console.log() );
+    componentWillMount () {
+        // // Gets the product categories
+        // axios.get('/api/product-categories').then( res => {
+        //     console.log( res.data );
+        //     this.setState({ categoryONElist: res.data });
+        // }).catch( console.log() );
 
-        // Gets the game platform names
-        axios.get('/api/game-platforms').then( res => {
-            console.log( res.data );
-            this.setState({ gamePlatforms: res.data });
-        }).catch( console.log() );
+        // // Gets the game platform names
+        // axios.get('/api/game-platforms').then( res => {
+        //     console.log( res.data );
+        //     this.setState({ gamePlatforms: res.data });
+        // }).catch( console.log() );
             
-        // Gets the book subject names
-        axios.get('/api/book-subjects').then( res => {
-            console.log( res.data );
-            this.setState({ bookSubjects: res.data });
-        }).catch( console.log() );
+        // // Gets the book subject names
+        // axios.get('/api/book-subjects').then( res => {
+        //     console.log( res.data );
+        //     this.setState({ bookSubjects: res.data });
+        // }).catch( console.log() );
             
-        // Gets the poster category names
-        axios.get('/api/poster-categories').then( res => {
-            console.log( res.data );
-            this.setState({ posterCategories: res.data });
-        }).catch( console.log() );
+        // // Gets the poster category names
+        // axios.get('/api/poster-categories').then( res => {
+        //     console.log( res.data );
+        //     this.setState({ posterCategories: res.data });
+        // }).catch( console.log() );
 
         // Gets all poster ( for test purposes )
         // axios.get('/api/search/posters').then( res => {
@@ -70,21 +66,21 @@ class SearchBar extends Component {
     }
 
     handleCategoryChange ( property, val ) {
-        const { gamePlatforms, bookSubjects, posterCategories } = this.state;
+        const { productSubcategories } = this.props;
+
+        this.setState({ [property]: val });
 
         if ( property === 'categoryONE' ) {
             if ( val === 'Games' ) {
-                this.setState({ categoryTWOlist: gamePlatforms });
+                this.setState({ categoryTWOlist: productSubcategories[0] });
             } else if ( val === 'Books' ) {
-                this.setState({ categoryTWOlist: bookSubjects });
+                this.setState({ categoryTWOlist: productSubcategories[1] });
             } else if ( val === 'Posters' ) {
-                this.setState({ categoryTWOlist: posterCategories });
+                this.setState({ categoryTWOlist: productSubcategories[2] });
             } else {
                 this.setState({ categoryTWOlist: [] });
             }
         }
-        
-        this.setState({ [property]: val });
     }
 
     search () {
@@ -95,7 +91,6 @@ class SearchBar extends Component {
             axios.get(`/api/search/games?search=${ userInput }&platform=${ categoryTWO }`).then( res => {
 
                 updateSearchResults( res.data );
-                console.log( this.props.searchResults );
 
             }).catch( console.log() ); 
         }
@@ -103,27 +98,23 @@ class SearchBar extends Component {
             axios.get(`/api/search/books?search=${ userInput }&subject=${ categoryTWO }`).then( res => {
 
                 updateSearchResults( res.data );
-                console.log( this.props.searchResults );
 
             }).catch( console.log() );
         } else if ( categoryONE === 'Posters' ) {
             axios.get(`/api/search/posters?search=${ userInput }&category=${ categoryTWO }`).then( res => {
 
                 updateSearchResults( res.data );
-                console.log( this.props.searchResults );
 
             }).catch( console.log() );
         }
     }
 
     render () {
-        const { categoryONElist, categoryTWOlist } = this.state;
-
         // List of category options ( The list order isn't changing, so using i for the key is fine )
-        const categories1 = categoryONElist.map( (e, i) => {
+        const categories1 = this.props.productCategories.map( (e, i) => {
             return <option key={ i } value={ e }>{ e }</option>
         });
-        const categories2 = categoryTWOlist.map( (e, i) => {
+        const categories2 = this.state.categoryTWOlist.map( (e, i) => {
             return <option key={ i } value={ e }>{ e }</option>
         });
 
@@ -147,7 +138,11 @@ class SearchBar extends Component {
 }
 
 const mapStateToProps = ( state ) => {
-return { searchResults: state.searchResults };
+    return {
+        productCategories: state.productCategories,
+        productSubcategories: state.productSubcategories,
+        searchResults: state.searchResults 
+    };
 };
 
 const mapDispatchToProps = {
