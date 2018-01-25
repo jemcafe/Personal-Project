@@ -1,0 +1,30 @@
+.item-page {
+    padding: 10px 50px;
+    box-sizing: border-box;
+}
+.item-page-container {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    background-color: #cbe4fc;
+}
+.img-container {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* width: 250px; */
+    height: 250px;
+    background-color: #fccbcb;
+}
+.product-img {
+    max-width: 250px;
+    max-height: 250px;
+}
+.info-container {
+    flex: 1;
+    background-color: #d1fccb;
+}
+.info-container > div {
+    margin: 20px 0;
+}

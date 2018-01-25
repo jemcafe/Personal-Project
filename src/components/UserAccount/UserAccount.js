@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './UserAccount.css';
 import { Route, Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';

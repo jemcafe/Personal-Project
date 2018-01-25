@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import './SearchPage.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { updateCartItems } from '../../redux/ducks/reducer';
-
-import Item from './Item/Item';
+import { updateCartItems, getProductInfo } from '../../redux/ducks/reducer';
 
 class SearchPage extends Component {
     constructor () {
@@ -37,16 +37,45 @@ class SearchPage extends Component {
         }).catch( err => console.log(err) );
     }
 
-    render () {
-        const { searchResults } = this.props;
+    getProductInfo ( product ) {
+        const { getProductInfo } = this.props;
+        getProductInfo( product );
+        console.log( this.props.productInfo );
+    }
 
-        // List of category options
-        const list = searchResults.map( result => {
+    render () {
+        const { user, searchResults } = this.props;
+        const { getProductInfo } = this.props;
+
+        // List of products
+        const list = searchResults.map( item => {
+            item.name = item.name.length > 20 ? `${item.name.slice(0,20).trim()}...` : item.name;
             return (
-            <li key={ result.id }>
-                <Item result={ result } 
-                      addItem={ this.addItem } />
-            </li>
+                <li key={ item.id }>
+                    <div className="item">
+                        <div className="item-container">
+
+                            <div className="image-container">
+                                <Link to={`${item.productcategory.toLowerCase()}/${item.name}`}>
+                                    <img className="img-anim" src={ item.imageurl } alt="cover" onClick={ () => getProductInfo(item) }/>
+                                </Link>
+                            </div>
+
+                            <div className="info-container">
+                                <Link to={`${item.productcategory.toLowerCase()}/${item.name}`}>
+                                    <div className="title" onClick={ () => getProductInfo(item) }>{ item.name }</div>
+                                </Link>
+                                <div className="info">
+                                    <div>Rating</div>
+                                    <div>Date</div>
+                                    <div>${ item.price }</div>
+                                </div>
+                                { user.username ? <button className="add-btn" onClick={ () => this.addItem( item.id, item.name, item.price, item.productcategoryid, 1, item.imageurl ) }>Add To Cart</button> : <Link to="/login"><button className="add-btn">Add To Cart</button></Link> }
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
             )
         });
 
@@ -78,13 +107,16 @@ class SearchPage extends Component {
 
 const mapStateToProps = ( state ) => {
     return {
+        user: state.user,
+        cartItems: state.cartItems,
         searchResults: state.searchResults,
-        cartItems: state.cartItems
+        productInfo: state.productInfo
     };
 };
 
 const mapDispatchToProps = {
-    updateCartItems: updateCartItems
+    updateCartItems: updateCartItems,
+    getProductInfo: getProductInfo
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( SearchPage );

@@ -1,0 +1,21 @@
+.checkout-page {
+    background-color: #ddecfd;
+    padding: 50px 25%;
+    box-sizing: border-box;
+  }
+      .checkout-page-container {
+        padding: 25px 0;
+        background-color: #ffdfe8;
+      }
+  
+      .checkout-page-container > div {
+        padding: 15px 0;
+        /* margin: 25px 0; */
+        background-color: #fdf0dc;
+      }
+  
+      .checkout-page .shipping-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }

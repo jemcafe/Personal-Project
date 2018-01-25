@@ -1,0 +1,34 @@
+/*  Login and Register  */
+
+.login-reg {
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+    background-color: #fce3e3;
+    }
+    .login-reg-container {
+    padding: 20px 20px;
+    background-color: #d1d0f7;
+    }
+    .login-reg .info-input {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px 20px;
+    background-color: #d0ecf7;
+    }
+    .login-reg .info-input > div {
+    text-align: left;
+    /* background-color: rgb(255, 203, 220); */
+    }
+    .login-reg .input {
+    margin-bottom: 15px;
+    }
+    .login-reg .btns {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    margin-top: 5px;
+    }

@@ -20,7 +20,6 @@ export default (
         <Route path="/books" component={ BooksPage } />
         <Route path="/posters" component={ PostersPage } />
         <Route path="/search" component={ SearchPage } />
-        <Route path="/item/:id" component={ ItemPage } />
         <Route path="/checkout" component={ CheckoutPage } />
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />

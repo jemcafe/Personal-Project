@@ -1,10 +1,10 @@
 const initialState = {
    user: {},            // Will be the user session object
    cartItems: [],
-
    productCategories: [],
    productSubcategories: [],
-   searchResults: []
+   searchResults: [],
+   productInfo: {},
 };
 
 // Action types
@@ -17,6 +17,7 @@ const UPDATE_CART_ITEMS = 'UPDATE_CART_ITEMS';
 const GET_PRODUCT_CATEGORIES = 'GET_PRODUCT_CATEGORIES';
 const GET_PRODUCT_SUBCATEGORIES = 'GET_PRODUCT_SUBCATEGORIES';
 const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS';
+const GET_PRODUCT_INFO= 'GET_PRODUCT_INFO';
 
 // Reducer
 export default function reducer ( state = initialState, action ) {
@@ -39,6 +40,8 @@ export default function reducer ( state = initialState, action ) {
          return { ...state, productSubcategories: payload };
       case UPDATE_SEARCH_RESULTS:
          return { ...state, searchResults: payload };
+      case GET_PRODUCT_INFO:
+         return { ...state, productInfo: payload };
       default:
          return state;
    }
@@ -98,5 +101,12 @@ export function updateSearchResults ( searchResults ) {
    return {
       type: 'UPDATE_SEARCH_RESULTS',
       payload: searchResults
+   };
+}
+
+export function getProductInfo ( productInfo ) {
+   return {
+      type: 'GET_PRODUCT_INFO',
+      payload: productInfo
    };
 }
