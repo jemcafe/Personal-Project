@@ -18,9 +18,7 @@ class Posts extends Component {
 
     componentDidMount () {
         axios.get('/api/posts').then( res => {
-            // console.log( res.data );
             this.setState({ posts: res.data });
-            // console.log(this.state.posts);
         }).catch( err => console.log(err) );
     }
 
@@ -39,7 +37,7 @@ class Posts extends Component {
             console.log( res.data );
 
             axios.get('/api/posts').then( resp => {
-                this.setState({ posts: resp.data });
+                this.setState({ posts: resp.data, title: '', text: '', image: '' });
             }).catch( err => console.log(err) );
 
         }).catch( err => console.log( err ) );
@@ -91,11 +89,12 @@ class Posts extends Component {
                     {/* <div>POSTS COMPONENT</div> */}
 
                     <div className="new-post">
-                        <div>New Post</div>
-                        <input placeholder="Title" onChange={ (e) => this.handleChange('title', e.target.value) }/>
-                        <input placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }/>
-                        <input placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
-                        <button onClick={ () => this.createPost(this.state.title, this.state.text, this.state.image) }>Post</button>
+                        {/* <div>New Post</div> */}
+                        <input className="input" value={ this.state.title } placeholder="Title" onChange={ (e) => this.handleChange('title', e.target.value) }/>
+                        {/* <input value={ this.state.text } placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }/> */}
+                        <input className="input" value={ this.state.image } placeholder="Image Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
+                        <textarea className="input" rows="1" cols="10" value={ this.state.text } placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }></textarea>
+                        <button className="btn" onClick={ () => this.createPost(this.state.title, this.state.text, this.state.image) }>Post</button>
                     </div>
                     
                     <ul className="posts-list">

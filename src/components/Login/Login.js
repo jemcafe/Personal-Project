@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { connect } from 'react-redux';
-import { login } from '../../redux/ducks/reducer';
+import { login, updateCartItems } from '../../redux/ducks/reducer';
 
 class Login extends Component {
     constructor () {
@@ -29,10 +29,15 @@ class Login extends Component {
 
         axios.post(`/api/login`, body).then( res => {
             console.log( res.data );
-            // If there is user data, update user in redux and got to home page
+            // If there is user data, update user in redux and go to home page
             if ( res.data ) {
                 this.props.login( res.data );
                 this.props.history.push('/');
+
+                axios.get('/api/cart').then( res => {
+                    this.props.updateCartItems( res.data );
+                    console.log( this.props.cartItems );
+                }).catch( console.log() );
             }
         }).catch( console.log() );
     }
@@ -66,11 +71,15 @@ class Login extends Component {
 }
 
 const mapStateToProps = ( state ) => {
-    return { user: state.user };
+    return { 
+        user: state.user,
+        cartItems: state.cartItems
+    };
 };
 
 const mapDispatchToProps = {
-    login: login
+    login: login,
+    updateCartItems: updateCartItems
 };
 
 export default connect( mapStateToProps , mapDispatchToProps )( Login );

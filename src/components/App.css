@@ -2,6 +2,34 @@
     text-align: center;
 }
 
+/* 
+  Colors 1
+    #872f6f - purple
+    #f6a54f - orange
+    #cbf292 - green
+    #fff3a2 - yellow
+
+  Colors 2
+    #ffc8cc - pink
+    #ffe7b0 - orange
+    #cafccc - green
+    #c8e6ff - blue
+
+  Colors 3
+    #872f4e - maroon
+    #ffc586 - orange
+    #fff3a2 - yellow
+    #cbf292 - green
+
+    #c8e6ff - blue
+    #ffc8cc - pink  *
+    #cafccc - green
+    #ffe7b0 - lighter orange  *
+    #ead7fa - purple
+
+    #b0dbff - blue
+*/
+
 ul {
   margin: 0;
   padding: 0;
@@ -15,13 +43,18 @@ a {
 .panel {
   width: 1000px;
   margin: 0 auto;
-  background-color: rgb(252, 247, 201);
+  /* background-color: rgb(252, 247, 201); */
 }
 
 /*  Main Content  */
 
 .main {
+  /* background-image: linear-gradient(white, #f0b192, #737ed3); */
+  /* background-image: linear-gradient(white, #f0b192, #cc6a83); */
+  /* background-image: linear-gradient(transparent, #f0b192, #cc6a83); */
   background-color: #cbf8d6;
+  /* background-color: #1a0d0d; */
+  min-height: 600px;
 }
 
 /*  Footer  */

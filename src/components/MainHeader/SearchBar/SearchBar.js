@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import searchIcon from '../../../images/icon-search.png';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -94,18 +95,21 @@ class SearchBar extends Component {
 
         return (
             <div className="search">
-                <span>
-                <select className="category-1" onChange={ (e) => this.handleCategoryChange("categoryONE", e.target.value) }>
-                    { categories1 }
-                </select>
+                <div className="search-container">
+                    <select className="category-1" onChange={ (e) => this.handleCategoryChange("categoryONE", e.target.value) }>
+                        { categories1 }
+                    </select>
 
-                <select className="category-2" onChange={ (e) => this.handleCategoryChange("categoryTWO", e.target.value) }>
-                    { categories2 }
-                </select>
-
-                <input className="search-bar" placeholder={ 'Search' } onChange={ (e) => this.handleInputChange(e.target.value) }/>
-                <Link to="/search"><button className="search-btn" onClick={ () => this.search() }>Search</button></Link>
-                </span>
+                    {/* <select className="category-2" onChange={ (e) => this.handleCategoryChange("categoryTWO", e.target.value) }>
+                        { categories2 }
+                    </select> */}
+                    
+                    <input className="search-bar" placeholder={ 'Search' } onChange={ (e) => this.handleInputChange(e.target.value) }/>
+                    {/* <Link to="/search"><button className="search-btn" onClick={ () => this.search() }>Search</button></Link> */}
+                    {/* <div className="search-icon"> */}
+                        <Link to="/search"><img className="search-icon" src={ searchIcon } alt="Search" onClick={ () => this.search() }/></Link>
+                    {/* </div> */}
+                </div>
             </div>
         )
     }

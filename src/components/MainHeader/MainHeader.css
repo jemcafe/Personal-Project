@@ -1,73 +1,176 @@
 /*  Header  */
 
 .main-header {
-    background-color: #fccbd3;
-  }
-  .main-header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    background-color: #f8e4ba;
-    /* height: 150px; */
-  }
-  .main-header .title {
-    background: #cbf8d6;
-  }
-  .main-header .search {
-    background-color: #f4cbfc;
-  }
-  .main-header .search .category-1 {
-    width: 75px;
-  }
-  .main-header .search .category-2 {
-    width: 125px;
-  }
-  .main-header .search .search-bar {
-    width: 150px;
-  }
-  .main-header .nav {
-    display: flex;
-    justify-content: space-between;
-    background-color: #ddecfd;
-  }
-  /* Removes link underlines */
-  .main-header .nav a {
-    text-decoration: none;
-  }
-  /* Each link will have this style */
-  .link {
-    background-color: #4CAF50;
-    color: white;
-    padding: 6px;
-    border: none;
-  }
-  /* The container <div> - needed to position the dropdown content */
-  .main-header .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  /* Dropdown Content (Hidden by Default) */
-  .main-header .dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: #f9f9f9;
-    min-width: 120px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  /* Links inside the dropdown */
-  .main-header .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    display: block;
-  }
-  /* Color change on hover for links */
-  .main-header .dropdown-content a:hover {
-    background-color: #f1f1f1
-  }
-  /* Show the dropdown menu on hover */
-  .main-header .dropdown:hover .dropdown-content {
-    display: block;
-  }
+  /* background: url('http://images4.fanpop.com/image/photos/21600000/Street-Fighter-Tribute-crimson-viper-21659005-796-1000.jpg');
+  background-position: 10% -300px; */
+  background: url('../../images/Patreon_banner_b.jpg');
+  background-repeat: no-repeat;
+  background-position: 15% 0;
+  border-bottom: 8px solid #fadac5;
+  /* background-color: #fccbd3; */
+}
+/* #header-bkgd-overlay {
+  background: linear-gradient(-5deg, #ffe7b0, transparent);
+  background-color:  #ffc8cc;
+  opacity: 0.5;
+} */
+.position {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5em;
+}
+.header-bkgd-overlay {
+  /* background: linear-gradient(-5deg, white, #ffe7b0, transparent); */
+  /* background: linear-gradient(-5deg, #b0dbff, transparent); */
+  /* background: linear-gradient(-5deg, #b0dbff, transparent, #b0dbff); */
+  background: linear-gradient(-5deg, #ffe7b0, transparent, #ffc8cc);
+  /* background: linear-gradient(-5deg, #b0dbff, transparent, #ffe7b0); */
+  /* background-color:  #ffc8cc; */
+  opacity: 0.7;
+}
+.main-header-container {
+  display: flex;
+  justify-content: space-between;
+  /* flex-direction: column; */
+  padding: 20px 30px;
+  box-sizing: border-box;
+  /* border-bottom: 1px solid #d6a7b7; */
+  left: auto;
+  height: 5em;
+  /* background-color: #f8e4ba; */
+}
+.header-1 {
+  min-width: 1000px;
+  padding: 0 50px;
+  box-sizing: border-box;
+}
+.main-header-container > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: #f3d2fc; */
+}
+.main-header .title {
+  color: #ad3b63;
+  font-size: 25px;
+  font-weight: bold;
+  /* background: #cbf8d6; */
+}
+.main-header input {
+  outline: none;
+  padding: 3px 8px;
+  margin: 0 4px;
+  background-color: rgba(255, 255, 255, 0.45);
+  border: none;
+  border-bottom: 1px solid #c98fa5;
+  /* border-radius: 3px; */
+  font-size: 14px;
+}
+    ::placeholder {
+      color: rgba(172, 133, 139, 0.548);
+    }
+    .main-header input:focus {
+      background-color: rgba(255, 255, 255, 0.65);
+    }
+.main-header select {
+  outline: none;
+  padding: 3px 8px;
+  margin: 0 4px;
+  background-color: rgba(255, 255, 255, 0.90);
+  border: none;
+  border-bottom: 1px solid #c98fa5;
+  border-radius: 0;
+  font-size: 14px;
+  height: 30px;
+}
+    .main-header select:focus {
+      background-color: rgba(255, 255, 255, 1.0);
+    }
+.main-header .search-container {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  /* background-color: #e5fccb; */
+}
+.main-header .search-container .category-1 {
+  width: 75px;
+}
+.main-header .search-container .category-2 {
+  width: 125px;
+}
+.main-header .search-container .search-bar {
+  width: 150px;
+}
+.search-icon {
+  max-width: 22px;
+  max-height: 22px;
+  border-radius: 3px;
+  opacity: 0.5;
+}
+.search-icon:active {
+  opacity: 0.75;
+}
+.main-header .nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: #ddecfd; */
+}
+/* Removes link underlines */
+.main-header .nav a {
+  text-decoration: none;
+  color: black;
+}
+.main-header .nav > a:hover {
+  border-bottom: 1px solid #b67b7f;
+  color: #b14b4b;
+}
+/* Each link will have this style */
+.link {
+  background-color: transparent;
+  /* color: black; */
+  padding: 4px 6px;
+  border: none;
+}
+.main-header .nav .signin {
+  color: #b14b4b;
+}
+/* The container <div> - needed to position the dropdown content */
+.main-header .dropdown {
+  position: relative;
+  display: inline-block;
+}
+.main-header .droplink img {
+  max-width: 30px;
+  border: 2px solid #c58888;
+  border-radius: 50%;
+}
+/* Dropdown Content (Hidden by Default) */
+.main-header .dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  border: 1px solid #c58888;
+  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+  z-index: 1;
+}
+/* Links inside the dropdown */
+.main-header .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  display: block;
+}
+/* Color change on hover for links */
+.main-header .dropdown-content a:hover {
+  /* color: #f7b671; */
+  color: #f6a54f;
+  background-color: #f1f1f1
+}
+/* Show the dropdown menu on hover */
+.main-header .dropdown:hover .dropdown-content {
+  display: block;
+}

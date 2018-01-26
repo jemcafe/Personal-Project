@@ -44,7 +44,7 @@ class Post extends Component {
                     <div className="post-container">
                         { imageurlCheck && <img src={ imageurl } alt="Url not found"/> }
                         <div>
-                            <div>Title: { title }</div>
+                            <h3>{ title }</h3>
                             <div>Username: { username }</div>
                         </div>
                         <div>Text: { text }</div>

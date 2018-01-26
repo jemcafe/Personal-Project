@@ -12,6 +12,10 @@ class SearchPage extends Component {
         this.addItem = this.addItem.bind(this);
     }
 
+    changePage () {
+        
+    }
+
     addItem ( productId, name, price, productCategoryId, quantity, image) {
         const { updateCartItems } = this.props;
 
@@ -49,21 +53,20 @@ class SearchPage extends Component {
 
         // List of products
         const list = searchResults.map( item => {
-            item.name = item.name.length > 20 ? `${item.name.slice(0,20).trim()}...` : item.name;
             return (
                 <li key={ item.id }>
                     <div className="item">
                         <div className="item-container">
 
-                            <div className="image-container">
-                                <Link to={`${item.productcategory.toLowerCase()}/${item.name}`}>
+                            <Link to={`${item.productcategory.toLowerCase()}/${item.name}`}>
+                                <div className="image-container">
                                     <img className="img-anim" src={ item.imageurl } alt="cover" onClick={ () => getProductInfo(item) }/>
-                                </Link>
-                            </div>
+                                </div>
+                            </Link>
 
                             <div className="info-container">
                                 <Link to={`${item.productcategory.toLowerCase()}/${item.name}`}>
-                                    <div className="title" onClick={ () => getProductInfo(item) }>{ item.name }</div>
+                                    <div className="title" onClick={ () => getProductInfo(item) }>{ item.name.length > 20 ? `${item.name.slice(0,20).trim()}...` : item.name }</div>
                                 </Link>
                                 <div className="info">
                                     <div>Rating</div>

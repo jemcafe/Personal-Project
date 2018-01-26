@@ -3,8 +3,10 @@
 .login-reg {
     display: flex;
     justify-content: center;
-    padding: 50px 0;
+    /* padding: 50px 0; */
+    align-items: center;
     background-color: #fce3e3;
+    height: 450px;
     }
     .login-reg-container {
     padding: 20px 20px;

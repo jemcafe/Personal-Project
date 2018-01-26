@@ -14,12 +14,12 @@
     justify-content: space-around;
     align-items: center;
     /* width: 250px; */
-    height: 250px;
+    height: 300px;
     background-color: #fccbcb;
 }
 .product-img {
-    max-width: 250px;
-    max-height: 250px;
+    max-width: 300px;
+    max-height: 300px;
 }
 .info-container {
     flex: 1;

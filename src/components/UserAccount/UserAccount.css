@@ -2,8 +2,10 @@
     display: flex;
     /* justify-content: space-between; */
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 50px;
     box-sizing: border-box;
+    /* background-image: url('../../images/profile-header-bkgd_500x500_transparent.png'); */
+    /* background-size: 400px 400px; */
     background-color: #fccbd9;
   }
   .useraccount .nav {
@@ -15,6 +17,10 @@
   .useraccount .main {
     background-color: #cbf8d6;
   }
+    .useraccount .profile-pic-name {
+      display: flex;
+      flex-direction: column;
+    }
       /* Fills the thumbnail div with the image */
     .useraccount .profile-pic {
       display: flex;
@@ -23,7 +29,9 @@
       overflow: hidden;
       width: 100px;
       height: 100px;
+      /* border: 3px solid white; */
       border-radius: 20px;
+      background-color: #cbe4fc;
     }
     .useraccount .profile-pic img {
       flex-shrink: 0;
@@ -41,17 +49,32 @@
     background-color: #cbe4fc;
   }
   .useraccount .posts-container {
-    width: 500px;
+    width: 550px;
     background-color: green;
   }
-      .posts .new-post {
+      .btn {
+        
+      }
+      .new-post {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        padding: 8px;
+        padding: 8px 30px;
         box-sizing: border-box;
         border: 1px dashed gray;
         background-color: #fcf0c8;
+      }
+      .new-post .input  {
+        font-size: 15px;
+        margin: 10px;
+      }
+      .new-post textarea {
+        outline: none;
+        border: 1px solid #ecceba;
+        /* border-radius: 5px; */
+        height: 60px;
+      }
+      .new-post button {
+        align-self: center;
       }
       .posts ul {
         background-color: #b9ece8;
@@ -66,11 +89,10 @@
         display: flex;
         justify-content: space-between;
         flex-direction: column;
-        /* align-items: center; */
         background-color: #fcf4d9;
       }
       .posts .post-container > img {
-        max-width: 484px;
+        max-width: 524px;
       }
       .posts .post-container > div > input {
         width: 100%;
@@ -134,7 +156,7 @@
       .cart-container .item {
         padding: 10px;
         box-sizing: border-box;
-        border: 1px dashed gray;
+        /* border: 1px dashed gray; */
         background-color: #f0eacb;
       }
       .cart-container .item-container {
@@ -153,7 +175,7 @@
         align-items: center;
         width: 120px;
         height: 120px;
-        border: 1px dashed gray;
+        /* border: 1px dashed gray; */
         background-color: #f9e5fd;
       }
       .cart-container .image {

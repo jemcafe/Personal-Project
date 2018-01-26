@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 
-// import { connect } from 'react-redux';
-// import { updateCartItems } from '../../../redux/ducks/reducer';
-
 class Checkout extends Component {
     amountToCents = ( amount ) => amount * 100;
+
+    // The response if the payment was suuccessful
+    successfulPayment = ( data ) => {
+        console.log('Payment successful', data.data.success);
+        if ( data.data.success.paid ) {
+            this.props.removeCartItems();
+        }
+    }
 
     onToken = ( amount, description ) => ( token ) => {
         axios.post('/save-stripe-token', {
@@ -15,12 +20,11 @@ class Checkout extends Component {
             currency: 'USD',
             amount: this.amountToCents(amount),
         })
-        .then( res => console.log( 'Payment successful' ) )
+        .then( this.successfulPayment )
         .catch( err => console.log('Payment Error', err) );
     }
 
     render () {
-        // const { cartItems } = this.props;
         const { name, description, amount } = this.props;
 
         return (
@@ -39,15 +43,3 @@ class Checkout extends Component {
 }
 
 export default Checkout;
-
-// const mapStateToProps = ( state ) => {
-//     return {
-//         cartItems: state.cartItems
-//     };
-// };
-
-// const mapDispatchToProps = {
-//     updateCartItems: updateCartItems
-// }
-
-// export default connect( mapStateToProps, mapDispatchToProps )( Checkout );

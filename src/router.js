@@ -7,7 +7,6 @@ import GamesPage from './components/GamesPage/GamesPage';
 import BooksPage from './components/BooksPage/BooksPage';
 import PostersPage from './components/PostersPage/PostersPage';
 import SearchPage from './components/SearchPage/SearchPage';
-import ItemPage from './components/ItemPage/ItemPage';
 import CheckoutPage from './components/CheckoutPage/CheckoutPage';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
@@ -23,6 +22,6 @@ export default (
         <Route path="/checkout" component={ CheckoutPage } />
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
-        <Route path="/user" component={ UserAccount } />
+        <Route path="/:username" component={ UserAccount } />
     </Switch>
 );

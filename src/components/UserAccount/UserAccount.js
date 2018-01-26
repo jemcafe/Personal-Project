@@ -27,18 +27,19 @@ class UserAccount extends Component {
                     <div className="header">
                         <div className="header-container">
 
-                            <div className="profile-pic">
-                                <img src={ user.imageurl || 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png'} alt="User pic"/>
+                            <div className="profile-pic-name">
+                                <Link to={`/${user.username}`}>
+                                    <div className="profile-pic"><img src={ user.imageurl } alt="Profileres pic"/></div>
+                                </Link>
+                                <div>{ user.username }</div>
                             </div>
 
-                            <div>{ user.username }</div>
-
                             <div className="nav">
-                                <Link to="/user/posts">Posts</Link>
-                                <Link to="/user/posters">Posters</Link>
-                                <Link to="/user/following">Following</Link>
-                                <Link to="/user/cart">Cart</Link>
-                                <Link to="/user/settings">Settings</Link>
+                                <Link to={`/${user.username}`}>Profile</Link>
+                                <Link to={`/${user.username}/posters`}>Posters</Link>
+                                <Link to={`/${user.username}/following`}>Following</Link>
+                                <Link to={`/${user.username}/cart`}>Cart</Link>
+                                <Link to={`/${user.username}/settings`}>Settings</Link>
                             </div>
 
                         </div>
@@ -47,12 +48,12 @@ class UserAccount extends Component {
                     <div className="main">
                         <div className="main-container">
 
-                            <Route exact path="/user" component={ Profile } />
-                            <Route path="/user/posts" component={ Posts } />
-                            <Route path="/user/posters" component={ Posters } />
-                            <Route path="/user/following" component={ Following } />
-                            <Route path="/user/cart" component={ Cart } />
-                            <Route path="/user/settings" component={ Settings } />
+                            {/* <Route exact path="/:username" component={ Profile } /> */}
+                            <Route exact path="/:username" component={ Posts } />
+                            <Route path="/:username/posters" component={ Posters } />
+                            <Route path="/:username/following" component={ Following } />
+                            <Route path="/:username/cart" component={ Cart } />
+                            <Route path="/:username/settings" component={ Settings } />
 
                         </div>
                     </div>

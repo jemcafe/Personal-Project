@@ -52,7 +52,7 @@ app.get('/api/user', authCntrl.getUser);
     app.delete('/api/remove-item/:id', cartCntrl.removeItem);
     app.patch('/api/update-quantity/:id', cartCntrl.updateQuantity);
     app.get('/api/cart', cartCntrl.getCart);
-    // app.delete('/api/remove-all-items', cartCntrl.removeAllItems);
+    app.delete('/api/remove-all-items', cartCntrl.removeAllItems);
 
 // Products
     // Categories

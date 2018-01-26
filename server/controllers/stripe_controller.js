@@ -3,7 +3,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 module.exports = {
     paymentApi ( req, res ) {
-        stripe.charges.create(req.body, res => (stripeErr, stripeRes) => {
+        stripe.charges.create(req.body, (stripeErr, stripeRes) => {
             if (stripeErr) {
               res.status(500).send({ error: stripeErr });
             } else {

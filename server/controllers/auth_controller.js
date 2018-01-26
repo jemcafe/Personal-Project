@@ -10,7 +10,8 @@ module.exports = {
             session.user = {
                 id: user[0].id,
                 username: user[0].username,
-                imageurl: !user[0].imageurl || user[0].imageurl.slice(0,8) === 'https://' ? user[0].imageurl : ''
+                imageurl: !user[0].imageurl ? 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png' : 
+                          user[0].imageurl.slice(0,8) === 'https://' ? user[0].imageurl : 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png'
             };
 
             // If the user is found

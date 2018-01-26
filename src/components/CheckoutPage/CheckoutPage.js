@@ -8,10 +8,19 @@ import { updateCartItems } from '../../redux/ducks/reducer';
 import Checkout from './Checkout/Checkout';
 
 class CheckoutPage extends Component {
+    constructor () {
+        super();
+        this.state = {}
+        this.removeCartItems = this.removeCartItems.bind(this);
+    }
 
     removeCartItems () {
+        const { user, updateCartItems } = this.props;
         axios.delete('/api/remove-all-items').then( res => {
-            //
+            axios.get('/api/cart').then( resp => {
+                updateCartItems( resp.data );
+                this.props.history.push(`/${user}/cart`);
+            }).catch( err => console.log(err) );
         }).catch( err => console.log(err) );
     }
 
@@ -51,7 +60,8 @@ class CheckoutPage extends Component {
                     <Checkout name={ 'Products' } 
                               description={ 'Various products' } 
                               amount={ priceTotal } 
-                              customer={ user.id } />
+                              customer={ user.id }
+                              removeCartItems={ this.removeCartItems } />
 
                 </div>
                 }
