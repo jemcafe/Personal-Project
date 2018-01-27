@@ -17,14 +17,14 @@ CREATE TABLE Users (
     authId TEXT,
     name TEXT,
     imageURL TEXT
-    -- profile_url TEXT
+    -- profileURL TEXT
 );
-INSERT INTO Users (username, password, authId, name, imageURL) VALUES
-('a',      'b',        null, 'A',               null),
-('b',      'c',        null, 'Carry',           ''),
-('Goku',   'dbz',      null, 'Son Goku',        'https://i.pinimg.com/736x/ed/1d/73/ed1d7355a9bb9460f4085b5ef695740f.jpg'),
-('Ichigo', 'bleach',   null, 'Ichigo Kurosaki', 'https://pbs.twimg.com/profile_images/640284910326972416/IOChu2E1_400x400.jpg'),
-('Luffy',  'onepiece', null, 'Monkey D. Luffy', 'https://vignette.wikia.nocookie.net/onepiece/images/6/61/Estatua_de_cera_de_Luffy.png/revision/latest?cb=20121231203632&path-prefix=es');
+-- INSERT INTO Users (username, password, authId, name, imageURL) VALUES
+-- ('a',      'b',        null, 'A',               null),
+-- ('b',      'c',        null, 'Carry',           ''),
+-- ('Goku',   'dbz',      null, 'Son Goku',        'https://i.pinimg.com/736x/ed/1d/73/ed1d7355a9bb9460f4085b5ef695740f.jpg'),
+-- ('Ichigo', 'bleach',   null, 'Ichigo Kurosaki', 'https://pbs.twimg.com/profile_images/640284910326972416/IOChu2E1_400x400.jpg'),
+-- ('Luffy',  'onepiece', null, 'Monkey D. Luffy', 'https://vignette.wikia.nocookie.net/onepiece/images/6/61/Estatua_de_cera_de_Luffy.png/revision/latest?cb=20121231203632&path-prefix=es');
 
 
 

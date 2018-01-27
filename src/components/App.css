@@ -41,7 +41,8 @@ a {
 }
 
 .panel {
-  width: 1000px;
+  max-width: 1000px;
+  min-width: 480px;
   margin: 0 auto;
   /* background-color: rgb(252, 247, 201); */
 }
@@ -60,5 +61,6 @@ a {
 /*  Footer  */
 
 .footer {
+  padding: 50px 0;
   background-color: #cbe4fc;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 class Posters extends Component {
     constructor () {
@@ -23,12 +24,45 @@ class Posters extends Component {
 
     handleChange ( property, value ) {
         this.setState({ [property]: value });
-
         console.log( this.state.category );
     }
 
+    addPoster ( name, description, price, category, image ) {
+        const body = {
+            name: name,
+            description: description,
+            price: price,
+            cateogry: category,
+            image: image
+        };
+
+        axios.post('/api/new-poster', body).then( res => {
+            console.log( res.data );
+
+            axios.get('/api/posters').then( resp => {
+                this.setState({ posters: resp.data, name: '', description: '', price: '', image: '' });
+            }).catch( err => console.log(err) );
+
+        }).catch( err => console.log( err ) );
+    }
+
+    deletePoster ( id ) {
+        axios.delete(`/api/delete-poster/${ id }`).then( res => {
+            console.log( res.data );
+
+            axios.get('/api/posts').then( resp => {
+                this.setState({ posts: resp.data });
+            }).catch( err => console.log( err ) );
+
+        }).catch( err => console.log( err ) );
+    }
+
     render () {
-        const { posters } = this.state;
+        const { posters, name, description, price, category, image } = this.state;
+
+        const categories = this.props.productSubcategories[2].map( (e, i) => {
+            return i !== 0 ? <option key={ i } value={ e }>{ e }</option> : false;
+        }).filter( (e, i) => i !== 0 );
 
         const listOfPosters = posters.map( poster => {
             return (
@@ -58,11 +92,10 @@ class Posters extends Component {
                         <input placeholder="Description" onChange={ (e) => this.handleChange('description', e.target.value) }/>
                         <input placeholder="Price" onChange={ (e) => this.handleChange('price', e.target.value) }/>
                         <input placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
-                        <select onChange={ (e) => this.handleChange("cateogry", e.target.value) }>
-                            <option value={ 'Digital Art' }>Digital Art</option>
-                            <option value={ 'Traditional Art' }>Traditional Art</option>
-                            <option value={ 'Photography' }>Photography</option>
+                        <select name="categories" onChange={ (e) => this.handleChange("category", e.target.value) }>
+                            { categories }
                         </select>
+                        <button className="btn" onClick={ () => this.addPoster(name, description, price, category, image) }>Save</button>
                     </div>
 
                     <ul className="posters-list">
@@ -75,4 +108,4 @@ class Posters extends Component {
     }
 }
 
-export default Posters;
+export default connect( state => state )( Posters );

@@ -10,9 +10,11 @@ module.exports = {
         const yyyy = date.getFullYear();
         const currentDate = `${mm} / ${dd} / ${yyyy}`;
 
+        const categoryId = category === 'Digital Art' ? 1 : category === 'Traditional Art' ? 2 : 3;
+
         if ( session.user.id ) {
 
-            db.create_poster( [name, description, currentDate, price, category, 3, session.user.id, image] ).then( poster => {
+            db.create_poster( [name, description, currentDate, price, categoryId, 3, session.user.id, image] ).then( poster => {
                 res.status(200).json( poster );
             }).catch( err => {
                 console.log(err);

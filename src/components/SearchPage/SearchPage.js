@@ -92,7 +92,7 @@ class SearchPage extends Component {
                         <div className="results-container">
 
                             <div className="list">
-                                { list.length === 0 ? 'No results' : <ul>{ list }</ul> }
+                                { list.length ? <ul>{ list }</ul> : 'No results' }
                             </div>
                             <div className="prev-next-btn">
                                 <button className="previous-btn">Previous</button>

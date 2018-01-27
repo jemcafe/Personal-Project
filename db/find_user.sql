@@ -1,3 +1,3 @@
 SELECT * FROM Users 
-WHERE username = $1 AND password = $2 
+WHERE username = $1
 LIMIT 1;

@@ -47,12 +47,12 @@ class MainHeader extends Component {
         return (
             <header className="main-header">
                 <div className="header-bkgd-overlay position"></div>
-                    <div className="main-header-container ">
+                    <div className="main-header-container panel">
 
-                        <div className="header-1 position panel">
+                        <div className="header-1 position">
                             <Link to="/"><div className="title">SITE NAME</div></Link>
                             {/* <SearchBar /> */}
-                            <div className="nav">
+                            <div className="header-nav">
                                 <SearchBar />
                                 <Link to="/" className="link">Home</Link>
                                 <Link to="/games" className="link">Games</Link>

@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 
 // Components ( routes )
 import Profile from './Profile/Profile';
-import Posts from './Posts/Posts';
 import Posters from './Posters/Posters';
 import Following from './Following/Following';
 import Cart from './Cart/Cart';
@@ -24,18 +23,23 @@ class UserAccount extends Component {
                 <div className="useraccount-container">
                     {/* <div>The UserAccount Component</div> */}
 
-                    <div className="header">
-                        <div className="header-container">
+                    <div className="profile-header-bkgd">
+                        <img src="http://www.slate.com/content/dam/slate/articles/health_and_science/Science/2016/10/161024_SCI_swamp.jpg.CROP.promo-xlarge2.jpg" alt="profile header pic"/>
+                    </div>
+
+                    <div className="profile-header">
+
+                        <div className="profile-header-container">
 
                             <div className="profile-pic-name">
                                 <Link to={`/${user.username}`}>
                                     <div className="profile-pic"><img src={ user.imageurl } alt="Profileres pic"/></div>
                                 </Link>
-                                <div>{ user.username }</div>
+                                <h4>{ user.username }</h4>
                             </div>
 
-                            <div className="nav">
-                                <Link to={`/${user.username}`}>Profile</Link>
+                            <div className="user-nav">
+                                {/* <Link to={`/${user.username}`}>Profile</Link> */}
                                 <Link to={`/${user.username}/posters`}>Posters</Link>
                                 <Link to={`/${user.username}/following`}>Following</Link>
                                 <Link to={`/${user.username}/cart`}>Cart</Link>
@@ -43,19 +47,19 @@ class UserAccount extends Component {
                             </div>
 
                         </div>
-                    </div>
 
-                    <div className="main">
-                        <div className="main-container">
+                        <div className="main">
+                            <div className="main-container">
 
-                            {/* <Route exact path="/:username" component={ Profile } /> */}
-                            <Route exact path="/:username" component={ Posts } />
-                            <Route path="/:username/posters" component={ Posters } />
-                            <Route path="/:username/following" component={ Following } />
-                            <Route path="/:username/cart" component={ Cart } />
-                            <Route path="/:username/settings" component={ Settings } />
+                                <Route exact path="/:username" component={ Profile } />
+                                <Route path="/:username/posters" component={ Posters } />
+                                <Route path="/:username/following" component={ Following } />
+                                <Route path="/:username/cart" component={ Cart } />
+                                <Route path="/:username/settings" component={ Settings } />
 
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
