@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Post from './Post/Post';
 
@@ -88,6 +90,7 @@ class Posts extends Component {
 
     render () {
         const { posts, posters, title, text, image } = this.state;
+        const { user } = this.props;
 
         const listOfPosts = posts.map( post => {
             return <Post key={ post.id } 
@@ -105,8 +108,27 @@ class Posts extends Component {
         });
 
         return (
-            <div className="posts">
-                    {/* <div>POSTS COMPONENT</div> */}
+            <div className="profile">
+                {/* <div>PROFILE COMPONENT</div> */}
+
+                <div className="profile-header">
+                    <div className="profile-header-container">
+                        <div className="profile-pic-name">
+                            <Link to={`/${user.username}`}>
+                                <div className="profile-pic"><img src={ user.imageurl } alt="Profile pic"/></div>
+                            </Link>
+                            <h4>{ user.username }</h4>
+                        </div>
+
+                        <div className="user-nav">
+                            {/* <Link to={`/${user.username}`}>Profile</Link> */}
+                            <Link to={`/${user.username}/posters`}>Posters</Link>
+                            <Link to={`/${user.username}/following`}>Following</Link>
+                            <Link to={`/${user.username}/cart`}>Cart</Link>
+                            <Link to={`/${user.username}/settings`}>Settings</Link>
+                        </div>
+                    </div>
+                </div>
 
                 <div className="posts-container">
                     <div className="new-post">
@@ -122,13 +144,15 @@ class Posts extends Component {
                     </ul>
                 </div>
 
-                <div className="latest-container">
-                    RECENT
-                    <div>
-                        POSTERS
-                        { listOfRecentPosters.length ? <ul>{ listOfRecentPosters }</ul> : 'No Posters' }
+                <div className="latest">
+                    <div className="latest-container">
+                        RECENT
+                        <div>
+                            POSTERS
+                            { listOfRecentPosters.length ? <ul>{ listOfRecentPosters }</ul> : 'No Posters' }
+                        </div>
+                        <div>BOOKS</div>
                     </div>
-                    <div>BOOKS</div>
                 </div>
 
             </div>
@@ -136,4 +160,4 @@ class Posts extends Component {
     }
 }
 
-export default Posts;
+export default connect( state => state )( Posts );

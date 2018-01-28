@@ -2,19 +2,6 @@
   display: flex;
   flex-direction: column;
 }
-  .profile-header {
-    display: flex;
-  }
-  .useraccount .profile-header-container {
-    display: flex;
-    /* justify-content: space-between; */
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 50px;
-    box-sizing: border-box;
-    margin-top: 10em;
-    background-color: #fccbd9;
-  }
   .profile-header-bkgd {      /*  keeps  */
     position: absolute;
     left: 0;
@@ -41,10 +28,22 @@
     margin-left: 0;
   }
   .useraccount .main {
-    flex: 1;
     margin-top: 10em;
     /* background-color: #cbf8d6; */
   }
+    .profile-header {
+      max-width: 200px;
+    }
+    .profile .profile-header-container {
+      display: flex;
+      /* justify-content: space-between; */
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 50px;
+      box-sizing: border-box;
+      /* margin-top: 10em; */
+      background-color: #fccbd9;
+    }
     .profile-pic-name {
       display: flex;
       flex-direction: column;
@@ -69,26 +68,21 @@
       max-width: 100%;
       min-height: 100%;
     }
-  .useraccount .profile-container {
-    background-color: #cbe4fc;
-  }
-  .useraccount .posts {
+  .profile {
     display: flex;
-    justify-content: space-around;
-    padding: 10px;
+    justify-content: space-between;
+    box-sizing: border-box;
+    /* padding: 8px; */
     box-sizing: border-box;
     background-color: #cbe4fc;
   }
-  .useraccount .posts-container {
+  .profile > div {
+    /* margin: 8px; */
+  }
+  .profile .posts-container {
     width: 550px;
     /* background-color: rgb(189, 212, 189); */
   }
-      .btn {
-        
-      }
-      posts {
-        display: flex;
-      }
       .new-post {
         display: flex;
         flex-direction: column;
@@ -114,10 +108,10 @@
       .new-post button {
         align-self: center;
       }
-      .posts ul {
+      .profile ul {
         background-color: #b9ece8;
       }
-      .posts .post {
+      .profile .post {
         padding: 10px 12px;
         box-sizing: border-box;
         border: 1px dashed gray;
@@ -148,10 +142,8 @@
         justify-content: space-between;
         background-color: #dffafc;
       }
-  .latest-container {
-    max-width: 120px;
-    max-height: 100%;
-    margin: 0 8px;
+  .latest {
+    max-width: 150px;
     background-color: #dbfcd9;
   }
       .latest-container > div {
@@ -302,56 +294,59 @@
 
 /*  Responsive  */
 
-  @media (max-width: 870px) {
-    .latest-container {
-      display: none;
-    }
+@media (max-width: 750px) {
+  .latest-container {
+    display: none;
   }
+  .profile {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+  }
+  .profile-header {
+    max-width: 100%;
+  }
+  .posts-container {
+    max-width: 100%;
+    align-self: center;
+  }
+  .user-nav {
+    flex-direction: row;
+  }
+  .user-nav a {
+    margin-left: 10px;
+  }
+}
 
-  @media (max-width: 770px) {
-    .profile-header {
-      display: flex;
-      flex-direction: column;
-    }
-    .useraccount .main {
-      margin-top: 0;
-    }
-    .user-nav {
-      flex-direction: row;
-    }
-    .user-nav a {
-      margin-left: 10px;
-    }
-    .latest-container {
-      display: none;
-    }
+@media (max-width: 550px) {
+}
+
+@media (max-width: 587px) {
+  .poster .thumbnail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 370px;
+    height: 370px;
   }
-  @media (max-width: 587px) {
-    .poster .thumbnail {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      width: 370px;
-      height: 370px;
-    }
-  }
+}
 
 /*  Animations  */
 
-  .fade {
-    animation-name: "fade-out";
-    animation-duration: 0.5s;
-  }
-  .fade:hover {
-    animation-name: "fade-in";
-    animation-duration: 0.5s;
-  }
-  @keyframes fade-in {
-    0% { opacity: 0;}
-    100% { opacity: 1; }
-  }
-  @keyframes fade-out {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-  }
+.fade {
+  animation-name: "fade-out";
+  animation-duration: 0.5s;
+}
+.fade:hover {
+  animation-name: "fade-in";
+  animation-duration: 0.5s;
+}
+@keyframes fade-in {
+  0% { opacity: 0;}
+  100% { opacity: 1; }
+}
+@keyframes fade-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}

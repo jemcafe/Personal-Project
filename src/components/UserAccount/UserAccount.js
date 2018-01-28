@@ -27,37 +27,16 @@ class UserAccount extends Component {
                         <img src="https://static.pexels.com/photos/572688/pexels-photo-572688.jpeg" alt="profile header pic"/>
                     </div>
 
-                    <div className="profile-header">
+                    <div className="main">
+                        <div className="main-container">
 
-                        <div className="profile-header-container">
-                            <div className="profile-pic-name">
-                                <Link to={`/${user.username}`}>
-                                    <div className="profile-pic"><img src={ user.imageurl } alt="Profileres pic"/></div>
-                                </Link>
-                                <h4>{ user.username }</h4>
-                            </div>
+                            <Route exact path="/:username" component={ Profile } />
+                            <Route path="/:username/posters" component={ Posters } />
+                            <Route path="/:username/following" component={ Following } />
+                            <Route path="/:username/cart" component={ Cart } />
+                            <Route path="/:username/settings" component={ Settings } />
 
-                            <div className="user-nav">
-                                {/* <Link to={`/${user.username}`}>Profile</Link> */}
-                                <Link to={`/${user.username}/posters`}>Posters</Link>
-                                <Link to={`/${user.username}/following`}>Following</Link>
-                                <Link to={`/${user.username}/cart`}>Cart</Link>
-                                <Link to={`/${user.username}/settings`}>Settings</Link>
-                            </div>
                         </div>
-
-                        <div className="main">
-                            <div className="main-container">
-
-                                <Route exact path="/:username" component={ Profile } />
-                                <Route path="/:username/posters" component={ Posters } />
-                                <Route path="/:username/following" component={ Following } />
-                                <Route path="/:username/cart" component={ Cart } />
-                                <Route path="/:username/settings" component={ Settings } />
-
-                            </div>
-                        </div>
-
                     </div>
 
                 </div>
