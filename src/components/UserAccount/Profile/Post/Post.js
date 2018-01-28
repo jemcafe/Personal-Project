@@ -36,13 +36,13 @@ class Post extends Component {
         const { deletePost } = this.props;
 
         // The image will be displayed if the input begins with the condition
-        const imageurlCheck = imageurl.slice(0,8) === 'https://' ? true : false;
+        const imageurlCheck = (imageurl.slice(0,7) === 'http://' || imageurl.slice(0,8) === 'https://') ? true : false;
 
         return (
             <li className="post">
                 { !this.state.editMode ? (
                     <div className="post-container">
-                        { imageurlCheck && <img src={ imageurl } alt="Url not found"/> }
+                        { imageurlCheck && <div className="post-image"><img src={ imageurl } alt="Url not found"/></div> }
                         <div>
                             <h3>{ title }</h3>
                             <div>Username: { username }</div>
@@ -55,7 +55,7 @@ class Post extends Component {
                     </div>
                 ) : (
                     <div className="post-container">
-                        { imageurlCheck && <img src={ imageurl } alt="Url not found"/> }
+                        { imageurlCheck && <div className="post-image"><img src={ imageurl } alt="Url not found"/></div> }
                         <div>
                             <input placeholder="Url" defaultValue={ imageurl } onChange={ (e) => this.handleChange('image', e.target.value) }/>
                         </div>

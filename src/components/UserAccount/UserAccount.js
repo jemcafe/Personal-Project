@@ -24,13 +24,12 @@ class UserAccount extends Component {
                     {/* <div>The UserAccount Component</div> */}
 
                     <div className="profile-header-bkgd">
-                        <img src="http://www.slate.com/content/dam/slate/articles/health_and_science/Science/2016/10/161024_SCI_swamp.jpg.CROP.promo-xlarge2.jpg" alt="profile header pic"/>
+                        <img src="https://static.pexels.com/photos/572688/pexels-photo-572688.jpeg" alt="profile header pic"/>
                     </div>
 
                     <div className="profile-header">
 
                         <div className="profile-header-container">
-
                             <div className="profile-pic-name">
                                 <Link to={`/${user.username}`}>
                                     <div className="profile-pic"><img src={ user.imageurl } alt="Profileres pic"/></div>
@@ -45,7 +44,6 @@ class UserAccount extends Component {
                                 <Link to={`/${user.username}/cart`}>Cart</Link>
                                 <Link to={`/${user.username}/settings`}>Settings</Link>
                             </div>
-
                         </div>
 
                         <div className="main">

@@ -12,22 +12,25 @@
     align-items: center;
     padding: 10px 50px;
     box-sizing: border-box;
-    /* background-image: url('../../images/profile-header-bkgd_500x500_transparent.png'); */
-    /* background-size: 400px 400px; */
+    margin-top: 10em;
     background-color: #fccbd9;
+    max-height: 500px;
   }
   .profile-header-bkgd {      /*  keeps  */
+    position: absolute;
+    left: 0;
+    z-index: -1;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     width: 100%;
-    height: 150px;
+    height: 10em;
     background-color: #d0c7d6;
   }
   .profile-header-bkgd img {
     flex-shrink: 0;
-    max-width: 100%;
+    width: 100%;
     min-height: 100%;
   }
   .user-nav {
@@ -40,14 +43,18 @@
   }
   .useraccount .main {
     flex: 1;
-    background-color: #cbf8d6;
+    margin-top: 10em;
+    /* background-color: #cbf8d6; */
   }
-    .useraccount .profile-pic-name {
+    .profile-pic-name {
       display: flex;
       flex-direction: column;
     }
+    .profile-pic-name > h4 {
+      margin: 0;
+    }
       /* Fills the thumbnail div with the image */
-    .useraccount .profile-pic {
+    .profile-pic {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -58,7 +65,7 @@
       border-radius: 20px;
       background-color: #cbe4fc;
     }
-    .useraccount .profile-pic img {
+    .profile-pic > img {
       flex-shrink: 0;
       max-width: 100%;
       min-height: 100%;
@@ -75,8 +82,8 @@
   }
   .useraccount .posts-container {
     /* flex: 3; */
-    width: 550px;
-    background-color: rgb(189, 212, 189);
+    max-width: 550px;
+    /* background-color: rgb(189, 212, 189); */
   }
       .btn {
         
@@ -90,6 +97,7 @@
         padding: 8px 30px;
         box-sizing: border-box;
         /* border: 1px dashed gray; */
+        border-radius: 4px;
         background-color: #fce1c8;
       }
       .new-post .input  {
@@ -97,6 +105,7 @@
         margin: 8px;
         border: none;
         border-radius: 3px;
+        resize: none;
       }
       .new-post textarea {
         outline: none;
@@ -116,26 +125,35 @@
         border: 1px dashed gray;
         background-color: #ecb9ea;
       }
-      .posts .post-container {
+      .post-container {
         display: flex;
         justify-content: space-between;
         flex-direction: column;
         background-color: #fcf4d9;
       }
-      .posts .post-container > img {
-        max-width: 559px;
+      .post-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
       }
-      .posts .post-container > div > input {
+      .post-image > img {
+        width: 100%;
+        max-height: 100%;
+      }
+      .post-container > div > input {
         width: 100%;
       }
-      .posts .post-container > div {
+      .post-container > div {
         display: flex;
         justify-content: space-between;
         background-color: #dffafc;
       }
-      .latest-container {
-        background-color: #dbfcd9;
-      }
+  .latest-container {
+    max-height: 500px;
+    background-color: #dbfcd9;
+  }
       .latest-container > div {
         padding: 8px;
         box-sizing: border-box;
@@ -144,17 +162,34 @@
         max-width: 75px;
       }
   .useraccount .posters {
-    background-color: #cbe4fc;
+    /* background-color: #cbe4fc; */
   }
       .posters-container {
         display: flex;
+        flex-direction: column;
       }
-      .posters-container .new-poster {
+      .new-poster {
+        padding: 15px 30px;
+        box-sizing: border-box;
+      }
+      .new-poster-container {
         flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: #f8e0b3;
+        padding: 5px 0;
+        box-sizing: border-box;
+        border: 3px dashed rgba(150, 116, 123, 0.514);
+        border-radius: 5px;
+        /* background-color: #f8e0b3; */
+      }
+      .new-poster-container > input {
+        border: 1px solid #da6a6ab7;
+        font-size: 12px;
+        margin: 3px 0;
+      }
+      .new-poster-container > button {
+        margin: 8px 0 3px 0;
       }
       .posters-container > ul {
         flex: 3;
@@ -162,10 +197,12 @@
       }
       .posters-list {
         display: flex;
+        justify-content: center;
         flex-wrap: wrap;
       }
       .poster {
         background-color: #e1d0ec;
+        margin: 4px;
       }
         /* Fills the thumbnail div with the image */
       .poster .thumbnail {
@@ -176,10 +213,24 @@
         width: 187.5px;
         height: 187.5px;
       }
-      .poster .thumbnail img {  /*  When height is greater than width  */
+      .poster .thumbnail > img {  /*  When height is greater than width  */
         flex-shrink: 0;
         max-width: 100%;
         min-height: 100%;
+      }
+      .poster .thumbnail > .edit {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        width: 187.5px;
+        height: 187.5px;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+      }
+      .poster .thumbnail > .edit:hover {
+        opacity: 1;
       }
   .useraccount .following-container {
     background-color: #cbe4fc;
@@ -249,6 +300,8 @@
     background-color: #cbe4fc;
   }
 
+/*  Responsive  */
+
   @media (max-width: 862px) {
     .latest-container {
       display: none;
@@ -260,6 +313,9 @@
       display: flex;
       flex-direction: column;
     }
+    .useraccount .main {
+      margin-top: 0;
+    }
     .user-nav {
       flex-direction: row;
     }
@@ -269,4 +325,33 @@
     .latest-container {
       display: none;
     }
+  }
+  @media (max-width: 587px) {
+    .poster .thumbnail {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      width: 370px;
+      height: 370px;
+    }
+  }
+
+/*  Animations  */
+
+  .fade {
+    animation-name: "fade-out";
+    animation-duration: 0.5s;
+  }
+  .fade:hover {
+    animation-name: "fade-in";
+    animation-duration: 0.5s;
+  }
+  @keyframes fade-in {
+    0% { opacity: 0;}
+    100% { opacity: 1; }
+  }
+  @keyframes fade-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
   }

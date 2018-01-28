@@ -46,21 +46,22 @@ class Register extends Component {
                     {/* <div>The Register Component</div> */}
 
                     <div className="info-input">
-                        <div className="input">
-                            <div className="info">Username</div>
-                            <input className="register-input" placeholder="username" onChange={ (e) => this.handleChange('username', e.target.value) } />
+                        <h3>Sign Up</h3>
+                        <div className="input-info">
+                            {/* <div className="info">Username</div> */}
+                            <input className="input" placeholder="Username" onChange={ (e) => this.handleChange('username', e.target.value) } />
                         </div>
-                        <div className="input">
-                            <div className="info">Password</div>
-                            <input className="register-input" placeholder="password" onChange={ (e) => this.handleChange('password', e.target.value) } />
+                        <div className="input-info">
+                            {/* <div className="info">Password</div> */}
+                            <input className="input" placeholder="Password" onChange={ (e) => this.handleChange('password', e.target.value) } />
                         </div>
-                        <div className="input">
-                            <div className="info">Name</div>
-                            <input className="register-input" placeholder="name" onChange={ (e) => this.handleChange('name', e.target.value) } />
+                        <div className="input-info">
+                            {/* <div className="info">Name</div> */}
+                            <input className="input" placeholder="Name" onChange={ (e) => this.handleChange('name', e.target.value) } />
                             </div>
-                        <div className="input">
-                            <div className="info">Profile Picture</div>
-                            <input className="register-input" placeholder="url" onChange={ (e) => this.handleChange('image', e.target.value) } />
+                        <div className="input-info">
+                            {/* <div className="info">Profile Picture (url)</div> */}
+                            <input className="input" placeholder="Profile picture (url)" onChange={ (e) => this.handleChange('image', e.target.value) } />
                         </div>
                         <div className="btns">
                             <button className="btn" onClick={ () => this.register() }>Create Account</button>

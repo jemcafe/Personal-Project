@@ -10,7 +10,7 @@ class Posters extends Component {
             name: '',
             description: '',
             price: '',
-            category: '',
+            category: 'Digital Art',
             image: '',
         }
     }
@@ -50,19 +50,19 @@ class Posters extends Component {
         axios.delete(`/api/delete-poster/${ id }`).then( res => {
             console.log( res.data );
 
-            axios.get('/api/posts').then( resp => {
-                this.setState({ posts: resp.data });
-            }).catch( err => console.log( err ) );
+            axios.get('/api/posters').then( resp => {
+                this.setState({ posters: resp.data, name: '', description: '', price: '', image: '' });
+            }).catch( err => console.log(err) );
 
         }).catch( err => console.log( err ) );
     }
 
     render () {
         const { posters, name, description, price, category, image } = this.state;
+        const { productSubcategories } = this.props;
 
-        const categories = this.props.productSubcategories[2].map( (e, i) => {
-            return i !== 0 ? <option key={ i } value={ e }>{ e }</option> : false;
-        }).filter( (e, i) => i !== 0 );
+        // The first category ('All') is removed from the list
+        const categories = productSubcategories.length && productSubcategories[2].map( (e, i) => i !== 0 ? <option key={ i } value={ e }>{ e }</option> : false ).filter( e => e );
 
         const listOfPosters = posters.map( poster => {
             return (
@@ -74,6 +74,10 @@ class Posters extends Component {
                         <div>{ poster.productcategory }</div>
                         <div>{ poster.dateposted }</div> */}
                         <div className="thumbnail">
+                            <div className="edit fade">
+                                <button className="btn">Edit</button>
+                                <button className="btn" onClick={ () => this.deletePoster(poster.id) }>Delete</button>
+                            </div>
                             <img src={ poster.imageurl } alt={ poster.name }/>
                         </div>
                     </div>
@@ -87,15 +91,17 @@ class Posters extends Component {
                     {/* <div>POSTERS</div> */}
 
                     <div className="new-poster">
-                        <div>New Poster</div>
-                        <input placeholder="Name" onChange={ (e) => this.handleChange('name', e.target.value) }/>
-                        <input placeholder="Description" onChange={ (e) => this.handleChange('description', e.target.value) }/>
-                        <input placeholder="Price" onChange={ (e) => this.handleChange('price', e.target.value) }/>
-                        <input placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
-                        <select name="categories" onChange={ (e) => this.handleChange("category", e.target.value) }>
-                            { categories }
-                        </select>
-                        <button className="btn" onClick={ () => this.addPoster(name, description, price, category, image) }>Save</button>
+                        <div className="new-poster-container">
+                            {/* <div>New Poster</div> */}
+                            <input className="input" value={ name } placeholder="Name" onChange={ (e) => this.handleChange('name', e.target.value) }/>
+                            <input className="input" value={ description } placeholder="Description" onChange={ (e) => this.handleChange('description', e.target.value) }/>
+                            <input className="input" value={ price } placeholder="Price" onChange={ (e) => this.handleChange('price', e.target.value) }/>
+                            <input className="input" value={ image } placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
+                            <select value={ category } name="categories" onChange={ (e) => this.handleChange("category", e.target.value) }>
+                                { categories }
+                            </select>
+                            <button className="btn" onClick={ () => this.addPoster(name, description, price, category, image) }>Save</button>
+                        </div>
                     </div>
 
                     <ul className="posters-list">

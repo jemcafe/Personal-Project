@@ -65,15 +65,19 @@ class SearchPage extends Component {
                             </Link>
 
                             <div className="info-container">
-                                <Link to={`${item.productcategory.toLowerCase()}/${item.name}`}>
-                                    <div className="title" onClick={ () => getProductInfo(item) }>{ item.name.length > 20 ? `${item.name.slice(0,20).trim()}...` : item.name }</div>
-                                </Link>
+
+                                <Link to={`${item.productcategory.toLowerCase()}/${item.name}`} 
+                                      className="title" 
+                                      onClick={ () => getProductInfo(item) }
+                                >{ item.name.length > 20 ? `${item.name.slice(0,20).trim()}...` : item.name }</Link>
+
                                 <div className="info">
                                     <div>Rating</div>
                                     <div>Date</div>
                                     <div>${ item.price }</div>
                                 </div>
-                                { user.username ? <button className="add-btn" onClick={ () => this.addItem( item.id, item.name, item.price, item.productcategoryid, 1, item.imageurl ) }>Add To Cart</button> : <Link to="/login"><button className="add-btn">Add To Cart</button></Link> }
+                                { user.username ? <button className="add-btn btn" onClick={ () => this.addItem( item.id, item.name, item.price, item.productcategoryid, 1, item.imageurl ) }>Add To Cart</button> : <Link to="/login"><button className="add-btn btn">Add To Cart</button></Link> }
+                                
                             </div>
 
                         </div>
@@ -91,9 +95,7 @@ class SearchPage extends Component {
                     <div className="results">
                         <div className="results-container">
 
-                            <div className="list">
-                                { list.length ? <ul>{ list }</ul> : 'No results' }
-                            </div>
+                            { list.length ? <ul>{ list }</ul> : 'No results' }
                             <div className="prev-next-btn">
                                 <button className="previous-btn">Previous</button>
                                 <button className="next-btn">Next</button>
