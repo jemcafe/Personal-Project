@@ -57,6 +57,7 @@ a {
   color: white;
   background-color: #fc7474; 
   outline: none;
+  cursor: pointer;
 }
 .btn:active {
   background-color: #dd5c5c; 
@@ -88,4 +89,5 @@ a {
 .footer {
   padding: 50px 0;
   background-color: #cbe4fc;
+  background: radial-gradient( 180deg, #ffd4c786, transparent );
 }
