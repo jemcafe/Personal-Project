@@ -93,14 +93,14 @@ class Cart extends Component {
                 <div className="cart-container">
 
                     <div className="products">
-                        <div>CART</div>
+                        <h4>CART</h4>
                         <ul>
                             { listOfItems.length ? listOfItems : <li>This cart's boring.</li> }
                         </ul>
                     </div>
 
                     <div className="total">
-                        <div>TOTAL</div>
+                        <h4>TOTAL</h4>
                         <div className="total-summary">
                             <div>Total: ${ priceTotal }</div>
                             { priceTotal > 0 && <Link to="/checkout"><button className="checkout-btn btn">Checkout</button></Link> }

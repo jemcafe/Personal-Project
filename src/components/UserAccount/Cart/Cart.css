@@ -1,33 +1,29 @@
 .useraccount .cart {
-    background-color: #b7d5f1;
     /* padding: 10px; */
     box-sizing: border-box;
+    /* background-color: #b7d5f1; */
   }
       .cart-container {
         display: flex;
         justify-content: space-around;
-        background-color: #f9e5fd;
+        /* background-color: #f9e5fd; */
       }
       .cart-container .item {
         padding: 10px;
         box-sizing: border-box;
-        border-bottom: 1px solid gray;
-        background-color: #f0eacb;
+        border-top: 1px solid rgb(179, 164, 164);
+        /* background-color: #f0eacb; */
       }
       .cart-container .item-container {
         display: flex;
         justify-content: space-between;
         /* align-items: center; */
-        background-color: #f0fdea;
+        /* background-color: #f0fdea; */
       }
       .cart-container .products {
         flex: 3;
-        /* width: 700px; */
         padding: 10px;
-        background-color: #dceef8;
-      }
-      .cart-container {
-          
+        /* background-color: #dceef8; */
       }
       .cart-container .item-img {
         display: flex;
@@ -35,7 +31,7 @@
         width: 120px;
         height: 120px;
         /* border: 1px dashed gray; */
-        background-color: #f9e5fd;
+        /* background-color: #f9e5fd; */
       }
       .cart-container .image {
         max-width: 120px;
@@ -44,16 +40,22 @@
         /* background-color: #f9e5fd; */
       }
       .cart-container .item-info {
+        flex: 3;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         flex-direction: column;
         align-items: right;
-        background-color: #e5f0fd;
+        /* background-color: #e5f0fd; */
       }
       .cart-container .info {
         display: flex;
         justify-content: space-between;
-        background-color: #e5f0fd;
+        width: 100%;
+        /* background-color: #e5f0fd; */
+      }
+      .cart-container h4 {
+        margin: 0;
+        color: rgba(102, 58, 63, 0.849);
       }
 
       .cart-container .total {
@@ -65,3 +67,9 @@
       .cart-container .total-summary {
         background-color: #fdfbdf;
       }
+
+@media (max-width: 660px) {
+  .cart-container {
+    flex-direction: column;
+  }
+}

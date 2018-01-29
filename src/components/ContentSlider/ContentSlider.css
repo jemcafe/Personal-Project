@@ -1,0 +1,14 @@
+.slider {
+    /* margin-top: 25px; */
+    /* background-color: rgb(217, 255, 217); */
+}
+
+.slide-img {
+    display: flex;
+    justify-content: center;
+    height: 500px;
+}
+
+.slide-img > img {
+    max-height: 100%;
+}

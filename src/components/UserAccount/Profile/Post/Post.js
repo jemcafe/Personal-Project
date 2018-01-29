@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import FaEdit from 'react-icons/lib/fa/edit';
+import { Link } from 'react-router-dom';
 
 class Post extends Component {
     constructor (props) {
@@ -42,20 +44,20 @@ class Post extends Component {
             <li className="post">
                 { !this.state.editMode ? (
                     <div className="post-container">
-                        { imageurlCheck && <div className="post-image"><img src={ imageurl } alt="Url not found"/></div> }
-                        <div>
+                        <div className="name-title padding-align">
+                            <div><Link to={`/${username}`}>{ username }</Link></div>
                             <h3>{ title }</h3>
-                            <div>Username: { username }</div>
                         </div>
-                        <div>Text: { text }</div>
-                        <div>
-                            <div>Date: { dateposted }</div>
-                            <div><button onClick={ () => this.toggleEdit() }>Edit</button></div>
+                        { imageurlCheck && <div className="image"><img src={ imageurl } alt="Url not found"/></div> }
+                        <div className="text padding-align" >{ text }</div>
+                        <div className="date-edit padding-align">
+                            <div>{ dateposted }</div>
+                            <div><FaEdit className="fa-edit" onClick={ () => this.toggleEdit() } size={25} color="gray" /></div>
                         </div>
                     </div>
                 ) : (
                     <div className="post-container">
-                        { imageurlCheck && <div className="post-image"><img src={ imageurl } alt="Url not found"/></div> }
+                        { imageurlCheck && <div className="image"><img src={ imageurl } alt="Url not found"/></div> }
                         <div>
                             <input placeholder="Url" defaultValue={ imageurl } onChange={ (e) => this.handleChange('image', e.target.value) }/>
                         </div>

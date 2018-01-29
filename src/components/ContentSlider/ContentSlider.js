@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
+import './ContentSlider.css'
 import Slider from 'react-slick';
 
 class ContentSlider extends Component {
     render () {
         const settings = {
+            autoplay: true,
+            autoplaySpeed: 6000,
             dots: true,
             infinite: true,
-            speed: 500,
+            speed: 1500,
             slidesToShow: 1,
             slidesToScroll: 1
         };
 
         return (
-            <div>
+            <div className="slider">
                 <Slider {...settings}>
-                    <div><h3>1</h3></div>
-                    <div><h3>2</h3></div>
-                    <div><h3>3</h3></div>
-                    <div><h3>4</h3></div>
+                    { this.props.images.map( e => <div><div className="slide-img"><img src={ e } alt="Media pic"/></div></div> )}
                 </Slider>
             </div>
         )

@@ -67,7 +67,7 @@ class SearchPage extends Component {
                                 </div>
                             </Link>
 
-                            <div className="info-container">
+                            <div className="item-info-container">
 
                                 <Link to={`${item.productcategory.toLowerCase()}/${item.name}`} 
                                       className="title" 

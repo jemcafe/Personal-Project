@@ -17,6 +17,7 @@
   justify-content: center;
   flex-direction: column;
   width: 60%;
+  background: linear-gradient( 0deg, transparent, #ffece3);
   /* background-color: #cefae9; */
 }
 .search-page .results-container ul {
@@ -31,20 +32,21 @@
   width: 175px;
   /* border: 1px solid gray; */
   margin: 8px;
-  background-color: #fcf6de;
+  background-color: white;
+  /* background-color: #fcf6de; */
 }
 .search-page .item-container {       /*  The item contents are in columns  */
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: #fcf6de;
+  /* background-color: #fcf6de; */
 }
 .search-page .image-container {      /*  The image is centered and the container height is fixed  */
   display: flex;
   justify-content: space-around;
   align-items: center;
   height: 183px;
-  background-color: #ebb3dd;
+  /* background-color: #ebb3dd; */
 }
 .search-page .image-container:hover {
   opacity: 0.8;
@@ -55,23 +57,28 @@
 }
 
 
-.search-page .info-container {
+.search-page .item-info-container {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  background-color: #c8e2f8;
+  /* background-color: #c8e2f8; */
 }
-.search-page .info-container .title {
+.item-container > .item-info-container {
   font-size: 15px;
+  padding-top: 5px;
+  box-sizing: border-box;
 }
-.search-page .info-container .info {
+.item-container > .item-info-container > .title:hover {
+  color: #ec554a;
+}
+.search-page .item-info-container .info {
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
   margin: 4px 0;
-  background-color: #cefae9;
+  /* background-color: #cefae9; */
 }
-.search-page .info-container .add-btn {
+.search-page .item-info-container .add-btn {
   align-self: center;
   font-size: 10px;
   padding: 5px 10px;

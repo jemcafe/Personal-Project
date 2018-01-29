@@ -10,9 +10,16 @@ class PostersPage extends Component {
         return (
             <div className="posters-page">
                 <div className="posters-page-container">
-                    <div>The Posters Page</div>
+                    <h3>Posters</h3>
 
-                    <Route exact path="/posters" render={ () => <ContentSlider /> } />
+                    {/* <Route exact path="/games" render={ () => {
+                        return <ContentSlider 
+                                    images={ ['https://static.gamespot.com/uploads/scale_super/1552/15524586/3246448-066597.jpg',
+                                                'https://img.youtube.com/vi/hRWoz5c_GFo/maxresdefault.jpg',
+                                                'https://www.zelda.com/breath-of-the-wild/assets/icons/BOTW-Share_icon.jpg',
+                                                'https://cdn4.dualshockers.com/wp-content/uploads/2018/01/MonsterHunterWorld-5-1.jpg'] } /> 
+                    } } /> */}
+
                     <Route exact path="/posters/:name" component={ ItemPage } />
 
                 </div>

@@ -30,6 +30,10 @@
     #b0dbff - blue
 */
 
+h3 {
+  color: rgba(104, 45, 52, 0.671);
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -105,5 +109,6 @@ select {
 .footer {
   padding: 50px 0;
   background-color: #cbe4fc;
-  background: radial-gradient( 180deg, #ffd4c786, transparent );
+  background: radial-gradient( 180deg, #ffd0c1b9, transparent );
+  /* background: radial-gradient( 180deg, #ffd4c786, transparent ); */
 }

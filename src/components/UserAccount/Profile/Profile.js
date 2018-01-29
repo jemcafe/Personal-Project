@@ -49,14 +49,16 @@ class Posts extends Component {
             image: image
         };
 
-        axios.post('/api/new-post', body).then( res => {
-            console.log( res.data );
+        if ( title && text ) {
+            axios.post('/api/new-post', body).then( res => {
+                console.log( res.data );
 
-            axios.get('/api/posts').then( resp => {
-                this.setState({ posts: resp.data, title: '', text: '', image: '' });
-            }).catch( err => console.log(err) );
+                axios.get('/api/posts').then( resp => {
+                    this.setState({ posts: resp.data, title: '', text: '', image: '' });
+                }).catch( err => console.log(err) );
 
-        }).catch( err => console.log( err ) );
+            }).catch( err => console.log( err ) );
+        }
     }
 
     editPost ( id, title, text, image ) {
@@ -125,7 +127,7 @@ class Posts extends Component {
                             {/* <Link to={`/${user.username}`}>Profile</Link> */}
                             <Link to={`/${user.username}/posters`}>Posters</Link>
                             <Link to={`/${user.username}/following`}>Following</Link>
-                            <Link to={`/${user.username}/cart`}>Cart</Link>
+                            {/* <Link to={`/${user.username}/cart`}>Cart</Link> */}
                             <Link to={`/${user.username}/settings`}>Settings</Link>
                         </div>
                     </div>
@@ -146,9 +148,7 @@ class Posts extends Component {
                 <div className="latest">
                     <div className="latest-container">
                         <h4>Recent Posters</h4>
-                        <div>
-                            { listOfRecentPosters.length ? <ul>{ listOfRecentPosters }</ul> : 'No Posters' }
-                        </div>
+                        { listOfRecentPosters.length ? <div><ul>{ listOfRecentPosters }</ul></div> : <h5>No posters</h5> }
                     </div>
                 </div>
 
