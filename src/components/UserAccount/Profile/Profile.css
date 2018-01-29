@@ -1,0 +1,185 @@
+.profile {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 8px;
+    box-sizing: border-box;
+    /* background-color: #cbe4fc; */
+  }
+.profile > div {
+/* margin: 8px; */
+}
+
+.profile-header {
+  max-width: 200px;
+  /* background-color: #dbfcd9; */
+}
+    .profile-header-container {
+        display: flex;
+        /* justify-content: space-between; */
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 50px;
+        box-sizing: border-box;
+        /* margin-top: 10em; */
+        background-color: #fccbd9;
+    }
+    .profile-pic-name {
+        display: flex;
+        flex-direction: column;
+    }
+    .profile-pic-name > h4 {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 8px 0;
+    }
+        /* Fills the thumbnail div with the image */
+    .profile-pic {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        width: 100px;
+        height: 100px;
+        /* border: 3px solid white; */
+        border-radius: 20px;
+        background-color: #cbe4fc;
+    }
+    .profile-pic > img {
+        flex-shrink: 0;
+        max-width: 100%;
+        min-height: 100%;
+    }
+    .user-nav {
+        display: flex;
+        flex-direction: column;
+        background-color: #ddecfd;
+    }
+    .user-nav a {
+        margin: 0;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+
+.posts-container {
+  width: 550px;
+  /* background-color: rgb(189, 212, 189); */
+}
+    .new-post {
+      display: flex;
+      flex-direction: column;
+      padding: 8px 30px;
+      box-sizing: border-box;
+      /* border: 1px dashed gray; */
+      border-radius: 4px;
+      background-color: #fce1c8;
+    }
+    .new-post .input  {
+      font-size: 15px;
+      margin: 8px;
+      border: none;
+      border-radius: 3px;
+      resize: none;
+    }
+    .new-post textarea {
+      outline: none;
+      border: 1px solid #ecceba;
+      /* border-radius: 5px; */
+      height: 80px;
+    }
+    .new-post button {
+      align-self: center;
+    }
+    .profile ul {
+      background-color: #b9ece8;
+    }
+    .posts-container h5 {
+      color: rgba(145, 64, 84, 0.459);
+    }
+    .profile .post {
+      padding: 10px 12px;
+      box-sizing: border-box;
+      border: 1px dashed gray;
+      background-color: #ecb9ea;
+    }
+    .post-container {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      background-color: #fcf4d9;
+    }
+    .post-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+    .post-image > img {
+      width: 100%;
+      max-height: 100%;
+    }
+    .post-container > div > input {
+      width: 100%;
+    }
+    .post-container > div {
+      display: flex;
+      justify-content: space-between;
+      background-color: #dffafc;
+    }
+
+.latest {
+  max-width: 150px;
+  background-color: #fccbd9;
+}
+    .latest-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #dbfcd9;
+    }
+    .latest-container > div {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .latest-container > h4 {
+      width: 100%;
+      margin: 8px 8px 0 8px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid rgb(179, 164, 164);
+      color: rgba(102, 58, 63, 0.849);
+    }
+    .latest-container img {
+      width: 100%;
+    }
+
+/*  Responsive  */
+
+@media (max-width: 750px) {
+    .latest-container {
+      display: none;
+    }
+    .profile {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      /* align-items: center; */
+    }
+    .profile-header {
+      max-width: 100%;
+    }
+    .posts-container {
+      max-width: 100%;
+      align-self: center;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    .user-nav {
+      flex-direction: row;
+    }
+    .user-nav a {
+      margin-left: 10px;
+    }
+  }

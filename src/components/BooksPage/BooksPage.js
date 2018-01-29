@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
+import ContentSlider from '../ContentSlider/ContentSlider';
 import ItemPage from '../ItemPage/ItemPage';
-
-// import axios from 'axios';
-// import RatingsGraph from './RatingsGraph/RatingsGraph';
 
 class BooksPage extends Component {
 
@@ -14,7 +12,8 @@ class BooksPage extends Component {
                 <div className="books-page-container">
                     <div>The Books Page</div>
 
-                    <Route path="/books/:name" component={ ItemPage } />
+                    <Route exact path="/books" render={ () => <ContentSlider /> } />
+                    <Route exact path="/books/:name" component={ ItemPage } />
 
                 </div>
             </div>

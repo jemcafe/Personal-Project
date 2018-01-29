@@ -168,8 +168,8 @@
 /* Color change on hover for links */
 .main-header .dropdown-content a:hover {
   /* color: #f7b671; */
-  color: #f6a54f;
-  background-color: #f1f1f1
+  color: #ec784a;
+  /* background-color: #f1f1f1 */
 }
 /* Show the dropdown menu on hover */
 .main-header .dropdown:hover .dropdown-content {

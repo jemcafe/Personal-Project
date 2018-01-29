@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import './Posters.css';
+import FaTrash from 'react-icons/lib/fa/trash';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
@@ -75,8 +77,10 @@ class Posters extends Component {
                         <div>{ poster.dateposted }</div> */}
                         <div className="thumbnail">
                             <div className="edit fade">
-                                <button className="btn">Edit</button>
-                                <button className="btn" onClick={ () => this.deletePoster(poster.id) }>Delete</button>
+                                <div className="poster-name">{ poster.name }</div>
+                                <button className="edit-btn btn">Edit</button>
+                                {/* <button className="btn" onClick={ () => this.deletePoster(poster.id) }>Delete</button> */}
+                                <FaTrash className="fa-trash" onClick={ () => this.deletePoster(poster.id) } size={25} color="lightgrey" />
                             </div>
                             <img src={ poster.imageurl } alt={ poster.name }/>
                         </div>
@@ -104,9 +108,7 @@ class Posters extends Component {
                         </div>
                     </div>
 
-                    <ul className="posters-list">
-                        { listOfPosters.length > 0 ? listOfPosters : <li>No posters created</li> }
-                    </ul>
+                    { listOfPosters.length > 0 ? <ul className="posters-list">{ listOfPosters }</ul> : <h5>No posters created</h5> }
 
                 </div>
             </div>

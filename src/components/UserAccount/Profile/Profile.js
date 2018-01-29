@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Profile.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -139,19 +140,15 @@ class Posts extends Component {
                         <button className="btn" onClick={ () => this.createPost(title, text, image) }>Post</button>
                     </div>
                     
-                    <ul className="posts-list">
-                        { listOfPosts }
-                    </ul>
+                    { listOfPosts.length ? <ul className="posts-list">{ listOfPosts }</ul> : <h5>You haven't made any posts</h5> }
                 </div>
 
                 <div className="latest">
                     <div className="latest-container">
-                        RECENT
+                        <h4>Recent Posters</h4>
                         <div>
-                            POSTERS
                             { listOfRecentPosters.length ? <ul>{ listOfRecentPosters }</ul> : 'No Posters' }
                         </div>
-                        <div>BOOKS</div>
                     </div>
                 </div>
 

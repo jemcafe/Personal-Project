@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './MainHeader.css';
+import FaBars from 'react-icons/lib/fa/bars';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 

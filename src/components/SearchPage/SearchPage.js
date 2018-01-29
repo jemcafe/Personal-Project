@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import './SearchPage.css';
+import FaAngleLeft from 'react-icons/lib/fa/angle-left';
+import FaAngleRight from 'react-icons/lib/fa/angle-right';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 import { updateCartItems, getProductInfo } from '../../redux/ducks/reducer';
 
@@ -95,10 +98,13 @@ class SearchPage extends Component {
                     <div className="results">
                         <div className="results-container">
 
-                            { list.length ? <ul>{ list }</ul> : 'No results' }
+                            { list.length ? <ul>{ list }</ul> : <h4>No results</h4> }
+
                             <div className="prev-next-btn">
-                                <button className="previous-btn">Previous</button>
-                                <button className="next-btn">Next</button>
+                                <FaAngleLeft className="fa-angle-L" size={40} color="gray" />
+                                <FaAngleRight className="fa-angle-R" size={40} color="gray" />
+                                {/* <button className="previous-btn">Previous</button>
+                                <button className="next-btn">Next</button> */}
                             </div>
                             
                         </div>

@@ -17,7 +17,7 @@ class SearchBar extends Component {
         }
     }
 
-    componentWillMount () {
+    componentDidMount () {
         // Gets all poster ( for test purposes )
         // axios.get('/api/search/posters').then( res => {
         //     console.log( res.data );
@@ -36,6 +36,7 @@ class SearchBar extends Component {
         // axios.get('/api/getGameRatingBoards').then( res => {
         //     console.log( res.data );
         // }).catch( console.log() );
+        console.log(this.state.category);
     }
         
     handleInputChange ( value ) {
@@ -61,6 +62,8 @@ class SearchBar extends Component {
     search () {
         let { category, subcategory, userInput } = this.state;
         const { updateSearchResults } = this.props;
+
+        updateSearchResults( [] );  // The previous items
 
         if ( category === 'Games' ) {
             axios.get(`/api/search/games?search=${ userInput }&platform=${ subcategory }`).then( res => {
@@ -96,7 +99,7 @@ class SearchBar extends Component {
         return (
             <div className="search">
                 <div className="search-container">
-                    <select value={ category } className="category-1" onChange={ (e) => this.handleCategoryChange("category", e.target.value) }>
+                    <select defaultValue={ category } className="category-1" onChange={ (e) => this.handleCategoryChange("category", e.target.value) }>
                         { categories }
                     </select>
 

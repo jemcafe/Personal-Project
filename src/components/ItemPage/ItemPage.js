@@ -24,7 +24,7 @@ class ItemPage extends Component {
                     </div>
 
                 </div>
-            : <div>{'No Item searched'}</div>}
+                : <h4>Item not found</h4> }
             </div>
         )
     }

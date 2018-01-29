@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import './Cart.css';
+import FaTrash from 'react-icons/lib/fa/trash';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 import { updateCartItems } from '../../../redux/ducks/reducer';
 
@@ -68,7 +71,7 @@ class Cart extends Component {
                             </div>
 
                             <div className="item-info">
-                                <div className="name">{ item.name }</div>
+                                <h4 className="name">{ item.name }</h4>
                                 <div className="info">
                                     <div>Category: { item.productcategory }</div>
                                     <div>Quantity: { item.quantity }</div>
@@ -76,7 +79,8 @@ class Cart extends Component {
                                 </div>
                             </div>
                             
-                            <button className="remove-btn" onClick={ () => this.removeItem( item.id ) }>Remove</button>
+                            {/* <button className="remove-btn" onClick={ () => this.removeItem( item.id ) }>Remove</button> */}
+                            <FaTrash className="fa-trash" onClick={ () => this.removeItem( item.id ) } size={25} color="gray" />
 
                         </div>
                     </div>
@@ -86,26 +90,23 @@ class Cart extends Component {
 
         return (
             <div className="cart">
-                <div className="title">
-                    CART
-                    <div className="cart-container">
+                <div className="cart-container">
 
-                        <div className="products">
-                            <div>PRODUCTS</div>
-                            <ul>
-                                { listOfItems.length ? listOfItems : <li>This cart's boring.</li> }
-                            </ul>
-                        </div>
-
-                        <div className="total">
-                            <div>TOTAL</div>
-                            <div className="total-summary">
-                                <div>Total: ${ priceTotal }</div>
-                                { priceTotal > 0 && <Link to="/checkout"><button className="checkout-btn">Checkout</button></Link> }
-                            </div>
-                        </div>
-                        
+                    <div className="products">
+                        <div>CART</div>
+                        <ul>
+                            { listOfItems.length ? listOfItems : <li>This cart's boring.</li> }
+                        </ul>
                     </div>
+
+                    <div className="total">
+                        <div>TOTAL</div>
+                        <div className="total-summary">
+                            <div>Total: ${ priceTotal }</div>
+                            { priceTotal > 0 && <Link to="/checkout"><button className="checkout-btn btn">Checkout</button></Link> }
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         )

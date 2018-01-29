@@ -28,3 +28,7 @@
 .info-container > div {
     margin: 20px 0;
 }
+
+.item-page h4 {
+    color: rgba(145, 64, 84, 0.459);
+}

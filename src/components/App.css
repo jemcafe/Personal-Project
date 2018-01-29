@@ -38,6 +38,7 @@ ul {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 .panel {
@@ -70,6 +71,21 @@ a {
   border-radius: 3px;
   font-size: 15px;
   outline-color: #ffaaaa;
+}
+
+select {
+  outline-color: #ffaaaa;
+  padding: 3px 8px;
+  margin: 0 4px;
+  background-color: rgba(255, 255, 255, 0.90);
+  border: none;
+  border-radius: 0;
+  font-size: 14px;
+  height: 30px;
+}
+
+.fa-trash {
+  cursor: pointer;
 }
 
 /*  Main Content  */

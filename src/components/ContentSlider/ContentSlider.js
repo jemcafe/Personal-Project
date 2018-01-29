@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Slider from 'react-slick';
 
 class ContentSlider extends Component {
-
     render () {
         const settings = {
             dots: true,
