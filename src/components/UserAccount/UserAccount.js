@@ -14,19 +14,14 @@ import Settings from './Settings/Settings';
 
 class UserAccount extends Component {
 
-    // componentDidMount () {
-    //     axios.get(`api/other-user/${ }`).then( res => {
-            
-    //     }).catch( err => console.log(err));
-    // }
-
     render () {
         const { user } = this.props;
+        const { username } = this.props.match.params;
 
         return (
             <div className="useraccount">
             
-                { user.username &&
+                { user.username && user.username === username &&
                 <div className="useraccount-container">
                     {/* <div>The UserAccount Component</div> */}
 
@@ -37,11 +32,11 @@ class UserAccount extends Component {
                     <div className="main">
                         <div className="main-container">
 
-                            <Route exact path="/:username" component={ Profile } />
-                            <Route path="/:username/posters" component={ Posters } />
-                            <Route path="/:username/following" component={ Following } />
-                            <Route path="/:username/cart" component={ Cart } />
-                            <Route path="/:username/settings" component={ Settings } />
+                            <Route exact path={`/${username}`} component={ Profile } />
+                            <Route path={`/${username}/posters`} component={ Posters } />
+                            <Route path={`/${username}/following`} component={ Following } />
+                            <Route path={`/${username}/cart`} component={ Cart } />
+                            <Route path={`/${username}/settings`} component={ Settings } />
 
                         </div>
                     </div>
