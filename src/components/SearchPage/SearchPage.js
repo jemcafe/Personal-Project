@@ -93,7 +93,7 @@ class SearchPage extends Component {
             <div className="search-page">
                 <div className="search-page-container">
                     {/* <div>The Search Page</div> */}
-                    <div>Search Results:</div>
+                    <div className="">Search Results:</div>
 
                     <div className="results">
                         <div className="results-container">

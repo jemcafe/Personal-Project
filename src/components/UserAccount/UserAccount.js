@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './UserAccount.css';
 import { Route } from 'react-router-dom';
+import axios from 'axios';
 
 import { connect } from 'react-redux';
 
@@ -13,6 +14,12 @@ import Settings from './Settings/Settings';
 
 class UserAccount extends Component {
 
+    // componentDidMount () {
+    //     axios.get(`api/other-user/${ }`).then( res => {
+            
+    //     }).catch( err => console.log(err));
+    // }
+
     render () {
         const { user } = this.props;
 
@@ -24,7 +31,7 @@ class UserAccount extends Component {
                     {/* <div>The UserAccount Component</div> */}
 
                     <div className="profile-header-bkgd">
-                        <img src="https://static.pexels.com/photos/572688/pexels-photo-572688.jpeg" alt="profile header pic"/>
+                        { user.headerbkgdimgurl && <img src={ user.headerbkgdimgurl } alt="Profile header pic"/> }
                     </div>
 
                     <div className="main">

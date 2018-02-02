@@ -12,7 +12,8 @@
     overflow: hidden;
     width: 100%;
     height: 10em;
-    background-color: #d0c7d6;
+    background-image: linear-gradient( 0deg, #e9e3f1, transparent );
+    /* background:  #cdc7d6; */
   }
   .profile-header-bkgd img {
     flex-shrink: 0;
@@ -26,9 +27,6 @@
     /* background-color: #cbf8d6; */
   }
 
-  .useraccount .following-container {
-    background-color: #cbe4fc;
-  }
   .useraccount .settings-container {
     background-color: #cbe4fc;
   }

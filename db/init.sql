@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS BookSubjects;
 DROP TABLE IF EXISTS PosterCategories;
 DROP TABLE IF EXISTS Cart;
 DROP TABLE IF EXISTS Posts;
--- DROP TABLE IF EXISTS Comments;
+DROP TABLE IF EXISTS PostComments;
 DROP TABLE IF EXISTS ProductCategories;
 DROP TABLE IF EXISTS Users;
 
@@ -16,15 +16,15 @@ CREATE TABLE Users (
     password TEXT NOT NULL,
     authId TEXT,
     name TEXT,
-    imageURL TEXT
-    -- profileURL TEXT
+    imageUrl TEXT,
+    headerBkgdImgUrl TEXT,
+    profileUrl TEXT
 );
--- INSERT INTO Users (username, password, authId, name, imageURL) VALUES
--- ('a',      'b',        null, 'A',               null),
--- ('b',      'c',        null, 'Carry',           ''),
--- ('Goku',   'dbz',      null, 'Son Goku',        'https://i.pinimg.com/736x/ed/1d/73/ed1d7355a9bb9460f4085b5ef695740f.jpg'),
--- ('Ichigo', 'bleach',   null, 'Ichigo Kurosaki', 'https://pbs.twimg.com/profile_images/640284910326972416/IOChu2E1_400x400.jpg'),
--- ('Luffy',  'onepiece', null, 'Monkey D. Luffy', 'https://vignette.wikia.nocookie.net/onepiece/images/6/61/Estatua_de_cera_de_Luffy.png/revision/latest?cb=20121231203632&path-prefix=es');
+-- INSERT INTO Users (username, password, authId, name, imageUrl, headerImageUrl, profileUrl) VALUES
+-- ('a',      'b',        null, 'A',               null,                                                                                                                                 null, 'http://localhost:3000/#/a'),
+-- ('Goku',   'dbz',      null, 'Son Goku',        'https://i.pinimg.com/736x/ed/1d/73/ed1d7355a9bb9460f4085b5ef695740f.jpg',                                                            'https://images5.alphacoders.com/677/677262.png', 'http://localhost:3000/#/Goku'),
+-- ('Ichigo', 'bleach',   null, 'Ichigo Kurosaki', 'https://pbs.twimg.com/profile_images/640284910326972416/IOChu2E1_400x400.jpg',                                                       'https://static.pexels.com/photos/572688/pexels-photo-572688.jpeg', 'http://localhost:3000/#/Ichigo'),
+-- ('Luffy',  'onepiece', null, 'Monkey D. Luffy', 'https://vignette.wikia.nocookie.net/manga/images/0/01/Monkey_D._Luffy_-_TPS15.png/revision/latest?cb=20150503204141&path-prefix=es', 'https://kids.nationalgeographic.com/content/dam/kids/photos/articles/Nature/H-P/Habitats/Ocean/wave.ngsversion.1500050062134.adapt.1900.1.jpg', 'http://localhost:3000/#/Luffy');
 
 
 
@@ -34,7 +34,7 @@ CREATE TABLE Posts (
     text TEXT,
     datePosted TEXT,
     userId INTEGER REFERENCES Users (id),
-    imageURL TEXT
+    imageUrl TEXT
 );
 INSERT INTO Posts (title, text, datePosted, userId, imageURL) VALUES
 ('Leap of Faith',       'A grasshopper''s dream of finding the end a fence. My new best seller.', '1 / 17 / 2018', 1, 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/American_Bird_Grasshopper.jpg/1200px-American_Bird_Grasshopper.jpg'),
@@ -44,13 +44,13 @@ INSERT INTO Posts (title, text, datePosted, userId, imageURL) VALUES
 
 
 
--- CREATE TABLE Comments (
---     id SERIAL PRIMARY KEY,
---     text TEXT,
---     date_posted TEXT,
---     post_id INTEGER REFERENCES Posts (id),
---     user_id INTEGER REFERENCES Users (id)
--- );
+CREATE TABLE PostComments (
+    id SERIAL PRIMARY KEY,
+    text TEXT,
+    datePosted TEXT,
+    postId INTEGER REFERENCES Posts (id),
+    userId INTEGER REFERENCES Users (id)
+);
 
 
 
@@ -146,12 +146,16 @@ CREATE TABLE Posters (
     posterCategoryId INTEGER REFERENCES PosterCategories (id),
     productCategoryId INTEGER REFERENCES ProductCategories (id),
     userId INTEGER REFERENCES Users (id),
-    imageURL TEXT
+    imageUrl TEXT
 );
 INSERT INTO Posters (name, description, datePosted, price, posterCategoryId, productCategoryId, userId, imageURL) VALUES
-('Jin Saotome',                 'Fanart of Jin Saotome.',      '1 / 18 / 2018', 39.99, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/004/056/362/large/jem-brown-jinsaotome-screenshot-03c-sml-copy.jpg?1479897947'),
+('Drift No.10',                 'Abstract art',                '1 / 20 / 2018', 30.00, 2, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/006/943/174/large/jem-brown-20170713-150515-edited-sml3.jpg?1502436122'),
+('Drift No.9',                  'Abstract art',                '1 / 20 / 2018', 30.00, 2, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/007/588/014/large/jem-brown-20170909-120941-edited-b-sml3b.jpg?1507148669'),
+('Drift No.8',                  'Abstract art',                '1 / 20 / 2018', 30.00, 2, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/008/678/704/large/jem-brown-20171224-101641-edited-sml-2.jpg?1514500897'),
 ('Jin Saotome Typhoon',         'Fanart of Jin Saotome.',      '1 / 18 / 2018', 39.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/004/752/517/large/jem-brown-jinsaotome-screenshot-04c-sml.jpg?1488844564'),
 ('Scar (Fullmetal Alchemist)',  'Fanart of Scar',              '1 / 22 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/005/728/353/large/jem-brown-scar-screenshot-01e.jpg?1493320471'),
+('Falco',                       'Fanart of Falco',             '1 / 22 / 2018', 40.00, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/004/869/300/large/jem-brown-2016-09-falco-2-sml1.jpg?1486876194'),
+('Lust (Fullmetal Alchemist)',  'Fanart of Lust.',             '1 / 19 / 2018', 40.00, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/005/429/016/large/jem-brown-lust-screenshot-01d.jpg?1491396935'),
 ('Ieyasu Tokugawa',             'Fanart of Ieyasu Tokugawa',   '1 / 22 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/005/352/385/large/jem-brown-ieyasu-screenshot-5c.jpg?1506238580'),
 ('Garra of the Sand (Neutral)', 'Fanart of Garra (neutral)',   '1 / 19 / 2018', 44.99, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/007/291/402/large/jem-brown-garra-screenshot-03b-700x700.jpg?1505110523'),
 ('Garra of the Sand',           'Fanart of Garra.',            '1 / 19 / 2018', 49.99, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/007/290/560/large/jem-brown-garra-screenshot-02-700x700-2.jpg?1505327332'),
@@ -181,5 +185,5 @@ CREATE TABLE Cart (
     productCategoryId INTEGER REFERENCES ProductCategories (id),
     quantity INTEGER,
     customerId INTEGER REFERENCES Users (id),
-    imageURL TEXT
+    imageUrl TEXT
 );

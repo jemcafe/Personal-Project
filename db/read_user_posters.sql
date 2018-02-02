@@ -1,4 +1,4 @@
-SELECT Posters.id, Posters.name, description, dateposted, price, posterCategoryId, productCategoryId, productCategory, userId, Posters.imageURL, username FROM Posters
+SELECT Posters.id, Posters.name, description, dateposted, price, posterCategoryId, productCategoryId, productCategory, userId, Posters.imageUrl, username FROM Posters
 JOIN ProductCategories ON Posters.productCategoryId = ProductCategories.id
 JOIN Users ON Posters.userId = Users.id
 WHERE userId = $1

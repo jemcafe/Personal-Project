@@ -3,7 +3,8 @@ module.exports = ( req, res, next ) => {
         req.session.user = {
             id: null,
             username: '',
-            imageurl: ''
+            imageurl: '',
+            headerimageurl: ''
         };
     }
     next();

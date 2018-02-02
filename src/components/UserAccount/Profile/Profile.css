@@ -21,7 +21,9 @@
         align-items: center;
         padding: 10px 50px;
         box-sizing: border-box;
-        /* margin-top: 10em; */
+        border-radius: 0 0 3px 3px;
+        background: linear-gradient( 180deg, #ffb6b6b0, transparent);
+        /* background-color: #ffd5d0; */
         /* background-color: #fccbd9; */
     }
     .profile-pic-name {
@@ -31,8 +33,8 @@
     .profile-pic-name > h4 {
         font-size: 18px;
         font-weight: bold;
-        margin: 8px 0;
-        color: #9b306e;
+        margin: 10px 0 8px 0;
+        color: #b34139;
     }
         /* Fills the thumbnail div with the image */
     .profile-pic {
@@ -61,8 +63,9 @@
         margin: 0;
         padding: 3px;
         box-sizing: border-box;
-        color: rgba(102, 58, 63, 0.849);
+        color: rgba(84, 74, 88, 0.767);
     }
+
 
 .posts-container {
   width: 550px;
@@ -74,97 +77,32 @@
       padding: 8px 30px;
       box-sizing: border-box;
       /* border: 1px dashed gray; */
-      border-radius: 4px;
-      background-color: #fce1c8;
+      border-radius: 0 0 4px 4px;
+      background-color: #fcd7c8;
     }
-    .new-post .input  {
+    .new-post > .input  {
       font-size: 15px;
       margin: 8px;
       border: none;
       border-radius: 3px;
       resize: none;
     }
-    .new-post textarea {
+    .new-post > textarea {
       outline: none;
       border: 1px solid #ecceba;
       /* border-radius: 5px; */
       min-height: 80px;
     }
-    .new-post button {
+    .new-post > button {
       align-self: center;
     }
-    .profile ul {
+    .posts-container > ul {
       /* background-color: #c9ecbb; */
     }
     .posts-container h5 {
-      color: rgba(145, 64, 84, 0.459);
+      color: rgba(145, 64, 84, 0.521);
     }
 
-    .post {
-      padding: 10px 12px;
-      box-sizing: border-box;
-      margin: 15px 0;
-      border-radius: 4px;
-      background-color: #ffd4c794;
-      /* background-color: #ffd4c798; */
-      /* border: 1px dashed gray; */
-      /* background-color: #ecb9ea; */
-    }
-    .post-container {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-      border-radius: 4px;
-      background-color: #fffbfd;
-    }
-    .post .padding-align {
-      padding: 6px 8px;
-      box-sizing: border-box;
-      text-align: left;
-    }
-    .post .name-title {
-      display: flex;
-      flex-direction: column;
-      /* background-color: rgb(240, 229, 180); */
-    }
-    .post .name-title h3 {
-      margin: 4px 0 0 0;
-    }
-    .name-title a:hover {
-      color: #ec554a;
-    }
-    .post .image {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-    }
-    .post .image > img {
-      width: 100%;
-      max-height: 100%;
-    }
-    .post .date-edit {
-      display: flex;
-      align-items: center;
-      /* background-color: #ccfccb; */
-    }
-    .post .text {
-      padding: 15px 15px 12px 15px;
-    }
-    .fa-edit {
-      margin: 0 10px 5px 0;
-      cursor: pointer;
-    }
-
-    .post-container > div > input {
-      width: 100%;
-    }
-    .post-container > div {
-      display: flex;
-      justify-content: space-between;
-      /* background-color: #dffafc; */
-    }
 
 .latest {
   max-width: 150px;
@@ -188,13 +126,13 @@
       margin: 8px 8px 0 8px;
       padding-bottom: 5px;
       border-bottom: 1px solid rgb(179, 164, 164);
-      color: rgba(102, 58, 63, 0.849);
+      color: rgba(102, 80, 82, 0.849);
     }
     .latest-container img {
       width: 100%;
     }
     .latest-container h5 {
-      color: rgba(145, 64, 84, 0.459);
+      color: rgba(145, 64, 84, 0.521);
     }
 
 /*  Responsive  */

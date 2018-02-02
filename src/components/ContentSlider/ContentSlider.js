@@ -6,7 +6,7 @@ class ContentSlider extends Component {
     render () {
         const settings = {
             autoplay: true,
-            autoplaySpeed: 6000,
+            autoplaySpeed: 4000,
             dots: true,
             infinite: true,
             speed: 1500,

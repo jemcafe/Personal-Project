@@ -70,11 +70,7 @@ class Posters extends Component {
             return (
                 <li key={ poster.id }>
                     <div className="poster">
-                        {/* <div>{ poster.name }</div>
-                        <div>{ poster.description }</div>
-                        <div>{ poster.price }</div>
-                        <div>{ poster.productcategory }</div>
-                        <div>{ poster.dateposted }</div> */}
+
                         <div className="thumbnail">
                             <div className="edit fade">
                                 <div className="poster-name">{ poster.name }</div>
@@ -84,6 +80,7 @@ class Posters extends Component {
                             </div>
                             <img src={ poster.imageurl } alt={ poster.name }/>
                         </div>
+                        
                     </div>
                 </li>
             );

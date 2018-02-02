@@ -11,11 +11,12 @@ const checkForSession = require('./middlewares/checkForSession');
 
 // Controllers
 const authCntrl = require('./controllers/auth_controller');
-const srchProductsCntrl = require('./controllers/search_products_controller');
+const srchProductsCntrl = require('./controllers/searchProducts_controller');
 const postsCntrl = require('./controllers/posts_controller');
 const postersCntrl = require('./controllers/posters_controller');
 const cartCntrl = require('./controllers/cart_controller');
 const stripeCntrl = require('./controllers/stripe_controller');
+const otherUsersCntrl = require('./controllers/otherUsers_controller');
 
 const app = express();
 
@@ -68,6 +69,10 @@ app.get('/api/user', authCntrl.getUser);
 
 // Stripe payment
     app.post('/save-stripe-token', stripeCntrl.paymentApi);
+
+// Other Users ( Users that aren't logged in )
+    app.get('/api/other-user/:username', otherUsersCntrl.getUser);
+    app.get('/api/other-users', otherUsersCntrl.getUsers);
 
 
 // This is for getting the 3rd party api data to my database

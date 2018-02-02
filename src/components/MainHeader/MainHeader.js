@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './MainHeader.css';
 import FaBars from 'react-icons/lib/fa/bars';
+import FaClose from 'react-icons/lib/fa/close';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -10,6 +11,20 @@ import { logout, updateCartItems } from '../../redux/ducks/reducer';
 import SearchBar from './SearchBar/SearchBar';
 
 class MainHeader extends Component {
+    constructor () {
+        super();
+        this.state = { showMenu: false }
+    }
+
+    menuToggle () {
+        // Toggle control for the responsive menu
+        if ( this.state.showMenu === false ) {
+            this.setState({ showMenu: true });
+        } else {
+            this.setState({ showMenu: false });
+        }
+    }
+
     logout () {
         axios.post(`/api/logout`).then( res => {
             console.log( res.data );
@@ -25,21 +40,24 @@ class MainHeader extends Component {
 
     render () {
         const { user, cartItems } = this.props;
+        const { showMenu } = this.state;
+
+        const cartItemsQuantity = cartItems.reduce( (acc, item) => acc += item.quantity, 0 );
         
         // If a user is logged in, the login link changes to the account link
         const linkChange = !user.username ? (
                                 <Link to="/login" className="link signin">Sign in</Link>
                             ) : (
-                                <div className="dropdown link">
+                                <div className="user-dropdown link">
                                     {/* <Link to={`/${user.username}`} className="droplink">UserAccount</Link> */}
-                                    <Link to={`/${user.username}`} className="droplink"><img src={ user.imageurl } alt="Profile pic"/></Link>
-                                    <div className="dropdown-content">
+                                    <Link to={`/${user.username}`} className="user-droplink"><img src={ user.imageurl } alt="Profile pic"/></Link>
+                                    <div className="user-dropdown-content">
                                         {/* <Link to={`/${user.username}`}>Profile</Link> */}
                                         <Link to={`/${user.username}`}>Profile</Link>
                                         <Link to={`/${user.username}/posters`}>My Posters</Link>
                                         <Link to={`/${user.username}/following`}>Following</Link>
-                                        <Link to={`/${user.username}/cart`}>Cart ({ cartItems.length })</Link>
-                                        <Link to={`/${user.username}/settings`}>Settings</Link>
+                                        <Link to={`/${user.username}/cart`}>Cart ({ cartItemsQuantity })</Link>
+                                        {/* <Link to={`/${user.username}/settings`}>Settings</Link> */}
                                         <Link to="/login" onClick={ () => this.logout() }>Signout</Link>
                                     </div>
                                 </div>
@@ -52,21 +70,10 @@ class MainHeader extends Component {
 
                         <div className="header-1 position">
                             <Link to="/"><div className="title">SITE NAME</div></Link>
-                            {/* <SearchBar /> */}
-                            <div className="header-nav">
-                                <SearchBar />
-                                <Link to="/" className="link">Home</Link>
-                                <Link to="/games" className="link">Games</Link>
-                                <Link to="/books" className="link">Books</Link>
-                                <Link to="/posters" className="link">Posters</Link>
-                                { linkChange }
-                            </div>
-                        </div>
 
-                        {/* <div className="header-2">
-                            <div>
-                                <Link to="/"><div className="title">SITE NAME</div></Link>
-                                <div className="nav">
+                            <div className="header-nav nav-1">
+                                <SearchBar />
+                                <div className="nav-links">
                                     <Link to="/" className="link">Home</Link>
                                     <Link to="/games" className="link">Games</Link>
                                     <Link to="/books" className="link">Books</Link>
@@ -74,8 +81,23 @@ class MainHeader extends Component {
                                     { linkChange }
                                 </div>
                             </div>
-                            <SearchBar />
-                        </div> */}
+
+                            <div className="nav-2">
+                                <div className="nav-dropdown link">
+                                    { !showMenu ? <FaBars className="fa-bars-close nav-droplink" size={45} onClick={ () => this.menuToggle() } /> : <FaClose className="fa-bars-close nav-droplink" size={45} onClick={ () => this.menuToggle() } /> }
+                                    <div className={`nav-dropdown-content ${showMenu ? "show" : ""}`}>
+                                        <SearchBar />
+                                        <div className="nav-links">
+                                            <Link to="/" className="link">Home</Link>
+                                            <Link to="/games" className="link">Games</Link>
+                                            <Link to="/books" className="link">Books</Link>
+                                            <Link to="/posters" className="link">Posters</Link>
+                                            { linkChange }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
             </header>

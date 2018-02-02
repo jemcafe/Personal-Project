@@ -53,7 +53,7 @@ class CheckoutPage extends Component {
                         </select>
                     </div> */}
 
-                    <div className="total">Total: ${ priceTotal }</div>
+                    <div className="total">Total: <span>${ priceTotal }</span></div>
 
                     {/* <div><button>Place Order</button></div> */}
 

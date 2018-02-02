@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
-import ContentSlider from '../ContentSlider/ContentSlider';
+// import ContentSlider from '../ContentSlider/ContentSlider';
 import ItemPage from '../ItemPage/ItemPage';
 
 class PostersPage extends Component {

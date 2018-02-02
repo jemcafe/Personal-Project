@@ -1,0 +1,10 @@
+.useraccount .following-container {
+    /* background-color: #cbe4fc; */
+  }
+
+.following-container > h3 {
+    color: rgba(77, 33, 102, 0.753);
+}
+.following-container > h5 {
+    color: rgba(145, 64, 84, 0.521);
+}

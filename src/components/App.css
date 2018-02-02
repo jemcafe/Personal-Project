@@ -71,7 +71,7 @@ a {
 .input {
   padding: 5px;
   box-sizing: border-box;
-  border: 1px solid #bb5656bd;
+  border: 1px solid #ff9d9d;
   border-radius: 3px;
   font-size: 15px;
   outline-color: #ffaaaa;
@@ -108,7 +108,7 @@ select {
 
 .footer {
   padding: 50px 0;
-  background-color: #cbe4fc;
-  background: radial-gradient( 180deg, #ffd0c1b9, transparent );
-  /* background: radial-gradient( 180deg, #ffd4c786, transparent ); */
+  /* background-color: #cbe4fc; */
+  /* background: radial-gradient( 180deg, #ffd0c1b9,  rgba(145, 85, 115, 0.534) ); */
+  background: radial-gradient( 180deg, #ffc4b2c9, transparent );
 }

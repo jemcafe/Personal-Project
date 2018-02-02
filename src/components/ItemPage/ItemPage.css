@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-between;
     /* align-items: center; */
-    background-color: #cbe4fc;
+    /* background-color: #cbe4fc; */
 }
 .img-container {
     flex: 1;
@@ -15,7 +15,7 @@
     align-items: center;
     /* width: 250px; */
     height: 300px;
-    background-color: #fccbcb;
+    /* background-color: #fccbcb; */
 }
 .product-img {
     max-width: 300px;
@@ -23,7 +23,7 @@
 }
 .info-container {
     flex: 1;
-    background-color: #d1fccb;
+    /* background-color: #d1fccb; */
 }
 .info-container > div {
     margin: 20px 0;

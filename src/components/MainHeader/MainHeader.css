@@ -3,10 +3,10 @@
 .main-header {
   /* background: url('http://images4.fanpop.com/image/photos/21600000/Street-Fighter-Tribute-crimson-viper-21659005-796-1000.jpg');
   background-position: 10% -300px; */
-  background: url('../../images/Patreon_banner_b.jpg');
+  background: url('../../images/header_banner.jpg');
   background-repeat: no-repeat;
   background-position: 15% 0;
-  border-bottom: 1px solid #ffccbc94;
+  border-bottom: 1px solid #ffc0bc94;
   /* background-color: #fccbd3; */
 }
 /* #header-bkgd-overlay {
@@ -26,7 +26,7 @@
   /* background: linear-gradient(-5deg, #b0dbff, transparent); */
   /* background: linear-gradient(-5deg, #b0dbff, transparent, #b0dbff); */
   /* background: linear-gradient(-5deg, #ffe7b0, transparent, #ffc8cc); */
-  background: linear-gradient(-1deg, transparent, #ffdab0);
+  background: linear-gradient(-1deg, transparent, #ffcdb0);
   background-color: #f180c633;
   /* background-color: #ffc8cc; */
   /* background: linear-gradient(-5deg,#fff5dd,#ffdfb0, #ffc8cc, transparent);
@@ -43,7 +43,7 @@
   /* background-color: #f8e4ba; */
 }
 .header-1 {
-  min-width: 1000px;
+  /* min-width: 1000px; */
   padding: 0 30px;
   box-sizing: border-box;
   width: 100%;
@@ -61,27 +61,26 @@
   font-weight: bold;
   /* background: #cbf8d6; */
 }
-.main-header input {
+.main-header .search-bar {
   outline: none;
-  padding: 3px 8px;
+  padding: 5px 8px;
   margin: 0 4px;
-  background-color: rgba(255, 255, 255, 0.45);
+  background-color: rgb(255, 255, 255);
   border: none;
-  border-bottom: 1px solid #c98fa5;
-  /* border-radius: 3px; */
-  font-size: 14px;
+  border-radius: 10px;
+  font-size: 15px;
 }
     ::placeholder {
-      color: rgba(172, 133, 139, 0.548);
+      color: rgb(223, 214, 213);
     }
-    .main-header input:focus {
+    /* .main-header input:focus {
       background-color: rgba(255, 255, 255, 0.65);
-    }
+    } */
 .main-header select {
   outline: none;
   padding: 3px 8px;
   margin: 0 4px;
-  background-color: rgba(255, 255, 255, 0.90);
+  background-color: rgb(255, 255, 255);
   border: none;
   /* border-bottom: 1px solid #c98fa5; */
   border-radius: 0;
@@ -106,14 +105,14 @@
 .main-header .search-container .search-bar {
   width: 150px;
 }
-.search-icon {
-  max-width: 18px;
-  max-height: 18px;
-  border-radius: 3px;
-  opacity: 0.5;
+
+.fa-search {
+  position: absolute;
+  color: rgb(88, 88, 88);
+  transform: translate(-30px, 2px);
 }
-.search-icon:active {
-  opacity: 0.75;
+.fa-search:active {
+  color: rgb(51, 51, 51);
 }
 .header-nav {
   display: flex;
@@ -121,15 +120,21 @@
   align-items: center;
   /* background-color: #ddecfd; */
 }
-/* Removes link underlines */
-.header-nav a {
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-links > a {   /* Removes link underlines */
   text-decoration: none;
   color: black;
 }
-.header-nav > a:hover {
+.nav-links > a:hover {
   border-bottom: 1px solid #b67b7f;
   color: #ec784a;
 }
+
+
 /* Each link will have this style */
 .link {
   background-color: transparent;
@@ -140,17 +145,17 @@
   color: #dd5c5c;
 }
 /* The container <div> - needed to position the dropdown content */
-.main-header .dropdown {
+.main-header .user-dropdown {
   position: relative;
   display: inline-block;
 }
-.main-header .droplink img {
+.main-header .user-droplink img {
   max-width: 30px;
   /* border: 1px solid #eb9f9f; */
   border-radius: 50%;
 }
 /* Dropdown Content (Hidden by Default) */
-.main-header .dropdown-content {
+.main-header .user-dropdown-content {
   display: none;
   position: absolute;
   right: 0;
@@ -161,19 +166,121 @@
   z-index: 1;
 }
 /* Links inside the dropdown */
-.main-header .dropdown-content a {
+.main-header .user-dropdown-content a {
   color: black;
   padding: 12px 16px;
   display: block;
   font-size: 15px;
 }
 /* Color change on hover for links */
-.main-header .dropdown-content a:hover {
+.main-header .user-dropdown-content a:hover {
   /* color: #f7b671; */
   color: #ec784a;
   /* background-color: #f1f1f1 */
 }
 /* Show the dropdown menu on hover */
-.main-header .dropdown:hover .dropdown-content {
+.main-header .user-dropdown:hover .user-dropdown-content {
   display: block;
+}
+
+
+
+.fa-bars-close {
+  padding: 10px;
+  box-sizing: border-box;
+  color: rgb(102, 51, 50);
+  background: gray;
+  border-radius: 4px;
+  background-color: rgba(255, 248, 248, 0.95);
+  cursor: pointer;
+}
+.nav-dropdown {
+  /* position: relative; */
+  display: inline-block;
+}
+.nav-dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #ffffffef;
+  /* background: linear-gradient( rgb(255, 255, 255), #ffe3e3f1); */
+  min-width: 100%;
+  box-shadow: 0px 6px 16px 0px #b9a4d36c;
+  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+  z-index: 1;
+  align-items: center;
+  margin-top: 18px;
+  padding: 10px 0 15px 0;
+}
+.nav-dropdown-content > div {
+  width: 100%;
+  padding: 6px 0;
+  box-sizing: border-box;
+  text-align: center;
+  /* border: 1px dashed gray; */
+}
+.nav-dropdown-content > .search {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /* border: 1px dashed gray; */
+}
+.nav-dropdown-content .search-container {
+  display: flex;
+  justify-content: space-between;
+  min-width: 275px;
+  /* border: 1px dashed gray; */
+}
+.nav-dropdown-content .search-container select {
+  font-size: 15px;
+}
+/* .nav-dropdown:hover .nav-dropdown-content {
+  display: flex;
+} */
+.show {
+  display: flex;
+}
+
+
+.nav-1 {
+  display: contents;
+}
+.nav-2 {
+  display: none;
+}
+
+@media (max-width: 840px) {
+  .header-1 { 
+    min-width: 0;
+  }
+  .nav-1 {
+    display: none;
+  }
+
+  .nav-2 {
+    display: flex;
+  }
+  .nav-dropdown-content {
+    /* display: flex; */
+    justify-content: space-between;
+    padding-right: 10px;
+  }
+  .fa-search {
+    transform: translate(-33px, 5px);
+  }
+  .nav-dropdown-content .search .search-bar {
+    font-size: 16px;
+    width: 175px;
+    border: 2px solid #ebb7b7;
+  }
+  .nav-dropdown-content a {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 650px) {
+  .nav-dropdown-content {
+    justify-content: center;
+    flex-direction: column;
+  }
 }

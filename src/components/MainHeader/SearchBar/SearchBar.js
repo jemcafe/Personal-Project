@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import searchIcon from '../../../images/icon-search.png';
+import FaSearch from 'react-icons/lib/fa/search';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -107,8 +107,10 @@ class SearchBar extends Component {
                         { subcategories }
                     </select> */}
                     
-                    <input className="search-bar" placeholder={ 'Search' } onChange={ (e) => this.handleInputChange(e.target.value) }/>
-                    <Link to="/search"><img className="search-icon" src={ searchIcon } alt="Search" onClick={ () => this.search() }/></Link>
+                    <div>
+                        <input className="search-bar" placeholder={ 'Search' } onChange={ (e) => this.handleInputChange(e.target.value) }/>
+                        <Link to="/search"><FaSearch className="fa-search" size={20} onClick={ () => this.search() }/></Link>
+                    </div>
                 </div>
             </div>
         )

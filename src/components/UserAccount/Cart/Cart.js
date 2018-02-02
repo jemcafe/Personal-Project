@@ -58,7 +58,7 @@ class Cart extends Component {
     render () {
         const { cartItems } = this.props;
 
-        const priceTotal = cartItems.reduce( (acc, item) => acc += parseFloat(item.price), 0 ).toFixed(2);
+        const priceTotal = cartItems.reduce( (acc, item) => acc += item.quantity * parseFloat(item.price), 0 ).toFixed(2);
 
         const listOfItems = cartItems.map( item => {
             return (
@@ -74,8 +74,8 @@ class Cart extends Component {
                                 <h4 className="name">{ item.name }</h4>
                                 <div className="info">
                                     <div>Category: { item.productcategory }</div>
-                                    <div>Quantity: { item.quantity }</div>
-                                    <div>Price: ${ item.price }</div>
+                                    <div>Quantity: <span>{ item.quantity }</span></div>
+                                    <div>Price: <span>${ item.price }</span></div>
                                 </div>
                             </div>
                             
@@ -94,15 +94,13 @@ class Cart extends Component {
 
                     <div className="products">
                         <h4>CART</h4>
-                        <ul>
-                            { listOfItems.length ? listOfItems : <li>This cart's boring.</li> }
-                        </ul>
+                        { listOfItems.length ? <ul>{ listOfItems }</ul> : <h5>This cart's boring.</h5> }
                     </div>
 
                     <div className="total">
                         <h4>TOTAL</h4>
                         <div className="total-summary">
-                            <div>Total: ${ priceTotal }</div>
+                            <div>${ priceTotal }</div>
                             { priceTotal > 0 && <Link to="/checkout"><button className="checkout-btn btn">Checkout</button></Link> }
                         </div>
                     </div>

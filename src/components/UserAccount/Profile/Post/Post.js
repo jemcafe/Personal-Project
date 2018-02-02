@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Post.css';
 import FaEdit from 'react-icons/lib/fa/edit';
 import { Link } from 'react-router-dom';
 
@@ -35,7 +36,7 @@ class Post extends Component {
 
     render () {
         const { id, title, text, imageurl, dateposted, username } = this.props.post;
-        const { deletePost } = this.props;
+        const { user, deletePost } = this.props;
 
         // The image will be displayed if the input begins with the condition
         const imageurlCheck = (imageurl.slice(0,7) === 'http://' || imageurl.slice(0,8) === 'https://') ? true : false;
@@ -45,7 +46,8 @@ class Post extends Component {
                 { !this.state.editMode ? (
                     <div className="post-container">
                         <div className="name-title padding-align">
-                            <div><Link to={`/${username}`}>{ username }</Link></div>
+                            {/* <div><Link to={`/${username}`}>{ username }</Link></div> */}
+                            <Link to={`/${username}`}><img src={ user.imageurl } alt="Proifle pic"/></Link>
                             <h3>{ title }</h3>
                         </div>
                         { imageurlCheck && <div className="image"><img src={ imageurl } alt="Url not found"/></div> }

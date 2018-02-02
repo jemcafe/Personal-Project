@@ -8,10 +8,11 @@
     /* background-color: #fce3e3; */
     }
     .login-reg-container {
-        padding: 20px 20px;
+        padding: 15px 15px;
         border-radius: 8px;
-        background-color: #ffd4c786;
-        /* box-shadow: 2px 3px 10px 3px #d1d0f7c0; */
+        background: linear-gradient( 0deg, #ff9d9dc2, #ffcab99f );
+        /* background-color: #ffc5b186; */
+        /* box-shadow: 0 3px 15px 1px rgba(77, 33, 102, 0.5); */
     }
     .login-reg .info-input {
         display: flex;
@@ -19,6 +20,7 @@
         flex-direction: column;
         padding: 40px 40px;
         border-radius: 4px;
+        /* background: linear-gradient( 0deg, white, #ffc4b19f ); */
         background-color: white;
         /* background-color: #d0ecf7; */
     }
@@ -28,12 +30,13 @@
     }
     .login-reg .info-input > h3 {
         margin: 0 0 10px 0;
-        color: #b14b4b;
+        color: rgba(77, 33, 102, 0.753);
         font-size: 25px;
         font-weight: normal;
     }
     .login-reg .input {
         margin: 12px 0;
+        /* border: none; */
     }
     .login-reg .btns {
         display: flex;
@@ -47,11 +50,11 @@
 
     .login-reg .create-btn {
         color: rgba(125, 108, 108, 0.705);
-        background-color: rgb(240, 237, 237);
+        background-color: rgb(236, 230, 230);
     }
     .login-reg .create-btn:hover {
         background-color: rgb(233, 230, 230);
     }
     .login-reg .create-btn:active {
-        background-color: rgb(240, 237, 237);
+        background-color: rgb(236, 230, 230);
     }

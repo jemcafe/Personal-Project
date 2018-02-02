@@ -17,6 +17,12 @@ class Login extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    componentDidMount () {
+        if ( this.props.user.username ) {
+            this.props.history.push('/');
+        }
+    }
+
     handleChange ( property, value ) {
         this.setState({ [property]: value });
     }

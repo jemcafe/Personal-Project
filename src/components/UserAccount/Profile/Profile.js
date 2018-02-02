@@ -96,7 +96,8 @@ class Posts extends Component {
         const { user } = this.props;
 
         const listOfPosts = posts.map( post => {
-            return <Post key={ post.id } 
+            return <Post key={ post.id }
+                         user={ user }
                          post={ post }
                          editPost={ this.editPost }
                          deletePost={ this.deletePost } />
@@ -128,7 +129,7 @@ class Posts extends Component {
                             <Link to={`/${user.username}/posters`}>Posters</Link>
                             <Link to={`/${user.username}/following`}>Following</Link>
                             {/* <Link to={`/${user.username}/cart`}>Cart</Link> */}
-                            <Link to={`/${user.username}/settings`}>Settings</Link>
+                            {/* <Link to={`/${user.username}/settings`}>Settings</Link> */}
                         </div>
                     </div>
                 </div>
