@@ -2,28 +2,8 @@
   display: flex;
   flex-direction: column;
 }
-  .profile-header-bkgd {      /*  keeps  */
-    position: absolute;
-    left: 0;
-    z-index: -1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    width: 100%;
-    height: 10em;
-    background-image: linear-gradient( 0deg, #e9e3f1, transparent );
-    /* background:  #cdc7d6; */
-  }
-  .profile-header-bkgd img {
-    flex-shrink: 0;
-    width: 100%;
-    min-height: 100%;
-  }
   
   .useraccount .main {
-    margin-top: 10em;
-    background-color: white;
     /* background-color: #cbf8d6; */
   }
 

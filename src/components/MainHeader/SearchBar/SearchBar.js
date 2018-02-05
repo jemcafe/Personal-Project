@@ -18,24 +18,6 @@ class SearchBar extends Component {
     }
 
     componentDidMount () {
-        // Gets all poster ( for test purposes )
-        // axios.get('/api/search/posters').then( res => {
-        //     console.log( res.data );
-        // }).catch( console.log() );
-
-        //
-        // axios.get('/api/getgames').then( res => {
-        //     console.log( res.data );
-        // }).catch( err => console.log(err) );
-
-        //
-        // axios.get('/api/getbooks').then( res => {
-        //     console.log( res.data );
-        // }).catch( err => console.log(err) );
-
-        // axios.get('/api/getGameRatingBoards').then( res => {
-        //     console.log( res.data );
-        // }).catch( console.log() );
         console.log(this.state.category);
     }
         
@@ -63,27 +45,27 @@ class SearchBar extends Component {
         let { category, subcategory, userInput } = this.state;
         const { updateSearchResults } = this.props;
 
-        updateSearchResults( [] );  // The previous items
+        updateSearchResults( [] );  // Resets the search results to an empty array
 
         if ( category === 'Games' ) {
+
             axios.get(`/api/search/games?search=${ userInput }&platform=${ subcategory }`).then( res => {
-
                 updateSearchResults( res.data );
-
             }).catch( console.log() ); 
+
         }
         else if ( category === 'Books') {
+
             axios.get(`/api/search/books?search=${ userInput }&subject=${ subcategory }`).then( res => {
-
                 updateSearchResults( res.data );
-
             }).catch( console.log() );
+
         } else if ( category === 'Posters' ) {
+
             axios.get(`/api/search/posters?search=${ userInput }&category=${ subcategory }`).then( res => {
-
                 updateSearchResults( res.data );
-
             }).catch( console.log() );
+            
         }
     }
 

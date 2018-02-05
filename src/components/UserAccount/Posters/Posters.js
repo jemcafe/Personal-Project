@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Posters.css';
 import FaTrash from 'react-icons/lib/fa/trash';
 import axios from 'axios';
+
 import { connect } from 'react-redux';
 
 class Posters extends Component {
@@ -18,15 +19,15 @@ class Posters extends Component {
     }
 
     componentDidMount () {
-        axios.get('/api/posters').then( res => {
-            console.log( res.data );
+        const { user, otherUser } = this.props;
+
+        axios.get(`/api/posters/${otherUser.id || user.id}`).then( res => {
             this.setState({ posters: res.data });
         }).catch( err => console.log(err) );
     }
 
     handleChange ( property, value ) {
         this.setState({ [property]: value });
-        console.log( this.state.category );
     }
 
     addPoster ( name, description, price, category, image ) {
@@ -39,9 +40,8 @@ class Posters extends Component {
         };
 
         axios.post('/api/new-poster', body).then( res => {
-            console.log( res.data );
 
-            axios.get('/api/posters').then( resp => {
+            axios.get(`/api/posters/${this.props.user.id}`).then( resp => {
                 this.setState({ posters: resp.data, name: '', description: '', price: '', image: '' });
             }).catch( err => console.log(err) );
 
@@ -50,9 +50,8 @@ class Posters extends Component {
 
     deletePoster ( id ) {
         axios.delete(`/api/delete-poster/${ id }`).then( res => {
-            console.log( res.data );
 
-            axios.get('/api/posters').then( resp => {
+            axios.get(`/api/posters/${this.props.user.id}`).then( resp => {
                 this.setState({ posters: resp.data, name: '', description: '', price: '', image: '' });
             }).catch( err => console.log(err) );
 
@@ -61,7 +60,7 @@ class Posters extends Component {
 
     render () {
         const { posters, name, description, price, category, image } = this.state;
-        const { productSubcategories } = this.props;
+        const { user, otherUser, paramsUsername, productSubcategories } = this.props;
 
         // The first category ('All') is removed from the list
         const categories = productSubcategories.length && productSubcategories[2].map( (e, i) => i !== 0 ? <option key={ i } value={ e }>{ e }</option> : false ).filter( e => e );
@@ -72,12 +71,14 @@ class Posters extends Component {
                     <div className="poster">
 
                         <div className="thumbnail">
+                            { user.username === paramsUsername &&
                             <div className="edit fade">
                                 <div className="poster-name">{ poster.name }</div>
                                 <button className="edit-btn btn">Edit</button>
                                 {/* <button className="btn" onClick={ () => this.deletePoster(poster.id) }>Delete</button> */}
                                 <FaTrash className="fa-trash" onClick={ () => this.deletePoster(poster.id) } size={25} color="lightgrey" />
                             </div>
+                            }
                             <img src={ poster.imageurl } alt={ poster.name }/>
                         </div>
                         
@@ -89,8 +90,9 @@ class Posters extends Component {
         return (
             <div className="posters">
                 <div className="posters-container">
-                    {/* <div>POSTERS</div> */}
+                    <h4>POSTERS</h4>
 
+                    { user.username === paramsUsername &&
                     <div className="new-poster">
                         <div className="new-poster-container">
                             {/* <div>New Poster</div> */}
@@ -104,6 +106,7 @@ class Posters extends Component {
                             <button className="btn" onClick={ () => this.addPoster(name, description, price, category, image) }>Save</button>
                         </div>
                     </div>
+                    }
 
                     { listOfPosters.length > 0 ? <ul className="posters-list">{ listOfPosters }</ul> : <h5>No posters created</h5> }
 

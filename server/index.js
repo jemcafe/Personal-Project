@@ -14,6 +14,7 @@ const authCntrl = require('./controllers/auth_controller');
 const srchProductsCntrl = require('./controllers/searchProducts_controller');
 const postsCntrl = require('./controllers/posts_controller');
 const postersCntrl = require('./controllers/posters_controller');
+const followsCntrl = require('./controllers/follows_controller');
 const cartCntrl = require('./controllers/cart_controller');
 const stripeCntrl = require('./controllers/stripe_controller');
 const otherUsersCntrl = require('./controllers/otherUsers_controller');
@@ -38,23 +39,30 @@ app.post('/api/logout', authCntrl.logout);
 app.get('/api/user', authCntrl.getUser);
 
 // User 
-    // posts
+    // Posts
     app.post('/api/new-post', postsCntrl.createPost);
     app.put('/api/edit-post/:id', postsCntrl.updatePost);
     app.delete('/api/delete-post/:id', postsCntrl.deletePost);
     app.get('/api/post/:id', postsCntrl.getPost);
-    app.get('/api/posts', postsCntrl.getPosts);
-    // posters
+    app.get('/api/posts/:userid', postsCntrl.getPosts);
+    // Posters
     app.post('/api/new-poster', postersCntrl.createPoster);
     app.put('/api/edit-poster/:id', postersCntrl.updatePoster);
     app.delete('/api/delete-poster/:id', postersCntrl.deletePoster);
-    app.get('/api/posters', postersCntrl.readPosters);
+    app.get('/api/posters/:userid', postersCntrl.getPosters);
+    app.get('/api/recent-posters/:userid', postersCntrl.getRecentPosters);
+    // Follow
+    app.get('/api/follows/:userid', followsCntrl.getFollows);
     // Cart
     app.post('/api/add-item', cartCntrl.addItem);
     app.delete('/api/remove-item/:id', cartCntrl.removeItem);
     app.patch('/api/update-quantity/:id', cartCntrl.updateQuantity);
     app.get('/api/cart', cartCntrl.getCart);
     app.delete('/api/remove-all-items', cartCntrl.removeAllItems);
+
+// Other Users ( Users that aren't logged in )
+    app.get('/api/other-user/:username', otherUsersCntrl.getUser);
+    app.get('/api/other-users', otherUsersCntrl.getUsers);
 
 // Products
     // Categories
@@ -69,10 +77,6 @@ app.get('/api/user', authCntrl.getUser);
 
 // Stripe payment
     app.post('/save-stripe-token', stripeCntrl.paymentApi);
-
-// Other Users ( Users that aren't logged in )
-    app.get('/api/other-user/:username', otherUsersCntrl.getUser);
-    app.get('/api/other-users', otherUsersCntrl.getUsers);
 
 
 // This is for getting the 3rd party api data to my database

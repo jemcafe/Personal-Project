@@ -66,7 +66,41 @@ module.exports = {
         }
     },
 
-    readPoster ( req, res ) {
+    getPosters ( req, res ) {
+        const db = req.app.set('db');
+        // const { session } = req;
+        const { userid } = req.params;
+
+        db.read_user_posters( [userid] ).then( posters => {
+            res.status(200).json( posters );
+        }).catch( err => {
+            console.log(err);
+            res.status(500).send('Poster not deleted');
+        });
+    },
+
+    getRecentPosters ( req, res ) {
+        const db = req.app.set('db');
+        // const { session } = req;
+        const { userid } = req.params;
+
+        db.read_user_posters( [userid] ).then( posters => {
+
+            let recentPosters = []; 
+            if ( posters.length <= 3 ) {
+                for ( let i = 0; i < posters.length; i++ ) { recentPosters.push(posters[i]) }
+            } else {
+                for ( let i = 0; i < 3; i++ ) { recentPosters.push(posters[i]) }
+            }
+            res.status(200).json( recentPosters );
+
+        }).catch( err => {
+            console.log(err);
+            res.status(500).send('Poster not deleted');
+        });
+    },
+
+    getPoster ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
         const { id } = req.params;
@@ -74,30 +108,10 @@ module.exports = {
         if ( session.user.id ) {
 
             db.read_user_poster( [id, session.user.id] ).then( poster => {
-                // Nothing happens to the data
                 res.status(200).json( poster );
             }).catch( err => {
                 console.log(err);
                 res.status(404).send('No poster found');
-            });
-
-        } else {
-            res.status(404).send('No user');
-        }
-    },
-
-    readPosters ( req, res ) {
-        const db = req.app.set('db');
-        const { session } = req;
-
-        if ( session.user.id ) {
-
-            db.read_user_posters( [session.user.id] ).then( posters => {
-                // Nothing happens to the data
-                res.status(200).json( posters );
-            }).catch( err => {
-                console.log(err);
-                res.status(500).send('Poster not deleted');
             });
 
         } else {

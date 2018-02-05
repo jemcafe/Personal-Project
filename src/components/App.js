@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import { connect } from 'react-redux';
-import { getUser, getProductCategories, getProductSubcategories } from '../redux/ducks/reducer';
 import axios from 'axios';
 
-import routes from '../router';
+import { connect } from 'react-redux';
+import { getUser, getProductCategories, getProductSubcategories } from '../redux/ducks/reducer';
 
+import routes from '../router';
 import MainHeader from './MainHeader/MainHeader';
 
 class App extends Component {
@@ -28,6 +28,10 @@ class App extends Component {
             getProductSubcategories( res.data );
             console.log( this.props.productSubcategories );
         }).catch( console.log() );
+
+        axios.get('/api/other-users').then( res => {
+            console.log( res.data );
+        }).catch( err => console.log(err) );
     }
     
     render() {

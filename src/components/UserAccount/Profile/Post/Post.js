@@ -3,6 +3,8 @@ import './Post.css';
 import FaEdit from 'react-icons/lib/fa/edit';
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
 class Post extends Component {
     constructor (props) {
         super(props);
@@ -28,15 +30,13 @@ class Post extends Component {
     }
 
     saveEdit (id, title, text, image) {
-        const { editPost } = this.props;
-
         this.toggleEdit();
-        editPost(id, title, text, image);
+        this.props.editPost(id, title, text, image);
     }
 
     render () {
         const { id, title, text, imageurl, dateposted, username } = this.props.post;
-        const { user, deletePost } = this.props;
+        const { user, otherUser, paramsUsername } = this.props;
 
         // The image will be displayed if the input begins with the condition
         const imageurlCheck = (imageurl.slice(0,7) === 'http://' || imageurl.slice(0,8) === 'https://') ? true : false;
@@ -45,20 +45,22 @@ class Post extends Component {
             <li className="post">
                 { !this.state.editMode ? (
                     <div className="post-container">
+
                         <div className="name-title padding-align">
-                            {/* <div><Link to={`/${username}`}>{ username }</Link></div> */}
-                            <Link to={`/${username}`}><img src={ user.imageurl } alt="Proifle pic"/></Link>
+                            <Link to={`/${username}`}><img src={ otherUser.imageurl || user.imageurl } alt="Proifle pic"/></Link>
                             <h3>{ title }</h3>
                         </div>
                         { imageurlCheck && <div className="image"><img src={ imageurl } alt="Url not found"/></div> }
                         <div className="text padding-align" >{ text }</div>
                         <div className="date-edit padding-align">
                             <div>{ dateposted }</div>
-                            <div><FaEdit className="fa-edit" onClick={ () => this.toggleEdit() } size={25} color="gray" /></div>
+                            { user.username === paramsUsername && <div><FaEdit className="fa-edit" onClick={ () => this.toggleEdit() } size={25} color="gray" /></div> }
                         </div>
+
                     </div>
                 ) : (
                     <div className="post-container">
+
                         { imageurlCheck && <div className="image"><img src={ imageurl } alt="Url not found"/></div> }
                         <div>
                             <input placeholder="Url" defaultValue={ imageurl } onChange={ (e) => this.handleChange('image', e.target.value) }/>
@@ -72,8 +74,9 @@ class Post extends Component {
                         <span>
                             <button onClick={ () => this.toggleEdit() }>Cancel</button>
                             <button onClick={ () => this.saveEdit( id, this.state.title, this.state.text, this.state.image ) }>Save</button>
-                            <button onClick={ () => deletePost( id ) }>Delete</button>
+                            <button onClick={ () => this.props.deletePost( id ) }>Delete</button>
                         </span>
+
                     </div>
                 ) }
             </li>
@@ -81,4 +84,4 @@ class Post extends Component {
     }
 }
 
-export default Post;
+export default connect( state => state )( Post );

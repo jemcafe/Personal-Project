@@ -103,8 +103,6 @@ class SearchPage extends Component {
                             <div className="prev-next-btn">
                                 <FaAngleLeft className="fa-angle-L" size={40} color="gray" />
                                 <FaAngleRight className="fa-angle-R" size={40} color="gray" />
-                                {/* <button className="previous-btn">Previous</button>
-                                <button className="next-btn">Next</button> */}
                             </div>
                             
                         </div>

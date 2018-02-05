@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS BookSubjects;
 DROP TABLE IF EXISTS PosterCategories;
 DROP TABLE IF EXISTS Cart;
 DROP TABLE IF EXISTS Posts;
+DROP TABLE IF EXISTS Followers;
 DROP TABLE IF EXISTS PostComments;
 DROP TABLE IF EXISTS ProductCategories;
 DROP TABLE IF EXISTS Users;
@@ -42,6 +43,15 @@ INSERT INTO Posts (title, text, datePosted, userId, imageURL) VALUES
 ('Buster''s Todem',     'When cows seek vengance in the flatlands, Only one cow can stop it',     '1 / 17 / 2018', 1, 'https://media.mnn.com/assets/images/2017/01/cow-in-pasture.jpg.838x0_q80.jpg'),
 ('Into the Dawn',       'A leopard goes a journey to find it''s wings.',                          '1 / 19 / 1018', 1, 'https://dncache-mauganscorp.netdna-ssl.com/thumbseg/75/75239-bigthumbnail.jpg');
 
+
+CREATE TABLE Follows (
+    id SERIAL PRIMARY KEY,
+    userId INTEGER REFERENCES Users (id),
+    followerId INTEGER REFERENCES Users (id)
+);
+INSERT INTO Follows (userId, followerId) VALUES
+(2, 3),
+(4, 3);
 
 
 CREATE TABLE PostComments (

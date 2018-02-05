@@ -17,7 +17,7 @@ class ContentSlider extends Component {
         return (
             <div className="slider">
                 <Slider {...settings}>
-                    { this.props.images.map( e => <div><div className="slide-img"><img src={ e } alt="Media pic"/></div></div> )}
+                    { this.props.images.map( (e, i) => <div key={i}><div className="slide-img"><img src={ e } alt="Media pic"/></div></div> )}
                 </Slider>
             </div>
         )

@@ -1,6 +1,11 @@
 const initialState = {
    user: {},            // Will be the user session object
+   otherUser: {},
+
+   posts: [],
+   posters: [],
    cartItems: [],
+
    productCategories: [],
    productSubcategories: [],
    searchResults: [],
@@ -12,6 +17,10 @@ const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 const REGISTER = 'REGISTER';
 const GET_USER = 'GET_USER';
+const GET_OTHER_USER = 'GET_OTHER_USER';
+
+const UPDATE_POSTS = 'UPDATE_POSTS';
+const UPDATE_POSTERS = 'UPDATE_POSTERS';
 const UPDATE_CART_ITEMS = 'UPDATE_CART_ITEMS';
 
 const GET_PRODUCT_CATEGORIES = 'GET_PRODUCT_CATEGORIES';
@@ -32,6 +41,12 @@ export default function reducer ( state = initialState, action ) {
          return { ...state, user: payload };
       case GET_USER:
          return { ...state, user: payload };
+      case GET_OTHER_USER:
+         return { ...state, otherUser: payload };
+      case UPDATE_POSTS:
+         return { ...state, posts: payload };
+      case UPDATE_POSTERS:
+         return { ...state, posters: payload };
       case UPDATE_CART_ITEMS:
          return { ...state, cartItems: payload };
       case GET_PRODUCT_CATEGORIES:
@@ -76,12 +91,33 @@ export function getUser ( user ) {
    };
 }
 
+export function getOtherUser ( otherUser ) {
+   return {
+      type: 'GET_OTHER_USER',
+      payload: otherUser
+   };
+}
+
+export function updatePosts ( posts ) {
+   return {
+      type: 'UPDATE_POSTS',
+      payload: posts
+   };
+}
+
+export function updatePosters ( posters ) {
+   return {
+      type: 'UPDATE_POSTERS',
+      payload: posters
+   };
+}
+
 export function updateCartItems ( cartItems ) {
-      return {
-         type: 'UPDATE_CART_ITEMS',
-         payload: cartItems
-      };
-   }
+   return {
+      type: 'UPDATE_CART_ITEMS',
+      payload: cartItems
+   };
+}
 
 export function getProductCategories ( productCategories ) {
    return {

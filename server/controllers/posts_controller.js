@@ -64,6 +64,19 @@ module.exports = {
         }
     },
 
+    getPosts ( req, res ) {
+        const db = req.app.set('db');
+        // const { session } = req;
+        const { userid } = req.params;
+        
+        db.read_user_posts( [userid] ).then( posts => {
+            res.status(200).json( posts );
+        }).catch( err => {
+            console.log(err);
+            res.status(500).send('Unable to get posts');
+        });
+    },
+
     getPost (req, res ) {
         const db = req.app.set('db');
         const { session } = req;
@@ -76,24 +89,6 @@ module.exports = {
             }).catch( err => {
                 console.log(err);
                 res.status(500).send('Unable to get post');
-            });
-
-        } else {
-            res.status(404).send('No user');
-        }
-    },
-
-    getPosts ( req, res ) {
-        const db = req.app.set('db');
-        const { session } = req;
-
-        if ( session.user.id ) {
-            
-            db.read_user_posts( [session.user.id] ).then( posts => {
-                res.status(200).json( posts );
-            }).catch( err => {
-                console.log(err);
-                res.status(500).send('Unable to get posts');
             });
 
         } else {
