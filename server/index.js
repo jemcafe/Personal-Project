@@ -16,8 +16,8 @@ const postsCntrl = require('./controllers/posts_controller');
 const postersCntrl = require('./controllers/posters_controller');
 const followsCntrl = require('./controllers/follows_controller');
 const cartCntrl = require('./controllers/cart_controller');
+const usersCntrl = require('./controllers/users_controller');
 const stripeCntrl = require('./controllers/stripe_controller');
-const otherUsersCntrl = require('./controllers/otherUsers_controller');
 
 const app = express();
 
@@ -53,6 +53,7 @@ app.get('/api/user', authCntrl.getUser);
     app.get('/api/recent-posters/:userid', postersCntrl.getRecentPosters);
     // Follow
     app.get('/api/follows/:userid', followsCntrl.getFollows);
+    app.get('/api/followers/:userid', followsCntrl.getFollowers);
     // Cart
     app.post('/api/add-item', cartCntrl.addItem);
     app.delete('/api/remove-item/:id', cartCntrl.removeItem);
@@ -60,9 +61,9 @@ app.get('/api/user', authCntrl.getUser);
     app.get('/api/cart', cartCntrl.getCart);
     app.delete('/api/remove-all-items', cartCntrl.removeAllItems);
 
-// Other Users ( Users that aren't logged in )
-    app.get('/api/other-user/:username', otherUsersCntrl.getUser);
-    app.get('/api/other-users', otherUsersCntrl.getUsers);
+// Users ( For finding specific user profiles )
+    app.get('/api/user/:username', usersCntrl.getUser);
+    app.get('/api/users', usersCntrl.getUsers);
 
 // Products
     // Categories

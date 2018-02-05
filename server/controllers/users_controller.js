@@ -24,6 +24,7 @@ module.exports = {
             res.status(500).send(err);
         });
     },
+    
     getUsers ( req, res ) {
         const db = req.app.get('db');
 

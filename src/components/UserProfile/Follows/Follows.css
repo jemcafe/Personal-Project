@@ -1,0 +1,33 @@
+.profile .follows {
+    width: 100%;
+    background-color: #cbe4fc;
+}
+.profile .follows-container {
+    background-color: #cbe4fc;
+}
+
+    .follows-container > h3 {
+        color: rgba(77, 33, 102, 0.753);
+    }
+    .follows-container > h5 {
+        color: rgba(145, 64, 84, 0.521);
+    }
+
+    .follows-container ul {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        /* align-items: right; */
+        background-color: #d6fccb;
+    }
+    .follows-container li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fcddcb;
+    }
+    .follows-container .profile-img {
+        max-width: 35px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { getOtherUser, updatePosts, updatePosters } from '../../redux/ducks/reducer';
 
 // Components ( routes )
-import Profile from './Profile/Profile';
+// import Profile from './Profile/Profile';
 import Posters from './Posters/Posters';
 import Following from './Following/Following';
 import Cart from './Cart/Cart';
@@ -50,7 +50,7 @@ class UserAccount extends Component {
                     <div className="main">
                         <div className="main-container">
 
-                            <Route exact path={`/${username}`} render={ () => <Profile paramsUsername={ username }/> } />
+                            {/* <Route exact path={`/${username}`} render={ () => <Profile paramsUsername={ username }/> } /> */}
                             <Route path={`/${username}/posters`} render={ () => <Posters paramsUsername={ username }/> } />
                             <Route path={`/${username}/following`} render={ () => <Following paramsUsername={ username }/> } />
                             { user.username === username && <Route path={`/${username}/cart`} component={ Cart } /> }
