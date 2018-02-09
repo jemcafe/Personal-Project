@@ -26,12 +26,7 @@ class App extends Component {
         // Get the product subcategories
         axios.get('/api/product-subcategories').then( res => {
             getProductSubcategories( res.data );
-            console.log( this.props.productSubcategories );
         }).catch( console.log() );
-
-        axios.get('/api/other-users').then( res => {
-            console.log( res.data );
-        }).catch( err => console.log(err) );
     }
     
     render() {
@@ -51,7 +46,7 @@ class App extends Component {
                 <footer className="footer">
                     <div className="footer-container panel">
 
-                        <div>&copy; 2018 My Site</div>
+                        <div>&copy; 2018 N2Agate</div>
 
                     </div>
                 </footer>

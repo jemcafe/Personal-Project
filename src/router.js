@@ -10,8 +10,8 @@ import SearchPage from './components/SearchPage/SearchPage';
 import CheckoutPage from './components/CheckoutPage/CheckoutPage';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
-import UserProfile from './components/UserProfile/UserProfile';
 import UserAccount from './components/UserAccount/UserAccount';
+import UserProfile from './components/UserProfile/UserProfile';
 
 export default (
     <Switch>
@@ -23,7 +23,7 @@ export default (
         <Route path="/checkout" component={ CheckoutPage } />
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
-        {/* <Route path="/useraccount" component={ UserAccount } /> */}
+        <Route path="/useraccount" component={ UserAccount } />
         <Route path="/:username" component={ UserProfile } />
     </Switch>
 );

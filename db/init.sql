@@ -19,13 +19,12 @@ CREATE TABLE Users (
     name TEXT,
     imageUrl TEXT,
     headerBkgdImgUrl TEXT,
-    profileUrl TEXT
 );
 -- INSERT INTO Users (username, password, authId, name, imageUrl, headerImageUrl, profileUrl) VALUES
--- ('a',      'b',        null, 'A',               null,                                                                                                                                 null, 'http://localhost:3000/#/a'),
--- ('Goku',   'dbz',      null, 'Son Goku',        'https://i.pinimg.com/736x/ed/1d/73/ed1d7355a9bb9460f4085b5ef695740f.jpg',                                                            'https://images5.alphacoders.com/677/677262.png', 'http://localhost:3000/#/Goku'),
--- ('Ichigo', 'bleach',   null, 'Ichigo Kurosaki', 'https://pbs.twimg.com/profile_images/640284910326972416/IOChu2E1_400x400.jpg',                                                       'https://static.pexels.com/photos/572688/pexels-photo-572688.jpeg', 'http://localhost:3000/#/Ichigo'),
--- ('Luffy',  'onepiece', null, 'Monkey D. Luffy', 'https://vignette.wikia.nocookie.net/manga/images/0/01/Monkey_D._Luffy_-_TPS15.png/revision/latest?cb=20150503204141&path-prefix=es', 'https://kids.nationalgeographic.com/content/dam/kids/photos/articles/Nature/H-P/Habitats/Ocean/wave.ngsversion.1500050062134.adapt.1900.1.jpg', 'http://localhost:3000/#/Luffy');
+-- ('a',      'b',        null, 'A',               null,                                                                                                                                 null),
+-- ('Goku',   'dbz',      null, 'Son Goku',        'https://i.pinimg.com/736x/ed/1d/73/ed1d7355a9bb9460f4085b5ef695740f.jpg',                                                            'https://images5.alphacoders.com/677/677262.png'),
+-- ('Ichigo', 'bleach',   null, 'Ichigo Kurosaki', 'https://pbs.twimg.com/profile_images/640284910326972416/IOChu2E1_400x400.jpg',                                                       'https://static.pexels.com/photos/572688/pexels-photo-572688.jpeg'),
+-- ('Luffy',  'onepiece', null, 'Monkey D. Luffy', 'https://vignette.wikia.nocookie.net/manga/images/0/01/Monkey_D._Luffy_-_TPS15.png/revision/latest?cb=20150503204141&path-prefix=es', 'https://kids.nationalgeographic.com/content/dam/kids/photos/articles/Nature/H-P/Habitats/Ocean/wave.ngsversion.1500050062134.adapt.1900.1.jpg');
 
 
 

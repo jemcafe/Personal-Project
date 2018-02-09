@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './UserProfile.css';
 import axios from 'axios';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { getOtherUser, updatePosts, updatePosters } from '../../redux/ducks/reducer';
 
 import Posts from './Posts/Posts';
 import Posters from './Posters/Posters';
@@ -19,27 +18,50 @@ class Profile extends Component {
         }
     }
 
-    componentDidMount () {
-        const { username } = this.props.match.params;
+    componentDidMount() {
+        if ( !this.state.profileUser.username ) {
+            axios.get(`/api/user/${this.props.match.params.username}`).then( res => {
+                this.setState({ profileUser: res.data });
+            }).catch( err => console.log('Error', err) );
+        }
+    }
 
-        axios.get(`/api/user/${username}`).then( res => {
+    componentWillReceiveProps (nextProps) {
+        axios.get(`/api/user/${nextProps.match.params.username}`).then( res => {
             this.setState({ profileUser: res.data });
-        }).catch( err => console.log(err) );
+        }).catch( err => console.log('Error', err) );
+    }
+
+    follow ( profileUserId ) {
+        axios.post('/api/follow', { profileUserId }).then( res => {
+            console.log( res.data );
+        }).catch( err => console.log('Error', err) );
+    }
+
+    unfollow ( id ) {
+        axios.delete(`/api/unfollow/${ id }`).then( res => {
+            console.log( res.data );
+        }).catch( err => console.log('Error', err) );
     }
 
     render () {
         const { user } = this.props;
         const { profileUser } = this.state;
-        const { username } = this.props.match.params; // Needed for checking for the other users' page
-
+        const { username } = this.props.match.params; // This is needed for checking if the user is on their profile page
+        console.log('UserProfile profileUser', profileUser)
+        
         return (
             <div className="profile">
             { profileUser.username && 
                 <div>
                     <div className="profile-header-bkgd">
-                        <img src={profileUser.headerbkgdimgurl} alt="Profile header pic"/>
+                        { profileUser.headerbkgdimgurl && <img src={profileUser.headerbkgdimgurl} alt="Profile header pic"/> }
                     </div>
-                    <button className="follow-btn btn">Follow</button>
+
+                    { user.username !== username && ( 
+                        !user.username ? <Link to="/login"><button className="follow-btn btn">Follow</button></Link> :
+                        <button className="follow-btn btn" onClick={ () => this.follow( profileUser.id ) }>Follow</button> 
+                    ) }
 
                     <div className="profile-container">
 
@@ -61,10 +83,12 @@ class Profile extends Component {
                             </div>
                         </div>
 
-                        <Route exact path={`/${profileUser.username}`} render={ () => <Posts profileUser={profileUser} paramsUsername={ username }/> } />
-                        <Route path={`/${profileUser.username}/posters`} render={ () => <Posters profileUser={profileUser} paramsUsername={ username }/> } />
-                        <Route path={`/${profileUser.username}/following`} render={ () => <Following profileUser={profileUser} paramsUsername={ username }/> } />
-                        <Route path={`/${profileUser.username}/followers`} render={ () => <Followers profileUser={profileUser} paramsUsername={ username }/> } />
+                        <Switch>
+                            <Route exact path={`/${profileUser.username}`} render={ () => <Posts profileUser={ profileUser } paramsUsername={ username }/> } />
+                            <Route path={`/${profileUser.username}/posters`} render={ () => <Posters profileUser={ profileUser } paramsUsername={ username }/> } />
+                            <Route path={`/${profileUser.username}/following`} render={ () => <Following profileUser={ profileUser } paramsUsername={ username }/> } />
+                            <Route path={`/${profileUser.username}/followers`} render={ () => <Followers profileUser={ profileUser } paramsUsername={ username }/> } />
+                        </Switch>
 
                     </div>
                 </div> 
@@ -75,17 +99,4 @@ class Profile extends Component {
     }
 }
 
-const mapStateToProps = ( state ) => {
-    return {
-        user: state.user,
-        posts: state.posts,
-        posters: state.posters
-    };
-};
-
-const mapDispatchToProps = {
-    updatePosts: updatePosts,
-    updatePosters: updatePosters
-}
-
-export default connect( mapStateToProps, mapDispatchToProps )( Profile );
+export default connect( state => state )( Profile );

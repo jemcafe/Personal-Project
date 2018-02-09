@@ -53,7 +53,7 @@ module.exports = {
 
         db.read_gamePlatforms().then( platforms => {
 
-            // Giant Bomb uses ids instead of names to filter by platform. Got the id from the list I made.
+            // Giant Bomb uses numeric ids instead of names to filter data by platform. I found the platform ids I wanted and put them my Platforms table.
             let platformGbid = platforms.filter( e => e.platform === plat ).map( e => e.gbid )[0];
             // This checks the request values and updates the url with the proper Giant Bomb search fields 
             let gameSearch = search && plat ? `name:${ search },platforms:${ platformGbid }` :
@@ -63,7 +63,7 @@ module.exports = {
             axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=${ gameSearch }&limit=27&offest=0`).then( resp => {
                 const data = [];
                 resp.data.results.forEach( e => {
-                        data.push({
+                    data.push({
                         id: e.id,
                         name: e.name,
                         description: e.deck,

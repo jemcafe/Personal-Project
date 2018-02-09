@@ -36,7 +36,7 @@ class Post extends Component {
 
     render () {
         const { id, title, text, imageurl, dateposted, username } = this.props.post;
-        const { profileUser, paramsUsername, user } = this.props;
+        const { user, profileUser, paramsUsername } = this.props;
 
         // The image will be displayed if the input begins with the condition
         const imageurlCheck = (imageurl.slice(0,7) === 'http://' || imageurl.slice(0,8) === 'https://') ? true : false;

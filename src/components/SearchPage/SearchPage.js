@@ -19,35 +19,27 @@ class SearchPage extends Component {
         
     }
 
-    addItem ( productId, name, price, productCategoryId, quantity, image) {
-        const { updateCartItems } = this.props;
-
+    addItem ( item ) {
         const body = {
-            productId: productId,
-            name: name,
-            price: price,
-            productCategoryId: productCategoryId,
-            quantity: quantity,
-            image: image
+            productId: item.id,
+            name: item.name,
+            price: item.price,
+            productCategoryId: item.productcategoryid,
+            quantity: 1,
+            image: item.imageurl
         };
 
         axios.post('/api/add-item', body).then( res => {
-            console.log( res.data );
-            
             axios.get('/api/cart').then( resp => {
 
-                updateCartItems( resp.data );
-                console.log( this.props.cartItems );
+                this.props.updateCartItems( resp.data );
 
             }).catch( err => console.log(err) );
-
         }).catch( err => console.log(err) );
     }
 
     getProductInfo ( product ) {
-        const { getProductInfo } = this.props;
-        getProductInfo( product );
-        console.log( this.props.productInfo );
+        this.props.getProductInfo( product );
     }
 
     render () {
@@ -56,37 +48,38 @@ class SearchPage extends Component {
 
         // List of products
         const list = searchResults.map( item => {
-            return (
-                <li key={ item.id }>
-                    <div className="item">
-                        <div className="item-container">
+            return <li key={ item.id }>
+                <div className="item">
+                    <div className="item-container">
 
-                            <Link to={`${item.productcategory.toLowerCase()}/${item.name}`}>
-                                <div className="image-container">
-                                    <img className="img-anim" src={ item.imageurl } alt="cover" onClick={ () => getProductInfo(item) }/>
-                                </div>
-                            </Link>
+                        <Link to={`${item.productcategory.toLowerCase()}/${item.name}`}>
+                            <div className="image-container">
+                                <img className="img-anim" src={ item.imageurl } alt="cover" onClick={ () => getProductInfo(item) }/>
+                            </div>
+                        </Link>
 
-                            <div className="item-info-container">
+                        <div className="item-info-container">
 
-                                <Link to={`${item.productcategory.toLowerCase()}/${item.name}`} 
-                                      className="title" 
-                                      onClick={ () => getProductInfo(item) }
-                                >{ item.name.length > 20 ? `${item.name.slice(0,20).trim()}...` : item.name }</Link>
+                            <Link to={`${item.productcategory.toLowerCase()}/${item.name}`} 
+                                    className="title" 
+                                    onClick={ () => getProductInfo(item) }
+                            >{ item.name.length > 20 ? `${item.name.slice(0,20).trim()}...` : item.name }</Link>
 
-                                <div className="info">
-                                    <div>Rating</div>
-                                    <div>Date</div>
-                                    <div>${ item.price }</div>
-                                </div>
-                                { user.username ? <button className="add-btn btn" onClick={ () => this.addItem( item.id, item.name, item.price, item.productcategoryid, 1, item.imageurl ) }>Add To Cart</button> : <Link to="/login"><button className="add-btn btn">Add To Cart</button></Link> }
-                                
+                            <div className="info">
+                                <div>Rating</div>
+                                <div>Date</div>
+                                <div>${ item.price }</div>
                             </div>
 
+                            { user.username ? 
+                            <button className="add-btn btn" onClick={ () => this.addItem( item ) }>Add To Cart</button> : 
+                            <Link to="/login"><button className="add-btn btn">Add To Cart</button></Link> }
+                            
                         </div>
+
                     </div>
-                </li>
-            )
+                </div>
+            </li>
         });
 
         return (

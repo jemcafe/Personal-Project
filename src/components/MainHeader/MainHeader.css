@@ -1,19 +1,12 @@
 /*  Header  */
 
 .main-header {
-  /* background: url('http://images4.fanpop.com/image/photos/21600000/Street-Fighter-Tribute-crimson-viper-21659005-796-1000.jpg');
-  background-position: 10% -300px; */
   background: url('../../images/header_banner.jpg');
   background-repeat: no-repeat;
   background-position: 15% 0;
   border-bottom: 1px solid #ffc0bc94;
   /* background-color: #fccbd3; */
 }
-/* #header-bkgd-overlay {
-  background: linear-gradient(-5deg, #ffe7b0, transparent);
-  background-color:  #ffc8cc;
-  opacity: 0.5;
-} */
 .position {
   position: absolute;
   top: 0;
@@ -249,7 +242,7 @@
   display: none;
 }
 
-@media (max-width: 840px) {
+@media (max-width: 838px) {
   .header-1 { 
     min-width: 0;
   }

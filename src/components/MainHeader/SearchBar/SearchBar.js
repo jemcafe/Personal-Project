@@ -16,10 +16,6 @@ class SearchBar extends Component {
             userInput: ''
         }
     }
-
-    componentDidMount () {
-        console.log(this.state.category);
-    }
         
     handleInputChange ( value ) {
         this.setState({ userInput: value });
@@ -90,7 +86,7 @@ class SearchBar extends Component {
                     </select> */}
                     
                     <div>
-                        <input className="search-bar" placeholder={ 'Search' } onChange={ (e) => this.handleInputChange(e.target.value) }/>
+                        <input className="search-bar" placeholder={ 'Search' } onChange={ (e) => this.handleInputChange(e.target.value) } onKeyDown={ (e) => e.keyCode === 13 ? this.search() : '' }/>
                         <Link to="/search"><FaSearch className="fa-search" size={20} onClick={ () => this.search() }/></Link>
                     </div>
                 </div>

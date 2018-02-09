@@ -20,7 +20,6 @@ class Cart extends Component {
 
     componentDidMount () {
         axios.get('/api/cart').then( res => {
-            console.log( res.data );
             this.props.updateCartItems( res.data );
         }).catch( err => console.log(err) );
         console.log( this.props.cartItems );

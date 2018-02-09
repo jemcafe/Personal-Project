@@ -51,9 +51,11 @@ app.get('/api/user', authCntrl.getUser);
     app.delete('/api/delete-poster/:id', postersCntrl.deletePoster);
     app.get('/api/posters/:userid', postersCntrl.getPosters);
     app.get('/api/recent-posters/:userid', postersCntrl.getRecentPosters);
-    // Follow
-    app.get('/api/follows/:userid', followsCntrl.getFollows);
-    app.get('/api/followers/:userid', followsCntrl.getFollowers);
+    // Follows
+    app.post('/api/follow', followsCntrl.follow);
+    app.delete('/api/unfollow/:id', followsCntrl.unfollow);
+    app.get('/api/follows/:userid', followsCntrl.getUserFollows);
+    app.get('/api/followers/:userid', followsCntrl.getUserFollowers);
     // Cart
     app.post('/api/add-item', cartCntrl.addItem);
     app.delete('/api/remove-item/:id', cartCntrl.removeItem);
@@ -61,7 +63,7 @@ app.get('/api/user', authCntrl.getUser);
     app.get('/api/cart', cartCntrl.getCart);
     app.delete('/api/remove-all-items', cartCntrl.removeAllItems);
 
-// Users ( For finding specific user profiles )
+// Users ( neccessary for getting a specific user's profile )
     app.get('/api/user/:username', usersCntrl.getUser);
     app.get('/api/users', usersCntrl.getUsers);
 
@@ -80,7 +82,7 @@ app.get('/api/user', authCntrl.getUser);
     app.post('/save-stripe-token', stripeCntrl.paymentApi);
 
 
-// This is for getting the 3rd party api data to my database
+// This is just for getting the 3rd party api data to my database, so searching and finding products is easier than search 3 seperate APIs (two 3rd parties and my own)
 app.get('/api/getgames', srchProductsCntrl.getGamesForDatabase);
 app.get('/api/getBooks', srchProductsCntrl.getBooksForDatabase);
 

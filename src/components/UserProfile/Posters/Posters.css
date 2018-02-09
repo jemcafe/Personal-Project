@@ -1,6 +1,6 @@
 .profile .posters {
     width: 100%;
-    background-color: #cbe4fc;
+    /* background-color: #cbe4fc; */
   }
 .profile .posters-container {
     display: flex;
@@ -23,8 +23,8 @@
     }
     
     .poster {
-        background-color: #e1d0ec;
         margin: 4px;
+        /* background-color: #e1d0ec; */
     }
     /* Fills the thumbnail div with the image */
     .poster .thumbnail {

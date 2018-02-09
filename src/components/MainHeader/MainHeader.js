@@ -53,11 +53,12 @@ class MainHeader extends Component {
                                     <Link to={`/${user.username}`} className="user-droplink"><img src={ user.imageurl } alt="Profile pic"/></Link>
                                     <div className="user-dropdown-content">
                                         {/* <Link to={`/${user.username}`}>Profile</Link> */}
-                                        <Link to={`/${user.username}`}>Profile</Link>
+                                        <Link to={`/${user.username}`}>My Profile</Link>
                                         <Link to={`/${user.username}/posters`}>My Posters</Link>
                                         <Link to={`/${user.username}/following`}>Following</Link>
-                                        <Link to={`/${user.username}/cart`}>Cart ({ cartItemsQuantity })</Link>
-                                        {/* <Link to={`/${user.username}/settings`}>Settings</Link> */}
+                                        <Link to={`/${user.username}/followers`}>Followers</Link>
+                                        <Link to={`/useraccount/cart`}>Cart ({ cartItemsQuantity })</Link>
+                                        <Link to={`/useraccount/settings`}>Settings</Link>
                                         <Link to="/login" onClick={ () => this.logout() }>Signout</Link>
                                     </div>
                                 </div>
@@ -66,40 +67,40 @@ class MainHeader extends Component {
         return (
             <header className="main-header">
                 <div className="header-bkgd-overlay position"></div>
-                    <div className="main-header-container panel">
+                <div className="main-header-container panel">
 
-                        <div className="header-1 position">
-                            <Link to="/"><div className="title">SITE NAME</div></Link>
+                    <div className="header-1 position">
+                        <Link to="/"><div className="title">N2Agate</div></Link>
 
-                            <div className="header-nav nav-1">
-                                <SearchBar />
-                                <div className="nav-links">
-                                    <Link to="/" className="link">Home</Link>
-                                    <Link to="/games" className="link">Games</Link>
-                                    <Link to="/books" className="link">Books</Link>
-                                    <Link to="/posters" className="link">Posters</Link>
-                                    { linkChange }
-                                </div>
+                        <div className="header-nav nav-1">
+                            <SearchBar />
+                            <div className="nav-links">
+                                <Link to="/" className="link">Home</Link>
+                                <Link to="/games" className="link">Games</Link>
+                                <Link to="/books" className="link">Books</Link>
+                                <Link to="/posters" className="link">Posters</Link>
+                                { linkChange }
                             </div>
+                        </div>
 
-                            <div className="nav-2">
-                                <div className="nav-dropdown link">
-                                    { !showMenu ? <FaBars className="fa-bars-close nav-droplink" size={45} onClick={ () => this.menuToggle() } /> : <FaClose className="fa-bars-close nav-droplink" size={45} onClick={ () => this.menuToggle() } /> }
-                                    <div className={`nav-dropdown-content ${showMenu ? "show" : ""}`}>
-                                        <SearchBar />
-                                        <div className="nav-links">
-                                            <Link to="/" className="link">Home</Link>
-                                            <Link to="/games" className="link">Games</Link>
-                                            <Link to="/books" className="link">Books</Link>
-                                            <Link to="/posters" className="link">Posters</Link>
-                                            { linkChange }
-                                        </div>
+                        <div className="nav-2">
+                            <div className="nav-dropdown link">
+                                { !showMenu ? <FaBars className="fa-bars-close nav-droplink" size={45} onClick={ () => this.menuToggle() } /> : <FaClose className="fa-bars-close nav-droplink" size={45} onClick={ () => this.menuToggle() } /> }
+                                <div className={`nav-dropdown-content ${showMenu ? "show" : ""}`}>
+                                    <SearchBar />
+                                    <div className="nav-links">
+                                        <Link to="/" className="link">Home</Link>
+                                        <Link to="/games" className="link">Games</Link>
+                                        <Link to="/books" className="link">Books</Link>
+                                        <Link to="/posters" className="link">Posters</Link>
+                                        { linkChange }
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
+                </div>
             </header>
         );
     }

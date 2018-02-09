@@ -19,9 +19,7 @@ class Posters extends Component {
     }
 
     componentDidMount () {
-        const { user, otherUser } = this.props;
-
-        axios.get(`/api/posters/${otherUser.id || user.id}`).then( res => {
+        axios.get(`/api/posters/${this.props.user.id}`).then( res => {
             this.setState({ posters: res.data });
         }).catch( err => console.log(err) );
     }
@@ -60,9 +58,9 @@ class Posters extends Component {
 
     render () {
         const { posters, name, description, price, category, image } = this.state;
-        const { user, otherUser, paramsUsername, productSubcategories } = this.props;
+        const { user, productSubcategories } = this.props;
 
-        // The first category ('All') is removed from the list
+        // The first category ('All') is removed from the list of categories
         const categories = productSubcategories.length && productSubcategories[2].map( (e, i) => i !== 0 ? <option key={ i } value={ e }>{ e }</option> : false ).filter( e => e );
 
         const listOfPosters = posters.map( poster => {
@@ -71,14 +69,11 @@ class Posters extends Component {
                     <div className="poster">
 
                         <div className="thumbnail">
-                            { user.username === paramsUsername &&
                             <div className="edit fade">
                                 <div className="poster-name">{ poster.name }</div>
                                 <button className="edit-btn btn">Edit</button>
-                                {/* <button className="btn" onClick={ () => this.deletePoster(poster.id) }>Delete</button> */}
                                 <FaTrash className="fa-trash" onClick={ () => this.deletePoster(poster.id) } size={25} color="lightgrey" />
                             </div>
-                            }
                             <img src={ poster.imageurl } alt={ poster.name }/>
                         </div>
                         
@@ -92,10 +87,8 @@ class Posters extends Component {
                 <div className="posters-container">
                     <h4>POSTERS</h4>
 
-                    { user.username === paramsUsername &&
                     <div className="new-poster">
                         <div className="new-poster-container">
-                            {/* <div>New Poster</div> */}
                             <input className="input" value={ name } placeholder="Name" onChange={ (e) => this.handleChange('name', e.target.value) }/>
                             <input className="input" value={ description } placeholder="Description" onChange={ (e) => this.handleChange('description', e.target.value) }/>
                             <input className="input" value={ price } placeholder="Price" onChange={ (e) => this.handleChange('price', e.target.value) }/>
@@ -106,7 +99,6 @@ class Posters extends Component {
                             <button className="btn" onClick={ () => this.addPoster(name, description, price, category, image) }>Save</button>
                         </div>
                     </div>
-                    }
 
                     { listOfPosters.length > 0 ? <ul className="posters-list">{ listOfPosters }</ul> : <h5>No posters created</h5> }
 

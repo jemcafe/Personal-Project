@@ -19,7 +19,7 @@ class Login extends Component {
 
     componentDidMount () {
         if ( this.props.user.username ) {
-            this.props.history.push('/');
+            this.props.history.push(`/`);
         }
     }
 
@@ -34,11 +34,9 @@ class Login extends Component {
         };
 
         axios.post(`/api/login`, body).then( res => {
-            console.log( res.data );
-            // If there is user data, update user in redux and go to home page
-            if ( res.data.username ) {
-                this.props.login( res.data );
-                this.props.history.push('/');
+            if ( res.data.username ) {                                    // If login is successful and there is user data...
+                this.props.login( res.data );                             // the user obj is updated with user's data then...
+                this.props.history.push(`/${this.props.user.username}`);  // they will be redirected to their profile.
 
                 axios.get('/api/cart').then( res => {
                     this.props.updateCartItems( res.data );
@@ -52,8 +50,7 @@ class Login extends Component {
         return (
             <div className="login-reg">
                 <div className="login-reg-container">
-                    {/* <div>The LogIn Component</div> */}
-
+                    
                     <div className="info-input">
                         <h3>Sign In</h3>
                         <div className="input-info">
@@ -67,7 +64,6 @@ class Login extends Component {
                         <div className="btns">
                             <button className="btn" onClick={ () => this.login() }>Sign In</button>
                             <Link to="/register"><button className="create-btn btn">Create Account</button></Link>
-                            {/* <button className="btn" onClick={ () => this.getUser() }>Check for User</button> */}
                         </div>
                     </div>
 

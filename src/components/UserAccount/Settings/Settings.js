@@ -5,8 +5,11 @@ class Settings extends Component {
       return (
          <div className="settings">
             <div className="settings-container">
-                <div>SETTINGS</div>
+                <h4>SETTINGS</h4>
                 
+                <div>PROFILE IMAGE</div>
+                <div>HEADER IMAGE</div>
+                <div>CHANGE PASSWORD</div>
             </div>
          </div>
       )

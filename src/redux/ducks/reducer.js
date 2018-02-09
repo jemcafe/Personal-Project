@@ -1,6 +1,5 @@
 const initialState = {
-   user: {},            // Will be the user session object
-   otherUser: {},
+   user: {},
 
    posts: [],
    posters: [],
@@ -17,7 +16,8 @@ const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 const REGISTER = 'REGISTER';
 const GET_USER = 'GET_USER';
-const GET_OTHER_USER = 'GET_OTHER_USER';
+// const GET_PROFILE_USER = 'GET_PROFILE_USER';
+// const GET_OTHER_USER = 'GET_OTHER_USER';
 
 const UPDATE_POSTS = 'UPDATE_POSTS';
 const UPDATE_POSTERS = 'UPDATE_POSTERS';
@@ -41,8 +41,6 @@ export default function reducer ( state = initialState, action ) {
          return { ...state, user: payload };
       case GET_USER:
          return { ...state, user: payload };
-      case GET_OTHER_USER:
-         return { ...state, otherUser: payload };
       case UPDATE_POSTS:
          return { ...state, posts: payload };
       case UPDATE_POSTERS:
@@ -88,13 +86,6 @@ export function getUser ( user ) {
    return {
       type: 'GET_USER',
       payload: user
-   };
-}
-
-export function getOtherUser ( otherUser ) {
-   return {
-      type: 'GET_OTHER_USER',
-      payload: otherUser
    };
 }
 
