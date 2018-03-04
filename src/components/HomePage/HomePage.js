@@ -10,6 +10,10 @@ class HomePage extends Component {
                     
                     <h1>( Latest Content )</h1>
 
+                    <div className="loading">
+                        <div className="loading-img loading-anim"></div>
+                    </div>
+
                 </div>
             </div>
         )

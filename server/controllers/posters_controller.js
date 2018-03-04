@@ -2,7 +2,7 @@ module.exports = {
     createPoster ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
-        const { name, description, price, category, image } = req.body;
+        const { name, description, price, category, imageurl } = req.body;
 
         const date = new Date();
         const dd = date.getDate();
@@ -14,7 +14,7 @@ module.exports = {
 
         if ( session.user.id ) {
 
-            db.create_poster( [name, description, currentDate, price, categoryId, 3, session.user.id, image] ).then( poster => {
+            db.create_poster( [name, description, currentDate, price, categoryId, 3, session.user.id, imageurl] ).then( poster => {
                 res.status(200).json( poster );
             }).catch( err => {
                 console.log(err);
@@ -30,11 +30,12 @@ module.exports = {
         const db = req.app.set('db');
         const { session } = req;
         const { id } = req.params;
-        const { name, description, price, category, image } = req.body;
-
+        const { name, description, price, postercategoryid, imageurl } = req.body;
+        
         if ( session.user.id ) {
 
-            db.update_poster( [id, name, description, price, category, session.user.id, image] ).then( poster => {
+            db.update_poster( [id, name, description, price, postercategoryid, session.user.id, imageurl] ).then( poster => {
+                console.log( 'Poster update', poster )
                 res.status(200).send( poster );
             }).catch( err => {
                 console.log(err);

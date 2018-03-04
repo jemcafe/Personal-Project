@@ -1,14 +1,4 @@
-DROP TABLE IF EXISTS Posters;
-DROP TABLE IF EXISTS GamePlatforms;
-DROP TABLE IF EXISTS BookSubjects;
-DROP TABLE IF EXISTS PosterCategories;
-DROP TABLE IF EXISTS Cart;
-DROP TABLE IF EXISTS Posts;
-DROP TABLE IF EXISTS Followers;
-DROP TABLE IF EXISTS PostComments;
-DROP TABLE IF EXISTS ProductCategories;
-DROP TABLE IF EXISTS Users;
-
+DROP TABLE IF EXISTS Posters, GamePlatforms, BookSubjects, PosterCategories, Cart, Posts, Followers, PostComments, ProductCategories, Users CASCADE;
 
 
 CREATE TABLE Users (
@@ -36,11 +26,11 @@ CREATE TABLE Posts (
     userId INTEGER REFERENCES Users (id),
     imageUrl TEXT
 );
-INSERT INTO Posts (title, text, datePosted, userId, imageURL) VALUES
-('Leap of Faith',       'A grasshopper''s dream of finding the end a fence. My new best seller.', '1 / 17 / 2018', 1, 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/American_Bird_Grasshopper.jpg/1200px-American_Bird_Grasshopper.jpg'),
-('Didn''t expect this', 'Just found a nickel. Though you guys should know. Pretty important.',    '1 / 17 / 2018', 1, ''),
-('Buster''s Todem',     'When cows seek vengance in the flatlands, Only one cow can stop it',     '1 / 17 / 2018', 1, 'https://media.mnn.com/assets/images/2017/01/cow-in-pasture.jpg.838x0_q80.jpg'),
-('Into the Dawn',       'A leopard goes a journey to find it''s wings.',                          '1 / 19 / 1018', 1, 'https://dncache-mauganscorp.netdna-ssl.com/thumbseg/75/75239-bigthumbnail.jpg');
+-- INSERT INTO Posts (title, text, datePosted, userId, imageURL) VALUES
+-- ('Leap of Faith',       'A grasshopper''s dream of finding the end a fence. My new best seller.', '1 / 17 / 2018', 1, 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/American_Bird_Grasshopper.jpg/1200px-American_Bird_Grasshopper.jpg'),
+-- ('Didn''t expect this', 'Just found a nickel. Though you guys should know. Pretty important.',    '1 / 17 / 2018', 1, ''),
+-- ('Buster''s Todem',     'When cows seek vengance in the flatlands, Only one cow can stop it',     '1 / 17 / 2018', 1, 'https://media.mnn.com/assets/images/2017/01/cow-in-pasture.jpg.838x0_q80.jpg'),
+-- ('Into the Dawn',       'A leopard goes a journey to find it''s wings.',                          '1 / 19 / 1018', 1, 'https://dncache-mauganscorp.netdna-ssl.com/thumbseg/75/75239-bigthumbnail.jpg');
 
 
 CREATE TABLE Follows (
@@ -48,9 +38,9 @@ CREATE TABLE Follows (
     userId INTEGER REFERENCES Users (id),
     followerId INTEGER REFERENCES Users (id)
 );
-INSERT INTO Follows (userId, followerId) VALUES
-(2, 3),
-(4, 3);
+-- INSERT INTO Follows (userId, followerId) VALUES
+-- (2, 3),
+-- (4, 3);
 
 
 CREATE TABLE PostComments (
@@ -80,6 +70,7 @@ CREATE TABLE GamePlatforms (
     platform TEXT
 );
 INSERT INTO GamePlatforms (gbId, platform) VALUES
+(null, 'All' ),
 (117, 'Nintendo 3Ds'),
 (157, 'Nintendo Switch'),
 (94,  'PC'),
@@ -101,6 +92,7 @@ CREATE TABLE BookSubjects (
     subject TEXT
 );
 INSERT INTO BookSubjects (subject) VALUES
+('All'),
 ('Art'),
 ('Anthropomorphism'),
 ('Biography & Autobiography'),
@@ -140,6 +132,7 @@ CREATE TABLE PosterCategories (
     category TEXT
 );
 INSERT INTO PosterCategories (category) VALUES
+('All'),
 ('Digital Art'),
 ('Traditional Art'),
 ('Photography');
@@ -157,21 +150,6 @@ CREATE TABLE Posters (
     userId INTEGER REFERENCES Users (id),
     imageUrl TEXT
 );
-INSERT INTO Posters (name, description, datePosted, price, posterCategoryId, productCategoryId, userId, imageURL) VALUES
-('Drift No.10',                 'Abstract art',                '1 / 20 / 2018', 30.00, 2, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/006/943/174/large/jem-brown-20170713-150515-edited-sml3.jpg?1502436122'),
-('Drift No.9',                  'Abstract art',                '1 / 20 / 2018', 30.00, 2, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/007/588/014/large/jem-brown-20170909-120941-edited-b-sml3b.jpg?1507148669'),
-('Drift No.8',                  'Abstract art',                '1 / 20 / 2018', 30.00, 2, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/008/678/704/large/jem-brown-20171224-101641-edited-sml-2.jpg?1514500897'),
-('Jin Saotome Typhoon',         'Fanart of Jin Saotome.',      '1 / 18 / 2018', 39.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/004/752/517/large/jem-brown-jinsaotome-screenshot-04c-sml.jpg?1488844564'),
-('Scar (Fullmetal Alchemist)',  'Fanart of Scar',              '1 / 22 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/005/728/353/large/jem-brown-scar-screenshot-01e.jpg?1493320471'),
-('Falco',                       'Fanart of Falco',             '1 / 22 / 2018', 40.00, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/004/869/300/large/jem-brown-2016-09-falco-2-sml1.jpg?1486876194'),
-('Lust (Fullmetal Alchemist)',  'Fanart of Lust.',             '1 / 19 / 2018', 40.00, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/005/429/016/large/jem-brown-lust-screenshot-01d.jpg?1491396935'),
-('Ieyasu Tokugawa',             'Fanart of Ieyasu Tokugawa',   '1 / 22 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/005/352/385/large/jem-brown-ieyasu-screenshot-5c.jpg?1506238580'),
-('Garra of the Sand (Neutral)', 'Fanart of Garra (neutral)',   '1 / 19 / 2018', 44.99, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/007/291/402/large/jem-brown-garra-screenshot-03b-700x700.jpg?1505110523'),
-('Garra of the Sand',           'Fanart of Garra.',            '1 / 19 / 2018', 49.99, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/007/290/560/large/jem-brown-garra-screenshot-02-700x700-2.jpg?1505327332'),
-('Zabuza Momochi',              'Fanart of Zabuza Momochi.',   '1 / 19 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/006/050/959/large/jem-brown-zabuza-screenshot-02-sml.jpg?1495666567'),
-('Kisame Hoshigaki',            'Fanart of Kisame Hoshigaki.', '1 / 19 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/007/889/865/large/jem-brown-kisame-01-screenshot-smla.jpg?1509157762'),
-('Ulquiorra Cifer',             'Fanart of Ulquiorra Cifer.',  '1 / 19 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/007/624/631/large/jem-brown-ulquiorra-screenshot-6-700x700.jpg?1507427752');
-
 
 
 -- CREATE TABLE Games (

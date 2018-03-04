@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
 // import ContentSlider from '../ContentSlider/ContentSlider';
-import ItemPage from '../ItemPage/ItemPage';
 
 class PostersPage extends Component {
 
@@ -19,8 +18,6 @@ class PostersPage extends Component {
                                                 'https://www.zelda.com/breath-of-the-wild/assets/icons/BOTW-Share_icon.jpg',
                                                 'https://cdn4.dualshockers.com/wp-content/uploads/2018/01/MonsterHunterWorld-5-1.jpg'] } /> 
                     } } /> */}
-
-                    <Route exact path="/posters/:name" component={ ItemPage } />
 
                 </div>
             </div>

@@ -14,54 +14,63 @@ class Profile extends Component {
     constructor () {
         super();
         this.state = {
-            profileUser: {}
+            profileUser: {},
+            follows: [],
+            followers: [],
+            isFollowing: false,
         }
     }
 
-    componentDidMount() {
+    componentWillReceiveProps ( nextProps ) {
+        axios.get(`/api/user/${nextProps.match.params.username}`).then( user => {
+            axios.all([
+                axios.get(`/api/follows/${user.data.id}`),
+                axios.get(`/api/followers/${user.data.id}`)
+            ]).then( axios.spread( ( followsRes, followersRes ) => {
+
+                this.setState(prevState => ({ 
+                    profileUser: user.data,
+                    follows: followsRes.data,
+                    followers: followersRes.data,
+                    isFollowing: followersRes.data.find( e => e.username === this.props.user.username ) ? true : false
+                }));
+
+            })).catch( err => console.log('Error', err) );
+        }).catch( err => console.log('Error', err) );
+    }
+
+    componentDidMount () {
         if ( !this.state.profileUser.username ) {
-            axios.get(`/api/user/${this.props.match.params.username}`).then( res => {
-                this.setState({ profileUser: res.data });
+            axios.get(`/api/user/${this.props.match.params.username}`).then( user => {
+                this.setState({ profileUser: user.data });
             }).catch( err => console.log('Error', err) );
         }
     }
 
-    componentWillReceiveProps (nextProps) {
-        axios.get(`/api/user/${nextProps.match.params.username}`).then( res => {
-            this.setState({ profileUser: res.data });
-        }).catch( err => console.log('Error', err) );
-    }
-
     follow ( profileUserId ) {
         axios.post('/api/follow', { profileUserId }).then( res => {
-            console.log( res.data );
+            this.setState(prevState => ({ isFollowing: !prevState.isFollowing }));
         }).catch( err => console.log('Error', err) );
     }
 
-    unfollow ( id ) {
-        axios.delete(`/api/unfollow/${ id }`).then( res => {
-            console.log( res.data );
+    unfollow ( profileUserId ) {
+        axios.delete(`/api/unfollow/${ profileUserId }`).then( res => {
+            this.setState( prevState => ({ isFollowing: !prevState.isFollowing }));
         }).catch( err => console.log('Error', err) );
     }
 
     render () {
         const { user } = this.props;
-        const { profileUser } = this.state;
-        const { username } = this.props.match.params; // This is needed for checking if the user is on their profile page
-        console.log('UserProfile profileUser', profileUser)
+        const { profileUser, follows, followers, isFollowing } = this.state;
+        const { username } = this.props.match.params;  // This is needed for checking if the user is on their profile page
         
         return (
             <div className="profile">
-            { profileUser.username && 
+            { profileUser.username ? (
                 <div>
                     <div className="profile-header-bkgd">
                         { profileUser.headerbkgdimgurl && <img src={profileUser.headerbkgdimgurl} alt="Profile header pic"/> }
                     </div>
-
-                    { user.username !== username && ( 
-                        !user.username ? <Link to="/login"><button className="follow-btn btn">Follow</button></Link> :
-                        <button className="follow-btn btn" onClick={ () => this.follow( profileUser.id ) }>Follow</button> 
-                    ) }
 
                     <div className="profile-container">
 
@@ -80,19 +89,35 @@ class Profile extends Component {
                                     <Link to={`/${profileUser.username}/following`}>Following</Link>
                                     <Link to={`/${profileUser.username}/followers`}>Followers</Link>
                                 </div>
+
+                                <div className="follow-btn-container panel">
+                                { user.username !== username && (
+                                    !user.username ? 
+                                    <Link to="/login"><button className="follow-btn btn">Follow</button></Link> :
+                                    isFollowing ?
+                                    <button className="follow-btn btn" onClick={ () => this.unfollow( profileUser.id ) }>Unfollow</button> :
+                                    <button className="follow-btn btn" onClick={ () => this.follow( profileUser.id ) }>Follow</button>
+                                ) }
+                                </div>
                             </div>
                         </div>
 
                         <Switch>
                             <Route exact path={`/${profileUser.username}`} render={ () => <Posts profileUser={ profileUser } paramsUsername={ username }/> } />
                             <Route path={`/${profileUser.username}/posters`} render={ () => <Posters profileUser={ profileUser } paramsUsername={ username }/> } />
-                            <Route path={`/${profileUser.username}/following`} render={ () => <Following profileUser={ profileUser } paramsUsername={ username }/> } />
-                            <Route path={`/${profileUser.username}/followers`} render={ () => <Followers profileUser={ profileUser } paramsUsername={ username }/> } />
+                            <Route path={`/${profileUser.username}/following`} render={ () => <Following profileUser={ profileUser } paramsUsername={ username } follows={follows} /> } />
+                            <Route path={`/${profileUser.username}/followers`} render={ () => <Followers profileUser={ profileUser } paramsUsername={ username } followers={followers} /> } />
                         </Switch>
 
                     </div>
                 </div> 
-            }
+            ) : (
+                <div className="loading-container">
+                    <div className="circle">
+                        <div className="line"></div>
+                    </div>
+                </div>
+            ) }
                 
             </div>
         )

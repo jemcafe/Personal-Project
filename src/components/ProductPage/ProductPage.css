@@ -1,8 +1,8 @@
-.item-page {
+.product-page {
     padding: 10px 50px;
     box-sizing: border-box;
 }
-.item-page-container {
+.product-page-container {
     display: flex;
     justify-content: space-between;
     /* align-items: center; */
@@ -29,6 +29,6 @@
     margin: 20px 0;
 }
 
-.item-page h4 {
+.product-page h4 {
     color: rgba(145, 64, 84, 0.459);
 }

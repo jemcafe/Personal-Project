@@ -1,39 +1,34 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-
 import { connect } from 'react-redux';
 import { getUser, getProductCategories, getProductSubcategories } from '../redux/ducks/reducer';
-
 import routes from '../router';
-import MainHeader from './MainHeader/MainHeader';
+import Header from './Header/Header';
 
 class App extends Component {
 
     componentDidMount () {
         const { getUser, getProductCategories, getProductSubcategories } = this.props;
-
-        // Check if the user is logged in
-        axios.get('/api/user').then( res => {
-            getUser( res.data );
-        }).catch( err => console.log(err) );
-
-        // Get the product categories
-        axios.get('/api/product-categories').then( res => {
-            getProductCategories( res.data );
-        }).catch( console.log() );
-
-        // Get the product subcategories
-        axios.get('/api/product-subcategories').then( res => {
-            getProductSubcategories( res.data );
-        }).catch( console.log() );
+        
+        // Checks if the user is logged in (session)
+        // Gets the list of product categories and subcategories
+        axios.all([
+            axios.get('/api/user'),
+            axios.get('/api/product/categories'),
+            axios.get('/api/product/subcategories')
+        ]).then(axios.spread( ( userRes, productCategoriesRes, productSubcategoriesRes ) => {
+            getUser( userRes.data );
+            getProductCategories( productCategoriesRes.data );
+            getProductSubcategories( productSubcategoriesRes.data );
+        })).catch(err => console.log(err));
     }
     
     render() {
         return (
             <div className="App">
 
-                <MainHeader />
+                <Header />
 
                 <main className="main">
                     <div className="main-container panel">
@@ -46,7 +41,7 @@ class App extends Component {
                 <footer className="footer">
                     <div className="footer-container panel">
 
-                        <div>&copy; 2018 N2Agate</div>
+                        <div>&copy; 2018 ThruAgate</div>
 
                     </div>
                 </footer>

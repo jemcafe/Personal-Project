@@ -16,8 +16,7 @@ class Posts extends Component {
             text: '',
             image: '',
         }
-        this.editPost = this.editPost.bind(this);
-        this.deletePost = this.deletePost.bind(this);
+        // Methods do not need to be binded if they are function expressions ( React 2016 )
     }
 
     componentDidMount () {
@@ -54,7 +53,7 @@ class Posts extends Component {
         }
     }
 
-    editPost ( id, title, text, image ) {
+    editPost = ( id, title, text, image ) => {
         const { profileUser } = this.props;
         const body = {
             title: title,
@@ -72,7 +71,7 @@ class Posts extends Component {
     }
     
 
-    deletePost ( id ) {
+    deletePost = ( id ) => {
         const { profileUser } = this.props;
 
         axios.delete(`/api/delete-post/${ id }`).then( res => {
@@ -98,7 +97,7 @@ class Posts extends Component {
         });
 
         const listOfRecentPosters = posters.map( poster => {
-            return <li key={ poster.id }><img src={ poster.imageurl } alt="poster pic"/></li> 
+            return <li key={ poster.id } className="fade-in"><img src={ poster.imageurl } alt="poster pic"/></li> 
         });
 
         return (

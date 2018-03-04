@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const massive = require('massive');
 const session = require('express-session');
-
 require('dotenv').config();
 
 // Middleware
@@ -11,7 +10,7 @@ const checkForSession = require('./middlewares/checkForSession');
 
 // Controllers
 const authCntrl = require('./controllers/auth_controller');
-const srchProductsCntrl = require('./controllers/searchProducts_controller');
+const searchCntrl = require('./controllers/search_controller');
 const postsCntrl = require('./controllers/posts_controller');
 const postersCntrl = require('./controllers/posters_controller');
 const followsCntrl = require('./controllers/follows_controller');
@@ -54,8 +53,8 @@ app.get('/api/user', authCntrl.getUser);
     // Follows
     app.post('/api/follow', followsCntrl.follow);
     app.delete('/api/unfollow/:id', followsCntrl.unfollow);
-    app.get('/api/follows/:userid', followsCntrl.getUserFollows);
-    app.get('/api/followers/:userid', followsCntrl.getUserFollowers);
+    app.get('/api/follows/:username', followsCntrl.getFollows);
+    app.get('/api/followers/:username', followsCntrl.getFollowers);
     // Cart
     app.post('/api/add-item', cartCntrl.addItem);
     app.delete('/api/remove-item/:id', cartCntrl.removeItem);
@@ -63,28 +62,28 @@ app.get('/api/user', authCntrl.getUser);
     app.get('/api/cart', cartCntrl.getCart);
     app.delete('/api/remove-all-items', cartCntrl.removeAllItems);
 
-// Users ( neccessary for getting a specific user's profile )
+// Users ( Necessary for getting that are not logged in )
     app.get('/api/user/:username', usersCntrl.getUser);
     app.get('/api/users', usersCntrl.getUsers);
 
 // Products
     // Categories
-    app.get('/api/product-categories', srchProductsCntrl.getProductCategories);
-    app.get('/api/product-subcategories', srchProductsCntrl.getProductSubcategories);
+    app.get('/api/product/categories', searchCntrl.getProductCategories);
+    app.get('/api/product/subcategories', searchCntrl.getProductSubcategories);
     // Search
-    app.get('/api/search/games', srchProductsCntrl.getGames);
-    app.get('/api/search/books', srchProductsCntrl.getVolumes);
-    app.get('/api/search/posters', srchProductsCntrl.getPosters);
+    app.get('/api/search/games', searchCntrl.getGames);
+    app.get('/api/search/books', searchCntrl.getVolumes);
+    app.get('/api/search/posters', searchCntrl.getPosters);
     // Ratings
-    app.get('/api/book-ratings', srchProductsCntrl.getBookRatings);
+    app.get('/api/book-ratings', searchCntrl.getBookRatings);
 
 // Stripe payment
     app.post('/save-stripe-token', stripeCntrl.paymentApi);
 
 
 // This is just for getting the 3rd party api data to my database, so searching and finding products is easier than search 3 seperate APIs (two 3rd parties and my own)
-app.get('/api/getgames', srchProductsCntrl.getGamesForDatabase);
-app.get('/api/getBooks', srchProductsCntrl.getBooksForDatabase);
+app.get('/api/get-games', searchCntrl.getGamesForDatabase);
+app.get('/api/get-books', searchCntrl.getBooksForDatabase);
 
 
 const port = process.env.SERVER_PORT || 3030;

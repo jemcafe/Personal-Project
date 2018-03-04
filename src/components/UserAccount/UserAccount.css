@@ -2,10 +2,6 @@
   display: flex;
   flex-direction: column;
 }
-  
-  .useraccount .main {
-    /* background-color: #cbf8d6; */
-  }
 
   .useraccount .settings-container {
     background-color: #cbe4fc;

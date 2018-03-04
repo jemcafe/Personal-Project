@@ -34,24 +34,6 @@ class CheckoutPage extends Component {
 
                 { user.username &&
                 <div className="checkout-page-container">
-                    {/* <div>Checkout Page</div> */}
-
-                    {/* <div className="shipping-info">
-                        <div>Shipping Address</div>
-                        <input placeholder="Name"/>
-                        <input placeholder="Address"/>
-                        <input placeholder="City"/>
-                        <input placeholder="State"/>
-                        <input placeholder="Zip Code"/>
-                    </div>
-
-                    <div className="payment-info">
-                        <div>Payment</div>
-                        <select>
-                            <option>Visa</option>
-                            <option>Master</option>
-                        </select>
-                    </div> */}
 
                     <div className="total">Total: <span>${ priceTotal }</span></div>
 

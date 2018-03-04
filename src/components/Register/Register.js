@@ -40,7 +40,7 @@ class Register extends Component {
             console.log( res.data );
             if ( res.data ) {
                 this.props.register( res.data );
-                this.props.history.push('/user');
+                this.props.history.push(`/${this.props.user.username}`);
             }
         }).catch( console.log() );
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './MainHeader.css';
+import './Header.css';
 import FaBars from 'react-icons/lib/fa/bars';
 import FaClose from 'react-icons/lib/fa/close';
 import { Link } from 'react-router-dom';
@@ -13,29 +13,25 @@ import SearchBar from './SearchBar/SearchBar';
 class MainHeader extends Component {
     constructor () {
         super();
-        this.state = { showMenu: false }
-    }
-
-    menuToggle () {
-        // Toggle control for the responsive menu
-        if ( this.state.showMenu === false ) {
-            this.setState({ showMenu: true });
-        } else {
-            this.setState({ showMenu: false });
+        this.state = { 
+            showMenu: false 
         }
     }
 
+    menuToggle () {
+        // Toggle control for the responsive header menu
+        this.setState(prevState => ({ showMenu: !prevState.showMenu }));
+    }
+
     logout () {
-        axios.post(`/api/logout`).then( res => {
-            console.log( res.data );
-            this.props.logout( res.data );
+        axios.post(`/api/logout`).then( user => {
+            this.props.logout( user.data );
 
             axios.get('/api/cart').then( res => {
                 this.props.updateCartItems( res.data );
-                console.log( this.props.cartItems );
-            }).catch( console.log() );
+            }).catch(err => console.log(err));
 
-        }).catch( console.log() );
+        }).catch(err => console.log(err));
     }
 
     render () {
@@ -54,7 +50,7 @@ class MainHeader extends Component {
                                     <div className="user-dropdown-content">
                                         {/* <Link to={`/${user.username}`}>Profile</Link> */}
                                         <Link to={`/${user.username}`}>My Profile</Link>
-                                        <Link to={`/${user.username}/posters`}>My Posters</Link>
+                                        <Link to={`/useraccount/posters`}>My Posters</Link>
                                         <Link to={`/${user.username}/following`}>Following</Link>
                                         <Link to={`/${user.username}/followers`}>Followers</Link>
                                         <Link to={`/useraccount/cart`}>Cart ({ cartItemsQuantity })</Link>
@@ -70,7 +66,7 @@ class MainHeader extends Component {
                 <div className="main-header-container panel">
 
                     <div className="header-1 position">
-                        <Link to="/"><div className="title">N2Agate</div></Link>
+                        <Link to="/"><div className="title">ThruAgate</div></Link>
 
                         <div className="header-nav nav-1">
                             <SearchBar />

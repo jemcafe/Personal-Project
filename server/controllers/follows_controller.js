@@ -25,11 +25,11 @@ module.exports = {
         });
     },
 
-    getUserFollows ( req, res ) {
+    getFollows ( req, res ) {
         const db = req.app.get('db');
-        const { userid } = req.params;
+        const { username } = req.params;
 
-        db.read_user_follows( [userid] ).then( follows => {
+        db.read_user_follows( [username] ).then( follows => {
             res.status(200).json( follows );
         }).catch( err => {
             console.log(err)
@@ -37,11 +37,11 @@ module.exports = {
         });
     },
 
-    getUserFollowers ( req, res ) {
+    getFollowers ( req, res ) {
         const db = req.app.get('db');
-        const { userid } = req.params;
+        const { username } = req.params;
 
-        db.read_user_followers( [userid] ).then( followers => {
+        db.read_user_followers( [username] ).then( followers => {
             res.status(200).json( followers );
         }).catch( err => {
             console.log(err);

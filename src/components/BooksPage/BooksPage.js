@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
 import ContentSlider from '../ContentSlider/ContentSlider';
-import ItemPage from '../ItemPage/ItemPage';
 
 class BooksPage extends Component {
 
@@ -19,8 +18,6 @@ class BooksPage extends Component {
                                               'https://images-na.ssl-images-amazon.com/images/I/91mya47EdnL.jpg',
                                               'https://m.media-amazon.com/images/I/51jVpI9h-jL._SL500_.jpg'] } /> 
                     } } />
-
-                    <Route exact path="/books/:name" component={ ItemPage } />
 
                 </div>
             </div>

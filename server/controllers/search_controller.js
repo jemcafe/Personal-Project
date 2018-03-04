@@ -6,9 +6,8 @@ module.exports = {
     getProductCategories ( req, res, next ) {
         const db = req.app.get('db');
 
-        db.read_productCategories().then( category => {
+        db.read_productCategories().then( categories => {
 
-            const categories = category.map( e => e.productcategory );
             res.status(200).json( categories );
 
         }).catch( err => {
@@ -20,29 +19,15 @@ module.exports = {
     getProductSubcategories ( req, res, next ) {
         const db = req.app.get('db');
 
-        db.read_gamePlatforms().then( platform => {
-            db.read_bookSubjects().then( subject => {
-                db.read_posterCategories().then( pCategory => {
+        db.read_gamePlatforms().then( gamePlatforms => {
+            db.read_bookSubjects().then( bookSubjects => {
+                db.read_posterCategories().then( posterCategories => {
 
-                    const platforms = platform.map( e => e.platform );
-                    const subjects = subject.map( e => e.subject );
-                    const pCategories = pCategory.map( e => e.category );
+                    res.status(200).json( [gamePlatforms, bookSubjects, posterCategories] );
 
-                    const subCategories = [['All', ...platforms], ['All', ...subjects], ['All', ...pCategories]];
-                    res.status(200).json( subCategories );
-
-                }).catch( err => {
-                    console.log(err);
-                    res.status(500).send('No poster categories');
-                });
-            }).catch( err => {
-                console.log(err);
-                res.status(500).send('No book subjects');
-            });
-        }).catch( err => {
-            console.log(err);
-            res.status(500).send('No game platforms');
-        });
+                }).catch( err => console.log(err) );
+            }).catch( err => console.log(err) );
+        }).catch( err => console.log(err) );
     },
     
     getGames ( req, res, next ) {
@@ -124,7 +109,6 @@ module.exports = {
             const filteredPosters = posters.filter( poster => poster.name.toLowerCase().includes( search.toLowerCase() ) ? poster : false )
                                            .filter( poster => category === 'All' || category === '' ? poster : category === poster.category ? poster : false);
             const allPosters = !category ? posters : filteredPosters;
-
             res.status(200).json( allPosters );
 
         }).catch( err => {

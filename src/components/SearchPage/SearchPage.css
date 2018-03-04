@@ -66,12 +66,12 @@
   flex-direction: column;
   /* background-color: #c8e2f8; */
 }
-.item-container > .item-info-container {
+.item-container .item-info-container {
   font-size: 14px;
   padding-top: 5px;
   box-sizing: border-box;
 }
-.item-container > .item-info-container > .title:hover {
+.item-container .title:hover, .creator-name a:hover {
   color: #ec554a;
 }
 .search-page .item-info-container .info {

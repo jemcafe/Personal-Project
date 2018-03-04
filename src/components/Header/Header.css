@@ -28,10 +28,6 @@
 }
 .main-header-container {    /*  The position class above handles the absolute position of the contents in the container */ 
   display: flex;
-  /* justify-content: space-between; */
-  /* padding: 20px 30px; */
-  /* box-sizing: border-box; */
-  /* left: auto; */
   height: 5em;
   /* background-color: #f8e4ba; */
 }
@@ -60,7 +56,7 @@
   margin: 0 4px;
   background-color: rgb(255, 255, 255);
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   font-size: 15px;
 }
     ::placeholder {

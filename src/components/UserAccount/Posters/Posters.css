@@ -1,6 +1,6 @@
-.useraccount .posters {
-    /* background-color: #cbe4fc; */
-  }
+/* .useraccount .posters {
+    background-color: #cbe4fc;
+  } */
     .posters-container {
         display: flex;
         flex-direction: column;
@@ -47,66 +47,3 @@
     .posters h5 {
         color: rgba(145, 64, 84, 0.459);
     }
-    
-    .poster {
-        background-color: #e1d0ec;
-        margin: 4px;
-    }
-    /* Fills the thumbnail div with the image */
-    .poster .thumbnail {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        width: 187.5px;
-        height: 187.5px;
-    }
-    .poster .thumbnail > img {  /*  When height is greater than width  */
-        flex-shrink: 0;
-        max-width: 100%;
-        min-height: 100%;
-    }
-    .poster .thumbnail > .edit {
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        width: 187.5px;
-        height: 187.5px;
-        background: rgba(0, 0, 0, 0.6);
-        opacity: 0;
-    }
-    .poster .thumbnail > .edit:hover {
-        opacity: 1;
-    }
-    .poster-name {
-        width: 170px;
-        font-size: 15px;
-        color: white;
-    }
-    .poster .fa-trash {
-        position: absolute;
-        right: 0;
-        margin: 9px;
-        transform: translate( 0, -81px);
-    }
-
-/*  Animations  */
-
-.fade {
-    animation-name: "fade-out";
-    animation-duration: 0.5s;
-  }
-  .fade:hover {
-    animation-name: "fade-in";
-    animation-duration: 0.5s;
-  }
-  @keyframes fade-in {
-    0% { opacity: 0;}
-    100% { opacity: 1; }
-  }
-  @keyframes fade-out {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-  }

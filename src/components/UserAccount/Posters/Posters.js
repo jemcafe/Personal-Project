@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './Posters.css';
-import FaTrash from 'react-icons/lib/fa/trash';
 import axios from 'axios';
 
 import { connect } from 'react-redux';
+
+import Poster from './Poster/Poster';
 
 class Posters extends Component {
     constructor () {
@@ -14,13 +15,15 @@ class Posters extends Component {
             description: '',
             price: '',
             category: 'Digital Art',
-            image: '',
+            imageurl: ''
         }
+        // Methods do not need to be binded if they are function expressions ( React 2016 )    
     }
 
     componentDidMount () {
-        axios.get(`/api/posters/${this.props.user.id}`).then( res => {
-            this.setState({ posters: res.data });
+        axios.get(`/api/posters/${this.props.user.id}`).then( posters => {
+            console.log('Posters', posters.data);
+            this.setState({ posters: posters.data });
         }).catch( err => console.log(err) );
     }
 
@@ -28,58 +31,54 @@ class Posters extends Component {
         this.setState({ [property]: value });
     }
 
-    addPoster ( name, description, price, category, image ) {
-        const body = {
-            name: name,
-            description: description,
-            price: price,
-            cateogry: category,
-            image: image
-        };
+    addPoster = () => {
+        const { name, description, price, category, imageurl } = this.state;
+        axios.post('/api/new-poster', { name, description, price, category, imageurl }).then( res => {
+            axios.get(`/api/posters/${this.props.user.id}`).then( posters => {
 
-        axios.post('/api/new-poster', body).then( res => {
+                this.setState({ 
+                    posters: posters.data, 
+                    name: '', 
+                    description: '', 
+                    price: '', 
+                    imageurl: '' 
+                });
 
-            axios.get(`/api/posters/${this.props.user.id}`).then( resp => {
-                this.setState({ posters: resp.data, name: '', description: '', price: '', image: '' });
             }).catch( err => console.log(err) );
-
         }).catch( err => console.log( err ) );
     }
 
-    deletePoster ( id ) {
-        axios.delete(`/api/delete-poster/${ id }`).then( res => {
+    deletePoster = ( id ) => {
+        axios.delete(`/api/delete-poster/${ id }`).then( () => {
+            axios.get(`/api/posters/${this.props.user.id}`).then( posters => {
 
-            axios.get(`/api/posters/${this.props.user.id}`).then( resp => {
-                this.setState({ posters: resp.data, name: '', description: '', price: '', image: '' });
+                this.setState({ 
+                    posters: posters.data, 
+                    name: '', 
+                    description: '', 
+                    price: '', 
+                    imageurl: '' 
+                });
+
             }).catch( err => console.log(err) );
-
         }).catch( err => console.log( err ) );
     }
 
     render () {
-        const { posters, name, description, price, category, image } = this.state;
-        const { user, productSubcategories } = this.props;
+        const { posters, name, description, price, category, imageurl } = this.state;
+        const { productSubcategories } = this.props;
 
-        // The first category ('All') is removed from the list of categories
-        const categories = productSubcategories.length && productSubcategories[2].map( (e, i) => i !== 0 ? <option key={ i } value={ e }>{ e }</option> : false ).filter( e => e );
+        // The first category ('All') is removed from the list of poster categories
+        const posterCategories = productSubcategories[2]
+                           .map( (e, i) => i !== 0 ? <option key={ i } value={ e.id }>{ e.category }</option> : false )
+                           .filter( e => e );
 
+        // The list of posters
         const listOfPosters = posters.map( poster => {
-            return (
-                <li key={ poster.id }>
-                    <div className="poster">
-
-                        <div className="thumbnail">
-                            <div className="edit fade">
-                                <div className="poster-name">{ poster.name }</div>
-                                <button className="edit-btn btn">Edit</button>
-                                <FaTrash className="fa-trash" onClick={ () => this.deletePoster(poster.id) } size={25} color="lightgrey" />
-                            </div>
-                            <img src={ poster.imageurl } alt={ poster.name }/>
-                        </div>
-                        
-                    </div>
-                </li>
-            );
+            return <Poster key={poster.id} 
+                           poster={poster}
+                           posterCategories={posterCategories}
+                           deletePoster={this.deletePoster}/>
         });
 
         return (
@@ -89,18 +88,20 @@ class Posters extends Component {
 
                     <div className="new-poster">
                         <div className="new-poster-container">
-                            <input className="input" value={ name } placeholder="Name" onChange={ (e) => this.handleChange('name', e.target.value) }/>
+                            <input className="input" value={ imageurl } placeholder="Url" onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
+                            <input className="input" value={ name } placeholder="Title" onChange={ (e) => this.handleChange('name', e.target.value) }/>
                             <input className="input" value={ description } placeholder="Description" onChange={ (e) => this.handleChange('description', e.target.value) }/>
                             <input className="input" value={ price } placeholder="Price" onChange={ (e) => this.handleChange('price', e.target.value) }/>
-                            <input className="input" value={ image } placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
                             <select value={ category } name="categories" onChange={ (e) => this.handleChange("category", e.target.value) }>
-                                { categories }
+                                { posterCategories }
                             </select>
-                            <button className="btn" onClick={ () => this.addPoster(name, description, price, category, image) }>Save</button>
+                            <button className="btn" onClick={ this.addPoster }>Save</button>
                         </div>
                     </div>
 
-                    { listOfPosters.length > 0 ? <ul className="posters-list">{ listOfPosters }</ul> : <h5>No posters created</h5> }
+                    { posters
+                    ? <ul className="posters-list">{ listOfPosters }</ul>
+                    : <h5>No posters created</h5> }
 
                 </div>
             </div>

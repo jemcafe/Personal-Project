@@ -42,7 +42,7 @@ module.exports = {
 
         db.find_user( [username, password] ).then( user => {
             
-            // If the user is not found and the username aren't the same
+            // If the user is not found and the given username is not the same as another user
             if ( !user.length ) {
                 // The user is created
                 bcrypt.hash( password, saltRounds ).then( hashedPassword => {
@@ -71,15 +71,11 @@ module.exports = {
     },
 
     logout ( req, res, next ) {
-        const { session } = req;
-
-        session.destroy();
+        req.session.destroy();
         res.status(200).json( {} );
     },
 
     getUser ( req, res, next ) {
-        const { session } = req;
-        
-        res.status(200).json( session.user );
+        res.status(200).json( req.session.user );
     }
 }

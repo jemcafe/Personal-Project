@@ -21,12 +21,7 @@ class Post extends Component {
     }
 
     toggleEdit () {
-        console.log( this.state.editMode );
-        if ( this.state.editMode === false) {
-            this.setState({ editMode: true }); 
-        } else {
-            this.setState({ editMode: false });
-        }
+        this.setState(prevState => ({ editMode: !prevState.editMode }));
     }
 
     saveEdit (id, title, text, image) {
@@ -42,9 +37,9 @@ class Post extends Component {
         const imageurlCheck = (imageurl.slice(0,7) === 'http://' || imageurl.slice(0,8) === 'https://') ? true : false;
 
         return (
-            <li className="post">
+            <li className="post fade-in">
                 { !this.state.editMode ? (
-                    <div className="post-container">
+                    <div className="post-container fade-in">
 
                         <div className="name-title padding-align">
                             <Link to={`/${username}`}><img src={ profileUser.imageurl} alt="Proifle pic"/></Link>
@@ -61,20 +56,16 @@ class Post extends Component {
                 ) : (
                     <div className="post-container">
 
+                        <div className="name-title padding-align">
+                            <Link to={`/${username}`}><img src={ profileUser.imageurl} alt="Proifle pic"/></Link>
+                        </div>
                         { imageurlCheck && <div className="image"><img src={ imageurl } alt="Url not found"/></div> }
-                        <div>
-                            <input placeholder="Url" defaultValue={ imageurl } onChange={ (e) => this.handleChange('image', e.target.value) }/>
-                        </div>
-                        <div>
-                            <div>Title: <input placeholder="Title" defaultValue={ title } onChange={ (e) => this.handleChange('title', e.target.value) }/></div>
-                            <div>Username: { username }</div>
-                        </div>
-                        <div>Text: <input placeholder="Text" defaultValue={ text } onChange={ (e) => this.handleChange('text', e.target.value) }/></div>
-                        <div>{ dateposted }</div>
-                        <span>
-                            <button onClick={ () => this.toggleEdit() }>Cancel</button>
-                            <button onClick={ () => this.saveEdit( id, this.state.title, this.state.text, this.state.image ) }>Save</button>
-                            <button onClick={ () => this.props.deletePost( id ) }>Delete</button>
+                        <div><input className="input" placeholder="Title" defaultValue={ title } onChange={ (e) => this.handleChange('title', e.target.value) }/></div>
+                        <div><input className="input" placeholder="Url" defaultValue={ imageurl } onChange={ (e) => this.handleChange('image', e.target.value) }/></div>                        <textarea className="input" rows="1" cols="10" defaultValue={ text } placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }></textarea>
+                        <span className="btns">
+                            <button className="btn" onClick={ () => this.toggleEdit() }>Cancel</button>
+                            <button className="btn" onClick={ () => this.saveEdit( id, this.state.title, this.state.text, this.state.image ) }>Save</button>
+                            <button className="btn" onClick={ () => this.props.deletePost( id ) }>Delete</button>
                         </span>
 
                     </div>

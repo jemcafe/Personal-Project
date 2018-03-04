@@ -2,6 +2,10 @@
   background-color: #cbe4fc;
 } */
 
+/* .loading-container {
+  padding: 30vh 0 0 0;
+} */
+
 .profile-header-bkgd {
   position: absolute;
   left: 0;
@@ -12,7 +16,7 @@
   overflow: hidden;
   width: 100%;
   height: 10em;
-  background-image: linear-gradient( 0deg, #e9e3f1, transparent );
+  background-image: linear-gradient( 0deg, #e9e3f1, white );
   /* background:  #cdc7d6; */
 }
 .profile-header-bkgd img {
@@ -20,9 +24,13 @@
   width: 100%;
   min-height: 100%;
 }
-.follow-btn {
-  position: absolute;
-  margin: auto;
+.follow-btn-container {
+  display: flex;
+  justify-content: center;
+  padding: 5px 0;
+  box-sizing: border-box;
+  width: 100%;
+  /* background-color: rgb(199, 255, 199); */
 }
 
 .profile-container {
@@ -46,7 +54,7 @@
         padding: 10px 50px;
         box-sizing: border-box;
         border-radius: 0 0 3px 3px;
-        background: linear-gradient( 180deg, #ffb6b6b0, transparent);
+        background: linear-gradient( 180deg, #ffb6b6b0, white);
         /* background-color: #ffd5d0; */
         /* background-color: #fccbd9; */
     }
@@ -89,6 +97,19 @@
         box-sizing: border-box;
         color: rgba(84, 74, 88, 0.767);
     }
+
+
+/* Animations  */
+
+.fade-in {
+  animation-name: "fade-in";
+  animation-duration: 1s;
+}
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 
 /*  Responsive  */
 

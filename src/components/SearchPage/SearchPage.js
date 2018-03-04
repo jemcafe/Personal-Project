@@ -6,17 +6,12 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { updateCartItems, getProductInfo } from '../../redux/ducks/reducer';
+import { updateCartItems, getProduct } from '../../redux/ducks/reducer';
 
 class SearchPage extends Component {
     constructor () {
         super();
         this.state = {}
-        this.addItem = this.addItem.bind(this);
-    }
-
-    changePage () {
-        
     }
 
     addItem ( item ) {
@@ -30,21 +25,20 @@ class SearchPage extends Component {
         };
 
         axios.post('/api/add-item', body).then( res => {
-            axios.get('/api/cart').then( resp => {
+            axios.get('/api/cart').then( cart => {
 
-                this.props.updateCartItems( resp.data );
+                this.props.updateCartItems( cart.data );
 
             }).catch( err => console.log(err) );
         }).catch( err => console.log(err) );
     }
 
-    getProductInfo ( product ) {
-        this.props.getProductInfo( product );
+    getProduct ( product ) {
+        this.props.getProduct( product );
     }
 
     render () {
         const { user, searchResults } = this.props;
-        const { getProductInfo } = this.props;
 
         // List of products
         const list = searchResults.map( item => {
@@ -52,18 +46,21 @@ class SearchPage extends Component {
                 <div className="item">
                     <div className="item-container">
 
-                        <Link to={`${item.productcategory.toLowerCase()}/${item.name}`}>
+                        <Link to={`/product/${item.name.split(' ').join('_')}`}>
                             <div className="image-container">
-                                <img className="img-anim" src={ item.imageurl } alt="cover" onClick={ () => getProductInfo(item) }/>
+                                <img className="img-anim" src={ item.imageurl } alt="cover" onClick={ () => this.getProduct(item) }/>
                             </div>
                         </Link>
 
                         <div className="item-info-container">
 
-                            <Link to={`${item.productcategory.toLowerCase()}/${item.name}`} 
-                                    className="title" 
-                                    onClick={ () => getProductInfo(item) }
-                            >{ item.name.length > 20 ? `${item.name.slice(0,20).trim()}...` : item.name }</Link>
+                            <Link to={`/product/${item.name.split(' ').join('_')}`} className="title" onClick={ () => this.getProduct(item) }>
+                                { item.name.length > 20 ? `${item.name.slice(0,20).trim()}...` : item.name }
+                            </Link>
+
+                            { item.username && 
+                            <div className="creator-name">by <Link to={`/${item.username}`}>{ item.username }</Link></div> 
+                            }
 
                             <div className="info">
                                 <div>Rating</div>
@@ -73,7 +70,8 @@ class SearchPage extends Component {
 
                             { user.username ? 
                             <button className="add-btn btn" onClick={ () => this.addItem( item ) }>Add To Cart</button> : 
-                            <Link to="/login"><button className="add-btn btn">Add To Cart</button></Link> }
+                            <Link to="/login"><button className="add-btn btn">Add To Cart</button></Link> 
+                            }
                             
                         </div>
 
@@ -85,9 +83,9 @@ class SearchPage extends Component {
         return (
             <div className="search-page">
                 <div className="search-page-container">
-                    {/* <div>The Search Page</div> */}
                     <div className="">Search Results:</div>
 
+                    { list.length ? (
                     <div className="results">
                         <div className="results-container">
 
@@ -100,6 +98,13 @@ class SearchPage extends Component {
                             
                         </div>
                     </div>
+                    ) : (
+                        <div className="loading-container">
+                            <div className="circle">
+                                <div className="line"></div>
+                            </div>
+                        </div>
+                    ) }
                     
                 </div>
             </div>
@@ -112,13 +117,13 @@ const mapStateToProps = ( state ) => {
         user: state.user,
         cartItems: state.cartItems,
         searchResults: state.searchResults,
-        productInfo: state.productInfo
+        product: state.product
     };
 };
 
 const mapDispatchToProps = {
     updateCartItems: updateCartItems,
-    getProductInfo: getProductInfo
+    getProduct: getProduct
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( SearchPage );

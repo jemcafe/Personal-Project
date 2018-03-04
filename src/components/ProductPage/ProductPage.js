@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
-import './ItemPage.css';
+import './ProductPage.css';
 import { connect } from 'react-redux';
 
-class ItemPage extends Component {
+class ProductPage extends Component {
+    
+    componentWillReceiveProps ( nextProps ) {
+        
+    }
     
     render () {
         const { productInfo } = this.props;
 
         return (
-            <div className="item-page">
+            <div className="product-page">
             { productInfo.name ?
-                <div className="item-page-container">
-                    {/* <div>The Item Page</div> */}
+                <div className="product-page-container">
 
                     <div className="img-container">
                         <img className="product-img"src={ productInfo.imageurl } alt="Product pic"/>
@@ -41,4 +44,4 @@ const mapStateToProps = ( state ) => {
 //     getProductInfo: getProductInfo
 // }
 
-export default connect( mapStateToProps )( ItemPage );
+export default connect( mapStateToProps )( ProductPage );

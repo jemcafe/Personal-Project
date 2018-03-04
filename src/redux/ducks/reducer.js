@@ -8,7 +8,7 @@ const initialState = {
    productCategories: [],
    productSubcategories: [],
    searchResults: [],
-   productInfo: {},
+   product: {},
 };
 
 // Action types
@@ -16,8 +16,6 @@ const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 const REGISTER = 'REGISTER';
 const GET_USER = 'GET_USER';
-// const GET_PROFILE_USER = 'GET_PROFILE_USER';
-// const GET_OTHER_USER = 'GET_OTHER_USER';
 
 const UPDATE_POSTS = 'UPDATE_POSTS';
 const UPDATE_POSTERS = 'UPDATE_POSTERS';
@@ -26,7 +24,7 @@ const UPDATE_CART_ITEMS = 'UPDATE_CART_ITEMS';
 const GET_PRODUCT_CATEGORIES = 'GET_PRODUCT_CATEGORIES';
 const GET_PRODUCT_SUBCATEGORIES = 'GET_PRODUCT_SUBCATEGORIES';
 const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS';
-const GET_PRODUCT_INFO= 'GET_PRODUCT_INFO';
+const GET_PRODUCT= 'GET_PRODUCT';
 
 // Reducer
 export default function reducer ( state = initialState, action ) {
@@ -53,7 +51,7 @@ export default function reducer ( state = initialState, action ) {
          return { ...state, productSubcategories: payload };
       case UPDATE_SEARCH_RESULTS:
          return { ...state, searchResults: payload };
-      case GET_PRODUCT_INFO:
+      case GET_PRODUCT:
          return { ...state, productInfo: payload };
       default:
          return state;
@@ -131,9 +129,9 @@ export function updateSearchResults ( searchResults ) {
    };
 }
 
-export function getProductInfo ( productInfo ) {
+export function getProduct ( product ) {
    return {
-      type: 'GET_PRODUCT_INFO',
-      payload: productInfo
+      type: 'GET_PRODUCT',
+      payload: product
    };
 }

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './UserAccount.css';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-// Components ( routes )
+// Components
 import Posters from './Posters/Posters';
 // import Following from './Following/Following';
 import Cart from './Cart/Cart';
@@ -12,12 +12,15 @@ import Settings from './Settings/Settings';
 
 class UserAccount extends Component {
 
-    render () {
-        const { user } = this.props;
+    componentDidMount () {
+        if ( !this.props.user.username ) {
+            this.props.history.push('/login');
+        }
+    }
 
+    render () {
         return (
             <div className="useraccount">
-                { user.username ? (
                 <div className="useraccount-container">
 
                     <div className="main">
@@ -34,9 +37,6 @@ class UserAccount extends Component {
                     </div>
 
                 </div>
-                ) : (
-                <Redirect to="/login" />
-                ) }
             </div>
         )
     }

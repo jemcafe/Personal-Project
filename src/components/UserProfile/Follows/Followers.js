@@ -1,34 +1,18 @@
 import React, { Component } from 'react';
 import './Follows.css';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
-
 import { connect } from 'react-redux';
 
 class Followers extends Component {
-    constructor () {
-        super();
-        this.state = {
-            followers: []
-        }
-    }
-
-    componentDidMount () {
-        const { profileUser } = this.props;
-
-        axios.get(`/api/followers/${profileUser.id}`).then( followers => {
-            this.setState({ followers: followers.data });
-        }).catch( err => console.log(err) );
-    }
-
+    
     render () {
-        const { followers } = this.state;
+        const { followers } = this.props;
         
         const listOfFollowers = followers.map( follower => {
             return (
                 <li key={ follower.id }>
                     <div><Link to={`/${follower.username}`}><img className="profile-img" src={ follower.imageurl } alt="Profile pic"/></Link></div>
-                    <div><Link to={`/${follower.username}`}>{ follower.username }</Link></div>
+                    <div><Link to={`/${follower.username}`} className="username">{ follower.username }</Link></div>
                 </li>
             )
         });

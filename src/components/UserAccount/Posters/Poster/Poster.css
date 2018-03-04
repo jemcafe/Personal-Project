@@ -1,0 +1,132 @@
+.poster {
+    background-color: #e1d0ec;
+    margin: 4px;
+}
+.poster .thumbnail {    /* The image container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 187.5px;
+    height: 187.5px;
+}
+.poster .thumbnail > img {  /* When height is greater than width */
+    flex-shrink: 0;
+    max-width: 100%;
+    min-height: 100%;
+}
+
+
+/*  Thumbnail overlay on hover  */
+
+.poster .thumbnail > .overlay {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 187.5px;
+    height: 187.5px;
+    background: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+}
+.poster .thumbnail > .overlay:hover {
+    opacity: 1;
+}
+.poster .poster-name {
+    width: 170px;
+    font-size: 15px;
+    color: white;
+}
+.poster .trash-icon {
+    position: absolute;
+    right: 0;
+    margin: 9px;
+    transform: translate( 0, -81px);
+    font-size: 20px;
+    color: lightgrey;
+    cursor: pointer;
+}
+
+
+/*  Edit  */
+
+.poster .edit-overlay {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    /* padding: 20px; */
+    box-sizing: border-box;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.7);
+}
+.poster .edit-overlay .close-icon {
+    /* position: relative;
+    right: 0; */
+    font-size: 30px;
+    color: gray;
+    cursor: pointer;
+}
+.poster .edit {
+    width: 550px;
+    min-height: 500px;
+}
+.poster .edit > .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px; 
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin: 20px;
+    width: 100%;
+    /* min-height: 100%; */
+    background-color: #ffffff;
+    /* background-color: #fce1c8; */
+}
+.poster .edit .container img {
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+.poster .edit .container > div {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: left;
+}
+.poster .edit .container h4 {
+    margin: 0 0 6px 0;
+}
+.poster .edit .container .input {
+    width: 100%;
+}
+.poster .edit .container .price {
+    display: flex;
+    align-items: center;
+}
+
+
+
+/*  Animations  */
+
+.fade {
+    animation-name: "fade-out";
+    animation-duration: 0.5s;
+}
+.fade:hover {
+    animation-name: "fade-in";
+    animation-duration: 0.5s;
+}
+@keyframes fade-in {
+    0% { opacity: 0;}
+    100% { opacity: 1; }
+}
+@keyframes fade-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}

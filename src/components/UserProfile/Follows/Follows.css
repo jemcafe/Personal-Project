@@ -1,12 +1,13 @@
 .profile .follows {
     width: 100%;
-    background-color: #cbe4fc;
+    /* background-color: #cbe4fc; */
 }
-.profile .follows-container {
+/* .profile .follows-container {
     background-color: #cbe4fc;
-}
+} */
 
     .follows-container > h3 {
+        margin: 10px 0 25px 0;
         color: rgba(77, 33, 102, 0.753);
     }
     .follows-container > h5 {
@@ -15,19 +16,21 @@
 
     .follows-container ul {
         display: flex;
-        justify-content: center;
-        flex-direction: column;
-        /* align-items: right; */
-        background-color: #d6fccb;
+        justify-content: space-around;
+        /* padding: 0 50px;
+        box-sizing: border-box; */
+        /* background-color: #d6fccb; */
     }
     .follows-container li {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #fcddcb;
+        /* background-color: #fcddcb; */
     }
     .follows-container .profile-img {
-        max-width: 35px;
+        max-width: 45px;
         border-radius: 50%;
-        margin-right: 10px;
+    }
+    .follows-container .username {
+        margin-left: 12px;
     }
