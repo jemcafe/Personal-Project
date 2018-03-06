@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './Posts.css';
 import axios from 'axios';
-
 import { connect } from 'react-redux';
-
+// Components
 import Post from './Post/Post';
 
 class Posts extends Component {
@@ -11,80 +10,73 @@ class Posts extends Component {
         super();
         this.state = {
             posts: [],
-            posters: [],
+            recentPosters: [],
             title: '',
             text: '',
-            image: '',
+            imageurl: '',
         }
         // Methods do not need to be binded if they are function expressions ( React 2016 )
     }
 
     componentDidMount () {
-        const { profileUser } = this.props;
-
         axios.all([
-            axios.get(`/api/posts/${profileUser.id}`),
-            axios.get(`/api/recent-posters/${profileUser.id}`)
-        ]).then(axios.spread( ( posts, posters ) => {
-            this.setState({ posts: posts.data, posters: posters.data });
-        })).catch( err => console.log(err) );
+            axios.get(`/api/profile/${this.props.profileUser.username}/posts`),
+            axios.get(`/api/profile/${this.props.profileUser.username}/posters/recent`)
+        ]).then( axios.spread( (postsRes, postersRes) => {
+            console.log( 'Posts', postsRes.data );
+            console.log( 'Posters', postersRes.data );
+            this.setState({ 
+                posts: postsRes.data, 
+                recentPosters: postersRes.data 
+            });
+        })).catch(err => console.log(err));
     }
 
     handleChange ( property, value ) {
         this.setState({ [property]: value });
     }
 
-    createPost ( title, text, image ) {
-        const { profileUser } = this.props;
-        const body = {
-            title: title,
-            text: text,
-            image: image
-        };
-
+    createPost = () => {
+        const { title, text, imageurl } = this.state;
         if ( title && text ) {
-            axios.post('/api/new-post', body).then( res => {
+            axios.post('/api/post', { title, text, imageurl }).then( res => {
+                axios.get(`/api/posts`).then( posts => {
 
-                axios.get(`/api/posts/${profileUser.id}`).then( posts => {
-                    this.setState({ posts: posts.data, title: '', text: '', image: '' });
-                }).catch( err => console.log(err) );
+                    this.setState({ 
+                        posts: posts.data, 
+                        title: '', 
+                        text: '', 
+                        image: '' 
+                    });
 
-            }).catch( err => console.log( err ) );
+                }).catch(err => console.log(err));
+            }).catch(err => console.log(err));
         }
     }
 
-    editPost = ( id, title, text, image ) => {
-        const { profileUser } = this.props;
-        const body = {
-            title: title,
-            text: text,
-            image: image
-        };
+    editPost = ( id, title, text, imageurl ) => {
+        axios.put(`/api/post/${id}/edit`, { title, text, imageurl }).then( res => {
+            axios.get(`/api/posts`).then( posts => {
 
-        axios.put(`/api/edit-post/${ id }`, body).then( res => {
-
-            axios.get(`/api/posts/${profileUser.id}`).then( posts => {
                 this.setState({ posts: posts.data });
-            }).catch( err => console.log( err ) );
 
-        }).catch( err => console.log( err ) );
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
     }
     
 
     deletePost = ( id ) => {
-        const { profileUser } = this.props;
+        axios.delete(`/api/post/${id}/delete`).then( res => {
+            axios.get(`/api/posts`).then( posts => {
 
-        axios.delete(`/api/delete-post/${ id }`).then( res => {
-
-            axios.get(`/api/posts/${profileUser.id}`).then( posts => {
                 this.setState({ posts: posts.data });
-            }).catch( err => console.log( err ) );
-            
-        }).catch( err => console.log( err ) );
+
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
     }
 
     render () {
-        const { posts, posters, title, text, image } = this.state;
+        const { posts, recentPosters, title, text, imageurl } = this.state;
         const { user, profileUser, paramsUsername } = this.props;
 
         const listOfPosts = posts.map( post => {
@@ -96,8 +88,8 @@ class Posts extends Component {
                          deletePost={ this.deletePost } />
         });
 
-        const listOfRecentPosters = posters.map( poster => {
-            return <li key={ poster.id } className="fade-in"><img src={ poster.imageurl } alt="poster pic"/></li> 
+        const listOfRecentPosters = recentPosters.map( poster => {
+            return <li key={ poster.id } className="fade-in"><img src={ poster.imageurl } alt="Poster"/></li> 
         });
 
         return (
@@ -106,19 +98,21 @@ class Posts extends Component {
 
                     <div className="posts-list">
                         <div className="posts-list-container">
+
                             { user.username === paramsUsername &&
                             <div className="new-post">
                                 <input className="input" value={ title } placeholder="Title" onChange={ (e) => this.handleChange('title', e.target.value) }/>
-                                <input className="input" value={ image } placeholder="Image Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
+                                <input className="input" value={ imageurl } placeholder="Image Url" onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
                                 <textarea className="input" rows="1" cols="10" value={ text } placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }></textarea>
-                                <button className="btn" onClick={ () => this.createPost(title, text, image) }>Post</button>
+                                <button className="btn" onClick={ this.createPost }>Post</button>
                             </div> }
 
-                            { listOfPosts.length ? 
-                            <div><ul >{ listOfPosts }</ul></div> : 
-                            user.username === paramsUsername ? 
-                            <div><h5>You haven't made any posts</h5></div> : 
-                            <div><h5>No posts</h5></div> }
+                            { listOfPosts.length
+                            ? <div><ul >{ listOfPosts }</ul></div>
+                            : user.username === paramsUsername 
+                            ? <div><h5>You haven't made any posts</h5></div>
+                            : <div><h5>No posts</h5></div> }
+
                         </div>
                     </div>
 
@@ -126,9 +120,10 @@ class Posts extends Component {
                         <div className="latest-container">
                             <h4>Recent Posters</h4>
                             
-                            { listOfRecentPosters.length ? 
-                            <div><ul>{ listOfRecentPosters }</ul></div> : 
-                            <h5>No posters</h5> }
+                            { listOfRecentPosters.length
+                            ? <div><ul>{ listOfRecentPosters }</ul></div>
+                            : <h5>No posters</h5> }
+
                         </div>
                     </div>
 

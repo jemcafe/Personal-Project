@@ -27,16 +27,18 @@ class Poster extends Component {
     saveEdit = () => {
         const { name, description, price, postercategoryid, imageurl } = this.state
         
-        axios.put(`/api/edit-poster/${this.props.poster.id}`, { 
+        axios.put(`/api/poster/${this.props.poster.id}/edit`, { 
             name, description, price, postercategoryid, imageurl 
         }).then( poster => {
+
             this.setState({
                 name: poster.data[0].name,
                 description: poster.data[0].description,
                 price: poster.data[0].price,
-                category: poster.data[0].postercategoryId,
+                postercategoryid: poster.data[0].postercategoryId,
                 imageurl: poster.data[0].imageurl,
             });
+
         }).catch(err => console.log(err));
     }
 

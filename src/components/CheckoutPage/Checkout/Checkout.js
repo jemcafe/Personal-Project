@@ -5,9 +5,10 @@ import StripeCheckout from 'react-stripe-checkout';
 class Checkout extends Component {
     amountToCents = ( amount ) => amount * 100;
 
-    // The response if the payment was suuccessful
     successfulPayment = ( data ) => {
         console.log('Payment successful', data.data.success);
+        
+        // If the payment, is successful the cart is emptied
         if ( data.data.success.paid ) {
             this.props.removeCartItems();
         }

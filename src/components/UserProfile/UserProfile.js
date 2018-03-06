@@ -22,41 +22,48 @@ class Profile extends Component {
     }
 
     componentWillReceiveProps ( nextProps ) {
-        axios.get(`/api/user/${nextProps.match.params.username}`).then( user => {
-            axios.all([
-                axios.get(`/api/follows/${user.data.id}`),
-                axios.get(`/api/followers/${user.data.id}`)
-            ]).then( axios.spread( ( followsRes, followersRes ) => {
+        // The component will receive the new props when switching to different user's profile
+        const { username } = nextProps.match.params;
 
-                this.setState(prevState => ({ 
-                    profileUser: user.data,
-                    follows: followsRes.data,
-                    followers: followersRes.data,
-                    isFollowing: followersRes.data.find( e => e.username === this.props.user.username ) ? true : false
-                }));
+        axios.all([
+            axios.get(`/api/profile/${username}`),
+            axios.get(`/api/profile/${username}/follows`),
+            axios.get(`/api/profile/${username}/followers`)
+        ]).then( axios.spread( (userRes, followsRes, followersRes) => {
 
-            })).catch( err => console.log('Error', err) );
-        }).catch( err => console.log('Error', err) );
+            this.setState(prevState => ({ 
+                profileUser: userRes.data,
+                follows: followsRes.data,
+                followers: followersRes.data,
+                isFollowing: followersRes.data.find( e => e.username === this.props.user.username ) ? true : false
+            }));
+
+        })).catch(err => console.log(err));
     }
 
     componentDidMount () {
+        // If the page is visited directly and there is no profile data for the user specified in the url, the user's profile data will be retrieved
+        const { username } = this.props.match.params;
+
         if ( !this.state.profileUser.username ) {
-            axios.get(`/api/user/${this.props.match.params.username}`).then( user => {
+            axios.get(`/api/profile/${username}`).then( user => {
                 this.setState({ profileUser: user.data });
-            }).catch( err => console.log('Error', err) );
+            }).catch(err => console.log(err) );
         }
     }
 
-    follow ( profileUserId ) {
-        axios.post('/api/follow', { profileUserId }).then( res => {
+    follow = () => {
+        const userId = this.state.profileUser.id;
+        axios.post('/api/follow', { userId }).then( res => {
             this.setState(prevState => ({ isFollowing: !prevState.isFollowing }));
-        }).catch( err => console.log('Error', err) );
+        }).catch(err => console.log(err));
     }
 
-    unfollow ( profileUserId ) {
-        axios.delete(`/api/unfollow/${ profileUserId }`).then( res => {
+    unfollow = () => {
+        const userId = this.state.profileUser.id;
+        axios.delete(`/api/unfollow/${ userId }`).then( res => {
             this.setState( prevState => ({ isFollowing: !prevState.isFollowing }));
-        }).catch( err => console.log('Error', err) );
+        }).catch(err => console.log(err));
     }
 
     render () {
@@ -92,11 +99,11 @@ class Profile extends Component {
 
                                 <div className="follow-btn-container panel">
                                 { user.username !== username && (
-                                    !user.username ? 
-                                    <Link to="/login"><button className="follow-btn btn">Follow</button></Link> :
-                                    isFollowing ?
-                                    <button className="follow-btn btn" onClick={ () => this.unfollow( profileUser.id ) }>Unfollow</button> :
-                                    <button className="follow-btn btn" onClick={ () => this.follow( profileUser.id ) }>Follow</button>
+                                    !user.username
+                                    ? <Link to="/login"><button className="follow-btn btn">Follow</button></Link> 
+                                    : isFollowing
+                                    ? <button className="follow-btn btn" onClick={ this.unfollow }>Unfollow</button>
+                                    : <button className="follow-btn btn" onClick={ this.follow }>Follow</button>
                                 ) }
                                 </div>
                             </div>

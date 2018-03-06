@@ -86,9 +86,9 @@
         padding: 10px;
         /* background-color: #fadbc8; */
       }
-      .cart-container .total-summary {
-        /* background-color: #fdfbdf; */
-      }
+      /* .cart-container .total-summary {
+        background-color: #fdfbdf;
+      } */
       .cart-container .total-summary > div {
         font-size: 18px;
         margin: 16px 0;

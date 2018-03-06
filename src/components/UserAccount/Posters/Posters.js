@@ -14,43 +14,46 @@ class Posters extends Component {
             name: '',
             description: '',
             price: '',
-            category: 'Digital Art',
+            postercategoryid: 1,
             imageurl: ''
         }
         // Methods do not need to be binded if they are function expressions ( React 2016 )    
     }
 
     componentDidMount () {
-        axios.get(`/api/posters/${this.props.user.id}`).then( posters => {
-            console.log('Posters', posters.data);
+        axios.get(`/api/posters`).then( posters => {
             this.setState({ posters: posters.data });
-        }).catch( err => console.log(err) );
+        }).catch(err => console.log(err));
     }
 
     handleChange ( property, value ) {
+        console.log(property, value);
         this.setState({ [property]: value });
     }
 
     addPoster = () => {
-        const { name, description, price, category, imageurl } = this.state;
-        axios.post('/api/new-poster', { name, description, price, category, imageurl }).then( res => {
-            axios.get(`/api/posters/${this.props.user.id}`).then( posters => {
+        const { name, description, price, postercategoryid, imageurl } = this.state;
+
+        axios.post('/api/poster', { 
+            name, description, price, postercategoryid, imageurl 
+        }).then( res => {
+            axios.get(`/api/posters`).then( posters => {
 
                 this.setState({ 
                     posters: posters.data, 
                     name: '', 
                     description: '', 
-                    price: '', 
+                    price: '',
                     imageurl: '' 
                 });
 
-            }).catch( err => console.log(err) );
-        }).catch( err => console.log( err ) );
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
     }
 
     deletePoster = ( id ) => {
-        axios.delete(`/api/delete-poster/${ id }`).then( () => {
-            axios.get(`/api/posters/${this.props.user.id}`).then( posters => {
+        axios.delete(`/api/poster/${id}/delete`).then( () => {
+            axios.get(`/api/posters`).then( posters => {
 
                 this.setState({ 
                     posters: posters.data, 
@@ -59,19 +62,20 @@ class Posters extends Component {
                     price: '', 
                     imageurl: '' 
                 });
-
-            }).catch( err => console.log(err) );
-        }).catch( err => console.log( err ) );
+                
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
     }
 
     render () {
         const { posters, name, description, price, category, imageurl } = this.state;
-        const { productSubcategories } = this.props;
+        const { user, productSubcategories } = this.props;
 
         // The first category ('All') is removed from the list of poster categories
-        const posterCategories = productSubcategories[2]
-                           .map( (e, i) => i !== 0 ? <option key={ i } value={ e.id }>{ e.category }</option> : false )
-                           .filter( e => e );
+
+        const posterCategories = []//productSubcategories[2]
+                                // .map( (e, i) => i !== 0 ? <option key={ e.id } value={ e.id }>{ e.category }</option> : false )
+                                // .filter( e => e );
 
         // The list of posters
         const listOfPosters = posters.map( poster => {
@@ -92,7 +96,7 @@ class Posters extends Component {
                             <input className="input" value={ name } placeholder="Title" onChange={ (e) => this.handleChange('name', e.target.value) }/>
                             <input className="input" value={ description } placeholder="Description" onChange={ (e) => this.handleChange('description', e.target.value) }/>
                             <input className="input" value={ price } placeholder="Price" onChange={ (e) => this.handleChange('price', e.target.value) }/>
-                            <select value={ category } name="categories" onChange={ (e) => this.handleChange("category", e.target.value) }>
+                            <select value={ category } name="categories" onChange={ (e) => this.handleChange('postercategoryid', e.target.value) }>
                                 { posterCategories }
                             </select>
                             <button className="btn" onClick={ this.addPoster }>Save</button>

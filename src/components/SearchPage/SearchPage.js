@@ -9,10 +9,6 @@ import { connect } from 'react-redux';
 import { updateCartItems, getProduct } from '../../redux/ducks/reducer';
 
 class SearchPage extends Component {
-    constructor () {
-        super();
-        this.state = {}
-    }
 
     addItem ( item ) {
         const body = {
@@ -24,13 +20,13 @@ class SearchPage extends Component {
             image: item.imageurl
         };
 
-        axios.post('/api/add-item', body).then( res => {
+        axios.post('/api/cart/add', body).then( res => {
             axios.get('/api/cart').then( cart => {
 
                 this.props.updateCartItems( cart.data );
 
-            }).catch( err => console.log(err) );
-        }).catch( err => console.log(err) );
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
     }
 
     getProduct ( product ) {
@@ -59,8 +55,7 @@ class SearchPage extends Component {
                             </Link>
 
                             { item.username && 
-                            <div className="creator-name">by <Link to={`/${item.username}`}>{ item.username }</Link></div> 
-                            }
+                            <div className="creator-name">by <Link to={`/${item.username}`}>{ item.username }</Link></div> }
 
                             <div className="info">
                                 <div>Rating</div>
@@ -68,10 +63,9 @@ class SearchPage extends Component {
                                 <div>${ item.price }</div>
                             </div>
 
-                            { user.username ? 
-                            <button className="add-btn btn" onClick={ () => this.addItem( item ) }>Add To Cart</button> : 
-                            <Link to="/login"><button className="add-btn btn">Add To Cart</button></Link> 
-                            }
+                            { user.username
+                            ? <button className="add-btn btn" onClick={ () => this.addItem( item ) }>Add To Cart</button>
+                            : <Link to="/login"><button className="add-btn btn">Add To Cart</button></Link> }
                             
                         </div>
 

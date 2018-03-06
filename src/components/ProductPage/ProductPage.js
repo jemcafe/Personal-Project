@@ -4,10 +4,6 @@ import { connect } from 'react-redux';
 
 class ProductPage extends Component {
     
-    componentWillReceiveProps ( nextProps ) {
-        
-    }
-    
     render () {
         const { productInfo } = this.props;
 
@@ -38,10 +34,5 @@ const mapStateToProps = ( state ) => {
         productInfo: state.productInfo
     };
 };
-
-// const mapDispatchToProps = {
-//     updateCartItems: updateCartItems,
-//     getProductInfo: getProductInfo
-// }
 
 export default connect( mapStateToProps )( ProductPage );

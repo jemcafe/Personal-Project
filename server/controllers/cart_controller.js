@@ -112,7 +112,7 @@ module.exports = {
         if ( session.user.id ) {
 
             db.delete_cart_items( [session.user.id] ).then( item => {
-                res.status(200).json('All item deleted');
+                res.status(200).json( [] );
             }).catch( err => {
                 console.log(err);
                 res.status(500).send('Items not deleted');

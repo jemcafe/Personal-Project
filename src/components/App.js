@@ -3,7 +3,7 @@ import './App.css';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { getUser, getProductCategories, getProductSubcategories } from '../redux/ducks/reducer';
-import routes from '../router';
+import routes from '../router/router';
 import Header from './Header/Header';
 
 class App extends Component {
@@ -18,13 +18,16 @@ class App extends Component {
             axios.get('/api/product/categories'),
             axios.get('/api/product/subcategories')
         ]).then(axios.spread( ( userRes, productCategoriesRes, productSubcategoriesRes ) => {
+            console.log('Product subcategories', productSubcategoriesRes.data);
             getUser( userRes.data );
             getProductCategories( productCategoriesRes.data );
             getProductSubcategories( productSubcategoriesRes.data );
         })).catch(err => console.log(err));
+        console.log('Product subcategories didmount', this.props.productSubcategories);
     }
     
     render() {
+        console.log('Product subcategories render', this.props.productSubcategories);
         return (
             <div className="App">
 

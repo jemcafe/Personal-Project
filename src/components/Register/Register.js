@@ -12,10 +12,8 @@ class Register extends Component {
             username: '',
             password: '',
             name: '',
-            image: ''
+            imageurl: ''
         }
-        this.register = this.register.bind(this);
-        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount () {
@@ -33,16 +31,15 @@ class Register extends Component {
                 username: this.state.username,
                 password: this.state.password,
                 name: this.state.name,
-                image: this.state.image || null
+                imageurl: this.state.imageurl || null
             };
 
-        axios.post(`/api/register`, body).then( res => {
-            console.log( res.data );
-            if ( res.data ) {
-                this.props.register( res.data );
+        axios.post(`/api/register`, body).then( user => {
+            if ( user.data ) {
+                this.props.register( user.data );
                 this.props.history.push(`/${this.props.user.username}`);
             }
-        }).catch( console.log() );
+        }).catch(err => console.log(err));
     }
 
     render () {

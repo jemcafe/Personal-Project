@@ -150,6 +150,21 @@ CREATE TABLE Posters (
     userId INTEGER REFERENCES Users (id),
     imageUrl TEXT
 );
+-- INSERT INTO Posters (name, description, datePosted, price, posterCategoryId, productCategoryId, userId, imageURL) VALUES
+-- ('Drift No.10',                 'Abstract art',                '1 / 20 / 2018', 30.00, 2, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/006/943/174/large/jem-brown-20170713-150515-edited-sml3.jpg?1502436122'),
+-- ('Drift No.9',                  'Abstract art',                '1 / 20 / 2018', 30.00, 2, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/007/588/014/large/jem-brown-20170909-120941-edited-b-sml3b.jpg?1507148669'),
+-- ('Drift No.8',                  'Abstract art',                '1 / 20 / 2018', 30.00, 2, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/008/678/704/large/jem-brown-20171224-101641-edited-sml-2.jpg?1514500897'),
+-- ('Jin Saotome Typhoon',         'Fanart of Jin Saotome.',      '1 / 18 / 2018', 39.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/004/752/517/large/jem-brown-jinsaotome-screenshot-04c-sml.jpg?1488844564'),
+-- ('Scar (Fullmetal Alchemist)',  'Fanart of Scar',              '1 / 22 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/005/728/353/large/jem-brown-scar-screenshot-01e.jpg?1493320471'),
+-- ('Falco',                       'Fanart of Falco',             '1 / 22 / 2018', 40.00, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/004/869/300/large/jem-brown-2016-09-falco-2-sml1.jpg?1486876194'),
+-- ('Lust (Fullmetal Alchemist)',  'Fanart of Lust.',             '1 / 19 / 2018', 40.00, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/005/429/016/large/jem-brown-lust-screenshot-01d.jpg?1491396935'),
+-- ('Ieyasu Tokugawa',             'Fanart of Ieyasu Tokugawa',   '1 / 22 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/005/352/385/large/jem-brown-ieyasu-screenshot-5c.jpg?1506238580'),
+-- ('Garra of the Sand (Neutral)', 'Fanart of Garra (neutral)',   '1 / 19 / 2018', 44.99, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/007/291/402/large/jem-brown-garra-screenshot-03b-700x700.jpg?1505110523'),
+-- ('Garra of the Sand',           'Fanart of Garra.',            '1 / 19 / 2018', 49.99, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/007/290/560/large/jem-brown-garra-screenshot-02-700x700-2.jpg?1505327332'),
+-- ('Zabuza Momochi',              'Fanart of Zabuza Momochi.',   '1 / 19 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/006/050/959/large/jem-brown-zabuza-screenshot-02-sml.jpg?1495666567'),
+-- ('Kisame Hoshigaki',            'Fanart of Kisame Hoshigaki.', '1 / 19 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/007/889/865/large/jem-brown-kisame-01-screenshot-smla.jpg?1509157762'),
+-- ('Ulquiorra Cifer',             'Fanart of Ulquiorra Cifer.',  '1 / 19 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/007/624/631/large/jem-brown-ulquiorra-screenshot-6-700x700.jpg?1507427752');
+
 
 
 -- CREATE TABLE Games (

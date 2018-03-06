@@ -14,10 +14,8 @@ class Following extends Component {
     }
 
     componentDidMount () {
-        const { user, otherUser } = this.props;
-
-        axios.get(`/api/follows/${user.id}`).then( res => {
-            this.setState({ follows: res.data });
+        axios.get(`/api/follows`).then( follows => {
+            this.setState({ follows: follows.data });
         }).catch( err => console.log(err) );
     }
 

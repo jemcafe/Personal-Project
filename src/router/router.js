@@ -2,17 +2,17 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 // Components
-import HomePage from './components/HomePage/HomePage';
-import GamesPage from './components/GamesPage/GamesPage';
-import BooksPage from './components/BooksPage/BooksPage';
-import PostersPage from './components/PostersPage/PostersPage';
-import SearchPage from './components/SearchPage/SearchPage';
-import ProductPage from './components/ProductPage/ProductPage';
-import CheckoutPage from './components/CheckoutPage/CheckoutPage';
-import Login from './components/Login/Login';
-import Register from './components/Register/Register';
-import UserAccount from './components/UserAccount/UserAccount';
-import UserProfile from './components/UserProfile/UserProfile';
+import HomePage from '../components/HomePage/HomePage';
+import GamesPage from '../components/GamesPage/GamesPage';
+import BooksPage from '../components/BooksPage/BooksPage';
+import PostersPage from '../components/PostersPage/PostersPage';
+import SearchPage from '../components/SearchPage/SearchPage';
+import ProductPage from '../components/ProductPage/ProductPage';
+import CheckoutPage from '../components/CheckoutPage/CheckoutPage';
+import Login from '../components/Login/Login';
+import Register from '../components/Register/Register';
+import UserAccount from '../components/UserAccount/UserAccount';
+import UserProfile from '../components/UserProfile/UserProfile';
 
 export default (
     <Switch>

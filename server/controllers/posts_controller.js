@@ -2,17 +2,17 @@ module.exports = {
     createPost ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
-        const { title, text, image } = req.body;
+        const { title, text, imageurl } = req.body;
 
         const date = new Date();
         const dd = date.getDate();
         const mm = date.getMonth() + 1; // Months start at 0
         const yyyy = date.getFullYear();
-        const currentDate = `${mm} / ${dd} / ${yyyy}`;
+        const currentDate = `${date.getMonth() + 1} / ${date.getDate()} / ${date.getFullYear()}`;
 
         if ( session.user.id ) {
 
-            db.create_post( [title, text, currentDate, session.user.id, image] ).then( post => {
+            db.create_post( [title, text, currentDate, session.user.id, imageurl] ).then( post => {
                 res.status(200).json( post );
             }).catch( err => {
                 console.log(err);
@@ -66,10 +66,9 @@ module.exports = {
 
     getPosts ( req, res ) {
         const db = req.app.set('db');
-        // const { session } = req;
-        const { userid } = req.params;
+        const { session } = req;
         
-        db.read_user_posts( [userid] ).then( posts => {
+        db.read_user_posts( [session.user.id] ).then( posts => {
             res.status(200).json( posts );
         }).catch( err => {
             console.log(err);

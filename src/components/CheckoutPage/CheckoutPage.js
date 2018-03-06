@@ -11,17 +11,16 @@ class CheckoutPage extends Component {
     constructor () {
         super();
         this.state = {}
-        this.removeCartItems = this.removeCartItems.bind(this);
     }
 
-    removeCartItems () {
+    removeCartItems = () => {
         const { user, updateCartItems } = this.props;
-        axios.delete('/api/remove-all-items').then( res => {
-            axios.get('/api/cart').then( resp => {
-                updateCartItems( resp.data );
-                this.props.history.push(`/${user}/cart`);
-            }).catch( err => console.log(err) );
-        }).catch( err => console.log(err) );
+        axios.delete('/api/cart/remove-all').then( cart => {
+
+                updateCartItems( cart.data );
+                this.props.history.push(`/useraccount/cart`);
+
+        }).catch(err => console.log(err));
     }
 
     render () {

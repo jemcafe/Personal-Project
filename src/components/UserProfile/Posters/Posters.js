@@ -13,8 +13,8 @@ class Posters extends Component {
     }
 
     componentDidMount () {
-        axios.get(`/api/posters/${this.props.profileUser.id}`).then( res => {
-            this.setState({ posters: res.data });
+        axios.get(`/api/profile/${this.props.profileUser.username}/posters`).then( posters => {
+            this.setState({ posters: posters.data });
         }).catch( err => console.log(err) );
     }
 

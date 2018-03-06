@@ -13,16 +13,14 @@ class Cart extends Component {
     constructor () {
         super();
         this.state = {
-            userInput: '',
             quantity: ''
         }
     }
 
     componentDidMount () {
-        axios.get('/api/cart').then( res => {
-            this.props.updateCartItems( res.data );
+        axios.get('/api/cart').then( cart => {
+            this.props.updateCartItems( cart.data );
         }).catch( err => console.log(err) );
-        console.log( this.props.cartItems );
     }
 
     handleChange ( property, value ) {
@@ -32,26 +30,24 @@ class Cart extends Component {
     removeItem ( id ) {
         const { updateCartItems } = this.props;
 
-        axios.delete(`/api/remove-item/${ id }`).then( res => {
-            console.log( res.data );
-            
-            axios.get('/api/cart').then( resp => {
-                updateCartItems( resp.data );
-                console.log( resp.data );
-            }).catch( err => console.log(err) );
+        axios.delete(`/api/cart/remove/${id}`).then( () => {
+            axios.get('/api/cart').then( cart => {
 
-        }).catch( err => console.log(err) );
+                updateCartItems( cart.data );
+
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
     }
 
-    updateQuantity ( id, quantity ) {
-        axios.patch(`/api/update-quantity/${ id }`, { quantity }).then( res => {
-            console.log( res.data );
-            
-            axios.get('/api/cart').then( resp => {
-                this.props.updateCartItems( resp.data );
-            }).catch( err => console.log(err) );
+    updateQuantity ( id ) {
+        const { quantity } = this.state;
+        axios.patch(`/api/cart/update/quantity/${id}`, { quantity }).then( res => {
+            axios.get('/api/cart').then( cart => {
 
-        }).catch( err => console.log(err) );
+                this.props.updateCartItems( cart.data );
+
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
     }
 
     render () {
@@ -77,8 +73,6 @@ class Cart extends Component {
                                     <div>Price: <span>${ item.price }</span></div>
                                 </div>
                             </div>
-                            
-                            {/* <button className="remove-btn" onClick={ () => this.removeItem( item.id ) }>Remove</button> */}
                             <FaTrash className="fa-trash" onClick={ () => this.removeItem( item.id ) } size={25} color="gray" />
 
                         </div>
@@ -112,10 +106,10 @@ class Cart extends Component {
 
 const mapStateToProps = ( state ) => {
     return { cartItems: state.cartItems };
-    };
+};
     
-    const mapDispatchToProps = {
-        updateCartItems: updateCartItems
-    }
+const mapDispatchToProps = {
+    updateCartItems: updateCartItems
+}
 
 export default connect( mapStateToProps, mapDispatchToProps )( Cart );

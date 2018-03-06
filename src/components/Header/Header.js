@@ -18,19 +18,22 @@ class MainHeader extends Component {
         }
     }
 
+    componentDidMount () {
+        axios.get('/api/cart').then( cart => {
+            this.props.updateCartItems( cart.data );
+        }).catch(err => console.log(err));
+    }
+
     menuToggle () {
         // Toggle control for the responsive header menu
         this.setState(prevState => ({ showMenu: !prevState.showMenu }));
     }
 
     logout () {
+        // The session is ended and the cart is empty )
         axios.post(`/api/logout`).then( user => {
             this.props.logout( user.data );
-
-            axios.get('/api/cart').then( res => {
-                this.props.updateCartItems( res.data );
-            }).catch(err => console.log(err));
-
+            this.props.updateCartItems( [] );
         }).catch(err => console.log(err));
     }
 
@@ -38,7 +41,8 @@ class MainHeader extends Component {
         const { user, cartItems } = this.props;
         const { showMenu } = this.state;
 
-        const cartItemsQuantity = cartItems.reduce( (acc, item) => acc += item.quantity, 0 );
+        // The total of amount of items in the cart
+        const cartQuantity = cartItems.reduce( (acc, item) => acc += item.quantity, 0 );
         
         // If a user is logged in, the login link changes to the account link
         const linkChange = !user.username ? (
@@ -51,9 +55,9 @@ class MainHeader extends Component {
                                         {/* <Link to={`/${user.username}`}>Profile</Link> */}
                                         <Link to={`/${user.username}`}>My Profile</Link>
                                         <Link to={`/useraccount/posters`}>My Posters</Link>
-                                        <Link to={`/${user.username}/following`}>Following</Link>
-                                        <Link to={`/${user.username}/followers`}>Followers</Link>
-                                        <Link to={`/useraccount/cart`}>Cart ({ cartItemsQuantity })</Link>
+                                        {/* <Link to={`/${user.username}/following`}>Following</Link> */}
+                                        {/* <Link to={`/${user.username}/followers`}>Followers</Link> */}
+                                        <Link to={`/useraccount/cart`}>Cart ({ cartQuantity })</Link>
                                         <Link to={`/useraccount/settings`}>Settings</Link>
                                         <Link to="/login" onClick={ () => this.logout() }>Signout</Link>
                                     </div>

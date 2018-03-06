@@ -17,8 +17,6 @@
     .follows-container ul {
         display: flex;
         justify-content: space-around;
-        /* padding: 0 50px;
-        box-sizing: border-box; */
         /* background-color: #d6fccb; */
     }
     .follows-container li {

@@ -15,7 +15,7 @@ const postsCntrl = require('./controllers/posts_controller');
 const postersCntrl = require('./controllers/posters_controller');
 const followsCntrl = require('./controllers/follows_controller');
 const cartCntrl = require('./controllers/cart_controller');
-const usersCntrl = require('./controllers/users_controller');
+const userProfileCntrl = require('./controllers/user_profile_controller');
 const stripeCntrl = require('./controllers/stripe_controller');
 
 const app = express();
@@ -28,7 +28,7 @@ app.use( session({
     saveUninitialized: false
 }));
 app.use( checkForSession );
-massive( process.env.CONNECTION_STRING ).then( db => app.set('db', db) ).catch( err => console.log( 'error', err ) );
+massive( process.env.CONNECTION_STRING ).then( db => app.set('db', db) ).catch(err => console.log('Error', err));
 
 
 // Auth
@@ -39,32 +39,36 @@ app.get('/api/user', authCntrl.getUser);
 
 // User 
     // Posts
-    app.post('/api/new-post', postsCntrl.createPost);
-    app.put('/api/edit-post/:id', postsCntrl.updatePost);
-    app.delete('/api/delete-post/:id', postsCntrl.deletePost);
+    app.post('/api/post', postsCntrl.createPost);
+    app.put('/api/post/:id/edit', postsCntrl.updatePost);
+    app.delete('/api/post/:id/delete', postsCntrl.deletePost);
     app.get('/api/post/:id', postsCntrl.getPost);
-    app.get('/api/posts/:userid', postsCntrl.getPosts);
+    app.get('/api/posts', postsCntrl.getPosts);
     // Posters
-    app.post('/api/new-poster', postersCntrl.createPoster);
-    app.put('/api/edit-poster/:id', postersCntrl.updatePoster);
-    app.delete('/api/delete-poster/:id', postersCntrl.deletePoster);
-    app.get('/api/posters/:userid', postersCntrl.getPosters);
-    app.get('/api/recent-posters/:userid', postersCntrl.getRecentPosters);
+    app.post('/api/poster', postersCntrl.createPoster);
+    app.put('/api/poster/:id/edit', postersCntrl.updatePoster);
+    app.delete('/api/poster/:id/delete', postersCntrl.deletePoster);
+    app.get('/api/posters', postersCntrl.getPosters);
     // Follows
     app.post('/api/follow', followsCntrl.follow);
-    app.delete('/api/unfollow/:id', followsCntrl.unfollow);
-    app.get('/api/follows/:username', followsCntrl.getFollows);
-    app.get('/api/followers/:username', followsCntrl.getFollowers);
+    app.delete('/api/unfollow/:userId', followsCntrl.unfollow);
+    app.get('/api/follows', followsCntrl.getFollows);
+    app.get('/api/followers', followsCntrl.getFollowers);
     // Cart
-    app.post('/api/add-item', cartCntrl.addItem);
-    app.delete('/api/remove-item/:id', cartCntrl.removeItem);
-    app.patch('/api/update-quantity/:id', cartCntrl.updateQuantity);
+    app.post('/api/cart/add', cartCntrl.addItem);
+    app.delete('/api/cart/remove/:id', cartCntrl.removeItem);
+    app.patch('/api/cart/update/quantity/:id', cartCntrl.updateQuantity);
     app.get('/api/cart', cartCntrl.getCart);
-    app.delete('/api/remove-all-items', cartCntrl.removeAllItems);
+    app.delete('/api/cart/remove-all', cartCntrl.removeAllItems);
 
-// Users ( Necessary for getting that are not logged in )
-    app.get('/api/user/:username', usersCntrl.getUser);
-    app.get('/api/users', usersCntrl.getUsers);
+// Users ( users that are not logged in )
+    app.get('/api/users', userProfileCntrl.getUsers);
+    app.get('/api/profile/:username', userProfileCntrl.getUser);
+    app.get('/api/profile/:username/posts', userProfileCntrl.getPosts);
+    app.get('/api/profile/:username/posters', userProfileCntrl.getPosters);
+    app.get('/api/profile/:username/posters/recent', userProfileCntrl.getRecentPosters);
+    app.get('/api/profile/:username/follows', userProfileCntrl.getFollows);
+    app.get('/api/profile/:username/followers', userProfileCntrl.getFollowers);
 
 // Products
     // Categories

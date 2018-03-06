@@ -2,7 +2,7 @@ module.exports = {
     createPoster ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
-        const { name, description, price, category, imageurl } = req.body;
+        const { name, description, price, postercategoryid, imageurl } = req.body;
 
         const date = new Date();
         const dd = date.getDate();
@@ -10,11 +10,11 @@ module.exports = {
         const yyyy = date.getFullYear();
         const currentDate = `${mm} / ${dd} / ${yyyy}`;
 
-        const categoryId = category === 'Digital Art' ? 1 : category === 'Traditional Art' ? 2 : 3;
+        // const categoryId = category === 'Digital Art' ? 1 : category === 'Traditional Art' ? 2 : 3;
 
         if ( session.user.id ) {
 
-            db.create_poster( [name, description, currentDate, price, categoryId, 3, session.user.id, imageurl] ).then( poster => {
+            db.create_poster( [name, description, currentDate, price, postercategoryid, 3, session.user.id, imageurl] ).then( poster => {
                 res.status(200).json( poster );
             }).catch( err => {
                 console.log(err);
@@ -35,10 +35,8 @@ module.exports = {
         if ( session.user.id ) {
 
             db.update_poster( [id, name, description, price, postercategoryid, session.user.id, imageurl] ).then( poster => {
-                console.log( 'Poster update', poster )
                 res.status(200).send( poster );
             }).catch( err => {
-                console.log(err);
                 res.status(500).send('Poster not updated');
             });
 
@@ -69,10 +67,9 @@ module.exports = {
 
     getPosters ( req, res ) {
         const db = req.app.set('db');
-        // const { session } = req;
-        const { userid } = req.params;
+        const { session } = req;
 
-        db.read_user_posters( [userid] ).then( posters => {
+        db.read_user_posters( [session.user.id] ).then( posters => {
             res.status(200).json( posters );
         }).catch( err => {
             console.log(err);
@@ -82,10 +79,9 @@ module.exports = {
 
     getRecentPosters ( req, res ) {
         const db = req.app.set('db');
-        // const { session } = req;
-        const { userid } = req.params;
+        const { session } = req;
 
-        db.read_user_posters( [userid] ).then( posters => {
+        db.read_user_posters( [session.user.id] ).then( posters => {
 
             let recentPosters = []; 
             if ( posters.length <= 3 ) {

@@ -74,8 +74,8 @@ class SearchBar extends Component {
         const { productCategories } = this.props;
 
         // List of category options ( The list order isn't changing, so using i for the key is fine )
-        const categories = productCategories && productCategories.map( (e, i) => <option key={ i } value={ e.productcategory }>{ e.productcategory }</option> );
-
+        const categories = productCategories && productCategories.map( e => <option key={ e.id } value={ e.productcategory }>{ e.productcategory }</option> );
+        
         return (
             <div className="search">
                 <div className="search-container">

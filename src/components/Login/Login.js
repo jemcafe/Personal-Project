@@ -13,8 +13,6 @@ class Login extends Component {
             username: '',
             password: ''
         }
-        this.login = this.login.bind(this);
-        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount () {
@@ -28,22 +26,18 @@ class Login extends Component {
     }
 
     login () {
-        const body = {
-            username: this.state.username,
-            password: this.state.password
-        };
+        const { username, password } = this.state;
 
-        axios.post(`/api/login`, body).then( res => {
-            if ( res.data.username ) {                                    // If login is successful and there is user data...
-                this.props.login( res.data );                             // the user obj is updated with user's data then...
-                this.props.history.push(`/${this.props.user.username}`);  // they will be redirected to their profile.
+        axios.post(`/api/login`, { username, password }).then( user => {
+            if ( user.data ) {
+                this.props.login( user.data );
+                this.props.history.push(`/${this.props.user.username}`);
 
-                axios.get('/api/cart').then( res => {
-                    this.props.updateCartItems( res.data );
-                    console.log( this.props.cartItems );
-                }).catch( console.log() );
+                axios.get('/api/cart').then( cart => {
+                    this.props.updateCartItems( cart.data );
+                }).catch(err => console.log(err));
             }
-        }).catch( console.log() );
+        }).catch(err => console.log(err));
     }
 
     render () {
