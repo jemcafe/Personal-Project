@@ -58,24 +58,17 @@
     left: 0;
     display: flex;
     justify-content: center;
-    flex-direction: column;
     width: 100vw;
     height: 100vh;
-    /* padding: 20px; */
     box-sizing: border-box;
     overflow-y: auto;
     background: rgba(0, 0, 0, 0.7);
 }
-.poster .edit-overlay .close-icon {
-    /* position: relative;
-    right: 0; */
-    font-size: 30px;
-    color: gray;
-    cursor: pointer;
-}
 .poster .edit {
-    width: 550px;
-    min-height: 500px;
+    max-width: 600px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: auto;
 }
 .poster .edit > .container {
     display: flex;
@@ -84,33 +77,43 @@
     padding: 20px; 
     box-sizing: border-box;
     border-radius: 5px;
-    margin: 20px;
     width: 100%;
-    /* min-height: 100%; */
     background-color: #ffffff;
     /* background-color: #fce1c8; */
 }
-.poster .edit .container img {
+.poster .edit > .container img {
     max-width: 100%;
     margin-bottom: 20px;
 }
-.poster .edit .container > div {
+.poster .edit > .container > div {
     width: 100%;
     margin-bottom: 20px;
     text-align: left;
 }
-.poster .edit .container h4 {
+.poster .edit > .container h4 {
     margin: 0 0 6px 0;
 }
-.poster .edit .container .input {
+.poster .edit > .container .input {
     width: 100%;
 }
-.poster .edit .container .price {
+.poster .edit > .container .price {
     display: flex;
     align-items: center;
+    width: 100%;
+    color: #7d585c;
+}
+.poster .edit > .container .btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+}
+.poster .edit > .container .btns .gray-btn {
+    color: white;
+    background-color: rgb(184, 180, 189);
 }
 
-
+/*  Edit  */
 
 /*  Animations  */
 

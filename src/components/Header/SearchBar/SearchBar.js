@@ -83,12 +83,12 @@ class SearchBar extends Component {
                         { categories }
                     </select>
                     
-                    <div>
-                        <input className="search-bar" placeholder={ 'Search' } onChange={ (e) => this.handleChange('userInput', e.target.value) } onKeyDown={ (e) => e.keyCode === 13 ? this.search() : '' }/>
-                        <Link to="/search"><FaSearch className="fa-search" size={20} onClick={ () => this.search() }/></Link>
-                        {/* <Link to="/search" className="search-icon" onClick={ () => this.search() }>
-                            <i className="fas fa-search"></i>
-                        </Link> */}
+                    <div className="search-bar">
+                        <input placeholder={ 'Search' } onChange={ (e) => this.handleChange('userInput', e.target.value) } onKeyDown={ (e) => e.keyCode === 13 ? this.search() : '' }/>
+                        {/* <Link to="/search"><FaSearch className="fa-search" size={20} onClick={ () => this.search() }/></Link> */}
+                        <Link to="/search" onClick={ () => this.search() }>
+                            <div className="search-icon"><i className="fas fa-search"></i></div>
+                        </Link>
                     </div>
 
                     { searchRedirect && <Redirect to="/search" /> }

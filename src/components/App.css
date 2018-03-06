@@ -49,13 +49,13 @@ a {
   color: black;
 }
 
-.panel {
+.panel {  /*  The max width of the main section  */
   max-width: 1000px;
   margin: 0 auto;
   /* background-color: rgb(252, 247, 201); */
 }
 
-.btn {   /*  Reusable button style  */
+.btn {
   padding: 7px 14px;
   box-sizing: border-box;
   margin: 7px 0;
@@ -84,6 +84,9 @@ textarea {
   border: 1px solid #ecceba;
   resize: none;
   outline-color: #ffaaaa;
+}
+::placeholder {
+  color: rgb(221, 201, 199);
 }
 
 select {

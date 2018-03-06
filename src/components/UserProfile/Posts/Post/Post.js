@@ -11,7 +11,7 @@ class Post extends Component {
         this.state = {
             title: this.props.post.title,
             text: this.props.post.text,
-            image: this.props.post.imageurl,
+            imageurl: this.props.post.imageurl,
             editMode: false
         }
     }
@@ -24,17 +24,18 @@ class Post extends Component {
         this.setState(prevState => ({ editMode: !prevState.editMode }));
     }
 
-    saveEdit (id, title, text, image) {
+    saveEdit () {
+        const { title, text, imageurl } = this.state;
+        this.props.editPost(this.props.post.id, title, text, imageurl);
         this.toggleEdit();
-        this.props.editPost(id, title, text, image);
     }
 
     render () {
         const { id, title, text, imageurl, dateposted, username } = this.props.post;
         const { user, profileUser, paramsUsername } = this.props;
 
-        // The image will be displayed if the input begins with the condition
-        const imageurlCheck = (imageurl.slice(0,7) === 'http://' || imageurl.slice(0,8) === 'https://') ? true : false;
+        // If there is an image url, the image will be displayed if the input begins with the proper http
+        const imageurlCheck = imageurl && (imageurl.slice(0,7) === 'http://' || imageurl.slice(0,8) === 'https://') ? true : false;
 
         return (
             <li className="post fade-in">
@@ -42,7 +43,7 @@ class Post extends Component {
                     <div className="post-container fade-in">
 
                         <div className="name-title padding-align">
-                            <Link to={`/${username}`}><img src={ profileUser.imageurl} alt="Proifle pic"/></Link>
+                            <Link to={`/${profileUser.username}`}><img src={ profileUser.imageurl} alt="Proifle pic"/></Link>
                             <h3>{ title }</h3>
                         </div>
                         { imageurlCheck && <div className="image"><img src={ imageurl } alt="Url not found"/></div> }
@@ -64,7 +65,7 @@ class Post extends Component {
                         <div><input className="input" placeholder="Url" defaultValue={ imageurl } onChange={ (e) => this.handleChange('image', e.target.value) }/></div>                        <textarea className="input" rows="1" cols="10" defaultValue={ text } placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }></textarea>
                         <span className="btns">
                             <button className="btn" onClick={ () => this.toggleEdit() }>Cancel</button>
-                            <button className="btn" onClick={ () => this.saveEdit( id, this.state.title, this.state.text, this.state.image ) }>Save</button>
+                            <button className="btn" onClick={ () => this.saveEdit() }>Save</button>
                             <button className="btn" onClick={ () => this.props.deletePost( id ) }>Delete</button>
                         </span>
 

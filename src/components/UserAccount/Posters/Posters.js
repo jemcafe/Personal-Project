@@ -27,16 +27,22 @@ class Posters extends Component {
     }
 
     handleChange ( property, value ) {
-        console.log(property, value);
-        this.setState({ [property]: value });
+        // const dollars = value.slice(0, value.length-2);
+        // const cents = value.slice(value.length-2, value.length+2)
+        // const price = `${dollars}.${cents}`;
+        
+        if ( property === 'price' ) {
+            this.setState({ [property]: value});
+        } else {
+            this.setState({ [property]: value });
+        }
     }
 
     addPoster = () => {
         const { name, description, price, postercategoryid, imageurl } = this.state;
-
         axios.post('/api/poster', { 
             name, description, price, postercategoryid, imageurl 
-        }).then( res => {
+        }).then( () => {
             axios.get(`/api/posters`).then( posters => {
 
                 this.setState({ 
@@ -55,14 +61,20 @@ class Posters extends Component {
         axios.delete(`/api/poster/${id}/delete`).then( () => {
             axios.get(`/api/posters`).then( posters => {
 
-                this.setState({ 
-                    posters: posters.data, 
-                    name: '', 
-                    description: '', 
-                    price: '', 
-                    imageurl: '' 
-                });
-                
+                this.setState({ posters: posters.data });
+
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+    }
+
+    editPoster = ( id, name, description, price, postercategoryid, imageurl ) => {
+        axios.put(`/api/poster/${id}/edit`, { 
+            name, description, price, postercategoryid, imageurl 
+        }).then( () => {
+            axios.get(`/api/posters`).then( posters => {
+
+                this.setState({ posters: posters.data });
+
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
     }
@@ -71,17 +83,17 @@ class Posters extends Component {
         const { posters, name, description, price, category, imageurl } = this.state;
         const { user, productSubcategories } = this.props;
 
-        // The first category ('All') is removed from the list of poster categories
-
-        const posterCategories = []//productSubcategories[2]
-                                // .map( (e, i) => i !== 0 ? <option key={ e.id } value={ e.id }>{ e.category }</option> : false )
-                                // .filter( e => e );
+        // If there are subcategories, the first category ('All') is removed from the list
+        const posterCategories = productSubcategories[2] && productSubcategories[2]
+                                .map( (e, i) => i !== 0 ? <option key={ e.id } value={ e.id }>{ e.category }</option> : false )
+                                .filter( e => e );
 
         // The list of posters
         const listOfPosters = posters.map( poster => {
             return <Poster key={poster.id} 
                            poster={poster}
                            posterCategories={posterCategories}
+                           editPoster={this.editPoster}
                            deletePoster={this.deletePoster}/>
         });
 
@@ -92,14 +104,16 @@ class Posters extends Component {
 
                     <div className="new-poster">
                         <div className="new-poster-container">
-                            <input className="input" value={ imageurl } placeholder="Url" onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
-                            <input className="input" value={ name } placeholder="Title" onChange={ (e) => this.handleChange('name', e.target.value) }/>
-                            <input className="input" value={ description } placeholder="Description" onChange={ (e) => this.handleChange('description', e.target.value) }/>
-                            <input className="input" value={ price } placeholder="Price" onChange={ (e) => this.handleChange('price', e.target.value) }/>
-                            <select value={ category } name="categories" onChange={ (e) => this.handleChange('postercategoryid', e.target.value) }>
-                                { posterCategories }
-                            </select>
-                            <button className="btn" onClick={ this.addPoster }>Save</button>
+                            <div>
+                                <input className="input" value={ imageurl } placeholder="Image url" onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
+                                <input className="input" value={ name } placeholder="Title" onChange={ (e) => this.handleChange('name', e.target.value) }/>
+                                <textarea className="input" row="1" value={ description } placeholder="Description" onChange={ (e) => this.handleChange('description', e.target.value) }></textarea>
+                                <span className="price">$&nbsp;<input className="input" value={ price } placeholder="Price" onChange={ (e) => this.handleChange('price', e.target.value) }/>&nbsp;.99</span>
+                                <select value={ category } name="categories" onChange={ (e) => this.handleChange('postercategoryid', e.target.value) }>
+                                    { posterCategories }
+                                </select>
+                                <button className="btn" onClick={ this.addPoster }>Save</button>
+                            </div>
                         </div>
                     </div>
 

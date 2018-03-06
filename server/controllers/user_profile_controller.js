@@ -87,7 +87,7 @@ module.exports = {
         db.find_user( [username] ).then( user => {
 
             db.read_user_posters( [user[0].id] ).then( posters => {
-                console.log( 'Posters', posters );
+                
                 let recentPosters = []; 
                 if ( posters.length <= 3 ) {
                     for ( let i = 0; i < posters.length; i++ ) { recentPosters.push(posters[i]) }
