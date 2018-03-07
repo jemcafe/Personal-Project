@@ -93,10 +93,8 @@ class SearchPage extends Component {
                         </div>
                     </div>
                     ) : (
-                        <div className="loading-container">
-                            <div className="circle">
-                                <div className="line"></div>
-                            </div>
+                        <div className="loading">
+                            <div className="loading-spin"><i class="fas fa-sync fa-spin"></i></div>
                         </div>
                     ) }
                     

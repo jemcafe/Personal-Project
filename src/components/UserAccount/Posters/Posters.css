@@ -37,6 +37,9 @@
         width: 100%;
         color: #7d585c;
     }
+    .new-poster-container .price > .input {
+        text-align: right;
+    }
     .new-poster-container select {
         color: #7d585c;
         border: 1px solid #e1c2ce;

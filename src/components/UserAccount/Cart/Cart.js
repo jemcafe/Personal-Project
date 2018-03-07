@@ -4,10 +4,12 @@ import FaTrash from 'react-icons/lib/fa/trash';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+// Redux
 import { connect } from 'react-redux';
 import { updateCartItems } from '../../../redux/ducks/reducer';
 
-// import Item from './Item/Item';
+// Components
+import Checkout from './Checkout/Checkout';
 
 class Cart extends Component {
     constructor () {
@@ -50,8 +52,18 @@ class Cart extends Component {
         }).catch(err => console.log(err));
     }
 
+    removeAllItems = () => {
+        // Removes all items from the cart
+        axios.delete('/api/cart/remove-all').then( cart => {
+
+                this.props.updateCartItems( cart.data );
+                this.props.history.push(`/useraccount/cart`);
+
+        }).catch(err => console.log(err));
+    }
+
     render () {
-        const { cartItems } = this.props;
+        const { user, cartItems } = this.props;
 
         const priceTotal = cartItems.reduce( (acc, item) => acc += item.quantity * parseFloat(item.price), 0 ).toFixed(2);
 
@@ -73,7 +85,7 @@ class Cart extends Component {
                                     <div>Price: <span>${ item.price }</span></div>
                                 </div>
                             </div>
-                            <FaTrash className="fa-trash" onClick={ () => this.removeItem( item.id ) } size={25} color="gray" />
+                            <div><div className="trash-icon" onClick={ () => this.removeItem( item.id ) }><i className="fas fa-trash"></i></div></div>
 
                         </div>
                     </div>
@@ -94,7 +106,12 @@ class Cart extends Component {
                         <h4>TOTAL</h4>
                         <div className="total-summary">
                             <div>${ priceTotal }</div>
-                            { priceTotal > 0 && <Link to="/checkout"><button className="checkout-btn btn">Checkout</button></Link> }
+                            { priceTotal > 0 && 
+                            <Checkout name={ 'Products' } 
+                                description={ 'Various products' } 
+                                amount={ priceTotal } 
+                                customer={ user.id }
+                                removeAllItems={ this.removeAllItems } /> }
                         </div>
                     </div>
                     
@@ -105,7 +122,10 @@ class Cart extends Component {
 }
 
 const mapStateToProps = ( state ) => {
-    return { cartItems: state.cartItems };
+    return { 
+        user: state.user,
+        cartItems: state.cartItems 
+    }
 };
     
 const mapDispatchToProps = {

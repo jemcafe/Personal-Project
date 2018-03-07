@@ -1,4 +1,9 @@
 /*  Search Page  */
+.search-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .search-page a {
   text-decoration: none;
 }
@@ -9,7 +14,7 @@
   /* background-color: #f1cefa; */
   height: 100%;
 }
-.results h4 {
+.search-page .results h4 {
   color: rgba(145, 64, 84, 0.459);
 }
 .search-page .results-container {

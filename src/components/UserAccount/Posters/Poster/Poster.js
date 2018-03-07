@@ -17,9 +17,10 @@ class Poster extends Component {
     }
 
     handleChange ( property, value ) {
-        if ( property === 'price' ) {
+        if ( property === 'price' && value.length < 8 ) {
+            console.log( 'Price', value.length, value );
             this.setState({ [property]: value });
-        } else {
+        } else if ( property !== 'price' ) {
             this.setState({ [property]: value });
         }
     }
@@ -48,20 +49,20 @@ class Poster extends Component {
                             <img src={ imageurl } alt="Poster"/>
                             <div>
                                 <h4>Image</h4>
-                                <input className="input" defaultValue={ imageurl } placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
+                                <input className="input" value={ imageurl } placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
                             </div>
                             <div>
                                 <h4>Title</h4>
-                                <input className="input" defaultValue={ name } placeholder="Title" onChange={ (e) => this.handleChange('name', e.target.value) }/>
+                                <input className="input" value={ name } placeholder="Title" onChange={ (e) => this.handleChange('name', e.target.value) }/>
                             </div>
                             <div>
                                 <h4>Description</h4>
-                                <textarea className="input" rows="5" defaultValue={ description } placeholder="Description" onChange={ (e) => this.handleChange('description', e.target.value) }></textarea>
+                                <textarea className="input" rows="5" value={ description } placeholder="Description" onChange={ (e) => this.handleChange('description', e.target.value) }></textarea>
                             </div>
                             <div>
                                 <h4>Price</h4>
                                 <div className="price">
-                                    $&nbsp;<input className="input" defaultValue={ price } placeholder="Price" onChange={ (e) => this.handleChange('price', e.target.value) }/>&nbsp;.99
+                                    $&nbsp;<input className="input" value={ price } placeholder="Price" onChange={ (e) => this.handleChange('price', e.target.value) }/>&nbsp;.99
                                 </div>
                             </div>
                             <div>

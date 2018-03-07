@@ -10,7 +10,7 @@ class Checkout extends Component {
         
         // If the payment, is successful the cart is emptied
         if ( data.data.success.paid ) {
-            this.props.removeCartItems();
+            this.props.removeAllItems();
         }
     }
 
@@ -29,6 +29,17 @@ class Checkout extends Component {
         const { name, description, amount } = this.props;
 
         return (
+            // <StripeCheckout
+            //     name={ name }
+            //     description={ description }
+            //     amount={ this.amountToCents(amount) }
+            //     shippingAddress={ true }
+            //     billingAddress={ true }
+            //     token={ this.onToken( amount, description ) }
+            //     currency="USD"
+            //     stripeKey={ process.env.REACT_APP_STRIPE_PUBLISH_KEY }
+            // />
+            
             <StripeCheckout
                 name={ name }
                 description={ description }
@@ -37,8 +48,9 @@ class Checkout extends Component {
                 billingAddress={ true }
                 token={ this.onToken( amount, description ) }
                 currency="USD"
-                stripeKey={ process.env.REACT_APP_STRIPE_PUBLISH_KEY }
-            />
+                stripeKey={ process.env.REACT_APP_STRIPE_PUBLISH_KEY } >
+                <button className="btn">Checkout</button>
+            </StripeCheckout>
         )
     }
 }

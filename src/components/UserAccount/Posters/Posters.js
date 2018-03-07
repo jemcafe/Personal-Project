@@ -31,9 +31,10 @@ class Posters extends Component {
         // const cents = value.slice(value.length-2, value.length+2)
         // const price = `${dollars}.${cents}`;
         
-        if ( property === 'price' ) {
-            this.setState({ [property]: value});
-        } else {
+        if ( property === 'price' && value.length < 8 ) {
+            console.log( 'Price', value.length, value );
+            this.setState({ [property]: value });
+        } else if ( property !== 'price' ) {
             this.setState({ [property]: value });
         }
     }

@@ -80,15 +80,20 @@
         /* color: rgba(146, 51, 83, 0.938); */
       }
 
+
+      .cart-container .trash-icon {
+        color: gray;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      
+
       .cart-container .total {
         flex: 1;
         /* width: 300px; */
         padding: 10px;
         /* background-color: #fadbc8; */
       }
-      /* .cart-container .total-summary {
-        background-color: #fdfbdf;
-      } */
       .cart-container .total-summary > div {
         font-size: 18px;
         margin: 16px 0;
