@@ -53,6 +53,7 @@ CREATE TABLE PostComments (
 
 
 
+-- Search Categories will be the new table name ( Creators aren't products )
 CREATE TABLE ProductCategories (
     id SERIAL PRIMARY KEY,
     productCategory TEXT
@@ -60,7 +61,8 @@ CREATE TABLE ProductCategories (
 INSERT INTO ProductCategories (productCategory) VALUES
 ('Games'),
 ('Books'),
-('Posters');
+('Posters'),
+('Creators');
 
 
 
@@ -181,11 +183,11 @@ CREATE TABLE Posters (
 
 CREATE TABLE Cart (
     id SERIAL PRIMARY KEY,
-    productId INTEGER,
-    name TEXT,
-    price DECIMAL,
-    productCategoryId INTEGER REFERENCES ProductCategories (id),
-    quantity INTEGER,
-    customerId INTEGER REFERENCES Users (id),
+    productId INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    price DECIMAL NOT NULL,
+    productCategoryId INTEGER REFERENCES ProductCategories (id) NOT NULL,
+    quantity INTEGER NOT NULL,
+    customerId INTEGER REFERENCES Users (id) NOT NULL,
     imageUrl TEXT
 );

@@ -64,9 +64,9 @@ class Post extends Component {
                         <div><input className="input" placeholder="Title" defaultValue={ title } onChange={ (e) => this.handleChange('title', e.target.value) }/></div>
                         <div><input className="input" placeholder="Url" defaultValue={ imageurl } onChange={ (e) => this.handleChange('image', e.target.value) }/></div>                        <textarea className="input" rows="1" cols="10" defaultValue={ text } placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }></textarea>
                         <span className="btns">
-                            <button className="btn" onClick={ () => this.toggleEdit() }>Cancel</button>
-                            <button className="btn" onClick={ () => this.saveEdit() }>Save</button>
-                            <button className="btn" onClick={ () => this.props.deletePost( id ) }>Delete</button>
+                            <button className="gray-btn" onClick={ () => this.toggleEdit() }>Cancel</button>
+                            <button className="red-btn" onClick={ () => this.saveEdit() }>Save</button>
+                            <button className="red-btn" onClick={ () => this.props.deletePost( id ) }>Delete</button>
                         </span>
 
                     </div>

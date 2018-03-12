@@ -18,7 +18,7 @@ class ProductPage extends Component {
                     <div className="info-container">
                         <div>{ productInfo.name }</div>
                         <div>${ productInfo.price }</div>
-                        <div><button className="btn">Add to cart</button></div>
+                        <div><button className="red-btn">Add to cart</button></div>
                         <div>{ productInfo.description }</div>
                     </div>
 

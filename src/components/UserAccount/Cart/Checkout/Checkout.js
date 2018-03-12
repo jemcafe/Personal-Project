@@ -49,7 +49,7 @@ class Checkout extends Component {
                 token={ this.onToken( amount, description ) }
                 currency="USD"
                 stripeKey={ process.env.REACT_APP_STRIPE_PUBLISH_KEY } >
-                <button className="btn">Checkout</button>
+                <button className="red-btn">Checkout</button>
             </StripeCheckout>
         )
     }

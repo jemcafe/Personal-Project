@@ -10,7 +10,7 @@ import { logout, updateCartItems } from '../../redux/ducks/reducer';
 
 import SearchBar from './SearchBar/SearchBar';
 
-class MainHeader extends Component {
+class Header extends Component {
     constructor () {
         super();
         this.state = { 
@@ -24,12 +24,12 @@ class MainHeader extends Component {
         }).catch(err => console.log(err));
     }
 
-    menuToggle () {
+    menuToggle = () => {
         // Toggle control for the responsive header menu
         this.setState(prevState => ({ showMenu: !prevState.showMenu }));
     }
 
-    logout () {
+    logout = () => {
         // The session is ended and the cart is empty )
         axios.post(`/api/logout`).then( user => {
             this.props.logout( user.data );
@@ -59,7 +59,7 @@ class MainHeader extends Component {
                                         {/* <Link to={`/${user.username}/followers`}>Followers</Link> */}
                                         <Link to={`/useraccount/cart`}>Cart ({ cartQuantity })</Link>
                                         <Link to={`/useraccount/settings`}>Settings</Link>
-                                        <Link to="/login" onClick={ () => this.logout() }>Signout</Link>
+                                        <Link to="/login" onClick={ this.logout }>Signout</Link>
                                     </div>
                                 </div>
                             );
@@ -85,7 +85,14 @@ class MainHeader extends Component {
 
                         <div className="nav-2">
                             <div className="nav-dropdown link">
-                                { !showMenu ? <FaBars className="fa-bars-close nav-droplink" size={45} onClick={ () => this.menuToggle() } /> : <FaClose className="fa-bars-close nav-droplink" size={45} onClick={ () => this.menuToggle() } /> }
+                                {/* { !showMenu
+                                    ? <FaBars className="fa-bars-close nav-droplink" size={45} onClick={ this.menuToggle } />
+                                    : <FaClose className="fa-bars-close nav-droplink" size={45} onClick={ this.menuToggle } />
+                                } */}
+                                { !showMenu
+                                    ? <div className="menu-icon nav-droplink" onClick={ this.menuToggle }><i className="fas fa-bars"></i></div>
+                                    : <div className="menu-icon nav-droplink" onClick={ this.menuToggle }><i className="fas fa-times"></i></div>
+                                }
                                 <div className={`nav-dropdown-content ${showMenu ? 'show' : ''}`}>
                                     <SearchBar />
                                     <div className="nav-links">
@@ -118,4 +125,4 @@ const mapDispatchToProps = {
     updateCartItems: updateCartItems
 };
 
-export default connect( mapStateToProps , mapDispatchToProps )( MainHeader );
+export default connect( mapStateToProps , mapDispatchToProps )( Header );

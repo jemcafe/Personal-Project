@@ -71,8 +71,8 @@ class Poster extends Component {
                                 </select>
                             </div>
                             <div className="btns">
-                                <button className="btn gray-btn" onClick={ this.toggleEdit }>Close</button>
-                                <button className="btn" onClick={ this.saveEdit }>Save</button>
+                                <button className="gray-btn" onClick={ this.toggleEdit }>Close</button>
+                                <button className="red-btn" onClick={ this.saveEdit }>Save</button>
                             </div>
                         </div>
                     </div>
@@ -82,7 +82,7 @@ class Poster extends Component {
                 <div className="thumbnail">
                     <div className="overlay fade">
                         <div className="poster-name">{ poster.name }</div>
-                        <button className="btn" onClick={ this.toggleEdit }>Edit</button>
+                        <button className="red-btn" onClick={ this.toggleEdit }>Edit</button>
                         <div className="trash-icon" onClick={ () => deletePoster(poster.id) }><i className="fas fa-trash"></i></div>
                     </div>
                     <img src={ poster.imageurl } alt={ poster.name }/>

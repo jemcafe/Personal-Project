@@ -2,3 +2,32 @@
     width: 100%;
     background-color: #cbe4fc;
 }
+
+.settings .avatar {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.settings .avatar > img {
+    max-width: 100%;
+}
+
+.settings .delete-account {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    background: #00000030;
+}
+.settings .container {
+    border-radius: 5px;
+    background: #fff;
+}

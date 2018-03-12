@@ -26,7 +26,7 @@ module.exports = {
                 });
 
             } else {
-                res.status(401).json( 'Not registered' );
+                res.status(404).json('User not found');
             }
 
         }).catch( err => {
@@ -46,7 +46,7 @@ module.exports = {
             if ( !user.length ) {
                 // The user is created
                 bcrypt.hash( password, saltRounds ).then( hashedPassword => {
-                    db.create_user( [username, hashedPassword, null, name, image, headerBkgdImage, `http://localhost:3000/#/${username}`] ).then( newUser => {
+                    db.create_user( [username, hashedPassword, null, name, image, headerBkgdImage, null] ).then( newUser => {
                         
                         session.user = {
                             id: newUser[0].id,
@@ -54,7 +54,6 @@ module.exports = {
                             image: !newUser[0].imageurl ? 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png' : newUser[0].imageurl.slice(0,8) === 'https://' ? newUser[0].imageurl : 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png',
                             headerbkgdimgurl: newUser[0].headerbkgdimgurl
                         };
-
                         res.status(200).json( session.user );
 
                     }).catch( err => console.log(err) );
@@ -77,5 +76,9 @@ module.exports = {
 
     getUser ( req, res, next ) {
         res.status(200).json( req.session.user );
+    },
+
+    deleteAccount ( req, res, next) {
+        const { session } = req;
     }
 }

@@ -11,7 +11,9 @@ class Login extends Component {
         super();
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            isRegistered: true,
+            isCorrectPwd: true
         }
     }
 
@@ -37,7 +39,14 @@ class Login extends Component {
                     this.props.updateCartItems( cart.data );
                 }).catch(err => console.log(err));
             }
-        }).catch(err => console.log(err));
+        }).catch(err => {
+            console.log(err);
+            if ( err.response.status === 404) {
+                this.setState({ isRegistered: false });
+            } else if ( err.response.status === 403) {
+                this.setState({ isRegistered: true, isCorrectPwd: false });
+            }
+        });
     }
 
     render () {
@@ -51,13 +60,15 @@ class Login extends Component {
                             {/* <div className="info">Username</div> */}
                             <input className="input" placeholder="Username" onChange={ (e) => this.handleChange('username', e.target.value) } />
                         </div>
+                        { !this.state.isRegistered && <div style={{color: 'red', fontSize: '12px'}}>* User not registered</div> }
                         <div className="input-info">
                             {/* <div className="info">Password</div> */}
                             <input className="input" type="password" placeholder="Password" onChange={ (e) => this.handleChange('password', e.target.value) } />
                         </div>
+                        { !this.state.isCorrectPwd && <div style={{color: 'red', fontSize: '12px'}}>* Incorrect password</div> }
                         <div className="btns">
-                            <button className="btn" onClick={ () => this.login() }>Sign In</button>
-                            <Link to="/register"><button className="create-btn btn">Create Account</button></Link>
+                            <button className="red-btn" onClick={ () => this.login() }>Sign In</button>
+                            <Link to="/register"><button className="create-btn red-btn">Create Account</button></Link>
                         </div>
                     </div>
 

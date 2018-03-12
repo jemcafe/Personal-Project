@@ -55,7 +55,7 @@ a {
   /* background-color: rgb(252, 247, 201); */
 }
 
-.btn {
+.red-btn {
   padding: 7px 14px;
   box-sizing: border-box;
   margin: 7px 0;
@@ -63,13 +63,26 @@ a {
   border-radius: 4px;
   font-size: 13px;
   font-weight: bold;
+  outline: none;
   color: white;
   background-color: #fc7474; 
-  outline: none;
   cursor: pointer;
 }
-.btn:active {
+.red-btn:active {
   background-color: #dd5c5c; 
+}
+.gray-btn {
+  padding: 7px 14px;
+  box-sizing: border-box;
+  margin: 7px 0;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: bold;
+  outline: none;
+  color: white;
+  background-color: rgb(184, 180, 189);
+  cursor: pointer;
 }
 
 .input {

@@ -100,10 +100,10 @@ class Profile extends Component {
                                 <div className="follow-btn-container panel">
                                 { user.username !== username && (
                                     !user.username
-                                    ? <Link to="/login"><button className="follow-btn btn">Follow</button></Link> 
+                                    ? <Link to="/login"><button className="red-btn">Follow</button></Link> 
                                     : isFollowing
-                                    ? <button className="follow-btn btn" onClick={ this.unfollow }>Unfollow</button>
-                                    : <button className="follow-btn btn" onClick={ this.follow }>Follow</button>
+                                    ? <button className="red-btn" onClick={ this.unfollow }>Unfollow</button>
+                                    : <button className="red-btn" onClick={ this.follow }>Follow</button>
                                 ) }
                                 </div>
                             </div>

@@ -104,7 +104,7 @@ class Posts extends Component {
                                 <input className="input" value={ title } placeholder="Title" onChange={ (e) => this.handleChange('title', e.target.value) }/>
                                 <input className="input" value={ imageurl } placeholder="Image Url" onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
                                 <textarea className="input" rows="1" value={ text } placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }></textarea>
-                                <button className="btn" onClick={ this.createPost }>Post</button>
+                                <button className="red-btn" onClick={ this.createPost }>Post</button>
                             </div> }
 
                             { listOfPosts.length

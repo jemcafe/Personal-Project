@@ -113,7 +113,7 @@ class Posters extends Component {
                                 <select value={ category } name="categories" onChange={ (e) => this.handleChange('postercategoryid', e.target.value) }>
                                     { posterCategories }
                                 </select>
-                                <button className="btn" onClick={ this.addPoster }>Save</button>
+                                <button className="red-btn" onClick={ this.addPoster }>Save</button>
                             </div>
                         </div>
                     </div>

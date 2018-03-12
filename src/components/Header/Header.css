@@ -190,8 +190,9 @@
 
 
 
-.fa-bars-close {
-  padding: 10px;
+.menu-icon {
+  font-size: 20px;
+  padding: 8px 10px 6px 10px;
   box-sizing: border-box;
   color: rgb(102, 51, 50);
   background: gray;
@@ -214,7 +215,7 @@
   /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
   z-index: 1;
   align-items: center;
-  margin-top: 18px;
+  margin-top: 22px;
   padding: 10px 0 15px 0;
 }
 .nav-dropdown-content > div {
@@ -239,9 +240,8 @@
 .nav-dropdown-content .search-container select {
   font-size: 15px;
 }
-/* .nav-dropdown:hover .nav-dropdown-content {
-  display: flex;
-} */
+
+
 .show {
   display: flex;
 }

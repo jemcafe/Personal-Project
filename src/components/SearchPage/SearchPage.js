@@ -61,8 +61,8 @@ class SearchPage extends Component {
                         </div>
 
                         { user.username
-                            ? <button className="add-btn btn" onClick={ () => this.addItem( item ) }>Add To Cart</button>
-                            : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn btn">Add To Cart</button></Link> 
+                            ? <button className="add-btn red-btn" onClick={ () => this.addItem( item ) }>Add To Cart</button>
+                            : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn red-btn">Add To Cart</button></Link> 
                         }
                     </div>
                     }
@@ -105,7 +105,7 @@ class SearchPage extends Component {
                             
                     </div>
 
-                    <div className="prev-next-btn">
+                    <div className="prev-next">
                         <FaAngleLeft className="fa-angle-L" size={40} color="gray" />
                         <FaAngleRight className="fa-angle-R" size={40} color="gray" />
                         {/* <div className="left-icon" style={{fontSize: '30px', color: 'gray', padding: '10px'}}><i className="fas fa-angle-left"></i></div> */}

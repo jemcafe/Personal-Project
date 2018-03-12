@@ -8,6 +8,20 @@
         justify-content: space-around;
         /* background-color: #f9e5fd; */
       }
+      .cart-container h4 {
+        font-size: 20px;
+        margin: 16px 6px;
+        /* color: #756d79; */
+        color: #9c98e0;
+      }
+
+      .cart-container .products {
+        flex: 3;
+        padding: 10px;
+        text-align: left;
+        /* background-color: #dceef8; */
+      }
+
       .cart-container .item {
         padding: 10px;
         box-sizing: border-box;
@@ -20,30 +34,21 @@
         /* align-items: center; */
         /* background-color: #f0fdea; */
       }
-      .cart-container .products {
-        flex: 3;
-        padding: 10px;
-        text-align: left;
-        /* background-color: #dceef8; */
-      }
-      .cart-container .products > h5 {
-        color: rgba(145, 64, 84, 0.521);
-      }
-      .cart-container .item-img {
+      .cart-container .item .item-img {
         display: flex;
         align-items: center;
-        width: 120px;
-        height: 120px;
+        min-width: 120px;
+        max-height: 120px;
         /* border: 1px dashed gray; */
         /* background-color: #f9e5fd; */
       }
-      .cart-container .image {
+      .cart-container .item .item-img > img {
         max-width: 120px;
         max-height: 120px;
         margin: 0 auto;
         /* background-color: #f9e5fd; */
       }
-      .cart-container .item-info {
+      .cart-container .item .item-info {
         flex: 3;
         display: flex;
         justify-content: space-around;
@@ -52,26 +57,20 @@
         margin-left: 15px;
         /* background-color: #e5f0fd; */
       }
-      .cart-container .item-info > h4 {
+      .cart-container .item .item-info > h4 {
         margin: 0;
         font-size: 18px;
         color: #fc7474;
       }
-      .cart-container .info {
+      .cart-container .item .info {
         display: flex;
         justify-content: space-between;
         width: 100%;
         /* background-color: #e5f0fd; */
       }
-      .cart-container .info > div {
+      .cart-container .item .info > div {
         font-size: 15px;
         color: rgba(104, 95, 117, 0.747);
-      }
-      .cart-container h4 {
-        font-size: 20px;
-        margin: 6px;
-        /* color: rgba(145, 64, 84, 0.459); */
-        color: rgba(146, 51, 83, 0.938);
       }
       .cart-container span {
         font-size: 18px;

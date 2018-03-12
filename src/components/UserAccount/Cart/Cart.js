@@ -74,7 +74,7 @@ class Cart extends Component {
                         <div className="item-container">
 
                             <div className="item-img">
-                                <img className="image" src={ item.imageurl } alt="Product"/>
+                                <img src={ item.imageurl } alt="Product"/>
                             </div>
 
                             <div className="item-info">

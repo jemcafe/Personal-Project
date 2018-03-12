@@ -10,7 +10,7 @@ class SearchBar extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            category: '',
+            category: 'Games',
             subcategory: '',
             userInput: '',
             searchRedirect: false
