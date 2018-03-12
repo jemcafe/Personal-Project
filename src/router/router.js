@@ -8,7 +8,6 @@ import BooksPage from '../components/BooksPage/BooksPage';
 import PostersPage from '../components/PostersPage/PostersPage';
 import SearchPage from '../components/SearchPage/SearchPage';
 import ProductPage from '../components/ProductPage/ProductPage';
-import CheckoutPage from '../components/CheckoutPage/CheckoutPage';
 import Login from '../components/Login/Login';
 import Register from '../components/Register/Register';
 import UserAccount from '../components/UserAccount/UserAccount';
@@ -22,7 +21,6 @@ export default (
         <Route path="/posters" component={ PostersPage } />
         <Route path="/search" component={ SearchPage } />
         <Route path="/product/:name" component={ ProductPage } />
-        <Route path="/checkout" component={ CheckoutPage } />
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
         <Route path="/useraccount" component={ UserAccount } />

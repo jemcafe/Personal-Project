@@ -1,12 +1,10 @@
 const initialState = {
    user: {},
-
-   posts: [],
-   posters: [],
    cartItems: [],
 
    productCategories: [],
    productSubcategories: [],
+   searchCategory: '',
    searchResults: [],
    product: {},
 };
@@ -17,12 +15,11 @@ const LOGOUT = 'LOGOUT';
 const REGISTER = 'REGISTER';
 const GET_USER = 'GET_USER';
 
-const UPDATE_POSTS = 'UPDATE_POSTS';
-const UPDATE_POSTERS = 'UPDATE_POSTERS';
 const UPDATE_CART_ITEMS = 'UPDATE_CART_ITEMS';
 
 const GET_PRODUCT_CATEGORIES = 'GET_PRODUCT_CATEGORIES';
 const GET_PRODUCT_SUBCATEGORIES = 'GET_PRODUCT_SUBCATEGORIES';
+const UPDATE_SEARCH_CATEGORY = 'UPDATE_SEARCH_CATEGORY';
 const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS';
 const GET_PRODUCT= 'GET_PRODUCT';
 
@@ -39,16 +36,14 @@ export default function reducer ( state = initialState, action ) {
          return { ...state, user: payload };
       case GET_USER:
          return { ...state, user: payload };
-      case UPDATE_POSTS:
-         return { ...state, posts: payload };
-      case UPDATE_POSTERS:
-         return { ...state, posters: payload };
       case UPDATE_CART_ITEMS:
          return { ...state, cartItems: payload };
       case GET_PRODUCT_CATEGORIES:
          return { ...state, productCategories: payload };
       case GET_PRODUCT_SUBCATEGORIES:
          return { ...state, productSubcategories: payload };
+      case UPDATE_SEARCH_CATEGORY:
+         return { ...state, searchCategory: payload };
       case UPDATE_SEARCH_RESULTS:
          return { ...state, searchResults: payload };
       case GET_PRODUCT:
@@ -87,20 +82,6 @@ export function getUser ( user ) {
    };
 }
 
-export function updatePosts ( posts ) {
-   return {
-      type: 'UPDATE_POSTS',
-      payload: posts
-   };
-}
-
-export function updatePosters ( posters ) {
-   return {
-      type: 'UPDATE_POSTERS',
-      payload: posters
-   };
-}
-
 export function updateCartItems ( cartItems ) {
    return {
       type: 'UPDATE_CART_ITEMS',
@@ -119,6 +100,13 @@ export function getProductSubcategories ( productSubcategories ) {
    return {
       type: 'GET_PRODUCT_SUBCATEGORIES',
       payload: productSubcategories
+   };
+}
+
+export function updateSearchCategory ( searchCategory) {
+   return {
+      type: 'UPDATE_SEARCH_CATEGORY',
+      payload: searchCategory
    };
 }
 

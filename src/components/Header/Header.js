@@ -70,7 +70,7 @@ class MainHeader extends Component {
                 <div className="main-header-container panel">
 
                     <div className="header-1 position">
-                        <Link to="/"><div className="title">ThruAgate</div></Link>
+                        <Link to="/"><div className="title">Creation<br/>Basin</div></Link>
 
                         <div className="header-nav nav-1">
                             <SearchBar />
@@ -86,7 +86,7 @@ class MainHeader extends Component {
                         <div className="nav-2">
                             <div className="nav-dropdown link">
                                 { !showMenu ? <FaBars className="fa-bars-close nav-droplink" size={45} onClick={ () => this.menuToggle() } /> : <FaClose className="fa-bars-close nav-droplink" size={45} onClick={ () => this.menuToggle() } /> }
-                                <div className={`nav-dropdown-content ${showMenu ? "show" : ""}`}>
+                                <div className={`nav-dropdown-content ${showMenu ? 'show' : ''}`}>
                                     <SearchBar />
                                     <div className="nav-links">
                                         <Link to="/" className="link">Home</Link>

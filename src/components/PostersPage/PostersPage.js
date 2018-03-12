@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import './PostersPage.css'
 import { Route } from 'react-router-dom';
 
-// import ContentSlider from '../ContentSlider/ContentSlider';
+import ContentSlider from '../ContentSlider/ContentSlider';
 
 class PostersPage extends Component {
 
@@ -11,13 +12,14 @@ class PostersPage extends Component {
                 <div className="posters-page-container">
                     <h3>Posters</h3>
 
-                    {/* <Route exact path="/games" render={ () => {
-                        return <ContentSlider 
-                                    images={ ['https://static.gamespot.com/uploads/scale_super/1552/15524586/3246448-066597.jpg',
-                                                'https://img.youtube.com/vi/hRWoz5c_GFo/maxresdefault.jpg',
-                                                'https://www.zelda.com/breath-of-the-wild/assets/icons/BOTW-Share_icon.jpg',
-                                                'https://cdn4.dualshockers.com/wp-content/uploads/2018/01/MonsterHunterWorld-5-1.jpg'] } /> 
-                    } } /> */}
+                    <ContentSlider 
+                        images={[
+                            'https://cdnb.artstation.com/p/assets/images/images/007/889/865/large/jem-brown-kisame-01-screenshot-smla.jpg?1509157762',
+                            'https://cdna.artstation.com/p/assets/images/images/007/588/014/large/jem-brown-20170909-120941-edited-b-sml3b.jpg?1507148669',
+                            'https://cdna.artstation.com/p/assets/images/images/007/291/402/large/jem-brown-garra-screenshot-03b-700x700.jpg?1505110523',
+                            'https://i.pinimg.com/736x/24/d7/ec/24d7ec8bb462a9568a900a22ca57aba4--horses-beautiful-wild-pretty-horses.jpg'
+                        ]}
+                    />
 
                 </div>
             </div>

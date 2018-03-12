@@ -1,3 +1,4 @@
-.useraccount .settings-container {
+.useraccount .settings {
+    width: 100%;
     background-color: #cbe4fc;
 }

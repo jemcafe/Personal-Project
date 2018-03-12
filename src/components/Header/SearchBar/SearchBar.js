@@ -4,14 +4,14 @@ import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { updateSearchResults } from '../../../redux/ducks/reducer';
+import { updateSearchCategory, updateSearchResults } from '../../../redux/ducks/reducer';
 
 class SearchBar extends Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
         this.state = {
-            category: 'Game',
-            subcategory: 'All',
+            category: '',
+            subcategory: '',
             userInput: '',
             searchRedirect: false
         }
@@ -21,10 +21,10 @@ class SearchBar extends Component {
         this.setState({ [property]: value });
     }
 
-    handleCategoryChange ( property, value ) {
-        const { productSubcategories } = this.props;
+    // handleCategoryChange ( property, value ) {
+    //     const { productSubcategories } = this.props;
 
-        this.setState({ [property]: value });
+    //     this.setState({ [property]: value });
 
     //     if ( property === 'category' ) {
     //         if ( value === 'Games' ) {
@@ -35,13 +35,18 @@ class SearchBar extends Component {
     //             this.setState({ subcategory: productSubcategories[2][0], subcategoryList: productSubcategories[2] });
     //         }
     //     }
-    }
+    // }
 
     search () {
-        let { category, subcategory, userInput } = this.state;
-        const { updateSearchResults } = this.props;
+        const { category, subcategory, userInput } = this.state;
+        const { updateSearchCategory, updateSearchResults } = this.props;
+        console.log('Search ->', category, userInput);
 
-        updateSearchResults( [] );  // Resets the search results to an empty array
+        // Updates the chosen category in Redux. This is needed for conditional rendering on the search page.
+        updateSearchCategory( category );
+
+        // Resets the search results to an empty array for a fresh search
+        updateSearchResults( [] );
 
         if ( category === 'Games' ) {
 
@@ -50,8 +55,7 @@ class SearchBar extends Component {
                 updateSearchResults( res.data );
             }).catch(err => console.log(err)); 
 
-        }
-        else if ( category === 'Books') {
+        } else if ( category === 'Books') {
 
             axios.get(`/api/search/books?search=${ userInput }&subject=${ subcategory }`)
             .then( res => {
@@ -65,7 +69,16 @@ class SearchBar extends Component {
                 updateSearchResults( res.data );
             }).catch(err => console.log(err));
             
+        } else if ( category === 'Creators' ) {
+
+            axios.get(`/api/search/users?search=${ userInput }`)
+            .then( res => {
+                updateSearchResults( res.data );
+            }).catch(err => console.log(err));
+
         }
+
+        // Triggers the redirect to the search page
         this.setState(prevState => ({ searchRedirect: !prevState.searchRedirect }));
     }
 
@@ -74,18 +87,19 @@ class SearchBar extends Component {
         const { productCategories } = this.props;
 
         // List of category options ( The list order isn't changing, so using i for the key is fine )
-        const categories = productCategories && productCategories.map( e => <option key={ e.id } value={ e.productcategory }>{ e.productcategory }</option> );
+        const categories = productCategories && productCategories
+                          .map( e => <option key={ e.id } value={ e.productcategory }>{ e.productcategory }</option> );
         
         return (
             <div className="search">
                 <div className="search-container">
-                    <select defaultValue={ category } className="category-1" onChange={ (e) => this.handleCategoryChange("category", e.target.value) }>
+
+                    <select className="category" value={ category } onChange={ (e) => this.handleChange("category", e.target.value) }>
                         { categories }
                     </select>
                     
                     <div className="search-bar">
                         <input placeholder={ 'Search' } onChange={ (e) => this.handleChange('userInput', e.target.value) } onKeyDown={ (e) => e.keyCode === 13 ? this.search() : '' }/>
-                        {/* <Link to="/search"><FaSearch className="fa-search" size={20} onClick={ () => this.search() }/></Link> */}
                         <Link to="/search" onClick={ () => this.search() }>
                             <div className="search-icon"><i className="fas fa-search"></i></div>
                         </Link>
@@ -102,11 +116,13 @@ const mapStateToProps = ( state ) => {
     return {
         productCategories: state.productCategories,
         productSubcategories: state.productSubcategories,
-        searchResults: state.searchResults 
+        searchCategory: state.searchCategory,
+        searchResults: state.searchResults
     };
 };
 
 const mapDispatchToProps = {
+    updateSearchCategory: updateSearchCategory,
     updateSearchResults: updateSearchResults
 }
 

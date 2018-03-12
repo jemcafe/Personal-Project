@@ -1,27 +1,4 @@
 module.exports = {
-    getUsers ( req, res ) {
-        const db = req.app.get('db');
-
-        db.read_users().then( users => {
-
-            const usersData = users.map( user => {
-                return { 
-                    id: user.id,
-                    username: user.username,
-                    name: user.name,
-                    imageurl: user.imageurl,
-                    headerbkgdimgurl: user.headerbkgdimgurl,
-                    profileurl: user.profileurl
-                }
-            });
-            res.status(200).json( usersData );
-
-        }).catch( err => {
-            console.log(err); 
-            res.status(500).send(err); 
-        });
-    },
-
     getUser ( req, res ) {
         const db = req.app.get('db');
         const { username } = req.params;

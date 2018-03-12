@@ -28,7 +28,7 @@ app.use( session({
     saveUninitialized: false
 }));
 app.use( checkForSession );
-massive( process.env.CONNECTION_STRING ).then( db => app.set('db', db) ).catch(err => console.log('Error', err));
+massive( process.env.CONNECTION_STRING ).then(db => app.set('db', db)).catch(err => console.log('Error', err));
 
 
 // Auth
@@ -62,7 +62,6 @@ app.get('/api/user', authCntrl.getUser);
     app.delete('/api/cart/remove-all', cartCntrl.removeAllItems);
 
 // Users ( users that are not logged in )
-    app.get('/api/users', userProfileCntrl.getUsers);
     app.get('/api/profile/:username', userProfileCntrl.getUser);
     app.get('/api/profile/:username/posts', userProfileCntrl.getPosts);
     app.get('/api/profile/:username/posters', userProfileCntrl.getPosters);
@@ -78,8 +77,7 @@ app.get('/api/user', authCntrl.getUser);
     app.get('/api/search/games', searchCntrl.getGames);
     app.get('/api/search/books', searchCntrl.getVolumes);
     app.get('/api/search/posters', searchCntrl.getPosters);
-    // Ratings
-    app.get('/api/book-ratings', searchCntrl.getBookRatings);
+    app.get('/api/search/users', searchCntrl.getUsers);
 
 // Stripe payment
     app.post('/save-stripe-token', stripeCntrl.paymentApi);

@@ -11,16 +11,14 @@ import { updateCartItems, getProduct } from '../../redux/ducks/reducer';
 class SearchPage extends Component {
 
     addItem ( item ) {
-        const body = {
+        axios.post('/api/cart/add', {
             productId: item.id,
             name: item.name,
             price: item.price,
             productCategoryId: item.productcategoryid,
             quantity: 1,
             image: item.imageurl
-        };
-
-        axios.post('/api/cart/add', body).then( res => {
+        }).then( () => {
             axios.get('/api/cart').then( cart => {
 
                 this.props.updateCartItems( cart.data );
@@ -34,69 +32,89 @@ class SearchPage extends Component {
     }
 
     render () {
-        const { user, searchResults } = this.props;
+        const { user, searchCategory, searchResults } = this.props;
 
         // List of products
-        const list = searchResults.map( item => {
-            return <li key={ item.id }>
-                <div className="item">
-                    <div className="item-container">
+        const listOfProducts = searchResults.map( item => {
+            return <li key={ item.id } className="item">
+                <div className="container">
 
-                        <Link to={`/product/${item.name.split(' ').join('_')}`}>
-                            <div className="image-container">
-                                <img className="img-anim" src={ item.imageurl } alt="cover" onClick={ () => this.getProduct(item) }/>
-                            </div>
+                    <div className="img-container">
+                        <Link to={`/product/${item.name.split(' ').join('_')}`} className="img-fade-in">
+                            <img src={ item.imageurl } alt="cover" onClick={ () => this.getProduct(item) }/>
+                        </Link>
+                    </div>
+
+                    { (!item.headerbkgdimgurl || item.headerbkgdimgurl === '' ) && 
+                    <div className="item-info-container">
+                        <Link to={`/product/${item.name.split(' ').join('_')}`} className="title" onClick={ () => this.getProduct(item) }>
+                            { item.name.length > 20 ? `${item.name.slice(0,20).trim()}...` : item.name }
                         </Link>
 
-                        <div className="item-info-container">
+                        { item.username && 
+                            <div className="creator-name">by <Link to={`/${item.username}`}>{ item.username }</Link></div> 
+                        }
 
-                            <Link to={`/product/${item.name.split(' ').join('_')}`} className="title" onClick={ () => this.getProduct(item) }>
-                                { item.name.length > 20 ? `${item.name.slice(0,20).trim()}...` : item.name }
-                            </Link>
-
-                            { item.username && 
-                            <div className="creator-name">by <Link to={`/${item.username}`}>{ item.username }</Link></div> }
-
-                            <div className="info">
-                                <div>Rating</div>
-                                <div>Date</div>
-                                <div>${ item.price }</div>
-                            </div>
-
-                            { user.username
-                            ? <button className="add-btn btn" onClick={ () => this.addItem( item ) }>Add To Cart</button>
-                            : <Link to="/login"><button className="add-btn btn">Add To Cart</button></Link> }
-                            
+                        <div className="rating-price">
+                            <div>Rating</div>
+                            <div>${ item.price }</div>
                         </div>
 
+                        { user.username
+                            ? <button className="add-btn btn" onClick={ () => this.addItem( item ) }>Add To Cart</button>
+                            : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn btn">Add To Cart</button></Link> 
+                        }
                     </div>
+                    }
+
+                </div>
+            </li>
+        });
+
+        // List of users
+        const listOfUsers = searchResults.map( item => {
+            return <li key={ item.id } className="item">
+                <div className="container">
+
+                    <div className="img-container">
+                        <Link to={`/${item.username}`} className="img-fade-in" style={{width: '100%', height: '100%'}}>
+                            <img src={ item.imageurl } alt="avatar"/>
+                        </Link>
+                    </div>
+
+                    <div className="item-info-container">
+                        <Link to={`/${item.username}`} className="title">{ item.username }</Link>
+                    </div>
+
                 </div>
             </li>
         });
 
         return (
             <div className="search-page">
-                <div className="search-page-container">
-                    <div className="">Search Results:</div>
+                <div className="container">
+                    <div style={{ padding: '11px' }}>Search Results:</div>
 
-                    { list.length ? (
                     <div className="results">
-                        <div className="results-container">
-
-                            { list.length ? <ul>{ list }</ul> : <h4>No results</h4> }
-
-                            <div className="prev-next-btn">
-                                <FaAngleLeft className="fa-angle-L" size={40} color="gray" />
-                                <FaAngleRight className="fa-angle-R" size={40} color="gray" />
-                            </div>
                             
-                        </div>
+                            { searchCategory === 'Creators' && listOfUsers.length
+                            ? <ul className="users-list">{ listOfUsers }</ul>
+                            : listOfProducts.length
+                            ? <ul className="product-list">{ listOfProducts }</ul> 
+                            : <h4>No results</h4> }
+                            
                     </div>
-                    ) : (
-                        <div className="loading">
-                            <div className="loading-spin"><i class="fas fa-sync fa-spin"></i></div>
-                        </div>
-                    ) }
+
+                    <div className="prev-next-btn">
+                        <FaAngleLeft className="fa-angle-L" size={40} color="gray" />
+                        <FaAngleRight className="fa-angle-R" size={40} color="gray" />
+                        {/* <div className="left-icon" style={{fontSize: '30px', color: 'gray', padding: '10px'}}><i className="fas fa-angle-left"></i></div> */}
+                        {/* <div className="right-icon" style={{fontSize: '30px', color: 'gray', padding: '10px'}}><i className="fas fa-angle-right"></i></div> */}
+                    </div>
+
+                    {/* <div className="loading">
+                        <div className="loading-spin"><i class="fas fa-sync fa-spin"></i></div>
+                    </div> */}
                     
                 </div>
             </div>
@@ -104,10 +122,11 @@ class SearchPage extends Component {
     }
 }
 
-const mapStateToProps = ( state ) => {
+const mapStateToProps = (state) => {
     return {
         user: state.user,
         cartItems: state.cartItems,
+        searchCategory: state.searchCategory,
         searchResults: state.searchResults,
         product: state.product
     };

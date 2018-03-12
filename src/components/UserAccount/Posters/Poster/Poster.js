@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Poster.css';
-import axios from 'axios';
 import { connect } from 'react-redux';
 
 class Poster extends Component {

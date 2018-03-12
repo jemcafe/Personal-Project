@@ -18,16 +18,13 @@ class App extends Component {
             axios.get('/api/product/categories'),
             axios.get('/api/product/subcategories')
         ]).then(axios.spread( ( userRes, productCategoriesRes, productSubcategoriesRes ) => {
-            console.log('Product subcategories', productSubcategoriesRes.data);
             getUser( userRes.data );
             getProductCategories( productCategoriesRes.data );
             getProductSubcategories( productSubcategoriesRes.data );
         })).catch(err => console.log(err));
-        console.log('Product subcategories didmount', this.props.productSubcategories);
     }
     
     render() {
-        console.log('Product subcategories render', this.props.productSubcategories);
         return (
             <div className="App">
 
@@ -44,7 +41,7 @@ class App extends Component {
                 <footer className="footer">
                     <div className="footer-container panel">
 
-                        <div>&copy; 2018 ThruAgate</div>
+                        <div>&copy; 2018 Creation Basin</div>
 
                     </div>
                 </footer>

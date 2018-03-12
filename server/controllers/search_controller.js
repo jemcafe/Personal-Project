@@ -29,7 +29,8 @@ module.exports = {
             }).catch( err => console.log(err) );
         }).catch( err => console.log(err) );
     },
-    
+
+
     getGames ( req, res, next ) {
         const db = req.app.set('db');
         const { search, platform } = req.query;
@@ -68,7 +69,8 @@ module.exports = {
             res.status(500).send('No Platforms');
         });
     },
-    
+
+
     getVolumes ( req, res, next ) {
         const { search, subject } = req.query;
         
@@ -93,22 +95,21 @@ module.exports = {
             res.status(200).json( data );
         }).catch( err => console.error(err) );
     },
-    getBookRatings( req, res, next ) {
-        axios.get(`https://www.googleapis.com/books/v1/volumes?q=Harry%20Potter&maxResults=10&startIndex=0`).then( resp => {
-            const averageRatings = resp.data.items.map( e => e.volumeInfo );
-            res.status(200).json( averageRatings );
-        }).catch( err => console.error(err) );
-    },
+
 
     getPosters ( req, res, next ) {
         const db = req.app.set('db');
         const { search, category } = req.query;
 
+        console.log( 'Search', search );
+        console.log( 'Category', category );
+
         db.read_posters().then( posters => {
 
             const filteredPosters = posters.filter( poster => poster.name.toLowerCase().includes( search.toLowerCase() ) ? poster : false )
                                            .filter( poster => category === 'All' || category === '' ? poster : category === poster.category ? poster : false);
-            const allPosters = !category ? posters : filteredPosters;
+            const allPosters = !search && !category ? posters : filteredPosters;
+            // console.log( 'Posters', allPosters );
             res.status(200).json( allPosters );
 
         }).catch( err => {
@@ -118,6 +119,32 @@ module.exports = {
     },
 
 
+    getUsers ( req, res ) {
+        const db = req.app.get('db');
+        const { search } = req.query;
+
+        db.read_users().then( users => {
+
+            const filteredUsers = users
+                .filter( user => user.username.toLowerCase().includes( search.toLowerCase() ) ? user : false )
+                // .filter( user => category === 'All' || category === '' ? user : category === user.category ? user : false)
+                .map( user => ({
+                    id: user.id,
+                    username: user.username,
+                    name: user.name,
+                    imageurl: user.imageurl,
+                    headerbkgdimgurl: user.headerbkgdimgurl,
+                    profileurl: user.profileurl
+                }));
+            // const allUsers = !search ? users : filteredUsers;
+
+            res.status(200).json( filteredUsers );
+
+        }).catch( err => {
+            console.log(err); 
+            res.status(500).send(err); 
+        });
+    },
 
 
     // This is for getting the data to my database

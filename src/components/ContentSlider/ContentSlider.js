@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 class ContentSlider extends Component {
     render () {
         const settings = {
+            arrows: false,
             autoplay: true,
             autoplaySpeed: 4000,
             dots: true,
@@ -15,11 +16,15 @@ class ContentSlider extends Component {
         };
 
         return (
-            <div className="slider">
+            <ul className="slider">
                 <Slider {...settings}>
-                    { this.props.images.map( (e, i) => <div key={i}><div className="slide-img"><img src={ e } alt="Media pic"/></div></div> )}
+                    { this.props.images.map( (e, i) => (
+                        <li key={i} className="slide-img">
+                            <img src={ e } alt="Media pic"/>
+                        </li>
+                    )) }
                 </Slider>
-            </div>
+            </ul>
         )
     }
 }

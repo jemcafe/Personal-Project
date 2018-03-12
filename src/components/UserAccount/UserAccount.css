@@ -1,4 +1,7 @@
-/* .useraccount-container {
+.useraccount {
   display: flex;
-  flex-direction: column;
-} */
+  width: 100%;
+}
+.useraccount-container {
+  width: 100%;
+}
