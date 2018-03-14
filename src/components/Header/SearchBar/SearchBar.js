@@ -37,7 +37,9 @@ class SearchBar extends Component {
     //     }
     // }
 
-    search () {
+    search (event) {
+        event.preventDefault();
+
         const { category, subcategory, userInput } = this.state;
         const { updateSearchCategory, updateSearchResults } = this.props;
         console.log('Search ->', category, userInput);
@@ -92,21 +94,19 @@ class SearchBar extends Component {
         
         return (
             <div className="search">
-                <div className="search-container">
-
-                    <select className="category" value={ category } onChange={ (e) => this.handleChange("category", e.target.value) }>
+                <form onSubmit={ (e) => this.search(e) }>
+                    <select className="category" value={ category } onChange={ (e) => this.handleChange('category', e.target.value) }>
                         { categories }
                     </select>
                     
                     <div className="search-bar">
-                        <input placeholder={ 'Search' } onChange={ (e) => this.handleChange('userInput', e.target.value) } onKeyDown={ (e) => e.keyCode === 13 ? this.search() : '' }/>
-                        <Link to="/search" onClick={ () => this.search() }>
+                        <input placeholder={ 'Search' } onChange={ (e) => this.handleChange('userInput', e.target.value) }/>
+                        <button type="submit" value="Search">
                             <div className="search-icon"><i className="fas fa-search"></i></div>
-                        </Link>
+                        </button>
                     </div>
-
-                    { searchRedirect && <Redirect to="/search" /> }
-                </div>
+                </form>
+                { searchRedirect && <Redirect to="/search" /> }
             </div>
         )
     }
