@@ -29,8 +29,8 @@
         /* background-color: rgb(255, 203, 220); */
     }
     .login-reg .info-input > h3 {
-        margin: 0 0 10px 0;
-        color: rgba(77, 33, 102, 0.753);
+        margin: 0 0 18px 0;
+        color: #66569b;
         font-size: 25px;
         font-weight: normal;
     }
@@ -44,12 +44,16 @@
         flex-direction: column;
         box-sizing: border-box;
         align-items: center;
-        margin-top: 5px;
+        margin: 10px 0 0 0;
         /* background-color: rgb(255, 223, 185); */
     }
 
+    .login-reg .red-btn {
+        margin: 10px 0;
+    }
+
     .login-reg .create-btn {
-        color: rgba(125, 108, 108, 0.705);
+        color: #978896;
         background-color: rgb(236, 230, 230);
     }
     .login-reg .create-btn:hover {

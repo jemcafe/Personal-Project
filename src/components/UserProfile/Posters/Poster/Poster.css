@@ -1,0 +1,67 @@
+.posters .poster {
+    margin: 4px;
+    /* background-color: #e1d0ec; */
+}
+/* Fills the thumbnail div with the image */
+.posters .poster .thumbnail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 187.5px;
+    height: 187.5px;
+    cursor: pointer;
+}
+.posters .poster .thumbnail > img {  /*  When height is greater than width  */
+    flex-shrink: 0;
+    max-width: 100%;
+    min-height: 100%;
+}
+.posters .poster .thumbnail > .highlight {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 187.5px;
+    height: 187.5px;
+    background: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+}
+.posters .poster .thumbnail > .highlight:hover {
+    opacity: 1;
+}
+.posters .poster .poster-name {
+    width: 170px;
+    font-size: 15px;
+    color: white;
+}
+
+.posters .poster .close-up {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.posters .poster .close-up > .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000a1
+}
+.posters .poster .close-up > img {
+    z-index: 1;
+    max-width: 90%;
+    max-height: 500px;
+    border: 12px solid white;
+    border-radius: 5px;
+}

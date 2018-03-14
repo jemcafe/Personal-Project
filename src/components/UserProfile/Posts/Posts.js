@@ -55,7 +55,7 @@ class Posts extends Component {
     }
 
     editPost = ( id, title, text, imageurl ) => {
-        axios.put(`/api/post/${id}/edit`, { title, text, imageurl }).then( res => {
+        axios.put(`/api/post/${id}/edit`, { title, text, imageurl }).then( () => {
             axios.get(`/api/posts`).then( posts => {
 
                 this.setState({ posts: posts.data });

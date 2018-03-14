@@ -28,11 +28,11 @@ module.exports = {
         const db = req.app.set('db');
         const { session } = req;
         const { id } = req.params;
-        const { title, text, image } = req.body;
+        const { title, text, imageurl } = req.body;
 
         if ( session.user.id ) {
 
-            db.update_post( [id, title, text, session.user.id, image] ).then( post => {
+            db.update_post( [id, title, text, session.user.id, imageurl] ).then( post => {
                 res.status(200).json( post );
             }).catch( err => {
                 console.log(err);

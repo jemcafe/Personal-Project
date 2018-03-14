@@ -13,14 +13,18 @@
   overflow: hidden;
   width: 100%;
   height: 10em;
-  background-image: linear-gradient( 0deg, #e9e3f1, white );
+  /* background-image: linear-gradient( 0deg, #e9e3f1, #fecdcd); */
+  /* background-image: linear-gradient( 0deg, #ffe2e2, #e9e3f1); */
+  background-image: linear-gradient( 0deg, #ffe2e2, #d5cde0);
+  /* background-image: linear-gradient( 0deg, #fecdcd, #c5b9d8); */
   /* background:  #cdc7d6; */
 }
-.profile-header-bkgd img {
+.profile-header-bkgd > img {
   flex-shrink: 0;
   width: 100%;
   min-height: 100%;
 }
+
 .follow-btn-container {
   display: flex;
   justify-content: center;
@@ -58,11 +62,11 @@
         display: flex;
         flex-direction: column;
     }
-    .profile-pic-name > h4 {
-        font-size: 18px;
+    .profile-pic-name > h3 {
+        font-size: 20px;
         font-weight: bold;
-        margin: 10px 0 8px 0;
-        color: #b34139;
+        margin: 18px 0 8px 0;
+        color: #66569b;
     }
         /* Fills the thumbnail div with the image */
     .profile-pic {
@@ -114,7 +118,6 @@
     display: flex;
     flex-direction: column;
     padding: 10em 0 0 0;
-    /* align-items: center; */
   }
   .profile-header {
     max-width: 100%;

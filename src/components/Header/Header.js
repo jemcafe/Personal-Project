@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './Header.css';
-import FaBars from 'react-icons/lib/fa/bars';
-import FaClose from 'react-icons/lib/fa/close';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -24,7 +22,7 @@ class Header extends Component {
         }).catch(err => console.log(err));
     }
 
-    menuToggle = () => {
+    toggleMenu = () => {
         // Toggle control for the responsive header menu
         this.setState(prevState => ({ showMenu: !prevState.showMenu }));
     }
@@ -70,7 +68,7 @@ class Header extends Component {
                 <div className="main-header-container panel">
 
                     <div className="header-1 position">
-                        <Link to="/"><div className="title">Creation<br/>Basin</div></Link>
+                        <Link to="/"><div className="title">Creation Basin</div></Link>
 
                         <div className="header-nav nav-1">
                             <SearchBar />
@@ -85,13 +83,9 @@ class Header extends Component {
 
                         <div className="nav-2">
                             <div className="nav-dropdown link">
-                                {/* { !showMenu
-                                    ? <FaBars className="fa-bars-close nav-droplink" size={45} onClick={ this.menuToggle } />
-                                    : <FaClose className="fa-bars-close nav-droplink" size={45} onClick={ this.menuToggle } />
-                                } */}
                                 { !showMenu
-                                    ? <div className="menu-icon nav-droplink" onClick={ this.menuToggle }><i className="fas fa-bars"></i></div>
-                                    : <div className="menu-icon nav-droplink" onClick={ this.menuToggle }><i className="fas fa-times"></i></div>
+                                    ? <div className="menu-icon nav-droplink" onClick={ this.toggleMenu }><i className="fas fa-bars"></i></div>
+                                    : <div className="menu-icon nav-droplink" onClick={ this.toggleMenu }><i className="fas fa-times"></i></div>
                                 }
                                 <div className={`nav-dropdown-content ${showMenu ? 'show' : ''}`}>
                                     <SearchBar />

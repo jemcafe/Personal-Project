@@ -1,77 +1,45 @@
 .profile .posters {
     width: 100%;
     /* background-color: #cbe4fc; */
-  }
-.profile .posters-container {
+}
+.profile .posters > .container {
     display: flex;
     flex-direction: column;
 }
-    .posters-container h4 {
+    .posters > .container h4 {
         color:rgba(77, 33, 102, 0.753);
     }
-    .posters-container > ul {
+    .posters > .container > ul {
         flex: 3;
         /* background-color: #ffffff; */
     }
-    .posters-list {
+    .posters .posters-list {
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
     }
     
-    .poster {
-        margin: 4px;
-        /* background-color: #e1d0ec; */
-    }
-    /* Fills the thumbnail div with the image */
-    .poster .thumbnail {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        width: 187.5px;
-        height: 187.5px;
-    }
-    .poster .thumbnail > img {  /*  When height is greater than width  */
-        flex-shrink: 0;
-        max-width: 100%;
-        min-height: 100%;
-    }
-    .poster .thumbnail > .highlight {
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        width: 187.5px;
-        height: 187.5px;
-        background: rgba(0, 0, 0, 0.7);
-        opacity: 0;
-    }
-    .poster .thumbnail > .highlight:hover {
-        opacity: 1;
-    }
-    .poster-name {
-        width: 170px;
-        font-size: 15px;
-        color: white;
-    }
 
 /*  Animations  */
 
-.fade {
+.fade-in {
+    animation-name: "fade-in";
+    animation-duration: 1s;
+}
+
+.overlay-fade {
     animation-name: "fade-out";
     animation-duration: 0.5s;
-  }
-  .fade:hover {
+}
+.overlay-fade:hover {
     animation-name: "fade-in";
     animation-duration: 0.5s;
-  }
-  @keyframes fade-in {
+}
+@keyframes fade-in {
     0% { opacity: 0;}
     100% { opacity: 1; }
-  }
-  @keyframes fade-out {
+}
+@keyframes fade-out {
     0% { opacity: 1; }
     100% { opacity: 0; }
-  }
+}

@@ -26,6 +26,7 @@ class Post extends Component {
 
     saveEdit () {
         const { title, text, imageurl } = this.state;
+        console.log( 'Image', imageurl );
         this.props.editPost(this.props.post.id, title, text, imageurl);
         this.toggleEdit();
     }
@@ -39,35 +40,36 @@ class Post extends Component {
 
         return (
             <li className="post fade-in">
-                { !this.state.editMode ? (
-                    <div className="post-container fade-in">
+                { this.state.editMode ? (
+                    <div className="container">
 
-                        <div className="name-title padding-align">
-                            <Link to={`/${profileUser.username}`}><img src={ profileUser.imageurl} alt="Proifle pic"/></Link>
-                            <h3>{ title }</h3>
-                        </div>
-                        { imageurlCheck && <div className="image"><img src={ imageurl } alt="Url not found"/></div> }
-                        <div className="text padding-align" >{ text }</div>
-                        <div className="date-edit padding-align">
-                            <div>{ dateposted }</div>
-                            { user.username === paramsUsername && <div><FaEdit className="fa-edit" onClick={ () => this.toggleEdit() } size={25} color="gray" /></div> }
-                        </div>
-
-                    </div>
-                ) : (
-                    <div className="post-container">
-
-                        <div className="name-title padding-align">
-                            <Link to={`/${username}`}><img src={ profileUser.imageurl} alt="Proifle pic"/></Link>
+                        <div className="name-title">
+                            <Link to={`/${username}`}><img className="avatar" src={ profileUser.imageurl} alt="Proifle pic"/></Link>
                         </div>
                         { imageurlCheck && <div className="image"><img src={ imageurl } alt="Url not found"/></div> }
                         <div><input className="input" placeholder="Title" defaultValue={ title } onChange={ (e) => this.handleChange('title', e.target.value) }/></div>
-                        <div><input className="input" placeholder="Url" defaultValue={ imageurl } onChange={ (e) => this.handleChange('image', e.target.value) }/></div>                        <textarea className="input" rows="1" cols="10" defaultValue={ text } placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }></textarea>
+                        <div><input className="input" placeholder="Url" defaultValue={ imageurl } onChange={ (e) => this.handleChange('imageurl', e.target.value) }/></div>
+                        <div><textarea className="input" rows="1" cols="10" defaultValue={ text } placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }></textarea></div>
                         <span className="btns">
                             <button className="gray-btn" onClick={ () => this.toggleEdit() }>Cancel</button>
+                            <button className="gray-btn" onClick={ () => this.props.deletePost( id ) }>Delete</button>
                             <button className="red-btn" onClick={ () => this.saveEdit() }>Save</button>
-                            <button className="red-btn" onClick={ () => this.props.deletePost( id ) }>Delete</button>
                         </span>
+
+                    </div>
+                ) : (
+                    <div className="container fade-in">
+
+                        <div className="name-title">
+                            <Link to={`/${profileUser.username}`}><img className="avatar" src={ profileUser.imageurl} alt="Proifle pic"/></Link>
+                            <h3>{ title }</h3>
+                        </div>
+                        { imageurlCheck && <div className="image"><img src={ imageurl } alt="Url not found"/></div> }
+                        <div className="text" >{ text }</div>
+                        <div className="date-edit">
+                            <div>{ dateposted }</div>
+                            { user.username === paramsUsername && <div><FaEdit className="fa-edit" onClick={ () => this.toggleEdit() } size={25} color="gray" /></div> }
+                        </div>
 
                     </div>
                 ) }

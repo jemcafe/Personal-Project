@@ -87,7 +87,7 @@ class Profile extends Component {
                                     <Link to={`/${profileUser.username}`}>
                                         <div className="profile-pic"><img src={profileUser.imageurl} alt="Profile pic"/></div>
                                     </Link>
-                                    <h4>{ profileUser.username }</h4>
+                                    <h3>{ profileUser.username }</h3>
                                 </div>
 
                                 <div className="user-nav">

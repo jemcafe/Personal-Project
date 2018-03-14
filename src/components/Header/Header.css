@@ -1,11 +1,7 @@
 /*  Header  */
 
 .main-header {
-  background: url('../../assets/images/header_banner.jpg');
-  background-repeat: no-repeat;
-  background-position: 15% 0;
-  border-bottom: 1px solid #ffc0bc94;
-  /* background-color: #fccbd3; */
+  border-bottom: 1px solid #feb5b6;
 }
 .position {
   position: absolute;
@@ -15,15 +11,7 @@
   height: 5em;
 }
 .header-bkgd-overlay {
-  /* background: linear-gradient(5deg, white, #ffe7b0, transparent); */
-  /* background: linear-gradient(-5deg, #b0dbff, transparent); */
-  /* background: linear-gradient(-5deg, #b0dbff, transparent, #b0dbff); */
-  /* background: linear-gradient(-5deg, #ffe7b0, transparent, #ffc8cc); */
-  background: linear-gradient(-1deg, transparent, #ffcdb0);
-  background-color: #f180c633;
-  /* background-color: #ffc8cc; */
-  /* background: linear-gradient(-5deg,#fff5dd,#ffdfb0, #ffc8cc, transparent);
-  background-color: rgba(190, 128, 241, 0.2); */
+  background: linear-gradient(-2deg, #fff, #ffcdb0);
   opacity: 0.6;
 }
 .main-header-container {    /*  The position class above handles the absolute position of the contents in the container */ 
@@ -59,7 +47,7 @@
   outline: none;
   padding: 3px 8px;
   margin: 0 4px;
-  background-color: rgb(255, 255, 255);
+  background-color: #ffffff;
   border: none;
   /* border-bottom: 1px solid #c98fa5; */
   border-radius: 0;
@@ -194,10 +182,9 @@
   font-size: 20px;
   padding: 8px 10px 6px 10px;
   box-sizing: border-box;
-  color: rgb(102, 51, 50);
-  background: gray;
+  color: #66569b;
   border-radius: 4px;
-  background-color: rgba(255, 248, 248, 0.95);
+  background: #fff;
   cursor: pointer;
 }
 .nav-dropdown {
@@ -208,7 +195,7 @@
   display: none;
   position: absolute;
   right: 0;
-  background-color: #ffffffef;
+  background-color: #fffffff5;
   /* background: linear-gradient( rgb(255, 255, 255), #ffe3e3f1); */
   min-width: 100%;
   box-shadow: 0px 6px 16px 0px #b9a4d36c;
@@ -247,24 +234,16 @@
 }
 
 
-.nav-1 {
-  display: contents;
-}
-.nav-2 {
-  display: none;
-}
+.nav-1 { display: contents; }
+.nav-2 { display: none; }
 
-@media (max-width: 825px) {
+@media (max-width: 890px) {
   .header-1 { 
     min-width: 0;
   }
-  .nav-1 {
-    display: none;
-  }
+  .nav-1 { display: none; }
+  .nav-2 { display: flex; }
 
-  .nav-2 {
-    display: flex;
-  }
   .nav-dropdown-content {
     justify-content: space-between;
     padding: 10px 0;

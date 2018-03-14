@@ -67,7 +67,7 @@ class Register extends Component {
                             <input className="input" placeholder="Profile picture (url)" onChange={ (e) => this.handleChange('image', e.target.value) } />
                         </div>
                         <div className="btns">
-                            <button className="btn" onClick={ () => this.register() }>Create Account</button>
+                            <button className="red-btn" onClick={ () => this.register() }>Create Account</button>
                         </div>
                     </div>
 

@@ -1,9 +1,29 @@
 .useraccount .settings {
     width: 100%;
-    background-color: #cbe4fc;
+    display: flex;
+    /* background-color: #cbe4fc; */
+}
+.settings > .container {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: #f5fccb; */
+}
+.settings > .container > div {
+    width: 100%;
+    /* border: 1px dashed gray; */
+    /* border-bottom: 1px solid rgb(207, 207, 207); */
+    padding: 20px 0 25px 0;
+}
+.settings .red-btn {
+    margin-top: 25px;
 }
 
 .settings .avatar {
+    margin: 0 auto;
     width: 100px;
     height: 100px;
     display: flex;
@@ -16,6 +36,24 @@
     max-width: 100%;
 }
 
+.settings .header-bkgd {
+    width: 100%;
+    /* height: 10em; */
+    background-image: linear-gradient( 0deg, #e9e3f1, white );
+}
+
+.settings form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    /* background: rgb(194, 255, 192);
+    border: 1px dashed gray; */
+}
+.settings form .input {
+    margin: 8px 0;
+}
+
 .settings .delete-account {
     position: fixed;
     top: 0;
@@ -26,8 +64,14 @@
     justify-content:center;
     align-items: center;
     background: #00000030;
+    color: #7b707a;
 }
-.settings .container {
+.settings .delete-account > .container {
     border-radius: 5px;
     background: #fff;
+    padding: 25px;
+    box-sizing: border-box;
+}
+.settings .delete-account > .container button {
+    margin: 20px;
 }

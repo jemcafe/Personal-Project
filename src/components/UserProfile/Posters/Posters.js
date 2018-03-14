@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import { connect } from 'react-redux';
 
+import Poster from './Poster/Poster';
+
 class Posters extends Component {
     constructor () {
         super();
@@ -19,30 +21,16 @@ class Posters extends Component {
     }
 
     render () {
-        const { posters} = this.state;
-
-        const listOfPosters = posters.map( poster => {
-            return <li key={ poster.id }>
-                        <div className="poster">
-
-                            <div className="thumbnail">
-                                <div className="highlight fade">
-                                    <div className="poster-name">{ poster.name }</div>
-                                </div>
-                                <img src={ poster.imageurl } alt={ poster.name }/>
-                            </div>
-                            
-                        </div>
-                    </li>
+        const listOfPosters = this.state.posters.map( poster => {
+            return <Poster key={poster.id} poster={poster} />
         });
 
         return (
             <div className="posters">
-                <div className="posters-container">
-                    {/* <h4>POSTERS</h4> */}
+                <div className="container">
 
                     { listOfPosters.length > 0 ? 
-                    <ul className="posters-list">{ listOfPosters }</ul> : 
+                    <ul className="posters-list fade-in">{ listOfPosters }</ul> : 
                     <h5>No posters created</h5> }
 
                 </div>

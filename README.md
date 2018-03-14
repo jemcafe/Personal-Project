@@ -24,4 +24,4 @@ The site is also fully responsive.
 * Giant Bomb (Games)
 * Google Books (Books)
 
-There would be one SQL table for all the products, if I did not use third party APIs for game and book searches.
+If I did not use third party APIs, there would be one SQL table for all the products, i

@@ -30,12 +30,29 @@
     #b0dbff - blue
 */
 
-h3 {
+/*
+    #fc7474 - red
+    #66569b - purple
+    #ffd5d0 - pink 
+    #ffb6b6b0 - pink (transparent)
+    #fce1c8 - light orange
+    
+*/
+
+/* h3 {
   color: rgba(104, 45, 52, 0.671);
+} */
+
+h3 {
+  color: #66569b;
+}
+
+h4 {
+  color: #7b707a;
 }
 
 h5 {
-  color: rgba(145, 64, 84, 0.521);
+  color: #c59ca6;
 }
 
 ul {
@@ -106,7 +123,7 @@ select {
   outline-color: #ffaaaa;
   padding: 3px 8px;
   margin: 0 4px;
-  background-color: rgba(255, 255, 255, 0.90);
+  background-color: #fff;
   border: none;
   border-radius: 0;
   font-size: 14px;
@@ -129,7 +146,9 @@ select {
 
 .footer {
   padding: 50px 0;
-  background: radial-gradient( 180deg, #ffc4b2c9, transparent );
+  background: radial-gradient( 180deg, #ffcdb0, #ffffff );
+  /* background: radial-gradient( 180deg, #ffe6d7, #ffffff ); */
+
 }
 
 /* Animations */
