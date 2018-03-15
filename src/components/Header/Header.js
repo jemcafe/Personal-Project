@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Header.css';
+import FaSignOut from 'react-icons/lib/fa/sign-out';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -47,17 +48,17 @@ class Header extends Component {
                                 <Link to="/login" className="link signin">Sign in</Link>
                             ) : (
                                 <div className="user-dropdown link">
-                                    {/* <Link to={`/${user.username}`} className="droplink">UserAccount</Link> */}
                                     <Link to={`/${user.username}`} className="user-droplink"><img src={ user.imageurl } alt="Profile pic"/></Link>
                                     <div className="user-dropdown-content">
-                                        {/* <Link to={`/${user.username}`}>Profile</Link> */}
                                         <Link to={`/${user.username}`}>My Profile</Link>
                                         <Link to={`/useraccount/posters`}>My Posters</Link>
-                                        {/* <Link to={`/${user.username}/following`}>Following</Link> */}
-                                        {/* <Link to={`/${user.username}/followers`}>Followers</Link> */}
+                                        {/* <Link to={`/useraccount/following`}>Following</Link> */}
+                                        {/* <Link to={`/useraccount/followers`}>Followers</Link> */}
                                         <Link to={`/useraccount/cart`}>Cart ({ cartQuantity })</Link>
                                         <Link to={`/useraccount/settings`}>Settings</Link>
-                                        <Link to="/login" onClick={ this.logout }>Signout</Link>
+                                        <Link to="/login" onClick={ this.logout }>
+                                            <FaSignOut className="fa-sign-out" size={20} color="#b1a4b3" /> Signout
+                                        </Link>
                                     </div>
                                 </div>
                             );

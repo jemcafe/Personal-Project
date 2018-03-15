@@ -90,7 +90,7 @@ class Profile extends Component {
                                     <h3>{ profileUser.username }</h3>
                                 </div>
 
-                                <div className="user-nav">
+                                <div className="profile-nav">
                                     <Link to={`/${profileUser.username}`}>Posts</Link>
                                     <Link to={`/${profileUser.username}/posters`}>Posters</Link>
                                     <Link to={`/${profileUser.username}/following`}>Following</Link>
@@ -102,7 +102,7 @@ class Profile extends Component {
                                     !user.username
                                     ? <Link to="/login"><button className="red-btn">Follow</button></Link> 
                                     : isFollowing
-                                    ? <button className="red-btn" onClick={ this.unfollow }>Unfollow</button>
+                                    ? <button className="gray-btn" onClick={ this.unfollow }>Unfollow</button>
                                     : <button className="red-btn" onClick={ this.follow }>Follow</button>
                                 ) }
                                 </div>

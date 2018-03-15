@@ -73,12 +73,14 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  /* background-color: #c8e2f8; */
-}
-.search-page .product-list .item-info-container {
   font-size: 14px;
   padding-top: 5px;
   box-sizing: border-box;
+  /* background-color: #c8e2f8; */
+}
+.search-page .product-list .title {
+  font-size: 14px;
+  text-align: left;
 }
 .search-page .product-list .item-info-container .title:hover,.creator-name a:hover {
   color: #ec554a;

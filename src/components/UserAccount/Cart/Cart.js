@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './Cart.css';
-import FaTrash from 'react-icons/lib/fa/trash';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 // Redux
 import { connect } from 'react-redux';
@@ -85,7 +83,9 @@ class Cart extends Component {
                                     <div>Price: <span>${ item.price }</span></div>
                                 </div>
                             </div>
-                            <div><div className="trash-icon" onClick={ () => this.removeItem( item.id ) }><i className="fas fa-trash"></i></div></div>
+                            <div>
+                                <div className="trash-icon" onClick={ () => this.removeItem( item.id ) }><i className="fas fa-trash"></i></div>
+                            </div>
 
                         </div>
                     </div>

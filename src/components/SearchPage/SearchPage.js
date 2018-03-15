@@ -48,7 +48,7 @@ class SearchPage extends Component {
                     { (!item.headerbkgdimgurl || item.headerbkgdimgurl === '' ) && 
                     <div className="item-info-container">
                         <Link to={`/product/${item.name.split(' ').join('_')}`} className="title" onClick={ () => this.getProduct(item) }>
-                            { item.name.length > 20 ? `${item.name.slice(0,20).trim()}...` : item.name }
+                            { item.name.length > 24 ? `${item.name.slice(0,24).trim()}...` : item.name }
                         </Link>
 
                         { item.username && 
@@ -61,8 +61,8 @@ class SearchPage extends Component {
                         </div>
 
                         { user.username
-                            ? <button className="add-btn red-btn" onClick={ () => this.addItem( item ) }>Add To Cart</button>
-                            : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn red-btn">Add To Cart</button></Link> 
+                            ? <button className="add-btn red-btn-2" onClick={ () => this.addItem( item ) }>Add To Cart</button>
+                            : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn red-btn-2">Add To Cart</button></Link> 
                         }
                     </div>
                     }
@@ -93,7 +93,7 @@ class SearchPage extends Component {
         return (
             <div className="search-page">
                 <div className="container">
-                    <div style={{ padding: '11px' }}>Search Results:</div>
+                    <div style={{ padding: '11px', color: '#7b727c' }}>Search Results:</div>
 
                     <div className="results">
                             

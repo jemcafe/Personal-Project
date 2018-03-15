@@ -1,21 +1,26 @@
 /*  Header  */
 
 .main-header {
-  border-bottom: 1px solid #feb5b6;
+  /* background: url('../../assets/images/header_banner.jpg');
+  background-repeat: no-repeat;
+  background-position-x: center;
+  border-bottom: 1px solid #feb5b6; */
+  height: 4em;
 }
 .position {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 5em;
+  height: 4em;
 }
 .header-bkgd-overlay {
-  background: radial-gradient( 180deg, #fee1d1, #ffffff );
+  /* background: radial-gradient( 180deg, #fee1d1, #ffffff ); */
+  background: radial-gradient( 180deg, #fee1d1, transparent );
 }
 .main-header-container {    /*  The position class above handles the absolute position of the contents in the container */ 
   display: flex;
-  height: 5em;
+  height: 100%;
   /* background-color: #f8e4ba; */
 }
 .header-1 {
@@ -95,8 +100,8 @@
   cursor: pointer;
 }
 .main-header .search > form .search-bar > button .search-icon {
-  color: rgb(88, 88, 88);
   font-size: 20px;
+  color: #7b727c;
 }
 .main-header .search > form .search-bar > button .search-icon:active {
   color: rgb(51, 51, 51);
@@ -116,12 +121,8 @@
   justify-content: center;
   align-items: center;
 }
-.nav-links > a {   /* Removes link underlines */
-  text-decoration: none;
-  color: black;
-}
 .nav-links > a:hover {
-  border-bottom: 1px solid #b67b7f;
+  /* border-bottom: 1px solid #b67b7f; */
   color: #ec784a;
 }
 
@@ -156,7 +157,6 @@
 }
 /* Links inside the dropdown */
 .main-header .user-dropdown-content a {
-  color: black;
   padding: 12px 16px;
   display: block;
   font-size: 15px;
@@ -190,12 +190,12 @@
   display: none;
   position: absolute;
   right: 0;
+  z-index: 1;
   background-color: #fffffff5;
   min-width: 100%;
   box-shadow: 0px 6px 16px 0px #b9a4d36c;
-  z-index: 1;
   align-items: center;
-  margin-top: 22px;
+  margin: 13px 0 0 0;
   padding: 10px 0 15px 0;
 }
 .nav-dropdown-content > div {
@@ -242,7 +242,7 @@
     padding: 10px 0;
   }
   .nav-dropdown-content .search .search-bar {
-    border: 2px solid #ebb7b7;
+    border: 1px solid #dd5c5c;
   }
   .nav-dropdown-content a {
     font-size: 17px;

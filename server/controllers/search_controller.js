@@ -79,7 +79,7 @@ module.exports = {
         axios.get(`https://www.googleapis.com/books/v1/volumes?q=${ search }+subject:${ sub }&maxResults=27&startIndex=0`).then( resp => {
             const data = [];
             resp.data.items.forEach( e => {
-                    data.push({
+                data.push({
                     id: bookId,
                     name: e.volumeInfo.title,
                     description: e.volumeInfo.description,
@@ -88,7 +88,8 @@ module.exports = {
                     subject: subject,
                     productcategoryid: 2,
                     productcategory: 'Books',
-                    imageurl: e.volumeInfo.imageLinks.thumbnail ? e.volumeInfo.imageLinks.thumbnail : ''
+                    imageurl: e.volumeInfo.imageLinks ? e.volumeInfo.imageLinks.thumbnail : ''
+                    // imageurl: ''
                 });
                 bookId++;
             });
@@ -100,9 +101,6 @@ module.exports = {
     getPosters ( req, res, next ) {
         const db = req.app.set('db');
         const { search, category } = req.query;
-
-        console.log( 'Search', search );
-        console.log( 'Category', category );
 
         db.read_posters().then( posters => {
 

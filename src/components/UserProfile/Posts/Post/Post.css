@@ -3,14 +3,13 @@
     box-sizing: border-box;
     margin-bottom: 15px;
     border-radius: 4px;
-    background-color: #fcccc8de;
+    background-color: #ffb6b6b0;
 }
 .post > .container {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    /* border-radius: 4px; */
-    background-color: #fffbfd;
+    background-color: #fff;
 }
 
 .post > .container .name-title {
@@ -50,6 +49,7 @@
     padding: 8px;
     box-sizing: border-box;
     text-align: left;
+    color: #7b727c;
     /* background-color: #ccfccb; */
 }
 
@@ -57,7 +57,9 @@
     padding: 18px 15px;
     box-sizing: border-box;
     text-align: left;
-    /* word-break: break-all; */
+    line-height: 1.2em;
+    color: #7b727c;
+    word-break: break-word;
 }
 
 .post > .container .input  {

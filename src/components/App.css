@@ -2,46 +2,15 @@
     text-align: center;
 }
 
-/* 
-  Colors 1
-    #872f6f - purple
-    #f6a54f - orange
-    #cbf292 - green
-    #fff3a2 - yellow
-
-  Colors 2
-    #ffc8cc - pink
-    #ffe7b0 - orange
-    #cafccc - green
-    #c8e6ff - blue
-
-  Colors 3
-    #872f4e - maroon
-    #ffc586 - orange
-    #fff3a2 - yellow
-    #cbf292 - green
-
-    #c8e6ff - blue
-    #ffc8cc - pink  *
-    #cafccc - green
-    #ffe7b0 - lighter orange  *
-    #ead7fa - purple
-
-    #b0dbff - blue
-*/
-
 /*
     #fc7474 - red
     #66569b - purple
     #ffd5d0 - pink 
     #ffb6b6b0 - pink (transparent)
     #fce1c8 - light orange
-    
-*/
 
-/* h3 {
-  color: rgba(104, 45, 52, 0.671);
-} */
+    #e2e3ff = light royal blue
+*/
 
 h3 {
   color: #66569b;
@@ -63,24 +32,27 @@ ul {
 
 a {
   text-decoration: none;
-  color: black;
+  color: #7b727c;
 }
 
-.panel {  /*  The max width of the main section  */
+.panel {  /*  The main section's max width  */
   max-width: 1000px;
   margin: 0 auto;
   /* background-color: rgb(252, 247, 201); */
 }
 
+
+/*  Buttons  */
+
 .red-btn {
-  padding: 7px 14px;
+  outline: none;
+  margin: 8px 0;
+  padding: 8px 14px;
   box-sizing: border-box;
-  margin: 7px 0;
   border: none;
   border-radius: 4px;
   font-size: 13px;
   font-weight: bold;
-  outline: none;
   color: white;
   background-color: #fc7474; 
   cursor: pointer;
@@ -88,10 +60,30 @@ a {
 .red-btn:active {
   background-color: #dd5c5c; 
 }
-.gray-btn {
-  padding: 7px 14px;
+
+.red-btn-2 {
+  outline: none;
+  margin: 8px 0;
+  padding: 8px 14px;
   box-sizing: border-box;
-  margin: 7px 0;
+  border: 2px solid #fc7474;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #fc7474;
+  background: transparent; 
+  cursor: pointer;
+}
+.red-btn-2:active {
+  color: #fff;
+  background: #fc7474; 
+  border-color: #fc7474; 
+}
+
+.gray-btn {
+  padding: 8px 14px;
+  box-sizing: border-box;
+  margin: 8px 0;
   border: none;
   border-radius: 4px;
   font-size: 13px;
@@ -101,6 +93,12 @@ a {
   background-color: rgb(184, 180, 189);
   cursor: pointer;
 }
+.gray-btn:active {
+  background-color: rgb(184, 180, 189);
+}
+
+
+/* input  */
 
 .input {
   padding: 5px;
@@ -130,13 +128,15 @@ select {
   height: 30px;
 }
 
+
 /*  Main Content  */
 
 .main {
   min-height: 600px;
   display: flex;
+  padding: 0 0 40px 0;
 }
-.main-container {
+.main > .container {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -145,11 +145,15 @@ select {
 /*  Footer  */
 
 .footer {
-  padding: 50px 0;
-  /* background: radial-gradient( 180deg, #ffcdb0, #ffffff ); */
+  /* position: fixed;
+  bottom: 0; */
+  width: 100vw;
+  padding: 14px 0;
+  font-size: 14px;
+  color: #7b727c;
   background: radial-gradient( 180deg, #fee1d1, #ffffff );
-
 }
+
 
 /* Animations */
 

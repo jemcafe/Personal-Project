@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import FaSearch from 'react-icons/lib/fa/search';
 import axios from 'axios';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { updateSearchCategory, updateSearchResults } from '../../../redux/ducks/reducer';
@@ -10,11 +9,18 @@ class SearchBar extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            category: 'Games',
+            category: '',
             subcategory: '',
             userInput: '',
             searchRedirect: false
         }
+    }
+
+    componentDidMount () {
+        // The initial category value
+        axios.get('/api/product/categories').then( categories => {
+            this.setState({ category: categories.data[0].productcategory });
+        }).catch(err => console.log(err));
     }
         
     handleChange ( property, value ) {
@@ -37,12 +43,19 @@ class SearchBar extends Component {
     //     }
     // }
 
-    search (event) {
-        event.preventDefault();
+    searchRedirect () {
+        this.setState({ searchRedirect: true });
+    }
+
+    searchRedirectReset () {
+        this.setState({ searchRedirect: false });
+    }
+
+    search = (e) => {
+        e.preventDefault();
 
         const { category, subcategory, userInput } = this.state;
         const { updateSearchCategory, updateSearchResults } = this.props;
-        console.log('Search ->', category, userInput);
 
         // Updates the chosen category in Redux. This is needed for conditional rendering on the search page.
         updateSearchCategory( category );
@@ -80,13 +93,16 @@ class SearchBar extends Component {
 
         }
 
-        // Triggers the redirect to the search page
-        this.setState(prevState => ({ searchRedirect: !prevState.searchRedirect }));
+        this.searchRedirect();
     }
+
 
     render () {
         const { category, subcategory, searchRedirect } = this.state;
         const { productCategories } = this.props;
+
+        console.log( 'Category ->', category );
+        console.log( 'Product categories ->', productCategories );
 
         // List of category options ( The list order isn't changing, so using i for the key is fine )
         const categories = productCategories && productCategories
@@ -94,11 +110,10 @@ class SearchBar extends Component {
         
         return (
             <div className="search">
-                <form onSubmit={ (e) => this.search(e) }>
+                <form onSubmit={ this.search }>
                     <select className="category" value={ category } onChange={ (e) => this.handleChange('category', e.target.value) }>
                         { categories }
                     </select>
-                    
                     <div className="search-bar">
                         <input placeholder={ 'Search' } onChange={ (e) => this.handleChange('userInput', e.target.value) }/>
                         <button type="submit" value="Search">

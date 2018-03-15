@@ -4,8 +4,10 @@ const initialState = {
 
    productCategories: [],
    productSubcategories: [],
+
    searchCategory: '',
    searchResults: [],
+
    product: {},
 };
 

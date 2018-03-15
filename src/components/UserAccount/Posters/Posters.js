@@ -82,7 +82,7 @@ class Posters extends Component {
 
     render () {
         const { posters, name, description, price, category, imageurl } = this.state;
-        const { user, productSubcategories } = this.props;
+        const { productSubcategories } = this.props;
 
         // If there are subcategories, the first category ('All') is removed from the list
         const posterCategories = productSubcategories[2] && productSubcategories[2]

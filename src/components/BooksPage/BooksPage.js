@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './BooksPage.css';
-import { Route } from 'react-router-dom';
 
 import ContentSlider from '../ContentSlider/ContentSlider';
 

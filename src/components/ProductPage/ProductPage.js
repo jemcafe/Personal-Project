@@ -10,7 +10,7 @@ class ProductPage extends Component {
         return (
             <div className="product-page">
             { productInfo.name ?
-                <div className="product-page-container">
+                <div className="container">
 
                     <div className="img-container">
                         <img className="product-img"src={ productInfo.imageurl } alt="Product pic"/>
@@ -18,8 +18,11 @@ class ProductPage extends Component {
                     <div className="info-container">
                         <div>{ productInfo.name }</div>
                         <div>${ productInfo.price }</div>
-                        <div><button className="red-btn">Add to cart</button></div>
-                        <div>{ productInfo.description }</div>
+                        <div><button className="red-btn-2">Add to cart</button></div>
+                        <div className="description">
+                            <h4>Description</h4>
+                            { productInfo.description }
+                        </div>
                     </div>
 
                 </div>

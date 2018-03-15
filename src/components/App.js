@@ -31,7 +31,7 @@ class App extends Component {
                 <Header />
 
                 <main className="main">
-                    <div className="main-container panel">
+                    <div className="container panel">
 
                         { routes }
 
@@ -39,9 +39,9 @@ class App extends Component {
                 </main>
                 
                 <footer className="footer">
-                    <div className="footer-container panel">
+                    <div className="container panel">
 
-                        <div>&copy; 2018 Creation Basin</div>
+                        <div className="copyright">&copy; 2018 Creation Basin</div>
 
                     </div>
                 </footer>
