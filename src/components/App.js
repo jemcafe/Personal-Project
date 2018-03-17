@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+
+import routes from '../router/router';
+
 import { connect } from 'react-redux';
 import { getUser, getProductCategories, getProductSubcategories } from '../redux/ducks/reducer';
-import routes from '../router/router';
-import Header from './Header/Header';
 
 class App extends Component {
 
@@ -28,15 +29,7 @@ class App extends Component {
         return (
             <div className="App">
 
-                <Header />
-
-                <main className="main">
-                    <div className="container panel">
-
-                        { routes }
-
-                    </div>
-                </main>
+                { routes }
                 
                 <footer className="footer">
                     <div className="container panel">

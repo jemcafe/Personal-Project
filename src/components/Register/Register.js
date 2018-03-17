@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import '../Login/Login.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { register } from '../../redux/ducks/reducer';
+
+import Header from '../Header/Header';
 
 class Register extends Component {
     constructor () {
@@ -26,7 +29,8 @@ class Register extends Component {
         this.setState({ [property]: value });
     }
 
-    register () {
+    register = (e) => {
+        e.preventDefault();
         const body = {
                 username: this.state.username,
                 password: this.state.password,
@@ -45,30 +49,33 @@ class Register extends Component {
     render () {
         return (
             <div className="login-reg">
-                <div className="login-reg-container">
-                    {/* <div>The Register Component</div> */}
+                <Header match={this.props.match} />
+                <div className="container">
 
-                    <div className="info-input">
-                        <h3>Sign Up</h3>
-                        <div className="input-info">
-                            {/* <div className="info">Username</div> */}
-                            <input className="input" placeholder="Username" onChange={ (e) => this.handleChange('username', e.target.value) } />
-                        </div>
-                        <div className="input-info">
-                            {/* <div className="info">Password</div> */}
-                            <input className="input" placeholder="Password" onChange={ (e) => this.handleChange('password', e.target.value) } />
-                        </div>
-                        <div className="input-info">
-                            {/* <div className="info">Name</div> */}
-                            <input className="input" placeholder="Name" onChange={ (e) => this.handleChange('name', e.target.value) } />
+                    <div className="signin-signup">
+                        <form onSubmit={ this.register }>
+                            <h3>Sign Up</h3>
+                            <div className="input-info">
+                                {/* <div className="info">Username</div> */}
+                                <input className="input" placeholder="Username" onChange={ (e) => this.handleChange('username', e.target.value) } />
                             </div>
-                        <div className="input-info">
-                            {/* <div className="info">Profile Picture (url)</div> */}
-                            <input className="input" placeholder="Profile picture (url)" onChange={ (e) => this.handleChange('image', e.target.value) } />
-                        </div>
-                        <div className="btns">
-                            <button className="red-btn" onClick={ () => this.register() }>Create Account</button>
-                        </div>
+                            <div className="input-info">
+                                {/* <div className="info">Password</div> */}
+                                <input className="input" placeholder="Password" onChange={ (e) => this.handleChange('password', e.target.value) } />
+                            </div>
+                            <div className="input-info">
+                                {/* <div className="info">Name</div> */}
+                                <input className="input" placeholder="Name" onChange={ (e) => this.handleChange('name', e.target.value) } />
+                                </div>
+                            <div className="input-info">
+                                {/* <div className="info">Profile Picture (url)</div> */}
+                                <input className="input" placeholder="Profile picture (url)" onChange={ (e) => this.handleChange('image', e.target.value) } />
+                            </div>
+                            <div className="btns">
+                                <button className="red-btn" type="submit" value="Submit">Create Account</button>
+                                <Link to="/login"><button className="red-btn-2">Sign In</button></Link>
+                            </div>
+                        </form>
                     </div>
 
                 </div>

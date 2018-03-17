@@ -1,8 +1,3 @@
-/* .slider {
-    margin-top: 25px;
-    background-color: rgb(217, 255, 217);
-} */
-
 .slide-img {
     height: 500px;
 }
@@ -10,6 +5,11 @@
 .slide-img > img {
     max-height: 100%;
     margin: auto;
+}
+
+.slick-list {
+    background: linear-gradient(0deg, transparent, #e4dcfc);
+    /* background: linear-gradient(0deg, transparent, #ffc7c7); */
 }
 
 @media (max-width: 900px) {
@@ -34,6 +34,6 @@
 }
 @media (max-width: 380px) {
     .slide-img {
-        height: 175px;
+        height: 190px;
     }
 }

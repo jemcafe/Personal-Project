@@ -6,6 +6,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { login, updateCartItems } from '../../redux/ducks/reducer';
 
+import Header from '../Header/Header';
+
 class Login extends Component {
     constructor () {
         super();
@@ -27,7 +29,8 @@ class Login extends Component {
         this.setState({ [property]: value });
     }
 
-    login () {
+    login = (e) => {
+        e.preventDefault();
         const { username, password } = this.state;
 
         axios.post(`/api/login`, { username, password }).then( user => {
@@ -52,24 +55,27 @@ class Login extends Component {
     render () {
         return (
             <div className="login-reg">
-                <div className="login-reg-container">
+                <Header match={this.props.match} />
+                <div className="container">
                     
-                    <div className="info-input">
-                        <h3>Sign In</h3>
-                        <div className="input-info">
-                            {/* <div className="info">Username</div> */}
-                            <input className="input" placeholder="Username" onChange={ (e) => this.handleChange('username', e.target.value) } />
-                        </div>
-                        { !this.state.isRegistered && <div style={{color: 'red', fontSize: '12px'}}>* User not registered</div> }
-                        <div className="input-info">
-                            {/* <div className="info">Password</div> */}
-                            <input className="input" type="password" placeholder="Password" onChange={ (e) => this.handleChange('password', e.target.value) } />
-                        </div>
-                        { !this.state.isCorrectPwd && <div style={{color: 'red', fontSize: '12px'}}>* Incorrect password</div> }
-                        <div className="btns">
-                            <button className="red-btn" onClick={ () => this.login() }>Sign In</button>
-                            <Link to="/register"><button className="create-btn red-btn">Create Account</button></Link>
-                        </div>
+                    <div className="signin-signup">
+                        <form onSubmit={ this.login }>
+                            <h3>Sign In</h3>
+                            <div className="input-info">
+                                {/* <div className="info">Username</div> */}
+                                <input className="input" placeholder="Username" onChange={ (e) => this.handleChange('username', e.target.value) } />
+                            </div>
+                            { !this.state.isRegistered && <div style={{color: 'red', fontSize: '12px'}}>* User not registered</div> }
+                            <div className="input-info">
+                                {/* <div className="info">Password</div> */}
+                                <input className="input" type="password" placeholder="Password" onChange={ (e) => this.handleChange('password', e.target.value) } />
+                            </div>
+                            { !this.state.isCorrectPwd && <div style={{color: 'red', fontSize: '12px'}}>* Incorrect password</div> }
+                            <div className="btns">
+                                <button className="red-btn" type="submit" value="Submit">Sign In</button>
+                                <Link to="/register"><button className="red-btn-2">Create Account</button></Link>
+                            </div>
+                        </form>
                     </div>
 
                 </div>

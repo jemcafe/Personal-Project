@@ -21,6 +21,8 @@ class SearchBar extends Component {
         axios.get('/api/product/categories').then( categories => {
             this.setState({ category: categories.data[0].productcategory });
         }).catch(err => console.log(err));
+
+        console.log( 'SearchBar Match', this.props.match );
     }
         
     handleChange ( property, value ) {
@@ -44,16 +46,15 @@ class SearchBar extends Component {
     // }
 
     searchRedirect () {
-        this.setState({ searchRedirect: true });
-    }
-
-    searchRedirectReset () {
-        this.setState({ searchRedirect: false });
+        if ( this.props.match.url !== '/search' ) {
+            this.setState({ searchRedirect: true });
+        } else {
+            this.setState({ searchRedirect: false });
+        }
     }
 
     search = (e) => {
         e.preventDefault();
-
         const { category, subcategory, userInput } = this.state;
         const { updateSearchCategory, updateSearchResults } = this.props;
 
@@ -63,6 +64,7 @@ class SearchBar extends Component {
         // Resets the search results to an empty array for a fresh search
         updateSearchResults( [] );
 
+        // The search results will change based on the selected category
         if ( category === 'Games' ) {
 
             axios.get(`/api/search/games?search=${ userInput }&platform=${ subcategory }`)
@@ -93,6 +95,7 @@ class SearchBar extends Component {
 
         }
 
+        // If the user is not on the search page, they will be redirected
         this.searchRedirect();
     }
 
@@ -101,8 +104,8 @@ class SearchBar extends Component {
         const { category, subcategory, searchRedirect } = this.state;
         const { productCategories } = this.props;
 
-        console.log( 'Category ->', category );
-        console.log( 'Product categories ->', productCategories );
+        // console.log( 'Category ->', category );
+        // console.log( 'Product categories ->', productCategories );
 
         // List of category options ( The list order isn't changing, so using i for the key is fine )
         const categories = productCategories && productCategories

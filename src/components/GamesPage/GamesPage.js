@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './GamesPage.css';
 
+import Header from '../Header/Header';
 import ContentSlider from '../ContentSlider/ContentSlider';
 
 class GamesPage extends Component {
-
     render () {
         return (
             <div className="games-page">
-                <div className="games-page-container">
+                <Header match={this.props.match}/>
+                <div className="container panel">
                     <h3>Games</h3>
 
                     <ContentSlider 
@@ -17,8 +18,7 @@ class GamesPage extends Component {
                             'https://img.youtube.com/vi/hRWoz5c_GFo/maxresdefault.jpg',
                             'https://www.zelda.com/breath-of-the-wild/assets/icons/BOTW-Share_icon.jpg',
                             'https://cdn4.dualshockers.com/wp-content/uploads/2018/01/MonsterHunterWorld-5-1.jpg'
-                        ]}
-                    />
+                        ]} />
 
                 </div>
             </div>

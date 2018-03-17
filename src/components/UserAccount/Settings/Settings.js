@@ -50,8 +50,9 @@ class Settings extends Component {
                             <input className="input" placeholder="Old password"/>
                             <input className="input" placeholder="New password"/>
                             <input className="input" placeholder="Confirm password"/>
-                            <button className="red-btn" type="submit">Change Password</button>
+                            {/* <button className="red-btn" type="submit">Change Password</button> */}
                         </form>
+                        <button className="red-btn" type="submit">Change Password</button>
                     </div>
                     
                     <div style={{padding: '20px 0 50px 0'}}>

@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateCartItems, getProduct } from '../../redux/ducks/reducer';
 
+import Header from '../Header/Header';
+
 class SearchPage extends Component {
 
     addItem ( item ) {
@@ -74,7 +76,7 @@ class SearchPage extends Component {
         // List of users
         const listOfUsers = searchResults.map( item => {
             return <li key={ item.id } className="item">
-                <div className="container">
+                <div className="container panel">
 
                     <div className="img-container">
                         <Link to={`/${item.username}`} className="img-fade-in" style={{width: '100%', height: '100%'}}>
@@ -92,7 +94,8 @@ class SearchPage extends Component {
 
         return (
             <div className="search-page">
-                <div className="container">
+                <Header match={this.props.match} />
+                <div className="container panel">
                     <div style={{ padding: '11px', color: '#7b727c' }}>Search Results:</div>
 
                     <div className="results">

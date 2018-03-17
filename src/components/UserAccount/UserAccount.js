@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { getUser } from '../../redux/ducks/reducer';
 
 // Components
+import Header from '../Header/Header';
 import Posters from './Posters/Posters';
 // import Following from './Follows/Following';
 // import Followers from './Follows/Followers';
@@ -26,7 +27,8 @@ class UserAccount extends Component {
     render () {
         return (
             <div className="useraccount">
-                <div className="useraccount-container">
+                <Header match={this.props.match} />
+                <div className="container panel">
 
                     <Switch>
                         <Route path={`/useraccount/posters`} component={ Posters } />

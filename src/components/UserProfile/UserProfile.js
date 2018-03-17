@@ -5,6 +5,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
+import Header from '../Header/Header';
 import Posts from './Posts/Posts';
 import Posters from './Posters/Posters';
 import Following from './Follows/Following';
@@ -73,13 +74,15 @@ class Profile extends Component {
         
         return (
             <div className="profile">
-            { profileUser.username ? (
-                <div>
+                <Header match={this.props.match} />
+
+                { profileUser.username &&
+                <div className="container">
                     <div className="profile-header-bkgd">
                         { profileUser.headerbkgdimgurl && <img src={profileUser.headerbkgdimgurl} alt="Profile header pic"/> }
                     </div>
 
-                    <div className="profile-container">
+                    <div className="profile-container panel">
 
                         <div className="profile-header">
                             <div className="profile-header-container">
@@ -117,14 +120,8 @@ class Profile extends Component {
                         </Switch>
 
                     </div>
-                </div> 
-            ) : (
-                <div className="loading-container">
-                    <div className="circle">
-                        <div className="line"></div>
-                    </div>
                 </div>
-            ) }
+                }
                 
             </div>
         )

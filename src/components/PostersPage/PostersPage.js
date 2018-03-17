@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './PostersPage.css'
 
+import Header from '../Header/Header';
 import ContentSlider from '../ContentSlider/ContentSlider';
 
 class PostersPage extends Component {
-
     render () {
         return (
             <div className="posters-page">
-                <div className="posters-page-container">
+                <Header match={this.props.match} />
+                <div className="container panel">
                     <h3>Posters</h3>
 
                     <ContentSlider 

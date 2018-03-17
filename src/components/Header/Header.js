@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Header.css';
+import Aux from '../../hoc/Aux';
 import FaSignOut from 'react-icons/lib/fa/sign-out';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -45,7 +46,10 @@ class Header extends Component {
         
         // If a user is logged in, the login link changes to the account link
         const linkChange = !user.username ? (
-                                <Link to="/login" className="link signin">Sign in</Link>
+                                <Aux>
+                                    <Link to="/login" className="link">Sign in</Link>
+                                    <Link to="/register" className="link">Sign up</Link>
+                                </Aux>
                             ) : (
                                 <div className="user-dropdown link">
                                     <Link to={`/${user.username}`} className="user-droplink"><img src={ user.imageurl } alt="Profile pic"/></Link>
@@ -65,14 +69,14 @@ class Header extends Component {
 
         return (
             <header className="main-header">
-                <div className="header-bkgd-overlay position"></div>
+                {/* <div className="header-bkgd-overlay position"></div> */}
                 <div className="main-header-container panel">
 
-                    <div className="header-1 position">
+                    <div className="header position">
                         <Link to="/"><div className="title">Creation Basin</div></Link>
 
-                        <div className="header-nav nav-1">
-                            <SearchBar />
+                        <div className="nav-1">
+                            <SearchBar match={this.props.match} />
                             <div className="nav-links">
                                 <Link to="/" className="link">Home</Link>
                                 <Link to="/games" className="link">Games</Link>
@@ -84,20 +88,22 @@ class Header extends Component {
 
                         <div className="nav-2">
                             <div className="nav-dropdown link">
-                                { !showMenu
-                                    ? <div className="menu-icon nav-droplink" onClick={ this.toggleMenu }><i className="fas fa-bars"></i></div>
-                                    : <div className="menu-icon nav-droplink" onClick={ this.toggleMenu }><i className="fas fa-times"></i></div>
-                                }
-                                <div className={`nav-dropdown-content ${showMenu ? 'show' : ''}`}>
-                                    <SearchBar />
-                                    <div className="nav-links">
-                                        <Link to="/" className="link">Home</Link>
-                                        <Link to="/games" className="link">Games</Link>
-                                        <Link to="/books" className="link">Books</Link>
-                                        <Link to="/posters" className="link">Posters</Link>
-                                        { linkChange }
+                                { !showMenu && 
+                                <div className="menu-icon nav-droplink" onClick={ this.toggleMenu }><i className="fas fa-bars"></i></div> }
+                                { showMenu &&
+                                <Aux> 
+                                    <div className="menu-icon nav-droplink" onClick={ this.toggleMenu }><i className="fas fa-times"></i></div>
+                                    <div className="nav-dropdown-content">
+                                        <SearchBar match={this.props.match} />
+                                        <div className="nav-links">
+                                            <Link to="/" className="link">Home</Link>
+                                            <Link to="/games" className="link">Games</Link>
+                                            <Link to="/books" className="link">Books</Link>
+                                            <Link to="/posters" className="link">Posters</Link>
+                                            { linkChange }
+                                        </div>
                                     </div>
-                                </div>
+                                </Aux> }
                             </div>
                         </div>
                     </div>

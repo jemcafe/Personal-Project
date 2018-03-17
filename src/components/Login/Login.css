@@ -1,64 +1,67 @@
 /*  Login and Register  */
 
 .login-reg {
+    width: 100%;
+    /* background: rgb(227, 255, 227); */
+}
+.login-reg > .container {
+    min-height: 100%;
     display: flex;
     justify-content: center;
-    padding: 80px 0;
     align-items: center;
-    /* background-color: #fce3e3; */
-    }
-    .login-reg-container {
-        padding: 15px 15px;
-        border-radius: 8px;
-        background: linear-gradient( 0deg, #ff9d9dc2, #ffcab99f );
-        /* background-color: #ffc5b186; */
-        /* box-shadow: 0 3px 15px 1px rgba(77, 33, 102, 0.5); */
-    }
-    .login-reg .info-input {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        padding: 40px 40px;
-        border-radius: 4px;
-        /* background: linear-gradient( 0deg, white, #ffc4b19f ); */
-        background-color: white;
-        /* background-color: #d0ecf7; */
-    }
-    .login-reg .info-input > div {
-        text-align: left;
-        /* background-color: rgb(255, 203, 220); */
-    }
-    .login-reg .info-input > h3 {
-        margin: 0 0 18px 0;
-        color: #66569b;
-        font-size: 25px;
-        font-weight: normal;
-    }
-    .login-reg .input {
-        margin: 12px 0;
-        /* border: none; */
-    }
-    .login-reg .btns {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        box-sizing: border-box;
-        align-items: center;
-        margin: 10px 0 0 0;
-        /* background-color: rgb(255, 223, 185); */
-    }
+    padding: 14% 0;
+    /* background: pink; */
+}
+.login-reg .signin-signup {
+    padding: 15px 15px;
+    border-radius: 8px;
+    background: linear-gradient(0deg, #feb5b6, #ffddd4);
+}
+.login-reg .signin-signup > form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px 40px;
+    border-radius: 4px;
+    /* background: linear-gradient( 0deg, white, #ffc4b19f ); */
+    background-color: white;
+    /* background-color: #d0ecf7; */
+}
+.login-reg .signin-signup > form > div {
+    text-align: left;
+    /* background-color: rgb(255, 203, 220); */
+}
+.login-reg .signin-signup > form > h3 {
+    margin: 0 0 18px 0;
+    color: #66569b;
+    font-size: 25px;
+    font-weight: normal;
+}
+.login-reg .input {
+    margin: 12px 0;
+    /* border: none; */
+}
+.login-reg .btns {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    margin: 10px 0 0 0;
+    /* background-color: rgb(255, 223, 185); */
+}
 
-    .login-reg .red-btn {
-        margin: 10px 0;
-    }
+.login-reg .red-btn {
+    margin: 10px 0;
+}
 
-    .login-reg .create-btn {
-        color: #978896;
-        background-color: rgb(236, 230, 230);
-    }
-    .login-reg .create-btn:hover {
-        background-color: rgb(233, 230, 230);
-    }
-    .login-reg .create-btn:active {
-        background-color: rgb(236, 230, 230);
-    }
+.login-reg .create-btn {
+    color: #978896;
+    background-color: rgb(236, 230, 230);
+}
+.login-reg .create-btn:hover {
+    background-color: rgb(233, 230, 230);
+}
+.login-reg .create-btn:active {
+    background-color: rgb(236, 230, 230);
+}

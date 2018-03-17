@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import './ProductPage.css';
 import { connect } from 'react-redux';
 
+import Header from '../Header/Header';
+
 class ProductPage extends Component {
-    
     render () {
         const { productInfo } = this.props;
 
         return (
             <div className="product-page">
-            { productInfo.name ?
-                <div className="container">
+                <Header match={this.props.match} />
+                { productInfo.name ?
+                <div className="container panel">
 
                     <div className="img-container">
                         <img className="product-img"src={ productInfo.imageurl } alt="Product pic"/>

@@ -1,7 +1,5 @@
 .product-page {
     width: 100%;
-    padding: 10px 50px;
-    box-sizing: border-box;
 }
 .product-page > .container {
     display: flex;
@@ -31,7 +29,7 @@
 
 .product-page .info-container {
     flex: 1;
-    border-left: 1px solid #d4c7d4;
+    /* border-left: 1px solid #d4c7d4; */
     /* background-color: #d1fccb; */
 }
 .product-page .info-container > div {

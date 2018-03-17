@@ -46,7 +46,7 @@ class Posts extends Component {
                         posts: posts.data, 
                         title: '', 
                         text: '', 
-                        image: '' 
+                        imageurl: '' 
                     });
 
                 }).catch(err => console.log(err));
