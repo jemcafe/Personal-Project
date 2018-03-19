@@ -43,8 +43,8 @@ class Post extends Component {
                 { this.state.editMode ? (
                     <div className="container">
 
-                        <div className="name-title">
-                            <Link to={`/${username}`}><img className="avatar" src={ profileUser.imageurl} alt="Proifle pic"/></Link>
+                        <div className="avatar-name">
+                            <Link to={`/${username}`} className="avatar"><img src={ profileUser.imageurl} alt="Proifle pic"/></Link>
                         </div>
                         { imageurlCheck && <div className="image"><img src={ imageurl } alt="Url not found"/></div> }
                         <div><input className="input" placeholder="Title" defaultValue={ title } onChange={ (e) => this.handleChange('title', e.target.value) }/></div>
@@ -60,10 +60,10 @@ class Post extends Component {
                 ) : (
                     <div className="container fade-in">
 
-                        <div className="name-title">
-                            <Link to={`/${profileUser.username}`}><img className="avatar" src={ profileUser.imageurl} alt="Proifle pic"/></Link>
-                            <h3>{ title }</h3>
+                        <div className="avatar-name">
+                            <Link to={`/${profileUser.username}`} className="avatar"><img src={ profileUser.imageurl} alt="Proifle pic"/></Link>
                         </div>
+                        <h3>{ title }</h3>
                         { imageurlCheck && <div className="image"><img src={ imageurl } alt="Url not found"/></div> }
                         <div className="text" >{ text }</div>
                         <div className="date-edit">

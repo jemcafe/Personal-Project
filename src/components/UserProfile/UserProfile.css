@@ -1,9 +1,12 @@
-.profile {
+/* .profile {
   width: 100%;
-  /* background-color: #cbe4fc; */
+} */
+
+.profile > .container {
+  min-height: 80vh;
 }
 
-.profile-header-bkgd {
+.profile > .container > .header-bkgd {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,10 +17,8 @@
   background-image: linear-gradient( 0deg, #ffe2e2, #d5cde0);
   /* background:  #cdc7d6; */
 }
-.profile-header-bkgd > img {
-  flex-shrink: 0;
+.profile > .container > .header-bkgd > img {
   width: 100%;
-  min-height: 100%;
 }
 
 .follow-btn-container {
@@ -37,11 +38,11 @@
   /* background-color: white; */
 }
 
-.profile-header {
+.header-menu {
   max-width: 200px;
   /* background-color: #dbfcd9; */
 }
-    .profile-header-container {
+    .header-menu > .container {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -53,29 +54,29 @@
         /* background-color: #ffd5d0; */
         /* background-color: #fccbd9; */
     }
-    .profile-pic-name {
+    .avatar-name {
         display: flex;
         flex-direction: column;
     }
-    .profile-pic-name > h3 {
+    .avatar-name > h3 {
         font-size: 20px;
         font-weight: bold;
         margin: 18px 0 8px 0;
         color: #66569b;
     }
         /* Fills the thumbnail div with the image */
-    .profile-pic {
+    .avatar {
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden;
         width: 100px;
         height: 100px;
-        /* border: 3px solid white; */
-        border-radius: 20px;
-        background-color: #cbe4fc;
+        border-radius: 50%;
+        /* border-radius: 20px; */
+        background: #fff;
     }
-    .profile-pic > img {
+    .avatar > img {
         flex-shrink: 0;
         max-width: 100%;
         min-height: 100%;
@@ -113,7 +114,7 @@
     flex-direction: column;
     padding: 0;
   }
-  .profile-header {
+  .header-menu {
     max-width: 100%;
   }
   .profile-nav {

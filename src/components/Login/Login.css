@@ -1,15 +1,15 @@
 /*  Login and Register  */
 
-.login-reg {
+/* .login-reg {
     width: 100%;
-    /* background: rgb(227, 255, 227); */
-}
+    background: rgb(227, 255, 227);
+} */
 .login-reg > .container {
-    min-height: 100%;
+    min-height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 14% 0;
+    padding: 10px 0;
     /* background: pink; */
 }
 .login-reg .signin-signup {

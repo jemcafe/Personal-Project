@@ -30,6 +30,7 @@ class Login extends Component {
     }
 
     login = (e) => {
+        // Prevents the form submission
         e.preventDefault();
         const { username, password } = this.state;
 
@@ -45,14 +46,22 @@ class Login extends Component {
         }).catch(err => {
             console.log(err);
             if ( err.response.status === 404) {
-                this.setState({ isRegistered: false });
+                this.setState({ 
+                    isRegistered: false,
+                    isCorrectPwd: true
+                });
             } else if ( err.response.status === 403) {
-                this.setState({ isRegistered: true, isCorrectPwd: false });
+                this.setState({
+                    isRegistered: true,
+                    isCorrectPwd: false
+                });
             }
         });
     }
 
     render () {
+        const { isRegistered, isCorrectPwd } = this.state;
+
         return (
             <div className="login-reg">
                 <Header match={this.props.match} />
@@ -61,16 +70,12 @@ class Login extends Component {
                     <div className="signin-signup">
                         <form onSubmit={ this.login }>
                             <h3>Sign In</h3>
-                            <div className="input-info">
-                                {/* <div className="info">Username</div> */}
-                                <input className="input" placeholder="Username" onChange={ (e) => this.handleChange('username', e.target.value) } />
-                            </div>
-                            { !this.state.isRegistered && <div style={{color: 'red', fontSize: '12px'}}>* User not registered</div> }
-                            <div className="input-info">
-                                {/* <div className="info">Password</div> */}
-                                <input className="input" type="password" placeholder="Password" onChange={ (e) => this.handleChange('password', e.target.value) } />
-                            </div>
-                            { !this.state.isCorrectPwd && <div style={{color: 'red', fontSize: '12px'}}>* Incorrect password</div> }
+                            { !isRegistered && <div style={{color: 'red', fontSize: '12px'}}>* User not registered</div> }
+                            {/* <div className="info">Username</div> */}
+                            <input className="input" placeholder="Username" onChange={ (e) => this.handleChange('username', e.target.value) } />
+                            { !isCorrectPwd && <div style={{color: 'red', fontSize: '12px'}}>* Wrong password</div> }
+                            {/* <div className="info">Password</div> */}
+                            <input className="input" type="password" placeholder="Password" onChange={ (e) => this.handleChange('password', e.target.value) } />
                             <div className="btns">
                                 <button className="red-btn" type="submit" value="Submit">Sign In</button>
                                 <Link to="/register"><button className="red-btn-2">Create Account</button></Link>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './UserProfile.css';
+import Aux from '../../hoc/Aux';
 import axios from 'axios';
 import { Link, Route, Switch } from 'react-router-dom';
 
@@ -78,17 +79,17 @@ class Profile extends Component {
 
                 { profileUser.username &&
                 <div className="container">
-                    <div className="profile-header-bkgd">
+                    <div className="header-bkgd">
                         { profileUser.headerbkgdimgurl && <img src={profileUser.headerbkgdimgurl} alt="Profile header pic"/> }
                     </div>
 
                     <div className="profile-container panel">
 
-                        <div className="profile-header">
-                            <div className="profile-header-container">
-                                <div className="profile-pic-name">
+                        <div className="header-menu">
+                            <div className="container">
+                                <div className="avatar-name">
                                     <Link to={`/${profileUser.username}`}>
-                                        <div className="profile-pic"><img src={profileUser.imageurl} alt="Profile pic"/></div>
+                                        <div className="avatar"><img src={profileUser.imageurl} alt="Profile pic"/></div>
                                     </Link>
                                     <h3>{ profileUser.username }</h3>
                                 </div>

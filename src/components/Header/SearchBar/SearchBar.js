@@ -21,8 +21,6 @@ class SearchBar extends Component {
         axios.get('/api/product/categories').then( categories => {
             this.setState({ category: categories.data[0].productcategory });
         }).catch(err => console.log(err));
-
-        console.log( 'SearchBar Match', this.props.match );
     }
         
     handleChange ( property, value ) {
@@ -54,6 +52,7 @@ class SearchBar extends Component {
     }
 
     search = (e) => {
+        // Prevents the form submission
         e.preventDefault();
         const { category, subcategory, userInput } = this.state;
         const { updateSearchCategory, updateSearchResults } = this.props;

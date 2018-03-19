@@ -100,11 +100,11 @@ class Posters extends Component {
 
         return (
             <div className="posters">
-                <div className="posters-container">
+                <div className="container">
                     <h4>POSTERS</h4>
 
                     <div className="new-poster">
-                        <div className="new-poster-container">
+                        <div className="container">
                             <div>
                                 <input className="input" value={ imageurl } placeholder="Image url" onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
                                 <input className="input" value={ name } placeholder="Title" onChange={ (e) => this.handleChange('name', e.target.value) }/>
@@ -118,7 +118,7 @@ class Posters extends Component {
                         </div>
                     </div>
 
-                    { posters
+                    { posters.length
                     ? <ul className="posters-list">{ listOfPosters }</ul>
                     : <h5>No posters created</h5> }
 

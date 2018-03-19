@@ -15,6 +15,7 @@ const postsCntrl = require('./controllers/posts_controller');
 const postersCntrl = require('./controllers/posters_controller');
 const followsCntrl = require('./controllers/follows_controller');
 const cartCntrl = require('./controllers/cart_controller');
+const settingsCntrl = require('./controllers/settings_controller');
 const userProfileCntrl = require('./controllers/user_profile_controller');
 const stripeCntrl = require('./controllers/stripe_controller');
 
@@ -28,15 +29,15 @@ app.use( session({
     saveUninitialized: false
 }));
 app.use( checkForSession );
-massive( process.env.CONNECTION_STRING ).then(db => app.set('db', db)).catch(err => console.log('Error', err));
-
+massive( process.env.CONNECTION_STRING )
+    .then(db => app.set('db', db))
+    .catch(err => console.log('Error', err));
 
 // Auth
 app.post('/api/login', authCntrl.login);
 app.post('/api/register', authCntrl.register);
 app.post('/api/logout', authCntrl.logout);
 app.get('/api/user', authCntrl.getUser);
-// app.post('/api/delete-account', authCntrl.deleteAccount);
 
 // User 
     // Posts
@@ -61,8 +62,12 @@ app.get('/api/user', authCntrl.getUser);
     app.patch('/api/cart/update/quantity/:id', cartCntrl.updateQuantity);
     app.get('/api/cart', cartCntrl.getCart);
     app.delete('/api/cart/remove-all', cartCntrl.removeAllItems);
+    // Settings
+    app.put('/api/avatar/update', settingsCntrl.updatePassword);
+    app.put('/api/headerbkgdImg/update', settingsCntrl.updateHeaderBkgdImg);
+    app.put('/api/password/update', settingsCntrl.updatePassword);
 
-// Users ( users that are not logged in )
+// User Profiles
     app.get('/api/profile/:username', userProfileCntrl.getUser);
     app.get('/api/profile/:username/posts', userProfileCntrl.getPosts);
     app.get('/api/profile/:username/posters', userProfileCntrl.getPosters);

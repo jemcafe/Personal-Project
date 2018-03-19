@@ -1,6 +1,6 @@
 .App {
     text-align: center;
-    min-height: 100vh;
+    /* min-height: 100vh; */
 }
 
 /*
@@ -32,10 +32,9 @@ a {
   color: #7b727c;
 }
 
-.panel {  /*  The main section's max width  */
+.panel {    /*  The main section's max width  */
   max-width: 1000px;
   margin: 0 auto;
-  /* background-color: rgb(252, 247, 201); */
 }
 
 

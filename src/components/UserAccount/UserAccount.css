@@ -1,6 +1,7 @@
-.useraccount {
+/* .useraccount {
   width: 100%;
-}
+} */
+
 .useraccount > .container {
-  width: 100%;
+  min-height: 80vh;
 }

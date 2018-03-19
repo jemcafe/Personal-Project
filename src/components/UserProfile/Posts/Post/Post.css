@@ -10,25 +10,30 @@
     justify-content: space-between;
     flex-direction: column;
     background-color: #fff;
+    text-align: left;
 }
 
-.post > .container .name-title {
-    display: flex;
-    flex-direction: column;
-    padding: 6px 8px;
+.post > .container h3 {
+    padding: 8px;
     box-sizing: border-box;
-    text-align: left;
-    /* background-color: rgb(240, 229, 180); */
+    margin: 0;
 }
-.post > .container .name-title > h3 {
-    margin: 4px 0 0 0;
+
+.post > .container .avatar-name {
+    padding: 8px;
+    box-sizing: border-box;
 }
-.post > .container .name-title .avatar {
-    border-radius: 50%;
+.post > .container > .avatar-name .avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
     width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }
-.post > .container .name-title a:hover {
-    color: #ec554a;
+.post > .container > .avatar-name .avatar > img {
+    max-width: 100%;
 }
 
 .post > .container > .image {
@@ -83,13 +88,4 @@
 .fa-edit {
     margin: 0 10px 5px 0;
     cursor: pointer;
-}
-
-/* .post > .container > div > input {
-    width: 100%;
-} */
-.post > .container > div {
-    display: flex;
-    justify-content: space-between;
-    /* background-color: #dffafc; */
 }

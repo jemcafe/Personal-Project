@@ -31,16 +31,12 @@
     align-items: center;
     border-radius: 50%;
     overflow: hidden;
+    border: 6px solid lightgrey;
 }
 .settings .avatar > img {
     max-width: 100%;
 }
 
-.settings .header-bkgd {
-    width: 100%;
-    /* height: 10em; */
-    background-image: linear-gradient( 0deg, #e9e3f1, white );
-}
 
 .settings form {
     display: flex;

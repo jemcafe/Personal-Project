@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const saltRounds = 6;
+const saltRounds = 8;
 
 module.exports = {
     login ( req, res, next ) {
@@ -38,7 +38,7 @@ module.exports = {
     register ( req, res, next ) {
         const db = req.app.get('db');
         const { session } = req;
-        const { username, password, name, image, headerBkgdImage } = req.body;
+        const { username, password, name, imageurl, headerBkgdImage } = req.body;
 
         db.find_user( [username, password] ).then( user => {
             
@@ -46,17 +46,17 @@ module.exports = {
             if ( !user.length ) {
                 // The user is created
                 bcrypt.hash( password, saltRounds ).then( hashedPassword => {
-                    db.create_user( [username, hashedPassword, null, name, image, headerBkgdImage, null] ).then( newUser => {
+                    db.create_user( [username, hashedPassword, null, name, imageurl, headerBkgdImage, null] ).then( newUser => {
                         
                         session.user = {
                             id: newUser[0].id,
                             username: newUser[0].username,
-                            image: !newUser[0].imageurl ? 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png' : newUser[0].imageurl.slice(0,8) === 'https://' ? newUser[0].imageurl : 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png',
+                            imageurl: !newUser[0].imageurl ? 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png' : newUser[0].imageurl.slice(0,8) === 'https://' ? newUser[0].imageurl : 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png',
                             headerbkgdimgurl: newUser[0].headerbkgdimgurl
                         };
                         res.status(200).json( session.user );
 
-                    }).catch( err => console.log(err) );
+                    }).catch(err => console.log(err));
                 });
                 
             } else {
@@ -76,9 +76,5 @@ module.exports = {
 
     getUser ( req, res, next ) {
         res.status(200).json( req.session.user );
-    },
-
-    deleteAccount ( req, res, next) {
-        const { session } = req;
     }
 }

@@ -1,7 +1,7 @@
-.games-page {
+/* .games-page {
     width: 100%;
-}
+} */
 
 .games-page > .container {
-    width: 100%;
+    min-height: 80vh;
 }

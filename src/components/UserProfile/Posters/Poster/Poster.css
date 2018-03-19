@@ -12,12 +12,10 @@
     height: 187.5px;
     cursor: pointer;
 }
-.posters .poster .thumbnail > img {  /*  When height is greater than width  */
-    flex-shrink: 0;
+.posters .poster .thumbnail > img {
     max-width: 100%;
-    min-height: 100%;
 }
-.posters .poster .thumbnail > .highlight {
+.posters .poster .thumbnail > .overlay {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -28,10 +26,10 @@
     background: rgba(0, 0, 0, 0.7);
     opacity: 0;
 }
-.posters .poster .thumbnail > .highlight:hover {
+.posters .poster .thumbnail > .overlay:hover {
     opacity: 1;
 }
-.posters .poster .poster-name {
+.posters .poster .thumbnail > overlay .poster-name {
     width: 170px;
     font-size: 15px;
     color: white;

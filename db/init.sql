@@ -7,8 +7,8 @@ CREATE TABLE Users (
     password TEXT NOT NULL,
     authId TEXT,
     name TEXT,
-    imageUrl TEXT,
-    headerBkgdImgUrl TEXT,
+    avatar TEXT,
+    headerBkgdImg TEXT,
 );
 -- INSERT INTO Users (username, password, authId, name, imageUrl, headerImageUrl, profileUrl) VALUES
 -- ('a',      'b',        null, 'A',               null,                                                                                                                                 null),

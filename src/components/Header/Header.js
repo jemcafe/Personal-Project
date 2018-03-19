@@ -19,9 +19,12 @@ class Header extends Component {
     }
 
     componentDidMount () {
-        axios.get('/api/cart').then( cart => {
-            this.props.updateCartItems( cart.data );
-        }).catch(err => console.log(err));
+        // If a user is logged in, their cart data is retrieved
+        if ( this.props.user.username ) {
+            axios.get('/api/cart').then( cart => {
+                this.props.updateCartItems( cart.data );
+            }).catch(err => console.log(err));
+        }
     }
 
     toggleMenu = () => {
@@ -52,12 +55,10 @@ class Header extends Component {
                                 </Aux>
                             ) : (
                                 <div className="user-dropdown link">
-                                    <Link to={`/${user.username}`} className="user-droplink"><img src={ user.imageurl } alt="Profile pic"/></Link>
-                                    <div className="user-dropdown-content">
+                                    <Link to={`/${user.username}`} className="avatar user-droplink"><img src={ user.imageurl } alt="Profile pic"/></Link>
+                                    <div className="content">
                                         <Link to={`/${user.username}`}>My Profile</Link>
                                         <Link to={`/useraccount/posters`}>My Posters</Link>
-                                        {/* <Link to={`/useraccount/following`}>Following</Link> */}
-                                        {/* <Link to={`/useraccount/followers`}>Followers</Link> */}
                                         <Link to={`/useraccount/cart`}>Cart ({ cartQuantity })</Link>
                                         <Link to={`/useraccount/settings`}>Settings</Link>
                                         <Link to="/login" onClick={ this.logout }>
@@ -70,44 +71,43 @@ class Header extends Component {
         return (
             <header className="main-header">
                 {/* <div className="header-bkgd-overlay position"></div> */}
-                <div className="main-header-container panel">
+                <div className="container position">
 
-                    <div className="header position">
-                        <Link to="/"><div className="title">Creation Basin</div></Link>
+                    <Link to="/"><div className="title">Creation Basin</div></Link>
 
-                        <div className="nav-1">
-                            <SearchBar match={this.props.match} />
-                            <div className="nav-links">
-                                <Link to="/" className="link">Home</Link>
-                                <Link to="/games" className="link">Games</Link>
-                                <Link to="/books" className="link">Books</Link>
-                                <Link to="/posters" className="link">Posters</Link>
-                                { linkChange }
-                            </div>
-                        </div>
-
-                        <div className="nav-2">
-                            <div className="nav-dropdown link">
-                                { !showMenu && 
-                                <div className="menu-icon nav-droplink" onClick={ this.toggleMenu }><i className="fas fa-bars"></i></div> }
-                                { showMenu &&
-                                <Aux> 
-                                    <div className="menu-icon nav-droplink" onClick={ this.toggleMenu }><i className="fas fa-times"></i></div>
-                                    <div className="nav-dropdown-content">
-                                        <SearchBar match={this.props.match} />
-                                        <div className="nav-links">
-                                            <Link to="/" className="link">Home</Link>
-                                            <Link to="/games" className="link">Games</Link>
-                                            <Link to="/books" className="link">Books</Link>
-                                            <Link to="/posters" className="link">Posters</Link>
-                                            { linkChange }
-                                        </div>
-                                    </div>
-                                </Aux> }
-                            </div>
+                    <div className="nav-1">
+                        <SearchBar match={this.props.match} />
+                        <div className="nav-links">
+                            <Link to="/" className="link">Home</Link>
+                            <Link to="/games" className="link">Games</Link>
+                            <Link to="/books" className="link">Books</Link>
+                            <Link to="/posters" className="link">Posters</Link>
+                            { linkChange }
                         </div>
                     </div>
 
+                    <div className="nav-2">
+                        <div className="nav-dropdown">
+                            { !showMenu ? (
+                            <div className="menu-icon nav-droplink" onClick={ this.toggleMenu }><i className="fas fa-bars"></i></div>
+                            ) : (
+                            <Aux> 
+                                <div className="menu-icon nav-droplink" onClick={ this.toggleMenu }><i className="fas fa-times"></i></div>
+                                <div className="content">
+                                    <SearchBar match={this.props.match} />
+                                    <div className="nav-links">
+                                        <Link to="/" className="link">Home</Link>
+                                        <Link to="/games" className="link">Games</Link>
+                                        <Link to="/books" className="link">Books</Link>
+                                        <Link to="/posters" className="link">Posters</Link>
+                                        { linkChange }
+                                    </div>
+                                </div>
+                            </Aux> 
+                            ) }
+                        </div>
+                    </div>
+                    
                 </div>
             </header>
         );

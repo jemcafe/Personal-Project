@@ -1,7 +1,7 @@
 /* .useraccount .posters {
     background-color: #cbe4fc;
   } */
-.posters-container {
+.posters > .container {
     display: flex;
     flex-direction: column;
 }
@@ -9,12 +9,12 @@
         padding: 15px 30px;
         box-sizing: border-box;
     }
-    .new-poster-container {
+    .new-poster > .container {
         border: 3px dashed rgba(150, 116, 123, 0.514);
         border-radius: 5px;
         /* background-color: #f8e0b3; */
     }
-    .new-poster-container > div {
+    .new-poster > .container > div {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -22,39 +22,39 @@
         max-width: 200px;
         /* background: rgb(192, 221, 255); */
     }
-    .new-poster-container .input {
+    .new-poster > .container .input {
         width: 100%;
         border: 1px solid #da6a6ab7;
         font-size: 12px;
         margin: 3px 0;
     }
-    .new-poster-container .price {
+    .new-poster > .container .price {
         display: flex;
         align-items: center;
         width: 100%;
         color: #7d585c;
     }
-    .new-poster-container .price > .input {
+    .new-poster > .container .price > .input {
         text-align: right;
     }
-    .new-poster-container select {
+    .new-poster > .container select {
         color: #7d585c;
         border: 1px solid #e1c2ce;
         margin: 3px 0;
     }
-    .new-poster-container .btn {
+    .new-poster > .container .btn {
         margin: 3px 0;
     }
 
-.posters-container > ul {
+.posters > .container > ul {
     flex: 3;
     background-color: #fff;
 }
-.posters-container .posters-list {
+.posters > .container .posters-list {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
-.posters-container h5 {
+.posters > .container h5 {
     color: rgba(145, 64, 84, 0.459);
 }

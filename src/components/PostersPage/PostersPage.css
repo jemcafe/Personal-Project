@@ -1,7 +1,7 @@
-.posters-page {
+/* .posters-page {
     width: 100%;
-}
+} */
 
 .posters-page > .container {
-    width: 100%;
+    min-height: 80vh;
 }

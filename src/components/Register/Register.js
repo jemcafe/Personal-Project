@@ -61,7 +61,7 @@ class Register extends Component {
                             </div>
                             <div className="input-info">
                                 {/* <div className="info">Password</div> */}
-                                <input className="input" placeholder="Password" onChange={ (e) => this.handleChange('password', e.target.value) } />
+                                <input className="input" type="password" placeholder="Password" onChange={ (e) => this.handleChange('password', e.target.value) } />
                             </div>
                             <div className="input-info">
                                 {/* <div className="info">Name</div> */}
@@ -69,7 +69,7 @@ class Register extends Component {
                                 </div>
                             <div className="input-info">
                                 {/* <div className="info">Profile Picture (url)</div> */}
-                                <input className="input" placeholder="Profile picture (url)" onChange={ (e) => this.handleChange('image', e.target.value) } />
+                                <input className="input" placeholder="Profile picture (url)" onChange={ (e) => this.handleChange('imageurl', e.target.value) } />
                             </div>
                             <div className="btns">
                                 <button className="red-btn" type="submit" value="Submit">Create Account</button>
