@@ -35,6 +35,7 @@ module.exports = {
                     if ( passwordMatch ) {
                         if ( newPwd === confirmedPwd ) {
 
+
                             bcrypt.hash( newPwd, saltRounds ).then( hashedPassword => {
                                 db.update_password( [hashedPassword, session.user.id] )
                                 .then(() => {
@@ -46,6 +47,7 @@ module.exports = {
                                     res.status(500).json('Password is not changed');
                                 });
                             }).catch(err => console.log(err));
+                            
                             
                         } else res.status(404).json('New password not confirmed');
                     } else res.status(403).json('Wrong password');

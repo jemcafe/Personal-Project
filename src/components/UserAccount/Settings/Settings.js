@@ -85,7 +85,7 @@ class Settings extends Component {
                         <h4>Change Password</h4>
 
                         { !isOldPwd && <div style={{color: 'red', fontSize: '12px'}}>* Wrong password</div> }
-                        { !newPwdConfirmed && <div style={{color: 'red', fontSize: '12px'}}>* Passwords does not match</div> }
+                        { !newPwdConfirmed && <div style={{color: 'red', fontSize: '12px'}}>* Passwords do not match</div> }
                         { pwdChanged && <div style={{color: 'green', fontSize: '12px'}}>* Password updated</div> }
 
                         <form className="change-pwd-form" onSubmit={ this.changePassword }>

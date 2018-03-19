@@ -70,10 +70,12 @@ class Login extends Component {
                     <div className="signin-signup">
                         <form onSubmit={ this.login }>
                             <h3>Sign In</h3>
+                            
                             { !isRegistered && <div style={{color: 'red', fontSize: '12px'}}>* User not registered</div> }
+                            { !isCorrectPwd && <div style={{color: 'red', fontSize: '12px'}}>* Wrong password</div> }
+
                             {/* <div className="info">Username</div> */}
                             <input className="input" placeholder="Username" onChange={ (e) => this.handleChange('username', e.target.value) } />
-                            { !isCorrectPwd && <div style={{color: 'red', fontSize: '12px'}}>* Wrong password</div> }
                             {/* <div className="info">Password</div> */}
                             <input className="input" type="password" placeholder="Password" onChange={ (e) => this.handleChange('password', e.target.value) } />
                             <div className="btns">

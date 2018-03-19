@@ -57,11 +57,11 @@ class Header extends Component {
                                 <div className="user-dropdown link">
                                     <Link to={`/${user.username}`} className="avatar user-droplink"><img src={ user.imageurl } alt="Profile pic"/></Link>
                                     <div className="content">
-                                        <Link to={`/${user.username}`}>My Profile</Link>
-                                        <Link to={`/useraccount/posters`}>My Posters</Link>
-                                        <Link to={`/useraccount/cart`}>Cart ({ cartQuantity })</Link>
-                                        <Link to={`/useraccount/settings`}>Settings</Link>
-                                        <Link to="/login" onClick={ this.logout }>
+                                        <Link to={`/${user.username}`} className="link">My Profile</Link>
+                                        <Link to={`/useraccount/posters`} className="link">My Posters</Link>
+                                        <Link to={`/useraccount/cart`} className="link">Cart ({ cartQuantity })</Link>
+                                        <Link to={`/useraccount/settings`} className="link">Settings</Link>
+                                        <Link to="/login" className="link" onClick={ this.logout }>
                                             <FaSignOut className="fa-sign-out" size={20} color="#b1a4b3" /> Signout
                                         </Link>
                                     </div>
@@ -96,10 +96,10 @@ class Header extends Component {
                                 <div className="content">
                                     <SearchBar match={this.props.match} />
                                     <div className="nav-links">
-                                        <Link to="/" className="link">Home</Link>
-                                        <Link to="/games" className="link">Games</Link>
-                                        <Link to="/books" className="link">Books</Link>
-                                        <Link to="/posters" className="link">Posters</Link>
+                                        <Link to="/" className="link" onClick={ this.toggleMenu }>Home</Link>
+                                        <Link to="/games" className="link" onClick={ this.toggleMenu }>Games</Link>
+                                        <Link to="/books" className="link" onClick={ this.toggleMenu }>Books</Link>
+                                        <Link to="/posters" className="link" onClick={ this.toggleMenu }>Posters</Link>
                                         { linkChange }
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@ class Header extends Component {
                             ) }
                         </div>
                     </div>
-                    
+
                 </div>
             </header>
         );
