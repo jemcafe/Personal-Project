@@ -55,9 +55,12 @@ class Header extends Component {
                                 </Aux>
                             ) : (
                                 <div className="user-dropdown link">
-                                    <Link to={`/${user.username}`} className="avatar user-droplink"><img src={ user.imageurl } alt="Profile pic"/></Link>
+                                    <Link to={`/${user.username}`} className="user-droplink">
+                                        <div className="avatar"><img src={ user.imageurl } alt="Profile pic"/></div>
+                                        <div className="arrow-icon"><i className="fas fa-angle-down"></i></div>
+                                    </Link>
                                     <div className="content">
-                                        <div>
+                                        <div className="user-nav">
                                             <Link to={`/${user.username}`} className="link">My Profile</Link>
                                             <Link to={`/useraccount/posters`} className="link">My Posters</Link>
                                             <Link to={`/useraccount/cart`} className="link">Cart ({ cartQuantity })</Link>
@@ -124,8 +127,8 @@ class Header extends Component {
                             ) }
                         </div>
                     </div>
-
                 </div>
+                {/* { showMenu && <div className="menu-overlay" onClick={ this.toggleMenu }></div> } */}
             </header>
         );
     }

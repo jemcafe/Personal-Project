@@ -23,6 +23,7 @@
   background: radial-gradient( 180deg, #fee1d1, transparent );
   /* background: radial-gradient( 180deg, #fee1d1, #ffffff ); */
 }
+
 .main-header > .container {    /*  The position class above handles the absolute position of the contents in the container */ 
   display: flex;
   align-items: center;
@@ -31,6 +32,15 @@
   width: 100%;
   /* background-color: #f8e4ba; */
 }
+/* .main-header > .menu-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000000a1;
+  z-index: 1;
+} */
 .main-header .title {
   color: #dd5c5c;
   font-size: 22px;
@@ -125,6 +135,14 @@
   position: relative;
   display: inline-block;
 }
+.main-header .user-dropdown > .user-droplink {
+  display: flex;
+  align-items: center;
+}
+.main-header .user-dropdown > .user-droplink > .arrow-icon {
+  font-size: 20px;
+  padding: 0 10px;
+}
 .main-header .user-dropdown .avatar {
   display: flex;
   justify-content: center;
@@ -141,13 +159,13 @@
   display: none;
   position: absolute;
   right: 0;
-  min-width: 120px;
+  min-width: 140px;
   z-index: 1;
   padding: 17px 0 0 0;
   /* border: 1px solid #c58888; */
   /* background: #fff; */
 }
-.main-header .user-dropdown > .content > div {
+.main-header .user-dropdown > .content > .user-nav {
   border-right: 1px solid #c58888;
   border-bottom: 1px solid #c58888;
   border-left: 1px solid #c58888;
@@ -163,12 +181,13 @@
 }
 
 
-.main-header .header-1 { 
+.main-header .header-1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  /* background: pink; */
+  z-index: 2;
+  /* background: #fff; */
 }
 
 
@@ -177,7 +196,8 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  /* background: rgb(192, 255, 236); */
+  z-index: 2;
+  /* background: #fff; */
 }
 .main-header .header-2 .menu-icon {
   font-size: 20px;

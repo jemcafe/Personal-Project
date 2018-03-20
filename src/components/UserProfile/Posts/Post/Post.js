@@ -47,9 +47,9 @@ class Post extends Component {
                             <Link to={`/${username}`} className="avatar"><img src={ profileUser.imageurl} alt="Proifle pic"/></Link>
                         </div>
                         { imageurlCheck && <div className="image"><img src={ imageurl } alt="Url not found"/></div> }
-                        <div><input className="input" placeholder="Title" defaultValue={ title } onChange={ (e) => this.handleChange('title', e.target.value) }/></div>
-                        <div><input className="input" placeholder="Url" defaultValue={ imageurl } onChange={ (e) => this.handleChange('imageurl', e.target.value) }/></div>
-                        <div><textarea className="input" rows="1" cols="10" defaultValue={ text } placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }></textarea></div>
+                        <input className="input" placeholder="Title" defaultValue={ title } onChange={ (e) => this.handleChange('title', e.target.value) }/>
+                        <input className="input" placeholder="Url" defaultValue={ imageurl } onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
+                        <textarea className="input" rows="1" cols="10" defaultValue={ text } placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }></textarea>
                         <span className="btns">
                             <button className="gray-btn" onClick={ () => this.toggleEdit() }>Cancel</button>
                             <button className="gray-btn" onClick={ () => this.props.deletePost( id ) }>Delete</button>

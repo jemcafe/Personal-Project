@@ -68,7 +68,6 @@
 }
 
 .post > .container .input  {
-    width: 100%;
     font-size: 15px;
     margin: 8px;
     border-radius: 3px;
@@ -79,9 +78,7 @@
 .post > .container > .btns {
     display: flex;
     justify-content: space-around;
-}
-.post > .container > .btns > .btn {
-    margin: 10px 15px 10px 15px;
+    padding: 0 0 10px 0;
 }
 
 .fa-edit {

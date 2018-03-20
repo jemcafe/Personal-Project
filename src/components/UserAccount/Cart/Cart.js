@@ -66,31 +66,31 @@ class Cart extends Component {
         const priceTotal = cartItems.reduce( (acc, item) => acc += item.quantity * parseFloat(item.price), 0 ).toFixed(2);
 
         const listOfItems = cartItems.map( item => {
-            return (
-                <li key={ item.id }>
-                    <div className="item">
-                        <div className="item-container">
+            return <li key={ item.id }>
+                <div className="item">
+                    <div className="item-container">
 
-                            <div className="item-img">
-                                <img src={ item.imageurl } alt="Product"/>
-                            </div>
-
-                            <div className="item-info">
-                                <h4 className="name">{ item.name }</h4>
-                                <div className="info">
-                                    <div>Category: { item.productcategory }</div>
-                                    <div>Quantity: <span>{ item.quantity }</span></div>
-                                    <div>Price: <span>${ item.price }</span></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div className="trash-icon" onClick={ () => this.removeItem( item.id ) }><i className="fas fa-trash"></i></div>
-                            </div>
-
+                        <div className="item-img">
+                            <img src={ item.imageurl } alt="Product"/>
                         </div>
+
+                        <div className="item-info">
+                            <h4 className="title">
+                                { item.name.length > 28 ? `${item.name.slice(0,28).trim()}...` : item.name }
+                            </h4>
+                            <div className="info">
+                                <div>Category: { item.productcategory }</div>
+                                <div>Quantity: <span>{ item.quantity }</span></div>
+                                <div>Price: <span>${ item.price }</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="trash-icon" onClick={ () => this.removeItem( item.id ) }><i className="fas fa-trash"></i></div>
+                        </div>
+
                     </div>
-                </li>
-            );
+                </div>
+            </li>
         });
 
         return (
@@ -99,13 +99,13 @@ class Cart extends Component {
 
                     <div className="products">
                         <h4>CART</h4>
-                        { listOfItems.length ? <ul>{ listOfItems }</ul> : <h5>This cart's boring.</h5> }
+                        { listOfItems.length ? <ul>{ listOfItems }</ul> : <h5 style={{textAlign: 'center'}}>This cart's boring.</h5> }
                     </div>
 
                     <div className="total">
                         <h4>TOTAL</h4>
                         <div className="total-summary">
-                            <div>${ priceTotal }</div>
+                            <div className="total">${ priceTotal }</div>
                             { priceTotal > 0 && 
                             <Checkout name={ 'Products' } 
                                 description={ 'Various products' } 

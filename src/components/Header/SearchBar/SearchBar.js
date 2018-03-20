@@ -16,12 +16,12 @@ class SearchBar extends Component {
         }
     }
 
-    componentDidMount () {
-        // The initial category value
-        axios.get('/api/product/categories').then( categories => {
-            this.setState({ category: categories.data[0].productcategory });
-        }).catch(err => console.log(err));
-    }
+    // componentDidMount () {
+    //     // The initial category value
+    //     axios.get('/api/product/categories').then( categories => {
+    //         this.setState({ category: categories.data[0].productcategory });
+    //     }).catch(err => console.log(err));
+    // }
         
     handleChange ( property, value ) {
         this.setState({ [property]: value });
@@ -54,6 +54,7 @@ class SearchBar extends Component {
     search = (e) => {
         // Prevents the form submission
         e.preventDefault();
+        
         const { category, subcategory, userInput } = this.state;
         const { updateSearchCategory, updateSearchResults } = this.props;
 

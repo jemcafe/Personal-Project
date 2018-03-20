@@ -17,7 +17,7 @@ class Posters extends Component {
             postercategoryid: 1,
             imageurl: ''
         }
-        // Methods do not need to be binded if they are function expressions ( React 2016 )    
+        // Methods do not need to be binded if they are function expressions
     }
 
     componentDidMount () {
@@ -27,7 +27,14 @@ class Posters extends Component {
     }
 
     handleChange ( property, value ) {
-        this.setState({ [property]: value });
+        // The price input has to be a number
+        if ( property === 'price' ) {
+            if ( !isNaN(value) ) {
+                this.setState({ [property]: value });
+            }
+        } else {
+            this.setState({ [property]: value });
+        }
     }
 
     addPoster = () => {

@@ -31,7 +31,12 @@ class Poster extends Component {
                     { isBigger &&
                     <div className="close-up">
                         <div className="overlay" onClick={this.toggleCloseUp}></div>
-                        <img src={ poster.imageurl } alt={ poster.name }/>
+                        <div className="image">
+                            <div className="close-icon">
+                                <i className="fas fa-times" onClick={this.toggleCloseUp} style={{cursor: 'pointer'}}></i>
+                            </div>
+                            <img src={ poster.imageurl } alt={ poster.name }/>
+                        </div>
                     </div> }
                     
                 </div>
