@@ -27,16 +27,7 @@ class Posters extends Component {
     }
 
     handleChange ( property, value ) {
-        // const dollars = value.slice(0, value.length-2);
-        // const cents = value.slice(value.length-2, value.length+2)
-        // const price = `${dollars}.${cents}`;
-        
-        if ( property === 'price' && value.length < 8 ) {
-            console.log( 'Price', value.length, value );
-            this.setState({ [property]: value });
-        } else if ( property !== 'price' ) {
-            this.setState({ [property]: value });
-        }
+        this.setState({ [property]: value });
     }
 
     addPoster = () => {
@@ -109,7 +100,9 @@ class Posters extends Component {
                                 <input className="input" value={ imageurl } placeholder="Image url" onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
                                 <input className="input" value={ name } placeholder="Title" onChange={ (e) => this.handleChange('name', e.target.value) }/>
                                 <textarea className="input" row="1" value={ description } placeholder="Description" onChange={ (e) => this.handleChange('description', e.target.value) }></textarea>
-                                <span className="price">$&nbsp;<input className="input" value={ price } placeholder="Price" onChange={ (e) => this.handleChange('price', e.target.value) }/>&nbsp;.99</span>
+                                <span className="price">
+                                    $&nbsp;<input className="input" value={ price } placeholder="price" onChange={ (e) => this.handleChange('price', e.target.value) }/>
+                                </span>
                                 <select value={ category } name="categories" onChange={ (e) => this.handleChange('postercategoryid', e.target.value) }>
                                     { posterCategories }
                                 </select>

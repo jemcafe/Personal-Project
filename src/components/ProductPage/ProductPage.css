@@ -30,6 +30,7 @@
 
 .product-page .info-container {
     flex: 1;
+    margin: 20px 40px 60px 0;
     /* border-left: 1px solid #d4c7d4; */
     /* background-color: #d1fccb; */
 }
@@ -39,4 +40,13 @@
 .product-page .info-container > .description {
     text-align: left;
     word-break: break-word;
+}
+
+@media (max-width: 600px) {
+    .product-page > .container {
+        flex-direction: column;
+    }
+    .product-page .info-container {
+        margin: 20px 40px 60px 40px;
+    }
 }

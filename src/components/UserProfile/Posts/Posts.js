@@ -23,8 +23,6 @@ class Posts extends Component {
             axios.get(`/api/profile/${this.props.profileUser.username}/posts`),
             axios.get(`/api/profile/${this.props.profileUser.username}/posters/recent`)
         ]).then( axios.spread( (postsRes, postersRes) => {
-            console.log( 'Posts', postsRes.data );
-            console.log( 'Posters', postersRes.data );
             this.setState({ 
                 posts: postsRes.data, 
                 recentPosters: postersRes.data 

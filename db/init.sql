@@ -6,6 +6,7 @@ CREATE TABLE Users (
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     authId TEXT,
+    email TEXT,
     name TEXT,
     avatar TEXT,
     headerBkgdImg TEXT,

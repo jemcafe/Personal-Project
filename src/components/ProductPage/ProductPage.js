@@ -18,7 +18,7 @@ class ProductPage extends Component {
                         <img className="product-img"src={ productInfo.imageurl } alt="Product pic"/>
                     </div>
                     <div className="info-container">
-                        <div>{ productInfo.name }</div>
+                        <h3>{ productInfo.name }</h3>
                         <div>${ productInfo.price }</div>
                         <div><button className="red-btn-2">Add to cart</button></div>
                         <div className="description">
