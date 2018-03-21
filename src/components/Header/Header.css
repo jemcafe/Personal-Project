@@ -186,7 +186,6 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  z-index: 2;
   /* background: #fff; */
 }
 
@@ -196,7 +195,6 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  z-index: 2;
   /* background: #fff; */
 }
 .main-header .header-2 .menu-icon {

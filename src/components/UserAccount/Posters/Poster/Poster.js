@@ -24,13 +24,50 @@ class Poster extends Component {
         }
     }
 
+    handlePriceChange ( value ) {
+        // The price input must be a number
+        if ( !isNaN(value) ) {
+            // The decimal point is removed from the string 
+            let newPrice = value.split('.').join('');
+
+            // The string is split by dollars and cents
+            let dollars = value.length < 4 ? '0' : newPrice.slice(0, newPrice.length-2);
+            let cents = newPrice.slice(newPrice.length-2, newPrice.length);
+
+            // Conditions based on the length of the string and the index value
+            if ( newPrice.length > 3 && dollars[1] !== '0' ) {
+                newPrice = `${dollars}.${cents}`;
+            } else if ( newPrice.length < 5 && cents[0] !== '0' ) {
+                newPrice = `0.${cents}`;
+            } else if ( newPrice.length < 5 && cents[1] !== '0' ) {
+                newPrice = `0.${cents}`;
+            } else {
+                newPrice = `0.00`;
+            }
+
+            // The string is converted to a decimal number, so the zero at the beginning of the string is removed
+            newPrice = `${parseFloat(newPrice,10)}`;
+
+            this.setState({ price: newPrice });
+        }
+    }
+
     toggleEdit = () => {
-        this.setState(prevState => ({ editMode: !prevState.editMode }));
+        const { name, poster, description, price, postercategoryid, imageurl } = this.props.poster;
+        this.setState(prevState => ({
+            name,
+            description,
+            price,
+            postercategoryid,
+            imageurl,
+            editMode: !prevState.editMode 
+        }));
     }
 
     saveEdit = () => {
         const { name, description, price, postercategoryid, imageurl } = this.state;
-        this.props.editPoster(this.props.poster.id, name, description, price, postercategoryid, imageurl);
+        const { editPoster, poster } = this.props;
+        editPoster(poster.id, name, description, price, postercategoryid, imageurl);
         this.toggleEdit();
     }
 
@@ -61,7 +98,7 @@ class Poster extends Component {
                             <div>
                                 <h4>Price</h4>
                                 <div className="price">
-                                    $&nbsp;<input className="input" value={ price } placeholder="Price" onChange={ (e) => this.handleChange('price', e.target.value) }/>&nbsp;.99
+                                    $&nbsp;<input className="input" value={ price } placeholder="Price" onChange={ (e) => this.handlePriceChange(e.target.value) }/>
                                 </div>
                             </div>
                             <div>
@@ -81,7 +118,9 @@ class Poster extends Component {
 
                 <div className="thumbnail">
                     <div className="overlay fade">
-                        <div className="poster-name">{ poster.name }</div>
+                        <div className="poster-name">
+                            { poster.name.length > 36 ? `${poster.name.slice(0,36).trim()}...` : poster.name }
+                        </div>
                         <button className="red-btn" onClick={ this.toggleEdit }>Edit</button>
                         <div className="trash-icon" onClick={ () => deletePoster(poster.id) }><i className="fas fa-trash"></i></div>
                     </div>

@@ -13,7 +13,7 @@ class Posters extends Component {
             posters: [],
             name: '',
             description: '',
-            price: '',
+            price: '0',
             postercategoryid: 1,
             imageurl: ''
         }
@@ -27,33 +27,58 @@ class Posters extends Component {
     }
 
     handleChange ( property, value ) {
-        // The price input has to be a number
-        if ( property === 'price' ) {
-            if ( !isNaN(value) ) {
-                this.setState({ [property]: value });
+        this.setState({ [property]: value });
+    }
+
+    handlePriceChange ( value ) {
+        // The price input must be a number
+        if ( !isNaN(value) ) {
+            // The decimal point is removed from the string 
+            let newPrice = value.split('.').join('');
+
+            // The string is split by dollars and cents
+            let dollars = value.length < 4 ? '0' : newPrice.slice(0, newPrice.length-2);
+            let cents = newPrice.slice(newPrice.length-2, newPrice.length);
+
+            // Conditions based on the length of the string and the index value
+            if ( newPrice.length > 3 && dollars[1] !== '0' ) {
+                newPrice = `${dollars}.${cents}`;
+            } else if ( newPrice.length < 5 && cents[0] !== '0' ) {
+                newPrice = `0.${cents}`;
+            } else if ( newPrice.length < 5 && cents[1] !== '0' ) {
+                newPrice = `0.${cents}`;
+            } else {
+                newPrice = `0.00`;
             }
-        } else {
-            this.setState({ [property]: value });
+
+            // The string is converted to a decimal number, so the zero at the beginning of the string is removed
+            newPrice = `${parseFloat(newPrice,10)}`;
+
+            this.setState({ price: newPrice });
         }
     }
 
     addPoster = () => {
         const { name, description, price, postercategoryid, imageurl } = this.state;
-        axios.post('/api/poster', { 
-            name, description, price, postercategoryid, imageurl 
-        }).then( () => {
-            axios.get(`/api/posters`).then( posters => {
 
-                this.setState({ 
-                    posters: posters.data, 
-                    name: '', 
-                    description: '', 
-                    price: '',
-                    imageurl: '' 
-                });
+        // The user must have input for these fields in order to add the poster
+        if ( name && description && price && postercategoryid && imageurl) {
+            axios.post('/api/poster', { 
+                name, description, price, postercategoryid, imageurl 
+            }).then( () => {
+                axios.get(`/api/posters`).then( posters => {
 
+                    this.setState({ 
+                        posters: posters.data, 
+                        name: '', 
+                        description: '', 
+                        price: '',
+                        imageurl: '' 
+                    });
+
+                }).catch(err => console.log(err));
             }).catch(err => console.log(err));
-        }).catch(err => console.log(err));
+        }
     }
 
     deletePoster = ( id ) => {
@@ -108,7 +133,7 @@ class Posters extends Component {
                                 <input className="input" value={ name } placeholder="Title" onChange={ (e) => this.handleChange('name', e.target.value) }/>
                                 <textarea className="input" row="1" value={ description } placeholder="Description" onChange={ (e) => this.handleChange('description', e.target.value) }></textarea>
                                 <span className="price">
-                                    $&nbsp;<input className="input" value={ price } placeholder="price" onChange={ (e) => this.handleChange('price', e.target.value) }/>
+                                    $&nbsp;<input className="input" value={ price } placeholder="price" onChange={ (e) => this.handlePriceChange(e.target.value) }/>
                                 </span>
                                 <select value={ category } name="categories" onChange={ (e) => this.handleChange('postercategoryid', e.target.value) }>
                                     { posterCategories }
