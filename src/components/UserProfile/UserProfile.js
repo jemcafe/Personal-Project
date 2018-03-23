@@ -11,12 +11,14 @@ import Posts from './Posts/Posts';
 import Posters from './Posters/Posters';
 import Following from './Follows/Following';
 import Followers from './Follows/Followers';
+// import Uploader from '../Uploader/Uploader';
 
 class Profile extends Component {
     constructor () {
         super();
         this.state = {
             profileUser: {},
+            headerBkgdImg: '',
             follows: [],
             followers: [],
             isFollowing: false,
@@ -71,7 +73,8 @@ class Profile extends Component {
     render () {
         const { user } = this.props;
         const { profileUser, follows, followers, isFollowing } = this.state;
-        const { username } = this.props.match.params;  // This is needed for checking if the user is on their profile page
+        // This is needed for checking if the user is on their profile page
+        const { username } = this.props.match.params;
         
         return (
             <div className="profile">
@@ -80,7 +83,9 @@ class Profile extends Component {
                 { profileUser.username &&
                 <div className="container">
                     <div className="header-bkgd">
-                        { profileUser.headerbkgdimgurl && <img src={profileUser.headerbkgdimgurl} alt="Profile header pic"/> }
+                        { profileUser.headerbkgdimgurl && 
+                        <img src={profileUser.headerbkgdimgurl} alt="Profile header pic"/> }
+                        {/* <Uploader /> */}
                     </div>
 
                     <div className="profile-container panel">

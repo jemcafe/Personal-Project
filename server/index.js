@@ -1,11 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const massive = require('massive');
 const session = require('express-session');
+const massive = require('massive');
+// const multer = require('multer');  // local storage
+// const AWS = require('aws-sdk');
 require('dotenv').config();
 
-// Middleware
+// Middlewares
 const checkForSession = require('./middlewares/checkForSession');
 
 // Controllers
@@ -21,6 +23,7 @@ const stripeCntrl = require('./controllers/stripe_controller');
 
 const app = express();
 
+// app.use( express.static( `${__dirname}/../build` ) );  // Needed for hosting. Points to the build folder.
 app.use( bodyParser.json() );
 app.use( cors() );
 app.use( session({
@@ -31,13 +34,26 @@ app.use( session({
 app.use( checkForSession );
 massive( process.env.CONNECTION_STRING )
     .then(db => app.set('db', db))
-    .catch(err => console.log('Error', err));
+    .catch(err => console.log('DB error', err));
+
+// AWS
+// AWS.config.update({
+//     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+//     region: process.env.AWS_REGION,
+// });
+// const s3 = new AWS.S3();
+// var upload = multer({
+//     storage: storage,
+//     limits: { fileSize: 1000000 } // bytes
+// }).single('image');
+// app.post('/api/upload');
 
 // Auth
-app.post('/api/login', authCntrl.login);
-app.post('/api/register', authCntrl.register);
-app.post('/api/logout', authCntrl.logout);
-app.get('/api/user', authCntrl.getUser);
+    app.post('/api/login', authCntrl.login);
+    app.post('/api/register', authCntrl.register);
+    app.post('/api/logout', authCntrl.logout);
+    app.get('/api/user', authCntrl.getUser);
 
 // User 
     // Posts
@@ -63,8 +79,8 @@ app.get('/api/user', authCntrl.getUser);
     app.get('/api/cart', cartCntrl.getCart);
     app.delete('/api/cart/remove-all', cartCntrl.removeAllItems);
     // Settings
-    app.put('/api/avatar/update', settingsCntrl.updatePassword);
-    app.put('/api/headerbkgdImg/update', settingsCntrl.updateHeaderBkgdImg);
+    app.put('/api/avatar/update', settingsCntrl.updateAvatar);
+    app.put('/api/header-image/update', settingsCntrl.updateHeaderBkgdImg);
     app.put('/api/password/update', settingsCntrl.updatePassword);
 
 // User Profiles
@@ -90,9 +106,9 @@ app.get('/api/user', authCntrl.getUser);
 
 
 // This is just for getting the 3rd party api data to my database, so searching and finding products is easier than search 3 seperate APIs (two 3rd parties and my own)
-app.get('/api/get-games', searchCntrl.getGamesForDatabase);
-app.get('/api/get-books', searchCntrl.getBooksForDatabase);
+// app.get('/api/get-games', searchCntrl.getGamesForDatabase);
+// app.get('/api/get-books', searchCntrl.getBooksForDatabase);
 
 
 const port = process.env.SERVER_PORT || 3030;
-app.listen( port, () => console.log('Listening on port: ' + port) );
+app.listen( port, () => console.log(`Listening on port: ${port}`) );

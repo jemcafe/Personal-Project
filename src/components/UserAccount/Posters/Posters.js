@@ -13,7 +13,7 @@ class Posters extends Component {
             posters: [],
             name: '',
             description: '',
-            price: '0',
+            price: '0.00',
             postercategoryid: 1,
             imageurl: ''
         }
@@ -32,7 +32,7 @@ class Posters extends Component {
 
     handlePriceChange ( value ) {
         // The price input must be a number
-        if ( !isNaN(value) ) {
+        if ( !isNaN(value) && value.length < 10 ) {
             // The decimal point is removed from the string 
             let newPrice = value.split('.').join('');
 
@@ -40,8 +40,10 @@ class Posters extends Component {
             let dollars = value.length < 4 ? '0' : newPrice.slice(0, newPrice.length-2);
             let cents = newPrice.slice(newPrice.length-2, newPrice.length);
 
-            // Conditions based on the length of the string and the index value
-            if ( newPrice.length > 3 && dollars[1] !== '0' ) {
+            // Conditions based on the string's length and index value
+            if ( newPrice.length > 3 && dollars[0] !== '0' ) {
+                newPrice = `${dollars}.${cents}`;
+            } else if ( newPrice.length > 3 && dollars[1] !== '0' ) {
                 newPrice = `${dollars}.${cents}`;
             } else if ( newPrice.length < 5 && cents[0] !== '0' ) {
                 newPrice = `0.${cents}`;
@@ -52,7 +54,7 @@ class Posters extends Component {
             }
 
             // The string is converted to a decimal number, so the zero at the beginning of the string is removed
-            newPrice = `${parseFloat(newPrice,10)}`;
+            newPrice = `${parseFloat(newPrice,10).toFixed(2)}`;
 
             this.setState({ price: newPrice });
         }

@@ -50,7 +50,7 @@ class SearchPage extends Component {
                     { (!item.headerbkgdimgurl || item.headerbkgdimgurl === '' ) && 
                     <div className="item-info-container">
                         <Link to={`/product/${item.name.split(' ').join('_')}`} className="title" onClick={ () => this.getProduct(item) }>
-                            { item.name.length > 24 ? `${item.name.slice(0,24).trim()}...` : item.name }
+                            { item.name.length > 26 ? `${item.name.slice(0,26).trim()}...` : item.name }
                         </Link>
 
                         { item.username && 

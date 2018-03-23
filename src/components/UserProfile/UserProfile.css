@@ -20,6 +20,18 @@
 .profile > .container > .header-bkgd > img {
   width: 100%;
 }
+.profile > .container > .header-bkgd > input {
+  outline: none;
+  position: absolute;
+  right: 0;
+  background: #000000;
+  color: #fff;
+  margin: 10px;
+}
+.profile > .container > .header-bkgd > .uploader{
+  position: absolute;
+  right: 0;
+}
 
 .follow-btn-container {
   display: flex;

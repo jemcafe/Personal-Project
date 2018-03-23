@@ -1,4 +1,4 @@
 UPDATE Users
-SET avatar = $1
+SET imageUrl = $1
 WHERE id = $2
 RETURNING *;

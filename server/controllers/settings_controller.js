@@ -7,7 +7,13 @@ module.exports = {
         const { avatar } = req.body;
         const { session } = req;
 
-        db.update_avatar( [avatar, session.user.id] ).then( resp => {
+        const avatarCheck = avatar ? avatar : 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png';
+
+        db.update_avatar( [avatarCheck, session.user.id] )
+        .then( user => {
+
+            session.user.imageurl = user[0].imageurl;
+            res.status(200).json( session.user );
 
         }).catch(err => console.log(err));
     },
@@ -15,10 +21,14 @@ module.exports = {
     updateHeaderBkgdImg ( req, res, next ) {
         const db = req.app.get('db');
         const { session } = req;
-        const { headerBkgdImg } = req.body;
+        const { headerBkgdImgUrl } = req.body;
 
-        db.update_headerBkgdImg( [headerBkgdImg, session.user.id] ).then( resp => {
-            
+        db.update_headerBkgdImg( [headerBkgdImgUrl, session.user.id] )
+        .then( user => {
+
+            session.user.headerbkgdimgurl = user[0].headerbkgdimgurl;
+            res.status(200).json( session.user );
+
         }).catch(err => console.log(err));
     },
 

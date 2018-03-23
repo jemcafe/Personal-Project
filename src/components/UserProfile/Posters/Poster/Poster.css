@@ -42,30 +42,25 @@
     z-index: 1;
     display: flex;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
     width: 100vw;
     height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
 }
 .posters .poster .close-up > .overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background: #000000a1
 }
 .posters .poster .close-up > .image {
     z-index: 1;
     max-width: 90%;
+    max-height: 90%;
 }
 .posters .poster .close-up > .image .close-icon {
-    width: 100%;
-    text-align: right;
+    position: absolute;
+    transform: translate(0, -40px);
     font-size: 30px;
-    margin: 0 0 10px 0;
     color: #fff;
 }
 .posters .poster .close-up > .image > img {

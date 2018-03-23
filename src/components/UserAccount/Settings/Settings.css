@@ -10,6 +10,8 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    padding: 10px 40px;
+    box-sizing: border-box;
     /* background-color: #f5fccb; */
 }
 .settings > .container > div {
@@ -19,11 +21,18 @@
     padding: 20px 0 25px 0;
 }
 .settings .red-btn {
-    margin-top: 25px;
+    margin: 25px 0 0 0;
+}
+
+.settings .btns {
+    margin: 20px 0 0 0;
+}
+.settings .btns > button {
+    margin: 0 10px;
 }
 
 .settings .avatar {
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
     width: 100px;
     height: 100px;
     display: flex;
@@ -34,6 +43,21 @@
     border: 6px solid lightgrey;
 }
 .settings .avatar > img {
+    max-width: 100%;
+}
+
+.settings .header-bkgd {
+    margin: 0 auto 20px auto;
+    max-width: 800px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+    background-image: linear-gradient( 0deg, #ffe2e2, #d5cde0);
+}
+.settings .header-bkgd > img {
     max-width: 100%;
 }
 

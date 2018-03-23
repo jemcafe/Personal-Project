@@ -86,11 +86,11 @@ a {
   font-weight: bold;
   outline: none;
   color: white;
-  background-color: rgb(184, 180, 189);
+  background-color: #b8b4bd;
   cursor: pointer;
 }
 .gray-btn:active {
-  background-color: rgb(184, 180, 189);
+  background-color: #a5a1aa;
 }
 
 
@@ -110,7 +110,7 @@ textarea {
   outline-color: #ffaaaa;
 }
 ::placeholder {
-  color: rgb(221, 201, 199);
+  color: rgb(202, 183, 181);
 }
 
 select {

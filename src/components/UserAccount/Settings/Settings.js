@@ -3,11 +3,14 @@ import './Settings.css';
 import axios from 'axios';
 
 import { connect } from 'react-redux';
+import { getUser } from '../../../redux/ducks/reducer';
 
 class Settings extends Component {
     constructor () {
         super();
         this.state = {
+            avatar: '',
+            headerBkgdImgUrl: '',
             oldPwd: '',
             newPwd: '',
             confirmedPwd: '',
@@ -20,14 +23,41 @@ class Settings extends Component {
 
     handleChange ( property, value ) {
         this.setState({ [property]: value });
+        console.log( property, value );
     }
 
-    toggleDeleteConfirm = () => {
-        this.setState(prevState => ({ isDeletingAccount: !prevState.isDeletingAccount }))
+    changeAvatar = () => {
+        const { avatar } = this.state;
+        axios.put(`/api/avatar/update`, { avatar })
+        .then( user => {
+            this.props.getUser( user.data );
+         }).catch(err => console.log(err));
+    }
+
+    removeAvatar = () => {
+        axios.put(`/api/avatar/update`, { avatar: '' })
+        .then( user => {
+            this.props.getUser( user.data );
+         }).catch(err => console.log(err));
+    }
+
+    changeHeaderImage = () => {
+        const { headerBkgdImgUrl } = this.state;
+        axios.put(`/api/header-image/update`, { headerBkgdImgUrl })
+        .then( user => {
+            this.props.getUser( user.data );
+         }).catch(err => console.log(err));
+    }
+
+    removeHeaderImage = () => {
+        axios.put(`/api/header-image/update`, { headerBkgdImgUrl: '' })
+        .then( user => {
+            this.props.getUser( user.data );
+        }).catch(err => console.log(err));
     }
 
     changePassword = (e) => {
-        // Prevents the form submission
+        // Prevents the form from submitting
         e.preventDefault();
 
         const { oldPwd, newPwd, confirmedPwd } = this.state;
@@ -35,10 +65,8 @@ class Settings extends Component {
         // update password
         if ( oldPwd && newPwd && confirmedPwd ) {
             axios.put(`/api/password/update`, { 
-                oldPwd, 
-                newPwd, 
-                confirmedPwd 
-            }).then( res => {
+                oldPwd, newPwd, confirmedPwd 
+            }).then( () => {
                 this.setState({
                     isOldPwd: true,
                     newPwdConfirmed: true,
@@ -63,6 +91,12 @@ class Settings extends Component {
         }
     }
 
+    toggleDeleteConfirm = () => {
+        this.setState(prevState => ({ 
+            isDeletingAccount: !prevState.isDeletingAccount 
+        }))
+    }
+
     deleteAccount = () => {
         // delete account
     }
@@ -74,11 +108,26 @@ class Settings extends Component {
         return (
             <div className="settings">
                 <div className="container">
-                    <h4>SETTINGS</h4>
-                    
+                    {/* <h4>SETTINGS</h4> */}
+                    {/* The avatar and header image box will eventually be dropzones */}
                     <div>
-                        <div className="avatar"><img src={user.imageurl} alt="avatar"/></div>
-                        <button className="red-btn">Change avatar</button>
+                        <div className="avatar"><img src={ user.imageurl } alt="avatar"/></div>
+                        <input className="input" placeholder="Avatar (url)" onChange={(e) => this.handleChange('avatar', e.target.value)}/>
+                        <div className="btns">
+                            <button className="red-btn" onClick={ this.changeAvatar }>Save image</button>
+                            <button className="gray-btn" onClick={ this.removeAvatar }>Remove image</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div className="header-bkgd">
+                            { user.headerbkgdimgurl && <img src={ user.headerbkgdimgurl } alt="header background"/> }
+                        </div>
+                        <input className="input" placeholder="Header image (url)" onChange={(e) => this.handleChange('headerBkgdImgUrl', e.target.value)}/>
+                        <div className="btns">
+                            <button className="red-btn" onClick={ this.changeHeaderImage }>Save image</button>
+                            <button className="gray-btn" onClick={ this.removeHeaderImage }>Remove image</button>
+                        </div>
                     </div>
 
                     <div>
@@ -115,4 +164,14 @@ class Settings extends Component {
     }
 }
 
-export default connect( state => state )( Settings );
+const mapStateToProps = ( state ) => {
+    return {
+        user: state.user
+    }
+}
+
+const mapDispatchToProps = {
+    getUser: getUser
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Settings );
