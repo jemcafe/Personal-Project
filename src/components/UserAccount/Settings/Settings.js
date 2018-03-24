@@ -28,25 +28,33 @@ class Settings extends Component {
 
     changeAvatar = () => {
         const { avatar } = this.state;
-        axios.put(`/api/avatar/update`, { avatar })
-        .then( user => {
-            this.props.getUser( user.data );
-         }).catch(err => console.log(err));
+
+        // The protocol is checked
+        if ( avatar.slice(0,8) === 'https://' || avatar.slice(0,7) === 'http://' ) {
+            axios.put(`/api/avatar/update`, { avatar })
+            .then( user => {
+                this.props.getUser( user.data );
+            }).catch(err => console.log(err));
+        }
     }
 
     removeAvatar = () => {
         axios.put(`/api/avatar/update`, { avatar: '' })
         .then( user => {
             this.props.getUser( user.data );
-         }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
     }
 
     changeHeaderImage = () => {
         const { headerBkgdImgUrl } = this.state;
-        axios.put(`/api/header-image/update`, { headerBkgdImgUrl })
-        .then( user => {
-            this.props.getUser( user.data );
-         }).catch(err => console.log(err));
+
+        // The protocol is checked
+        if ( headerBkgdImgUrl.slice(0,8) === 'https://' || headerBkgdImgUrl.slice(0,7) === 'http://' ) {
+            axios.put(`/api/header-image/update`, { headerBkgdImgUrl })
+            .then( user => {
+                this.props.getUser( user.data );
+            }).catch(err => console.log(err));
+        }
     }
 
     removeHeaderImage = () => {

@@ -40,7 +40,12 @@ module.exports = {
         const { session } = req;
         const { username, password, name, imageurl, headerBkgdImage } = req.body;
 
-        const imageurlCheck = !imageurl ? 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png' : imageurl.slice(0,8) === 'https://' ? imageurl : 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png'
+        // Checks the protocol. If the rest of the url does not point to a actual source, the default image is used.
+        const imageurlCheck = !imageurl 
+                              ? 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png' 
+                              : imageurl.slice(0,8) === 'https://' || imageurl.slice(0,7) === 'http://'
+                              ? imageurl 
+                              : 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png'
 
         db.find_user( [username, password] ).then( user => {
             

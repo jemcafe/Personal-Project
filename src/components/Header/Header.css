@@ -136,16 +136,9 @@
   padding: 0 10px;
 }
 .main-header .user-dropdown .avatar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
   width: 30px;
   height: 30px;
   border-radius: 50%;
-}
-.main-header .user-dropdown .avatar > img {
-  max-width: 100%;
 }
 .main-header .user-dropdown > .content {  /* The dropdown content is hidden by default */
   display: none;

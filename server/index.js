@@ -92,7 +92,7 @@ massive( process.env.CONNECTION_STRING )
     app.get('/api/profile/:username/follows', userProfileCntrl.getFollows);
     app.get('/api/profile/:username/followers', userProfileCntrl.getFollowers);
 
-// Products
+// Search
     // Categories
     app.get('/api/product/categories', searchCntrl.getProductCategories);
     app.get('/api/product/subcategories', searchCntrl.getProductSubcategories);

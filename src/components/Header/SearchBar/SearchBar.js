@@ -9,6 +9,7 @@ class SearchBar extends Component {
     constructor (props) {
         super(props);
         this.state = {
+            categories: [],
             category: '',
             subcategory: '',
             userInput: '',
@@ -16,12 +17,15 @@ class SearchBar extends Component {
         }
     }
 
-    // componentDidMount () {
-    //     // The initial category value
-    //     axios.get('/api/product/categories').then( categories => {
-    //         this.setState({ category: categories.data[0].productcategory });
-    //     }).catch(err => console.log(err));
-    // }
+    componentDidMount () {
+        // Gets the search categories, and initial category value is the first category.
+        axios.get('/api/product/categories').then( categories => {
+            this.setState({
+                categories: categories.data,
+                category: categories.data[0].productcategory 
+            });
+        }).catch(err => console.log(err));
+    }
         
     handleChange ( property, value ) {
         this.setState({ [property]: value });
@@ -52,13 +56,13 @@ class SearchBar extends Component {
     }
 
     search = (e) => {
-        // Prevents the form submission
+        // Prevents the form from submitting
         e.preventDefault();
         
         const { category, subcategory, userInput } = this.state;
         const { updateSearchCategory, updateSearchResults } = this.props;
 
-        // Updates the chosen category in Redux. This is needed for conditional rendering on the search page.
+        // The selected category is updated in Redux. This is needed for conditional rendering on the search page.
         updateSearchCategory( category );
 
         // Resets the search results to an empty array for a fresh search
@@ -101,21 +105,16 @@ class SearchBar extends Component {
 
 
     render () {
-        const { category, subcategory, searchRedirect } = this.state;
-        const { productCategories } = this.props;
+        const { categories, category, subcategory, searchRedirect } = this.state;
 
+        // console.log( 'Categories ->', categories );
         // console.log( 'Category ->', category );
-        // console.log( 'Product categories ->', productCategories );
-
-        // List of category options ( The list order isn't changing, so using i for the key is fine )
-        const categories = productCategories && productCategories
-                          .map( e => <option key={ e.id } value={ e.productcategory }>{ e.productcategory }</option> );
         
         return (
             <div className="search">
                 <form onSubmit={ this.search }>
                     <select className="category" value={ category } onChange={ (e) => this.handleChange('category', e.target.value) }>
-                        { categories }
+                        { categories.map( e => <option key={ e.id } value={ e.productcategory }>{ e.productcategory }</option> ) }
                     </select>
                     <div className="search-bar">
                         <input placeholder={ 'Search' } onChange={ (e) => this.handleChange('userInput', e.target.value) }/>
@@ -132,7 +131,6 @@ class SearchBar extends Component {
 
 const mapStateToProps = ( state ) => {
     return {
-        productCategories: state.productCategories,
         productSubcategories: state.productSubcategories,
         searchCategory: state.searchCategory,
         searchResults: state.searchResults

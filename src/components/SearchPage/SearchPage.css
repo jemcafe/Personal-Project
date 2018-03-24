@@ -87,9 +87,8 @@
 .search-page .product-list .item-info-container .rating-price {
   display: flex;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 0 8px 0 0;
   margin: 4px 0;
-  /* background-color: #cefae9; */
 }
 .search-page .product-list .item-info-container .add-btn {
   align-self: center;

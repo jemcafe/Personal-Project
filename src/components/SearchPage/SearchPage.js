@@ -58,7 +58,15 @@ class SearchPage extends Component {
                         }
 
                         <div className="rating-price">
-                            <div>Rating</div>
+                            {/* <div>Rating</div> */}
+                            <div className="rating">
+                                <span style={{color: '#ffcdb6'}}><i className="fas fa-heart"></i></span> { Math.floor((Math.random() * (150 - 50)) + 50) }
+                                {/* <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
+                                <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
+                                <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
+                                <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
+                                <span><i className="fas fa-star"></i></span> */}
+                            </div>
                             <div>${ item.price }</div>
                         </div>
 

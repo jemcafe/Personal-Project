@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { connect } from 'react-redux';
-import { logout, updateCartItems } from '../../redux/ducks/reducer';
+import { logout, updateCartItems, getProductCategories } from '../../redux/ducks/reducer';
 
 import SearchBar from './SearchBar/SearchBar';
 
@@ -56,7 +56,7 @@ class Header extends Component {
                             ) : (
                                 <div className="user-dropdown link">
                                     <Link to={`/${user.username}`} className="user-droplink">
-                                        <div className="avatar"><img src={ user.imageurl } alt="Profile pic"/></div>
+                                        <div className="avatar" style={{background: `center / cover no-repeat url(${user.imageurl})`}}></div>
                                         <div className="arrow-icon"><i className="fas fa-angle-down"></i></div>
                                     </Link>
                                     <div className="content">
@@ -143,7 +143,8 @@ const mapStateToProps = ( state ) => {
 
 const mapDispatchToProps = {
     logout: logout,
-    updateCartItems: updateCartItems
+    updateCartItems: updateCartItems,
+    getProductCategories: getProductCategories
 };
 
 export default connect( mapStateToProps , mapDispatchToProps )( Header );
