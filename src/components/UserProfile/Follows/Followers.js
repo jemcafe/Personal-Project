@@ -11,15 +11,15 @@ class Followers extends Component {
         const listOfFollowers = followers.map( follower => {
             return (
                 <li key={ follower.id }>
-                    <div><Link to={`/${follower.username}`}><img className="profile-img" src={ follower.imageurl } alt="Profile pic"/></Link></div>
-                    <div><Link to={`/${follower.username}`} className="username">{ follower.username }</Link></div>
+                    <Link to={`/${follower.username}`} className="avatar" style={{background: `center / cover no-repeat url(${follower.imageurl})`}}></Link>
+                    <Link to={`/${follower.username}`} className="username">{ follower.username }</Link>
                 </li>
             )
         });
             
         return (
             <div className="follows">
-                <div className="follows-container">
+                <div className="container">
 
                     <h3>Followers</h3>
 

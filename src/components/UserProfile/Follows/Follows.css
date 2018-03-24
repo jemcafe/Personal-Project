@@ -2,33 +2,47 @@
     width: 100%;
     /* background-color: #cbe4fc; */
 }
-/* .profile .follows-container {
+/* .profile .follows > .container {
     background-color: #cbe4fc;
 } */
 
-    .follows-container > h3 {
+    .follows > .container > h3 {
         margin: 10px 0 25px 0;
         color: rgba(77, 33, 102, 0.753);
     }
-    .follows-container > h5 {
+    .follows > .container > h5 {
         color: rgba(145, 64, 84, 0.521);
     }
 
-    .follows-container ul {
+    .follows > .container ul {
         display: flex;
         justify-content: space-around;
+        flex-wrap: wrap;
+        padding: 0 50px;
+        box-sizing: border-box;
         /* background-color: #d6fccb; */
     }
-    .follows-container li {
+    .follows > .container ul > li {
+        flex: 1;
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 0 30px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
         /* background-color: #fcddcb; */
     }
-    .follows-container .profile-img {
-        max-width: 45px;
+    .follows > .container .avatar {
+        width: 45px;
+        height: 45px;
         border-radius: 50%;
     }
-    .follows-container .username {
+    .follows > .container .username {
         margin-left: 12px;
+    }
+
+    @media (max-width: 650px) {
+        .follows > .container ul {
+            flex-direction: column;
+        }
     }

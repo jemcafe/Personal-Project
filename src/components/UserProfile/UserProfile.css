@@ -121,18 +121,18 @@
 /*  Responsive  */
 
 @media (max-width: 650px) {
-  .profile-container {
+  .profile .profile-container {
     display: flex;
     flex-direction: column;
     padding: 0;
   }
-  .header-menu {
+  .profile .header-menu {
     max-width: 100%;
   }
-  .profile-nav {
+  .profile .profile-nav {
     flex-direction: row;
   }
-  .profile-nav a {
+  .profile .profile-nav a {
     margin-left: 10px;
   }
 }
