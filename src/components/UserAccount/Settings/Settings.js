@@ -109,13 +109,15 @@ class Settings extends Component {
             <div className="settings">
                 <div className="container">
                     {/* <h4>SETTINGS</h4> */}
-                    {/* The avatar and header image box will eventually be dropzones */}
+                    {/* The avatar and header image change sections will eventually be dropzones */}
                     <div>
-                        <div className="avatar"><img src={ user.imageurl } alt="avatar"/></div>
-                        <input className="input" placeholder="Avatar (url)" onChange={(e) => this.handleChange('avatar', e.target.value)}/>
-                        <div className="btns">
-                            <button className="red-btn" onClick={ this.changeAvatar }>Save image</button>
-                            <button className="gray-btn" onClick={ this.removeAvatar }>Remove image</button>
+                        <div className="avatar">
+                            <img src={ user.imageurl } alt="avatar"/>
+                        </div>
+                        <button className="remove-btn" onClick={ this.removeAvatar }>Remove image</button>
+                        <div className="change-input">
+                            <input className="input" placeholder="Avatar (url)" onChange={(e) => this.handleChange('avatar', e.target.value)}/>
+                            <button className="red-btn-2" onClick={ this.changeAvatar }>Save image</button>
                         </div>
                     </div>
 
@@ -123,10 +125,10 @@ class Settings extends Component {
                         <div className="header-bkgd">
                             { user.headerbkgdimgurl && <img src={ user.headerbkgdimgurl } alt="header background"/> }
                         </div>
-                        <input className="input" placeholder="Header image (url)" onChange={(e) => this.handleChange('headerBkgdImgUrl', e.target.value)}/>
-                        <div className="btns">
-                            <button className="red-btn" onClick={ this.changeHeaderImage }>Save image</button>
-                            <button className="gray-btn" onClick={ this.removeHeaderImage }>Remove image</button>
+                        <button className="remove-btn" onClick={ this.removeHeaderImage }>Remove image</button>
+                        <div className="change-input">
+                            <input className="input" placeholder="Header image (url)" onChange={(e) => this.handleChange('headerBkgdImgUrl', e.target.value)}/>
+                            <button className="red-btn-2" onClick={ this.changeHeaderImage }>Save image</button>
                         </div>
                     </div>
 

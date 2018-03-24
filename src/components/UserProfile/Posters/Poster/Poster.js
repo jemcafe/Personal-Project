@@ -21,11 +21,10 @@ class Poster extends Component {
             <li key={ poster.id }>
                 <div className="poster">
 
-                    <div className="thumbnail" onClick={this.toggleCloseUp}>
+                    <div className="thumbnail" onClick={this.toggleCloseUp} style={{background: `center / cover no-repeat url(${poster.imageurl})`}}>
                         <div className="overlay overlay-fade">
                             <div className="poster-name">{ poster.name }</div>
                         </div>
-                        <img src={ poster.imageurl } alt={ poster.name }/>
                     </div>
 
                     { isBigger &&

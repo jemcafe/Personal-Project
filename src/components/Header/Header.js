@@ -107,15 +107,15 @@ class Header extends Component {
                                         <Link to="/posters" className="link" onClick={ this.toggleMenu }>Posters</Link>
                                         { !user.username ? (
                                         <Aux>
-                                            <Link to="/login" className="link">Sign in</Link>
-                                            <Link to="/register" className="link">Sign up</Link>
+                                            <Link to="/login" className="link" onClick={ this.toggleMenu }>Sign in</Link>
+                                            <Link to="/register" className="link" onClick={ this.toggleMenu }>Sign up</Link>
                                         </Aux>
                                         ) : (
                                         <Aux>
                                             <Link to={`/${user.username}`} className="link">My Profile</Link>
-                                            <Link to={`/useraccount/posters`} className="link">My Posters</Link>
-                                            <Link to={`/useraccount/cart`} className="link">Cart ({ cartQuantity })</Link>
-                                            <Link to={`/useraccount/settings`} className="link">Settings</Link>
+                                            <Link to={`/useraccount/posters`} className="link" onClick={ this.toggleMenu }>My Posters</Link>
+                                            <Link to={`/useraccount/cart`} className="link" onClick={ this.toggleMenu }>Cart ({ cartQuantity })</Link>
+                                            <Link to={`/useraccount/settings`} className="link" onClick={ this.toggleMenu }>Settings</Link>
                                             <Link to="/login" className="link" onClick={ this.logout }>
                                                 <FaSignOut className="fa-sign-out" size={20} color="#b1a4b3" /> Signout
                                             </Link>
@@ -123,12 +123,12 @@ class Header extends Component {
                                         ) }
                                     </div>
                                 </div>
+                                <div className="menu-underlay" onClick={ this.toggleMenu }></div>
                             </Aux> 
                             ) }
                         </div>
                     </div>
                 </div>
-                {/* { showMenu && <div className="menu-overlay" onClick={ this.toggleMenu }></div> } */}
             </header>
         );
     }

@@ -2,7 +2,7 @@
 
 .main-header {
   height: 4em;
-  border-bottom: 1px solid lightgrey;
+  border-bottom: 1px solid #d3d3d3;
   background: #fff;
   /* background: linear-gradient(174deg, #c5b3ff, rgb(255, 203, 106)); */
   /* background: url('../../assets/images/header_banner.jpg');
@@ -26,21 +26,13 @@
 
 .main-header > .container {    /*  The position class above handles the absolute position of the contents in the container */ 
   display: flex;
+  /* flex-direction: column; */
   align-items: center;
   padding: 0 30px;
   box-sizing: border-box;
   width: 100%;
   /* background-color: #f8e4ba; */
 }
-/* .main-header > .menu-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #000000a1;
-  z-index: 1;
-} */
 .main-header .title {
   color: #dd5c5c;
   font-size: 22px;
@@ -162,8 +154,6 @@
   min-width: 140px;
   z-index: 1;
   padding: 17px 0 0 0;
-  /* border: 1px solid #c58888; */
-  /* background: #fff; */
 }
 .main-header .user-dropdown > .content > .user-nav {
   border-right: 1px solid #c58888;
@@ -186,7 +176,10 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  /* background: #fff; */
+}
+.main-header .header-1 > .search {
+  flex: 1;
+  margin: 0 20px 0 40px;
 }
 
 
@@ -210,17 +203,19 @@
   display: flex;
 }
 .main-header .header-2 .nav-dropdown > .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  position: absolute;
-  left: 0;
-  z-index: 1;
   background-color: #fffffffa;
   min-width: 100%;
   box-shadow: 0px 6px 16px -2px #b9a4d36c;
-  margin: 51px 0 0 0;
+  margin: 4em 0 0 0;
+  border-top: 1px solid #d3d3d3;
   padding: 30px;
   box-sizing: border-box;
 }
@@ -228,7 +223,6 @@
   width: 100%;
   box-sizing: border-box;
   text-align: center;
-  /* border: 1px dashed gray; */
 }
 .main-header .header-2 .nav-dropdown > .content > .search {
   display: flex;
@@ -243,9 +237,19 @@
 .main-header .header-2 .nav-dropdown > .content > .search > form select {
   font-size: 15px;
 }
+.main-header .header-2 .nav-dropdown > .menu-underlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 4em 0 0 0;
+  background: #00000020;
+  z-index: 1;
+}
 
 
-@media (max-width: 970px) {
+@media (max-width: 960px) {
   .main-header .header-1 { 
     display: none; 
   }

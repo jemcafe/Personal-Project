@@ -14,22 +14,45 @@
     box-sizing: border-box;
     /* background-color: #f5fccb; */
 }
+
 .settings > .container > div {
     width: 100%;
-    /* border: 1px dashed gray; */
-    /* border-bottom: 1px solid rgb(207, 207, 207); */
     padding: 20px 0 25px 0;
+}
+.settings h4 {
+    font-size: 20px;
+}
+.settings button {
+    font-size: 12px;
 }
 .settings .red-btn {
     margin: 25px 0 0 0;
 }
 
-.settings .btns {
-    margin: 20px 0 0 0;
+.settings .remove-btn {
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    color: #b8b4bd;
+    background: transparent;
+    cursor: pointer;
 }
-.settings .btns > button {
+.settings .change-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 0 0;
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+.settings .change-input > .input {
+    /* border: 2px solid #ff9d9d; */
     margin: 0 10px;
 }
+.settings .change-input > button {
+    margin: 0 10px;
+}
+
 
 .settings .avatar {
     margin: 0 auto 20px auto;
@@ -45,6 +68,7 @@
 .settings .avatar > img {
     max-width: 100%;
 }
+
 
 .settings .header-bkgd {
     margin: 0 auto 20px auto;

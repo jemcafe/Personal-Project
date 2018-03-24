@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './UserProfile.css';
-import Aux from '../../hoc/Aux';
 import axios from 'axios';
 import { Link, Route, Switch } from 'react-router-dom';
 

@@ -32,6 +32,7 @@ class Posters extends Component {
 
     handlePriceChange ( value ) {
         // The price input must be a number
+        console.log( 'Value', value );
         if ( !isNaN(value) && value.length < 10 ) {
             // The decimal point is removed from the string 
             let newPrice = value.split('.').join('');
@@ -131,7 +132,7 @@ class Posters extends Component {
                     <div className="new-poster">
                         <div className="container">
                             <div>
-                                <input className="input" value={ imageurl } placeholder="Image url" onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
+                                <input className="input" value={ imageurl } placeholder="Image (url)" onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
                                 <input className="input" value={ name } placeholder="Title" onChange={ (e) => this.handleChange('name', e.target.value) }/>
                                 <textarea className="input" row="1" value={ description } placeholder="Description" onChange={ (e) => this.handleChange('description', e.target.value) }></textarea>
                                 <span className="price">

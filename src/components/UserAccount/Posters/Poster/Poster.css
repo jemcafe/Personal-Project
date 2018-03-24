@@ -2,43 +2,34 @@
     background-color: #e1d0ec;
     margin: 4px;
 }
-.poster .thumbnail {    /* The image container */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+.poster .thumbnail {    /* Contains the image */
     width: 187.5px;
     height: 187.5px;
-}
-.poster .thumbnail > img {  /* When height is greater than width */
-    flex-shrink: 0;
-    max-width: 100%;
-    min-height: 100%;
 }
 
 
 /*  Thumbnail overlay on hover  */
 
 .poster .thumbnail > .overlay {
-    position: absolute;
+    position: relative;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    width: 187.5px;
-    height: 187.5px;
-    background: rgba(0, 0, 0, 0.7);
+    background: #000000b3;
     opacity: 0;
 }
 .poster .thumbnail > .overlay:hover {
     opacity: 1;
 }
-.poster .poster-name {
+.poster .thumbnail .poster-name {
     width: 170px;
     font-size: 15px;
     color: white;
 }
-.poster .trash-icon {
+.poster .thumbnail .trash-icon {
     position: absolute;
     right: 0;
     margin: 9px;
@@ -65,7 +56,7 @@
     background: rgba(0, 0, 0, 0.7);
 }
 .poster .edit {
-    max-width: 600px;
+    width: 600px;
     padding: 20px;
     box-sizing: border-box;
     margin: auto;
@@ -83,6 +74,7 @@
 }
 .poster .edit > .container img {
     max-width: 100%;
+    max-height: 600px;
     margin-bottom: 20px;
 }
 .poster .edit > .container > div {

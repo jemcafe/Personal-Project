@@ -8,7 +8,7 @@ const initialState = {
    searchCategory: '',
    searchResults: [],
 
-   product: {},
+   product: null,
 };
 
 // Action types

@@ -84,10 +84,10 @@ class Poster extends Component {
                 <div className="edit-overlay">
                     <div className="edit">
                         <div className="container">
-                            <img src={ imageurl } alt="Poster"/>
+                            <img src={ poster.imageurl } alt="Poster"/>
                             <div>
                                 <h4>Image</h4>
-                                <input className="input" value={ imageurl } placeholder="Url" onChange={ (e) => this.handleChange('image', e.target.value) }/>
+                                <input className="input" value={ imageurl } placeholder="Image (url)" onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
                             </div>
                             <div>
                                 <h4>Title</h4>
@@ -118,7 +118,7 @@ class Poster extends Component {
                 </div>
                 }
 
-                <div className="thumbnail">
+                <div className="thumbnail" style={{background: `center / cover no-repeat url(${poster.imageurl})`}}>
                     <div className="overlay fade">
                         <div className="poster-name">
                             { poster.name.length > 36 ? `${poster.name.slice(0,36).trim()}...` : poster.name }
@@ -126,7 +126,6 @@ class Poster extends Component {
                         <button className="red-btn" onClick={ this.toggleEdit }>Edit</button>
                         <div className="trash-icon" onClick={ () => deletePoster(poster.id) }><i className="fas fa-trash"></i></div>
                     </div>
-                    <img src={ poster.imageurl } alt={ poster.name }/>
                 </div>
                         
             </li>

@@ -34,7 +34,8 @@ class Posts extends Component {
         this.setState({ [property]: value });
     }
 
-    createPost = () => {
+    createPost = (e) => {
+        e.preventDefault();
         const { title, text, imageurl } = this.state;
         if ( title && text ) {
             axios.post('/api/post', { title, text, imageurl }).then( res => {
@@ -64,7 +65,7 @@ class Posts extends Component {
     
 
     deletePost = ( id ) => {
-        axios.delete(`/api/post/${id}/delete`).then( res => {
+        axios.delete(`/api/post/${id}/delete`).then( () => {
             axios.get(`/api/posts`).then( posts => {
 
                 this.setState({ posts: posts.data });
@@ -87,7 +88,9 @@ class Posts extends Component {
         });
 
         const listOfRecentPosters = recentPosters.map( poster => {
-            return <li key={ poster.id } className="fade-in"><img src={ poster.imageurl } alt="Poster"/></li> 
+            return <li key={ poster.id } className="fade-in">
+                <img src={ poster.imageurl } alt="Poster"/>
+            </li> 
         });
 
         return (
@@ -98,12 +101,12 @@ class Posts extends Component {
                         <div className="posts-list-container">
 
                             { user.username === paramsUsername &&
-                            <div className="new-post">
+                            <form className="new-post" onSubmit={ this.createPost }>
                                 <input className="input" value={ title } placeholder="Title" onChange={ (e) => this.handleChange('title', e.target.value) }/>
                                 <input className="input" value={ imageurl } placeholder="Image Url" onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
                                 <textarea className="input" rows="1" value={ text } placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }></textarea>
-                                <button className="red-btn" onClick={ this.createPost }>Post</button>
-                            </div> }
+                                <button className="red-btn" type="submit">Post</button>
+                            </form> }
 
                             { listOfPosts.length
                             ? <div><ul >{ listOfPosts }</ul></div>

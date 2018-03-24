@@ -26,7 +26,6 @@ class Post extends Component {
 
     saveEdit () {
         const { title, text, imageurl } = this.state;
-        console.log( 'Image', imageurl );
         this.props.editPost(this.props.post.id, title, text, imageurl);
         this.toggleEdit();
     }

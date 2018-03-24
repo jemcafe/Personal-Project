@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './Uploader.css'
+import './HeaderBkgdUploader.css'
 import Dropzone from 'react-dropzone';
 
 import { connect } from 'react-redux';
 
-class Uploader extends Component {
+class HeaderBkgdUploader extends Component {
     constructor () {
         super();
         this.state = { 
@@ -18,7 +18,7 @@ class Uploader extends Component {
 
     render () {
         return (
-            <div className="uploader">
+            <div className="header-bkgd-uploader">
                 <Dropzone className="dropzone" onDrop={this.onDrop} multiple={false}>
                     {/* <div className="plus-icon"><i className="fas fa-plus"></i></div>&nbsp; */}
                     Change header background
@@ -30,4 +30,4 @@ class Uploader extends Component {
     }
 }
 
-export default connect( state => state )( Uploader );
+export default connect( state => state )( HeaderBkgdUploader );
