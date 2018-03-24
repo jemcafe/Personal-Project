@@ -71,5 +71,15 @@ module.exports = {
     deleteAccount ( req, res, next) {
         const db = req.app.get('db');
         const { session } = req;
+
+        db.delete_user_account( [session.user.id] ).then( () => {
+
+            req.session.destroy();
+            res.status(200).json('Account deleted');
+
+        }).catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
     }
 }

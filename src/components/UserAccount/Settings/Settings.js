@@ -97,13 +97,9 @@ class Settings extends Component {
         }))
     }
 
-    deleteAccount = () => {
-        // delete account
-    }
-
     render () {
         const { isOldPwd, newPwdConfirmed, pwdChanged, isDeletingAccount } = this.state;
-        const { user } = this.props;
+        const { user, deleteAccount } = this.props;
         
         return (
             <div className="settings">
@@ -154,8 +150,8 @@ class Settings extends Component {
                         <div className="delete-account">
                             <div className="container">
                                 <p>Are you sure?</p>
-                                <button className="red-btn">Yes</button>
-                                <button className="gray-btn" onClick={this.toggleDeleteConfirm}>Cancel</button>
+                                <button className="red-btn" onClick={ deleteAccount }>Yes</button>
+                                <button className="gray-btn" onClick={ this.toggleDeleteConfirm }>Cancel</button>
                             </div>
                         </div>
                         }

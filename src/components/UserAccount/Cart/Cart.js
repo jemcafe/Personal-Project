@@ -95,7 +95,7 @@ class Cart extends Component {
 
         return (
             <div className="cart">
-                <div className="cart-container">
+                <div className="container">
 
                     <div className="products">
                         <h4>CART</h4>
@@ -105,7 +105,7 @@ class Cart extends Component {
                     <div className="total">
                         <h4>TOTAL</h4>
                         <div className="total-summary">
-                            <div className="total">${ priceTotal }</div>
+                            <div className="price">${ priceTotal }</div>
                             { priceTotal > 0 && 
                             <Checkout name={ 'Products' } 
                                 description={ 'Various products' } 

@@ -82,6 +82,7 @@ massive( process.env.CONNECTION_STRING )
     app.put('/api/avatar/update', settingsCntrl.updateAvatar);
     app.put('/api/header-image/update', settingsCntrl.updateHeaderBkgdImg);
     app.put('/api/password/update', settingsCntrl.updatePassword);
+    app.delete('/api/delete-account', settingsCntrl.deleteAccount);
 
 // User Profiles
     app.get('/api/profile/:username', userProfileCntrl.getUser);

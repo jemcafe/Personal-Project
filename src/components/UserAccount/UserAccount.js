@@ -24,6 +24,15 @@ class UserAccount extends Component {
         }).catch(err => console.log(err));
     }
 
+    deleteAccount = () => {
+        // delete account
+        // axios.delete(`/api/delete-account`).then( res => {
+        //     if ( res.status.response === 200 ) {
+        //         this.props.history.push('/login');
+        //     }
+        // }).catch(err => console.log(err));
+    }
+
     render () {
         return (
             <div className="useraccount">
@@ -35,7 +44,7 @@ class UserAccount extends Component {
                         {/* <Route path={`/useraccount/following`} component={ Following } /> */}
                         {/* <Route path={`/useraccount/following`} component={ Followers } /> */}
                         <Route path={`/useraccount/cart`} component={ Cart } />
-                        <Route path={`/useraccount/settings`} component={ Settings } />
+                        <Route path={`/useraccount/settings`} render={() => <Settings deleteAccount={this.deleteAccount} /> } />
                     </Switch>
 
                 </div>

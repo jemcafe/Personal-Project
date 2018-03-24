@@ -40,18 +40,20 @@ module.exports = {
         const { session } = req;
         const { username, password, name, imageurl, headerBkgdImage } = req.body;
 
+        const imageurlCheck = !imageurl ? 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png' : imageurl.slice(0,8) === 'https://' ? imageurl : 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png'
+
         db.find_user( [username, password] ).then( user => {
             
             // If the user is not found and the given username is not the same as another user
             if ( !user.length ) {
                 // The user is created
                 bcrypt.hash( password, saltRounds ).then( hashedPassword => {
-                    db.create_user( [username, hashedPassword, null, name, imageurl, headerBkgdImage, null] ).then( newUser => {
+                    db.create_user( [username, hashedPassword, null, name, imageurlCheck, headerBkgdImage, null] ).then( newUser => {
                         
                         session.user = {
                             id: newUser[0].id,
                             username: newUser[0].username,
-                            imageurl: !newUser[0].imageurl ? 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png' : newUser[0].imageurl.slice(0,8) === 'https://' ? newUser[0].imageurl : 'http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png',
+                            imageurl: newUser[0].imageurl,
                             headerbkgdimgurl: newUser[0].headerbkgdimgurl
                         };
                         res.status(200).json( session.user );
