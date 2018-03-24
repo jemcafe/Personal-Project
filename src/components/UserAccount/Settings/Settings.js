@@ -107,8 +107,8 @@ class Settings extends Component {
                     {/* <h4>SETTINGS</h4> */}
                     {/* The avatar and header image change sections will eventually be dropzones */}
                     <div>
-                        <div className="avatar">
-                            <img src={ user.imageurl } alt="avatar"/>
+                        <div className="avatar" style={{background: `center / cover no-repeat url(${user.imageurl})`}}>
+                            {/* <img src={ user.imageurl } alt="avatar"/> */}
                         </div>
                         <button className="remove-btn" onClick={ this.removeAvatar }>Remove image</button>
                         <div className="change-input">

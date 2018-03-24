@@ -93,7 +93,9 @@ class Profile extends Component {
                             <div className="container">
                                 <div className="avatar-name">
                                     <Link to={`/${profileUser.username}`}>
-                                        <div className="avatar"><img src={profileUser.imageurl} alt="Profile pic"/></div>
+                                        <div className="avatar" style={{background: `center / cover no-repeat url(${profileUser.imageurl})`}}>
+                                            {/* <img src={profileUser.imageurl} alt="Profile pic"/> */}
+                                        </div>
                                     </Link>
                                     <h3>{ profileUser.username }</h3>
                                 </div>

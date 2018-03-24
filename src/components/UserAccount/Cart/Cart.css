@@ -20,7 +20,7 @@
       .cart > .container .item {
         padding: 10px;
         box-sizing: border-box;
-        border-top: 1px solid rgba(179, 164, 164, 0.863);
+        border-top: 1px solid #b3a4a4dc;
       }
       .cart > .container .item-container {
         display: flex;
@@ -29,8 +29,9 @@
       .cart > .container .item .item-img {
         display: flex;
         align-items: center;
-        min-width: 120px;
-        max-height: 120px;
+        width: 120px;
+        height: 120px;
+        background: radial-gradient(0deg, transparent, #f7f4ff);
       }
       .cart > .container .item .item-img > img {
         max-width: 120px;

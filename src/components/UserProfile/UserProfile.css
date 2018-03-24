@@ -50,11 +50,11 @@
   /* background-color: white; */
 }
 
-.header-menu {
+.profile .header-menu {
   max-width: 200px;
   /* background-color: #dbfcd9; */
 }
-    .header-menu > .container {
+.profile .header-menu > .container {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -66,18 +66,18 @@
         /* background-color: #ffd5d0; */
         /* background-color: #fccbd9; */
     }
-    .avatar-name {
+    .profile .avatar-name {
         display: flex;
         flex-direction: column;
     }
-    .avatar-name > h3 {
+    .profile .avatar-name > h3 {
         font-size: 20px;
         font-weight: bold;
         margin: 18px 0 8px 0;
         color: #66569b;
     }
         /* Fills the thumbnail div with the image */
-    .avatar {
+    .profile .avatar {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -88,18 +88,18 @@
         /* border-radius: 20px; */
         background: #fff;
     }
-    .avatar > img {
+    .profile .avatar > img {
         flex-shrink: 0;
         max-width: 100%;
         min-height: 100%;
     }
-    .profile-nav {
+    .profile .profile-nav {
         display: flex;
         flex-direction: column;
         margin-top: 10px;
         /* background-color: #ddecfd; */
     }
-    .profile-nav a {
+    .profile .profile-nav a {
         margin: 0;
         padding: 3px;
         box-sizing: border-box;

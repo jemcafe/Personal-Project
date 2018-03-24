@@ -26,11 +26,12 @@ class UserAccount extends Component {
 
     deleteAccount = () => {
         // delete account
-        // axios.delete(`/api/delete-account`).then( res => {
-        //     if ( res.status.response === 200 ) {
-        //         this.props.history.push('/login');
-        //     }
-        // }).catch(err => console.log(err));
+        axios.delete(`/api/delete-account`).then( res => {
+            this.props.getUser( res.data );
+            if ( !this.props.user.username ) {
+                this.props.history.push('/login');
+            }
+        }).catch(err => console.log(err));
     }
 
     render () {

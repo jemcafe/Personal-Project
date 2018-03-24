@@ -125,12 +125,13 @@
   background: linear-gradient(0deg, transparent, #e4dcfc);
   /* background-color: #ebb3dd; */
 }
-.search-page .users-list .img-container img {  /*  The image stays within the container  */
-  max-width: 100%;
+.search-page .users-list .img-container .avatar {  /*  The image stays within the container  */
+  width: 100%;
+  height: 100%;
   animation: 'shrink';
   animation-duration: 1s;
 }
-.search-page .users-list .img-container img:hover {
+.search-page .users-list .img-container .avatar:hover {
   transform: scale(1.1);
   animation: 'grow';
   animation-duration: 1s;

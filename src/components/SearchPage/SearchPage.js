@@ -80,7 +80,7 @@ class SearchPage extends Component {
 
                     <div className="img-container">
                         <Link to={`/${item.username}`} className="img-fade-in" style={{width: '100%', height: '100%'}}>
-                            <img src={ item.imageurl } alt="avatar"/>
+                            <div className="avatar" style={{background: `center / cover no-repeat url(${item.imageurl})`}}></div>
                         </Link>
                     </div>
 
