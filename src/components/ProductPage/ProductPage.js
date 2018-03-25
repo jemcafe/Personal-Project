@@ -2,14 +2,23 @@ import React, { Component } from 'react';
 import './ProductPage.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+// Redux
 import { connect } from 'react-redux';
 import { updateCartItems } from '../../redux/ducks/reducer';
-
-
+// Components
 import Header from '../Header/Header';
 
 class ProductPage extends Component {
+    // constructor () {
+    //     super();
+    //     this.state = {
+    //         product: {}
+    //     }
+    // }
+
+    // componentDidMount () {
+    //     axios.get().then().catch(err => console.log(err));
+    // }
 
     addItem () {
         const { productInfo } = this.props;

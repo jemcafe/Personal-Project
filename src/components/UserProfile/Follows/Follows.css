@@ -29,7 +29,8 @@
         align-items: center;
         padding: 0 30px;
         box-sizing: border-box;
-        margin: 0 0 30px 0;
+        margin: 0 0 40px 0;
+        /* border: 1px dashed lightgrey; */
         /* background-color: #fcddcb; */
     }
     .follows > .container .avatar {
@@ -44,5 +45,6 @@
     @media (max-width: 650px) {
         .follows > .container ul {
             flex-direction: column;
+            margin: 0 0 30px 0;
         }
     }

@@ -7,9 +7,7 @@ module.exports = {
         const db = req.app.get('db');
 
         db.read_productCategories().then( categories => {
-
             res.status(200).json( categories );
-
         }).catch( err => {
             console.log(err);
             res.status(500).send('No Platforms');

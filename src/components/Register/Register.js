@@ -31,14 +31,11 @@ class Register extends Component {
 
     register = (e) => {
         e.preventDefault();
-        const body = {
-                username: this.state.username,
-                password: this.state.password,
-                name: this.state.name,
-                imageurl: this.state.imageurl || null
-            };
+        const { username, password, name, imageurl } = this.state;
 
-        axios.post(`/api/register`, body).then( user => {
+        axios.post(`/api/register`, {
+            username, password, name, imageurl
+        }).then( user => {
             if ( user.data ) {
                 this.props.register( user.data );
                 this.props.history.push(`/${this.props.user.username}`);

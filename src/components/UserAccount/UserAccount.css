@@ -5,3 +5,27 @@
 .useraccount > .container {
   min-height: 80vh;
 }
+
+
+/* Animations  */
+
+.fade-in {
+  animation-name: "fade-in";
+  animation-duration: 1s;
+}
+.overlay-fade {
+  animation-name: "fade-out";
+  animation-duration: 0.5s;
+}
+.overlay-fade:hover {
+  animation-name: "fade-in";
+  animation-duration: 0.5s;
+}
+@keyframes fade-in {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+}
+@keyframes fade-out {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+}

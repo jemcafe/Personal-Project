@@ -59,8 +59,11 @@ class SearchBar extends Component {
         // Prevents the form from submitting
         e.preventDefault();
         
+        // State
         const { category, subcategory, userInput } = this.state;
-        const { updateSearchCategory, updateSearchResults } = this.props;
+
+        // Redux
+        const { searchCategory, updateSearchCategory, updateSearchResults } = this.props;
 
         // The selected category is updated in Redux. This is needed for conditional rendering on the search page.
         updateSearchCategory( category );
@@ -68,7 +71,8 @@ class SearchBar extends Component {
         // Resets the search results to an empty array for a fresh search
         updateSearchResults( [] );
 
-        // The search results will change based on the selected category
+        // The search results change depending on the selected category and user input
+        // The condition in the axios call prevents the search results from updating if the user does a different category search
         if ( category === 'Games' ) {
 
             axios.get(`/api/search/games?search=${ userInput }&platform=${ subcategory }`)
@@ -101,6 +105,9 @@ class SearchBar extends Component {
 
         // If the user is not on the search page, they will be redirected
         this.searchRedirect();
+
+        // If there is a toggleMenu prop, it will be toggled off ( This is for the responive menu )
+        if ( this.props.toggleMenu ) this.props.toggleMenu();
     }
 
 

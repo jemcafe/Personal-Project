@@ -4,14 +4,15 @@ import FaAngleLeft from 'react-icons/lib/fa/angle-left';
 import FaAngleRight from 'react-icons/lib/fa/angle-right';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+// Redux
 import { connect } from 'react-redux';
 import { updateCartItems, getProduct } from '../../redux/ducks/reducer';
-
+//Components
+import Loading from '../Loading/Loading';
 import Header from '../Header/Header';
 
 class SearchPage extends Component {
-
+    
     addItem ( item ) {
         axios.post('/api/cart/add', {
             productId: item.id,
@@ -34,7 +35,8 @@ class SearchPage extends Component {
     }
 
     render () {
-        const { user, searchCategory, searchResults } = this.props;
+        const { user, searchCategory, searchResults, hasSearchResults } = this.props;
+        console.log( 'Search results ->', searchResults );
 
         // List of products
         const listOfProducts = searchResults.map( item => {
@@ -47,7 +49,7 @@ class SearchPage extends Component {
                         </Link>
                     </div>
 
-                    { (!item.headerbkgdimgurl || item.headerbkgdimgurl === '' ) && 
+                    { !item.headerbkgdimgurl && 
                     <div className="item-info-container">
                         <Link to={`/product/${item.name.split(' ').join('_')}`} className="title" onClick={ () => this.getProduct(item) }>
                             { item.name.length > 26 ? `${item.name.slice(0,26).trim()}...` : item.name }
@@ -58,7 +60,6 @@ class SearchPage extends Component {
                         }
 
                         <div className="rating-price">
-                            {/* <div>Rating</div> */}
                             <div className="rating">
                                 <span style={{color: '#ffcdb6'}}><i className="fas fa-heart"></i></span> { Math.floor((Math.random() * (150 - 50)) + 50) }
                                 {/* <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
@@ -99,6 +100,8 @@ class SearchPage extends Component {
                 </div>
             </li>
         });
+        
+        console.log( 'List ->', listOfProducts, listOfUsers );
 
         return (
             <div className="search-page">
@@ -107,13 +110,21 @@ class SearchPage extends Component {
                     <div style={{ padding: '11px', color: '#7b727c' }}>Search Results:</div>
 
                     <div className="results">
-                            
-                            { searchCategory === 'Creators' && listOfUsers.length
+                            {/* { searchCategory === 'Creators' && listOfUsers.length
                             ? <ul className="users-list">{ listOfUsers }</ul>
                             : listOfProducts.length
                             ? <ul className="product-list">{ listOfProducts }</ul> 
-                            : <h4>No results</h4> }
+                            : <h4>No results</h4> } */}
                             
+                            { (!searchResults.length) ? (
+                                <Loading /> 
+                            ) : ( 
+                                searchCategory === 'Creators' && listOfUsers.length
+                                ? <ul className="users-list">{ listOfUsers }</ul>
+                                : listOfProducts.length
+                                ? <ul className="product-list">{ listOfProducts }</ul> 
+                                : <h4>No results</h4>
+                            ) }
                     </div>
 
                     <div className="prev-next">
@@ -122,10 +133,6 @@ class SearchPage extends Component {
                         {/* <div className="left-icon" style={{fontSize: '30px', color: 'gray', padding: '10px'}}><i className="fas fa-angle-left"></i></div> */}
                         {/* <div className="right-icon" style={{fontSize: '30px', color: 'gray', padding: '10px'}}><i className="fas fa-angle-right"></i></div> */}
                     </div>
-
-                    {/* <div className="loading">
-                        <div className="loading-spin"><i class="fas fa-sync fa-spin"></i></div>
-                    </div> */}
                     
                 </div>
             </div>

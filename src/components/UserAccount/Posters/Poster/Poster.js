@@ -16,12 +16,7 @@ class Poster extends Component {
     }
 
     handleChange ( property, value ) {
-        if ( property === 'price' && value.length < 8 ) {
-            console.log( 'Price', value.length, value );
-            this.setState({ [property]: value });
-        } else if ( property !== 'price' ) {
-            this.setState({ [property]: value });
-        }
+        this.setState({ [property]: value });
     }
 
     handlePriceChange ( value ) {
@@ -119,7 +114,7 @@ class Poster extends Component {
                 }
 
                 <div className="thumbnail" style={{background: `center / cover no-repeat url(${poster.imageurl})`}}>
-                    <div className="overlay fade">
+                    <div className="overlay overlay-fade">
                         <div className="poster-name">
                             { poster.name.length > 36 ? `${poster.name.slice(0,36).trim()}...` : poster.name }
                         </div>

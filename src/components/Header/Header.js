@@ -47,8 +47,21 @@ class Header extends Component {
         // The total of amount of items in the cart
         const cartQuantity = cartItems.reduce((acc, item) => acc += item.quantity, 0);
         
-        // If a user is logged in, the login link changes to the account link
-        const linkChange = !user.username ? (
+        return (
+            <header className="main-header">
+                {/* <div className="header-bkgd-overlay position"></div> */}
+                <div className="container position">
+
+                    <div className="header-1">
+                        <Link to="/"><div className="title">Creation Basin</div></Link>
+                        <SearchBar match={this.props.match}/>
+                        <div className="nav">
+                            <Link to="/" className="link">Home</Link>
+                            <Link to="/games" className="link">Games</Link>
+                            <Link to="/books" className="link">Books</Link>
+                            <Link to="/posters" className="link">Posters</Link>
+                            { // The links change if a user is logged in
+                            !user.username ? (
                                 <Aux>
                                     <Link to="/login" className="link">Sign in</Link>
                                     <Link to="/register" className="link">Sign up</Link>
@@ -71,22 +84,7 @@ class Header extends Component {
                                         </div>
                                     </div>
                                 </div>
-                            );
-
-        return (
-            <header className="main-header">
-                {/* <div className="header-bkgd-overlay position"></div> */}
-                <div className="container position">
-
-                    <div className="header-1">
-                        <Link to="/"><div className="title">Creation Basin</div></Link>
-                        <SearchBar match={this.props.match} />
-                        <div className="nav">
-                            <Link to="/" className="link">Home</Link>
-                            <Link to="/games" className="link">Games</Link>
-                            <Link to="/books" className="link">Books</Link>
-                            <Link to="/posters" className="link">Posters</Link>
-                            { linkChange }
+                            ) }
                         </div>
                     </div>
 
@@ -99,27 +97,28 @@ class Header extends Component {
                             <Aux> 
                                 <div className="menu-icon nav-droplink" onClick={ this.toggleMenu }><i className="fas fa-times"></i></div>
                                 <div className="content">
-                                    <SearchBar match={this.props.match} />
+                                    <SearchBar match={this.props.match} toggleMenu={this.toggleMenu} />
                                     <div className="nav">
                                         <Link to="/" className="link" onClick={ this.toggleMenu }>Home</Link>
                                         <Link to="/games" className="link" onClick={ this.toggleMenu }>Games</Link>
                                         <Link to="/books" className="link" onClick={ this.toggleMenu }>Books</Link>
                                         <Link to="/posters" className="link" onClick={ this.toggleMenu }>Posters</Link>
-                                        { !user.username ? (
-                                        <Aux>
-                                            <Link to="/login" className="link" onClick={ this.toggleMenu }>Sign in</Link>
-                                            <Link to="/register" className="link" onClick={ this.toggleMenu }>Sign up</Link>
-                                        </Aux>
+                                        { // The links change if a user is logged in 
+                                        !user.username ? (
+                                            <Aux>
+                                                <Link to="/login" className="link" onClick={ this.toggleMenu }>Sign in</Link>
+                                                <Link to="/register" className="link" onClick={ this.toggleMenu }>Sign up</Link>
+                                            </Aux>
                                         ) : (
-                                        <Aux>
-                                            <Link to={`/${user.username}`} className="link">My Profile</Link>
-                                            <Link to={`/useraccount/posters`} className="link" onClick={ this.toggleMenu }>My Posters</Link>
-                                            <Link to={`/useraccount/cart`} className="link" onClick={ this.toggleMenu }>Cart ({ cartQuantity })</Link>
-                                            <Link to={`/useraccount/settings`} className="link" onClick={ this.toggleMenu }>Settings</Link>
-                                            <Link to="/login" className="link" onClick={ this.logout }>
-                                                <FaSignOut className="fa-sign-out" size={20} color="#b1a4b3" /> Signout
-                                            </Link>
-                                        </Aux>
+                                            <Aux>
+                                                <Link to={`/${user.username}`} className="link">My Profile</Link>
+                                                <Link to={`/useraccount/posters`} className="link" onClick={ this.toggleMenu }>My Posters</Link>
+                                                <Link to={`/useraccount/cart`} className="link" onClick={ this.toggleMenu }>Cart ({ cartQuantity })</Link>
+                                                <Link to={`/useraccount/settings`} className="link" onClick={ this.toggleMenu }>Settings</Link>
+                                                <Link to="/login" className="link" onClick={ this.logout }>
+                                                    <FaSignOut className="fa-sign-out" size={20} color="#b1a4b3" /> Signout
+                                                </Link>
+                                            </Aux>
                                         ) }
                                     </div>
                                 </div>
@@ -128,6 +127,7 @@ class Header extends Component {
                             ) }
                         </div>
                     </div>
+
                 </div>
             </header>
         );

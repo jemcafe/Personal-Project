@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-
 import routes from '../router/router';
-
 import { connect } from 'react-redux';
 import { getUser, getProductCategories, getProductSubcategories } from '../redux/ducks/reducer';
 

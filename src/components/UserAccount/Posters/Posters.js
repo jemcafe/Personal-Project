@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './Posters.css';
 import axios from 'axios';
-
 import { connect } from 'react-redux';
-
+// Components
+import Loading from '../../Loading/Loading';
 import Poster from './Poster/Poster';
 
 class Posters extends Component {
@@ -11,6 +11,7 @@ class Posters extends Component {
         super();
         this.state = {
             posters: [],
+            hasPosters: '',
             name: '',
             description: '',
             price: '0.00',
@@ -22,7 +23,10 @@ class Posters extends Component {
 
     componentDidMount () {
         axios.get(`/api/posters`).then( posters => {
-            this.setState({ posters: posters.data });
+            this.setState({ 
+                posters: posters.data,
+                hasPosters: posters.data.length ? 'true' : 'false'
+            });
         }).catch(err => console.log(err));
     }
 
@@ -32,7 +36,7 @@ class Posters extends Component {
 
     handlePriceChange ( value ) {
         // The price input must be a number
-        console.log( 'Value', value );
+        // console.log( 'Value', value );
         if ( !isNaN(value) && value.length < 10 ) {
             // The decimal point is removed from the string 
             let newPrice = value.split('.').join('');
@@ -72,7 +76,8 @@ class Posters extends Component {
                 axios.get(`/api/posters`).then( posters => {
 
                     this.setState({ 
-                        posters: posters.data, 
+                        posters: posters.data,
+                        hasPosters: 'true',
                         name: '', 
                         description: '', 
                         price: '',
@@ -88,7 +93,10 @@ class Posters extends Component {
         axios.delete(`/api/poster/${id}/delete`).then( () => {
             axios.get(`/api/posters`).then( posters => {
 
-                this.setState({ posters: posters.data });
+                this.setState({ 
+                    posters: posters.data,
+                    hasPosters: posters.data.length ? 'true' : 'false'
+                });
 
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
@@ -107,7 +115,7 @@ class Posters extends Component {
     }
 
     render () {
-        const { posters, name, description, price, category, imageurl } = this.state;
+        const { posters, hasPosters, name, description, price, category, imageurl } = this.state;
         const { productSubcategories } = this.props;
 
         // If there are subcategories, the first category ('All') is removed from the list
@@ -146,9 +154,13 @@ class Posters extends Component {
                         </div>
                     </div>
 
-                    { posters.length
-                    ? <ul className="posters-list">{ listOfPosters }</ul>
-                    : <h5>No posters created</h5> }
+                    { !listOfPosters.length && !hasPosters.length ? (
+                        <Loading />
+                    ) : (
+                        hasPosters === 'true'
+                        ? <ul className="posters-list fade-in">{ listOfPosters }</ul>
+                        : <h5>No posters created</h5> 
+                    ) }
 
                 </div>
             </div>

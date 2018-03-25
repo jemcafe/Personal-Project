@@ -108,24 +108,3 @@
     color: white;
     background-color: rgb(184, 180, 189);
 } */
-
-/*  Edit  */
-
-/*  Animations  */
-
-.fade {
-    animation-name: "fade-out";
-    animation-duration: 0.5s;
-}
-.fade:hover {
-    animation-name: "fade-in";
-    animation-duration: 0.5s;
-}
-@keyframes fade-in {
-    0% { opacity: 0;}
-    100% { opacity: 1; }
-}
-@keyframes fade-out {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-}

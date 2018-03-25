@@ -138,18 +138,3 @@ select {
   background: #fff;
   /* background: radial-gradient( 180deg, #fee1d1, rgb(233, 220, 255) ); */
 }
-
-
-/* Animations */
-
-.loading {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-}
-.loading-spin {
-  color: gray;
-  font-size: 40px;
-  align-self: center;
-}
