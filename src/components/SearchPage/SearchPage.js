@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './SearchPage.css';
+import Aux from '../../hoc/Aux';
 import FaAngleLeft from 'react-icons/lib/fa/angle-left';
 import FaAngleRight from 'react-icons/lib/fa/angle-right';
 import axios from 'axios';
@@ -28,21 +29,31 @@ class SearchPage extends Component {
     }
 
     componentDidMount () {
-        const { searchResults, userResults } = this.state;
-
         // If the search results is empty when the page loads, request the data
-        if ( !searchResults.length && !userResults.length ) {
-            const { search } = this.props.history.location;
-            this.search( search, 'DidMount results->' );
+        const { search } = this.props.history.location;
+        this.search( search, 'DidMount results->' );
+    }
+
+    resetSearch () {
+        if ( this.state.hasSearchResults === 'true' ) {
+            this.setState({ 
+                searchResults: [],
+                userResults: [],
+                hasSearchResults: ''
+            });
         }
     }
 
     search ( search, lifecycle ) {
+        // Resets the search for a fresh search
+        this.resetSearch();
+        
+        // The query string is used for the search request
         const query = search.slice(1, search.length).split('&');
         const q = query[0].slice(2, query[0].length);
         let c = query[1].slice(2, query[1].length);
 
-        // The second query parameter changes depending on the category
+        // The second query parameter changes depending on the category (this is not implemented yet)
         const subcategory = c === 'games' ? `&platform=${ '' }`
                         : c === 'books' ? `&subject=${ '' }`
                         : c === 'posters' ? `&category=${ '' }`
@@ -78,9 +89,7 @@ class SearchPage extends Component {
             image: item.imageurl
         }).then( () => {
             axios.get('/api/cart').then( cart => {
-
                 this.props.updateCartItems( cart.data );
-
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
     }
@@ -110,26 +119,28 @@ class SearchPage extends Component {
                             { item.name.length > 26 ? `${item.name.slice(0,26).trim()}...` : item.name }
                         </Link>
 
-                        { item.username && 
-                            <div className="creator-name">by <Link to={`/${item.username}`}>{ item.username }</Link></div> 
-                        }
-
                         <div className="rating-price">
                             <div className="rating">
-                                <span style={{color: '#ffcdb6'}}><i className="fas fa-heart"></i></span> { Math.floor((Math.random() * (150 - 50)) + 50) }
-                                {/* <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
-                                <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
-                                <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
-                                <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
-                                <span><i className="fas fa-star"></i></span> */}
+                                { category === 'posters' ? (
+                                    <Aux>
+                                        <span style={{color: '#ffcdb6'}}><i className="fas fa-heart"></i></span> {Math.floor((Math.random() * (150 - 50)) + 50)}
+                                    </Aux>
+                                ) : ( 
+                                    <Aux>
+                                        <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
+                                        <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
+                                        <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
+                                        <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
+                                        <span style={{color: 'lightgrey'}}><i className="fas fa-star"></i></span>
+                                    </Aux> 
+                                ) }
                             </div>
                             <div>${ item.price }</div>
                         </div>
 
                         { user.username
-                            ? <button className="add-btn red-btn-2" onClick={ () => this.addItem( item ) }>Add To Cart</button>
-                            : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn red-btn-2">Add To Cart</button></Link> 
-                        }
+                        ? <button className="add-btn red-btn-2" onClick={ () => this.addItem( item ) }>Add To Cart</button>
+                        : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn red-btn-2">Add To Cart</button></Link> }
                     </div>
 
                 </div>
@@ -163,7 +174,7 @@ class SearchPage extends Component {
 
                     <div className="results">
                     
-                        { !searchResults.length && !hasSearchResults.length ? (
+                        { !searchResults.length && hasSearchResults === '' ? (
                             <Loading /> 
                         ) : ( 
                             hasSearchResults === 'true' ? (

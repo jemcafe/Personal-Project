@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // Redux
 import { connect } from 'react-redux';
-import { updateSearchCategory, updateSearchResults } from '../../../redux/ducks/reducer';
+// import {  } from '../../../redux/ducks/reducer';
 
 class SearchBar extends Component {
     constructor (props) {
@@ -73,5 +73,7 @@ const mapStateToProps = ( state ) => {
         productSubcategories: state.productSubcategories,
     };
 };
+
+// const mapDispatchToProps = {}
 
 export default connect( mapStateToProps )( SearchBar );

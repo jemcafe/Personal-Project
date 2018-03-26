@@ -19,7 +19,7 @@ export default (
         <Route path="/games" component={ GamesPage } />
         <Route path="/books" component={ BooksPage } />
         <Route path="/posters" component={ PostersPage } />
-        <Route path="/search" component={ SearchPage } autoCapitalization="none" />
+        <Route path="/search" component={ SearchPage } />
         <Route path="/product/:category/:name" component={ ProductPage } />
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
