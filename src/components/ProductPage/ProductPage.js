@@ -53,7 +53,7 @@ class ProductPage extends Component {
 
         return (
             <div className="product-page">
-                <Header match={this.props.match} />
+                <Header match={this.props.match} history={this.props.history} />
                 <div className="container panel">
 
                 { productInfo ? (

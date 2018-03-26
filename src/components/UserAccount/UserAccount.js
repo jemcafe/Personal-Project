@@ -37,7 +37,7 @@ class UserAccount extends Component {
     render () {
         return (
             <div className="useraccount">
-                <Header match={this.props.match} />
+                <Header match={this.props.match} history={this.props.history} />
                 <div className="container panel">
 
                     <Switch>

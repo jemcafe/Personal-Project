@@ -28,12 +28,12 @@ class Header extends Component {
     }
 
     toggleMenu = () => {
-        // Toggle control for the responsive header menu
+        // Menu toggle control for the responsive header menu
         this.setState(prevState => ({ showMenu: !prevState.showMenu }));
     }
 
     logout = () => {
-        // The session is ended and the cart is empty )
+        // The session is ended and the cart is empty
         axios.post(`/api/logout`).then( user => {
             this.props.logout( user.data );
             this.props.updateCartItems( [] );
@@ -54,7 +54,7 @@ class Header extends Component {
 
                     <div className="header-1">
                         <Link to="/"><div className="title">Creation Basin</div></Link>
-                        <SearchBar match={this.props.match}/>
+                        <SearchBar match={this.props.match} history={this.props.history}/>
                         <div className="nav">
                             <Link to="/" className="link">Home</Link>
                             <Link to="/games" className="link">Games</Link>
@@ -97,7 +97,7 @@ class Header extends Component {
                             <Aux> 
                                 <div className="menu-icon nav-droplink" onClick={ this.toggleMenu }><i className="fas fa-times"></i></div>
                                 <div className="content">
-                                    <SearchBar match={this.props.match} toggleMenu={this.toggleMenu} />
+                                    <SearchBar match={this.props.match} history={this.props.history} toggleMenu={this.toggleMenu} />
                                     <div className="nav">
                                         <Link to="/" className="link" onClick={ this.toggleMenu }>Home</Link>
                                         <Link to="/games" className="link" onClick={ this.toggleMenu }>Games</Link>

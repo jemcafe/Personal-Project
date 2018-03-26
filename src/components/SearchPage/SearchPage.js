@@ -12,6 +12,61 @@ import Loading from '../Loading/Loading';
 import Header from '../Header/Header';
 
 class SearchPage extends Component {
+    constructor () {
+        super();
+        this.state = {
+            category: '',
+            searchResults: [],
+            userResults: [],
+            hasSearchResults: ''
+        }
+    }
+
+    componentWillReceiveProps (nextProps) {
+        const { search } = nextProps.location;
+        this.search( search, 'WillReceiveProps results ->' );
+    }
+
+    componentDidMount () {
+        const { searchResults, userResults } = this.state;
+
+        // If the search results is empty when the page loads, request the data
+        if ( !searchResults.length && !userResults.length ) {
+            const { search } = this.props.history.location;
+            this.search( search, 'DidMount results->' );
+        }
+    }
+
+    search ( search, lifecycle ) {
+        const query = search.slice(1, search.length).split('&');
+        const q = query[0].slice(2, query[0].length);
+        let c = query[1].slice(2, query[1].length);
+
+        // The second query parameter changes depending on the category
+        const subcategory = c === 'games' ? `&platform=${ '' }`
+                        : c === 'books' ? `&subject=${ '' }`
+                        : c === 'posters' ? `&category=${ '' }`
+                        : ``;
+
+        // Search request
+        axios.get(`/api/search/${ c === 'creators' ? 'users' : c }?search=${ q }${ subcategory }`)
+        .then( res => {
+            console.log(lifecycle, res.data);
+            this.setState({
+                category: c,
+                searchResults: c !== 'creators' ? res.data : [],
+                userResults: c === 'creators' ? res.data : [],
+                hasSearchResults: res.data.length ? 'true' : 'false',
+            });
+        }).catch(err => {
+            console.log(err)
+            this.setState({
+                searchResults: [],
+                userResults: [],
+                hasSearchResults: 'false'
+            });
+        });
+    }
 
     addItem ( item ) {
         axios.post('/api/cart/add', {
@@ -35,15 +90,13 @@ class SearchPage extends Component {
     }
 
     render () {
-        const { user, searchCategory, searchResults, hasSearchResults } = this.props;
-
-        // console.log('Search category ->', searchCategory);
-        // console.log('Has search results ->', hasSearchResults);
-        // console.log( 'Search results ->', searchResults );
+        const { category, searchResults, userResults, hasSearchResults } = this.state;
+        const { user } = this.props;
 
         // List of products
-        const listOfProducts = searchResults.map( item => {
-            return <li key={ item.id } className="item">
+        const listOfProducts = searchResults.map( (item, i) => {
+            // Using i for the key is fine since the items aren't changing order
+            return <li key={i} className="item">
                 <div className="container">
 
                     <div className="img-container">
@@ -84,7 +137,7 @@ class SearchPage extends Component {
         });
 
         // List of users
-        const listOfUsers = searchResults.map( item => {
+        const listOfUsers = userResults.map( item => {
             return <li key={ item.id } className="item">
                 <div className="container panel">
 
@@ -104,35 +157,29 @@ class SearchPage extends Component {
 
         return (
             <div className="search-page">
-                <Header match={this.props.match} />
+                <Header match={this.props.match} history={this.props.history} />
                 <div className="container panel">
                     <div style={{ padding: '11px', color: '#7b727c' }}>Search Results:</div>
 
                     <div className="results">
-                            {/* { searchCategory === 'Creators' && listOfUsers.length
-                            ? <ul className="users-list">{ listOfUsers }</ul>
-                            : listOfProducts.length
-                            ? <ul className="product-list">{ listOfProducts }</ul> 
-                            : <h4>No results</h4> } */}
-                            
-                            { !searchResults.length && !hasSearchResults.length ? (
-                                <Loading /> 
-                            ) : ( 
-                                hasSearchResults === 'true' ? (
-                                    searchCategory === 'Creators'
-                                    ? <ul className="users-list">{ listOfUsers }</ul>
-                                    : <ul className="product-list">{ listOfProducts }</ul> 
-                                ) : (
-                                    <h4>No results</h4>
-                                )
-                            ) }
+                    
+                        { !searchResults.length && !hasSearchResults.length ? (
+                            <Loading /> 
+                        ) : ( 
+                            hasSearchResults === 'true' ? (
+                                category === 'creators'
+                                ? <ul className="users-list">{ listOfUsers }</ul>
+                                : <ul className="product-list">{ listOfProducts }</ul> 
+                            ) : (
+                                <h4>No results</h4>
+                            )
+                        ) }
+
                     </div>
 
                     <div className="prev-next">
                         <FaAngleLeft className="fa-angle-L" size={40} color="gray" />
                         <FaAngleRight className="fa-angle-R" size={40} color="gray" />
-                        {/* <div className="left-icon" style={{fontSize: '30px', color: 'gray', padding: '10px'}}><i className="fas fa-angle-left"></i></div> */}
-                        {/* <div className="right-icon" style={{fontSize: '30px', color: 'gray', padding: '10px'}}><i className="fas fa-angle-right"></i></div> */}
                     </div>
                     
                 </div>
@@ -145,9 +192,6 @@ const mapStateToProps = (state) => {
     return {
         user: state.user,
         cartItems: state.cartItems,
-        searchCategory: state.searchCategory,
-        searchResults: state.searchResults,
-        hasSearchResults: state.hasSearchResults,
         product: state.product
     };
 };

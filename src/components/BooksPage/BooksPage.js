@@ -9,7 +9,7 @@ class BooksPage extends Component {
     render () {
         return (
             <div className="books-page">
-                <Header match={this.props.match}/>
+                <Header match={this.props.match} history={this.props.history} />
                 <div className="container panel">
                     <h3>Books</h3>
 

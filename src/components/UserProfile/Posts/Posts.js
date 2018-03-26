@@ -87,8 +87,6 @@ class Posts extends Component {
         const { posts, hasPosts, recentPosters, hasPosters, title, text, imageurl } = this.state;
         const { user, profileUser, paramsUsername } = this.props;
 
-        console.log( 'Has posts ->', this.state.hasPosts );
-
         const listOfPosts = posts.map( post => {
             return <Post key={ post.id }
                          profileUser = { profileUser }

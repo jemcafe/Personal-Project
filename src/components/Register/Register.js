@@ -46,7 +46,7 @@ class Register extends Component {
     render () {
         return (
             <div className="login-reg">
-                <Header match={this.props.match} />
+                <Header match={this.props.match} history={this.props.history} />
                 <div className="container">
 
                     <div className="signin-signup">

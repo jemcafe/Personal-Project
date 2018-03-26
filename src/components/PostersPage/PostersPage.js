@@ -8,7 +8,7 @@ class PostersPage extends Component {
     render () {
         return (
             <div className="posters-page">
-                <Header match={this.props.match} />
+                <Header match={this.props.match} history={this.props.history} />
                 <div className="container panel">
                     <h3>Posters</h3>
 

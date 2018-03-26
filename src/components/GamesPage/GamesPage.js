@@ -8,7 +8,7 @@ class GamesPage extends Component {
     render () {
         return (
             <div className="games-page">
-                <Header match={this.props.match}/>
+                <Header match={this.props.match} history={this.props.history} />
                 <div className="container panel">
                     <h3>Games</h3>
 

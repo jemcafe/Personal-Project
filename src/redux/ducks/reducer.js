@@ -5,10 +5,6 @@ const initialState = {
    productCategories: [],
    productSubcategories: [],
 
-   searchCategory: '',
-   searchResults: [],
-   hasSearchResults: 'false',
-
    product: null,
 };
 
@@ -17,13 +13,11 @@ const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 const REGISTER = 'REGISTER';
 const GET_USER = 'GET_USER';
-
 const UPDATE_CART_ITEMS = 'UPDATE_CART_ITEMS';
 
 const GET_PRODUCT_CATEGORIES = 'GET_PRODUCT_CATEGORIES';
 const GET_PRODUCT_SUBCATEGORIES = 'GET_PRODUCT_SUBCATEGORIES';
-const UPDATE_SEARCH_CATEGORY = 'UPDATE_SEARCH_CATEGORY';
-const UPDATE_SEARCH_RESULTS = 'UPDATE_SEARCH_RESULTS';
+
 const GET_PRODUCT= 'GET_PRODUCT';
 
 // Reducer
@@ -45,10 +39,6 @@ export default function reducer ( state = initialState, action ) {
          return { ...state, productCategories: payload };
       case GET_PRODUCT_SUBCATEGORIES:
          return { ...state, productSubcategories: payload };
-      case UPDATE_SEARCH_CATEGORY:
-         return { ...state, searchCategory: payload };
-      case UPDATE_SEARCH_RESULTS:
-         return { ...state, searchResults: payload.searchResults, hasSearchResults: payload.hasSearchResults };
       case GET_PRODUCT:
          return { ...state, productInfo: payload };
       default:
@@ -103,20 +93,6 @@ export function getProductSubcategories ( productSubcategories ) {
    return {
       type: 'GET_PRODUCT_SUBCATEGORIES',
       payload: productSubcategories
-   };
-}
-
-export function updateSearchCategory ( searchCategory) {
-   return {
-      type: 'UPDATE_SEARCH_CATEGORY',
-      payload: searchCategory
-   };
-}
-
-export function updateSearchResults ( searchResults, hasSearchResults ) {
-   return {
-      type: 'UPDATE_SEARCH_RESULTS',
-      payload: { searchResults, hasSearchResults }
    };
 }
 

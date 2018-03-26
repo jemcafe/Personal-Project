@@ -25,6 +25,7 @@ class Profile extends Component {
     }
 
     componentWillReceiveProps ( nextProps ) {
+        console.log('Profile receive props', nextProps);
         // The component will receive the new props when switching to different user's profile
         const { username } = nextProps.match.params;
 
@@ -77,7 +78,7 @@ class Profile extends Component {
         
         return (
             <div className="profile">
-                <Header match={this.props.match} />
+                <Header match={this.props.match} history={this.props.history} />
 
                 { profileUser.username &&
                 <div className="container">

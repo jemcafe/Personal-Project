@@ -8,7 +8,7 @@ class HomePage extends Component {
     render () {
         return (
             <div className="home-page">
-                <Header match={this.props.match} />
+                <Header match={this.props.match} history={this.props.history} />
                 <div className="container panel">
                     {/* <h1>( Latest Content )</h1> */}
                     <ContentSlider 
