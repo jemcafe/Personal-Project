@@ -7,6 +7,7 @@ const initialState = {
 
    searchCategory: '',
    searchResults: [],
+   hasSearchResults: 'false',
 
    product: null,
 };
@@ -47,7 +48,7 @@ export default function reducer ( state = initialState, action ) {
       case UPDATE_SEARCH_CATEGORY:
          return { ...state, searchCategory: payload };
       case UPDATE_SEARCH_RESULTS:
-         return { ...state, searchResults: payload };
+         return { ...state, searchResults: payload.searchResults, hasSearchResults: payload.hasSearchResults };
       case GET_PRODUCT:
          return { ...state, productInfo: payload };
       default:
@@ -112,10 +113,10 @@ export function updateSearchCategory ( searchCategory) {
    };
 }
 
-export function updateSearchResults ( searchResults ) {
+export function updateSearchResults ( searchResults, hasSearchResults ) {
    return {
       type: 'UPDATE_SEARCH_RESULTS',
-      payload: searchResults
+      payload: { searchResults, hasSearchResults }
    };
 }
 

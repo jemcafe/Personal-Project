@@ -19,7 +19,7 @@ class Header extends Component {
     }
 
     componentDidMount () {
-        // If a user is logged in, their cart data is retrieved
+        // If a user is logged in, their cart data is requested
         if ( this.props.user.username ) {
             axios.get('/api/cart').then( cart => {
                 this.props.updateCartItems( cart.data );
@@ -60,7 +60,7 @@ class Header extends Component {
                             <Link to="/games" className="link">Games</Link>
                             <Link to="/books" className="link">Books</Link>
                             <Link to="/posters" className="link">Posters</Link>
-                            { // The links change if a user is logged in
+                            { // The signin and sign up links change if a user is logged in
                             !user.username ? (
                                 <Aux>
                                     <Link to="/login" className="link">Sign in</Link>

@@ -6,11 +6,11 @@ class Poster extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            name: this.props.poster.name,
-            description: this.props.poster.description,
-            price: this.props.poster.price,
-            postercategoryid: this.props.poster.postercategoryid,
-            imageurl: this.props.poster.imageurl,
+            name: props.poster.name,
+            description: props.poster.description,
+            price: props.poster.price,
+            postercategoryid: props.poster.postercategoryid,
+            imageurl: props.poster.imageurl,
             editMode: false
         }
     }

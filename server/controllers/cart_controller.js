@@ -12,12 +12,12 @@ module.exports = {
                 let newQuantity = quantity;
 
                 for ( let i = 0; i < cart.length; i++ ) {
-
                     if ( productId === cart[i].productid && productCategoryId === cart[i].productcategoryid ) {
 
                         newQuantity += cart[i].quantity;
 
-                        db.update_cart_item_quantity( [cart[i].id, newQuantity, session.user.id] ).then( item => {
+                        db.update_cart_item_quantity( [cart[i].id, newQuantity, session.user.id] )
+                        .then( item => {
                             res.status(200).json( item );
                         }).catch( err => {
                             console.log(err);
@@ -26,7 +26,6 @@ module.exports = {
 
                         itemFound = true;
                     }
-
                 }
 
                 if ( !itemFound ) {

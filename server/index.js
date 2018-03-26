@@ -96,6 +96,7 @@ massive( process.env.CONNECTION_STRING )
     // Categories
     app.get('/api/product/categories', searchCntrl.getProductCategories);
     app.get('/api/product/subcategories', searchCntrl.getProductSubcategories);
+    // app.get('/api/product', searchCntrl.getProduct);
     // Search
     app.get('/api/search/games', searchCntrl.getGames);
     app.get('/api/search/books', searchCntrl.getVolumes);

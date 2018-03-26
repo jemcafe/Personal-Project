@@ -7,9 +7,9 @@ CREATE TABLE Users (
     password TEXT NOT NULL,
     authId TEXT,
     email TEXT,
-    name TEXT,
+    name TEXT NOT NULL,
     avatar TEXT,
-    headerBkgdImg TEXT,
+    headerBkgdImg TEXT
 );
 -- INSERT INTO Users (username, password, authId, name, imageUrl, headerImageUrl, profileUrl) VALUES
 -- ('a',      'b',        null, 'A',               null,                                                                                                                                 null),
@@ -18,6 +18,16 @@ CREATE TABLE Users (
 -- ('Luffy',  'onepiece', null, 'Monkey D. Luffy', 'https://vignette.wikia.nocookie.net/manga/images/0/01/Monkey_D._Luffy_-_TPS15.png/revision/latest?cb=20150503204141&path-prefix=es', 'https://kids.nationalgeographic.com/content/dam/kids/photos/articles/Nature/H-P/Habitats/Ocean/wave.ngsversion.1500050062134.adapt.1900.1.jpg');
 
 
+-- CREATE TABLE Accounts_Made (
+--     id SERIAL PRIMARY KEY,
+--     username TEXT UNIQUE NOT NULL,
+--     password TEXT NOT NULL,
+--     authId TEXT,
+--     email TEXT,
+--     name TEXT NOT NULL,
+--     avatar TEXT,
+--     headerBkgdImg TEXT
+-- )
 
 CREATE TABLE Posts (
     id SERIAL PRIMARY KEY,
@@ -27,11 +37,6 @@ CREATE TABLE Posts (
     userId INTEGER REFERENCES Users (id),
     imageUrl TEXT
 );
--- INSERT INTO Posts (title, text, datePosted, userId, imageURL) VALUES
--- ('Leap of Faith',       'A grasshopper''s dream of finding the end a fence. My new best seller.', '1 / 17 / 2018', 1, 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/American_Bird_Grasshopper.jpg/1200px-American_Bird_Grasshopper.jpg'),
--- ('Didn''t expect this', 'Just found a nickel. Though you guys should know. Pretty important.',    '1 / 17 / 2018', 1, ''),
--- ('Buster''s Todem',     'When cows seek vengance in the flatlands, Only one cow can stop it',     '1 / 17 / 2018', 1, 'https://media.mnn.com/assets/images/2017/01/cow-in-pasture.jpg.838x0_q80.jpg'),
--- ('Into the Dawn',       'A leopard goes a journey to find it''s wings.',                          '1 / 19 / 1018', 1, 'https://dncache-mauganscorp.netdna-ssl.com/thumbseg/75/75239-bigthumbnail.jpg');
 
 
 CREATE TABLE Follows (
@@ -39,9 +44,6 @@ CREATE TABLE Follows (
     userId INTEGER REFERENCES Users (id),
     followerId INTEGER REFERENCES Users (id)
 );
--- INSERT INTO Follows (userId, followerId) VALUES
--- (2, 3),
--- (4, 3);
 
 
 CREATE TABLE PostComments (
@@ -144,14 +146,15 @@ INSERT INTO PosterCategories (category) VALUES
 
 CREATE TABLE Posters (
     id SERIAL PRIMARY KEY,
-    name TEXT,
+    name TEXT NOT NULL,
     description TEXT,
-    datePosted TEXT,
-    price DECIMAL,
+    datePosted TEXT NOT NULL,
+    price DECIMAL NOT NULL,
     posterCategoryId INTEGER REFERENCES PosterCategories (id),
     productCategoryId INTEGER REFERENCES ProductCategories (id),
+    imageUrl TEXT NOT NULL,
+    likes INTEGER NOT NULL,
     userId INTEGER REFERENCES Users (id),
-    imageUrl TEXT
 );
 -- INSERT INTO Posters (name, description, datePosted, price, posterCategoryId, productCategoryId, userId, imageURL) VALUES
 -- ('Drift No.10',                 'Abstract art',                '1 / 20 / 2018', 30.00, 2, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/006/943/174/large/jem-brown-20170713-150515-edited-sml3.jpg?1502436122'),
@@ -183,7 +186,7 @@ CREATE TABLE Posters (
 
 CREATE TABLE Cart (
     id SERIAL PRIMARY KEY,
-    productId INTEGER NOT NULL,
+    productId VARCHAR(50) NOT NULL,
     name TEXT NOT NULL,
     price DECIMAL NOT NULL,
     productCategoryId INTEGER REFERENCES ProductCategories (id) NOT NULL,

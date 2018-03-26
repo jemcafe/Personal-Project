@@ -12,7 +12,7 @@ import Loading from '../Loading/Loading';
 import Header from '../Header/Header';
 
 class SearchPage extends Component {
-    
+
     addItem ( item ) {
         axios.post('/api/cart/add', {
             productId: item.id,
@@ -36,7 +36,10 @@ class SearchPage extends Component {
 
     render () {
         const { user, searchCategory, searchResults, hasSearchResults } = this.props;
-        console.log( 'Search results ->', searchResults );
+
+        // console.log('Search category ->', searchCategory);
+        // console.log('Has search results ->', hasSearchResults);
+        // console.log( 'Search results ->', searchResults );
 
         // List of products
         const listOfProducts = searchResults.map( item => {
@@ -44,14 +47,13 @@ class SearchPage extends Component {
                 <div className="container">
 
                     <div className="img-container">
-                        <Link to={`/product/${item.name.split(' ').join('_')}`} className="img-fade-in">
+                        <Link to={`/product/${item.productcategory.toLowerCase()}/${item.name.split(' ').join('_')}`} className="img-fade-in">
                             <img src={ item.imageurl } alt="cover" onClick={ () => this.getProduct(item) }/>
                         </Link>
                     </div>
 
-                    { !item.headerbkgdimgurl && 
                     <div className="item-info-container">
-                        <Link to={`/product/${item.name.split(' ').join('_')}`} className="title" onClick={ () => this.getProduct(item) }>
+                        <Link to={`/product/${item.productcategory.toLowerCase()}/${item.name.split(' ').join('_')}`} className="title" onClick={ () => this.getProduct(item) }>
                             { item.name.length > 26 ? `${item.name.slice(0,26).trim()}...` : item.name }
                         </Link>
 
@@ -76,7 +78,6 @@ class SearchPage extends Component {
                             : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn red-btn-2">Add To Cart</button></Link> 
                         }
                     </div>
-                    }
 
                 </div>
             </li>
@@ -100,8 +101,6 @@ class SearchPage extends Component {
                 </div>
             </li>
         });
-        
-        console.log( 'List ->', listOfProducts, listOfUsers );
 
         return (
             <div className="search-page">
@@ -116,14 +115,16 @@ class SearchPage extends Component {
                             ? <ul className="product-list">{ listOfProducts }</ul> 
                             : <h4>No results</h4> } */}
                             
-                            { (!searchResults.length) ? (
+                            { !searchResults.length && !hasSearchResults.length ? (
                                 <Loading /> 
                             ) : ( 
-                                searchCategory === 'Creators' && listOfUsers.length
-                                ? <ul className="users-list">{ listOfUsers }</ul>
-                                : listOfProducts.length
-                                ? <ul className="product-list">{ listOfProducts }</ul> 
-                                : <h4>No results</h4>
+                                hasSearchResults === 'true' ? (
+                                    searchCategory === 'Creators'
+                                    ? <ul className="users-list">{ listOfUsers }</ul>
+                                    : <ul className="product-list">{ listOfProducts }</ul> 
+                                ) : (
+                                    <h4>No results</h4>
+                                )
                             ) }
                     </div>
 
@@ -146,6 +147,7 @@ const mapStateToProps = (state) => {
         cartItems: state.cartItems,
         searchCategory: state.searchCategory,
         searchResults: state.searchResults,
+        hasSearchResults: state.hasSearchResults,
         product: state.product
     };
 };

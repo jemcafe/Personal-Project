@@ -16,9 +16,19 @@ class ProductPage extends Component {
     //     }
     // }
 
-    // componentDidMount () {
-    //     axios.get().then().catch(err => console.log(err));
-    // }
+    componentDidMount () {
+        const url = this.props.match.url.split('/');
+        const category = url[2];
+        const name = url[3].split('_').join(' ');
+        console.log( 'Product category ->', category );
+        console.log( 'Product name ->', name );
+        // Should also search by subcategory ( author, platform, creator, etc. )
+        // axios.get(`/api/product?category=${ category }&name=${ name }`)
+        // .then( product => {
+        //    console.log( 'Product ->', product );
+        // //    this.setState({ product: product.data });
+        // }).catch(err => console.log(err));
+    }
 
     addItem () {
         const { productInfo } = this.props;
@@ -47,27 +57,27 @@ class ProductPage extends Component {
                 <div className="container panel">
 
                 { productInfo ? (
-                <div className="product">
-                    <div className="product-img">
-                        <img src={ productInfo.imageurl } alt="Product pic"/>
-                    </div>
-                    <div className="info-container">
-                        <h3>{ productInfo.name }</h3>
-                        <div>${ productInfo.price }</div>
-                        { user.username
-                        ? <button className="add-btn red-btn-2" onClick={ () => this.addItem() }>Add To Cart</button>
-                        : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn red-btn-2">Add To Cart</button></Link> 
-                        }
-                        <div className="description">
-                            <h4>Description</h4>
-                            { productInfo.description }
+                    <div className="product">
+                        <div className="product-img">
+                            <img src={ productInfo.imageurl } alt="Product pic"/>
+                        </div>
+                        <div className="info-container">
+                            <h3>{ productInfo.name }</h3>
+                            <div>${ productInfo.price }</div>
+                            { user.username
+                            ? <button className="add-btn red-btn-2" onClick={ () => this.addItem() }>Add To Cart</button>
+                            : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn red-btn-2">Add To Cart</button></Link> 
+                            }
+                            <div className="description">
+                                <h4>Description</h4>
+                                { productInfo.description }
+                            </div>
                         </div>
                     </div>
-                </div>
                 ) : ( 
-                <h4 style={{margin: '20px 0', fontSize: '18px', color: '#91405475'}}>
-                    Item not found<br/>( Try searching again )
-                </h4>
+                    <h4 style={{margin: '20px 0', fontSize: '18px', color: '#91405475'}}>
+                        Item not found<br/>( Try searching again )
+                    </h4>
                 ) }
                 </div>
             </div>

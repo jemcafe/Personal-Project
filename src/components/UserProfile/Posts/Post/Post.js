@@ -9,9 +9,9 @@ class Post extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            title: this.props.post.title,
-            text: this.props.post.text,
-            imageurl: this.props.post.imageurl,
+            title: props.post.title,
+            text: props.post.text,
+            imageurl: props.post.imageurl,
             editMode: false
         }
     }

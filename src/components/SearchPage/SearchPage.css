@@ -72,8 +72,8 @@
   /* background-color: #c8e2f8; */
 }
 .search-page .product-list .title {
+  align-self: start;
   font-size: 14px;
-  text-align: left;
 }
 /* .search-page .product-list .item-info-container .title:hover,.creator-name a:hover {
   color: #ec554a;

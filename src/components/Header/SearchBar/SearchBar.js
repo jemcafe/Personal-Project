@@ -9,8 +9,8 @@ class SearchBar extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            categories: [],
-            category: '',
+            categories: props.productCategories.length ? props.productCategories : [],
+            category: props.productCategories.length ? props.productCategories[0].productcategory : '',
             subcategory: '',
             userInput: '',
             searchRedirect: false
@@ -18,13 +18,16 @@ class SearchBar extends Component {
     }
 
     componentDidMount () {
-        // Gets the search categories, and initial category value is the first category.
-        axios.get('/api/product/categories').then( categories => {
-            this.setState({
-                categories: categories.data,
-                category: categories.data[0].productcategory 
-            });
-        }).catch(err => console.log(err));
+        // If categories is empty, the list search categories is requested, and initial category value is the first category.
+        // The list of categories is requested if it is not in redux. The condition prevents unecessary requests.
+        if ( !this.props.productCategories.length ) {
+            axios.get('/api/product/categories').then( categories => {
+                this.setState({
+                    categories: categories.data,
+                    category: categories.data[0].productcategory 
+                });
+            }).catch(err => console.log(err));
+        }
     }
         
     handleChange ( property, value ) {
@@ -68,37 +71,41 @@ class SearchBar extends Component {
         // The selected category is updated in Redux. This is needed for conditional rendering on the search page.
         updateSearchCategory( category );
 
-        // Resets the search results to an empty array for a fresh search
-        updateSearchResults( [] );
+        // Resets the search results in Redux for a fresh search
+        updateSearchResults([], '');
 
         // The search results change depending on the selected category and user input
-        // The condition in the axios call prevents the search results from updating if the user does a different category search
+        // The ternary in the axios call is needed for loading purposes
         if ( category === 'Games' ) {
 
             axios.get(`/api/search/games?search=${ userInput }&platform=${ subcategory }`)
             .then( res => {
-                updateSearchResults( res.data );
+                const hasResults = res.data.length ? 'true' : 'false';
+                updateSearchResults( res.data, hasResults );
             }).catch(err => console.log(err)); 
 
         } else if ( category === 'Books') {
 
             axios.get(`/api/search/books?search=${ userInput }&subject=${ subcategory }`)
             .then( res => {
-                updateSearchResults( res.data );
+                const hasResults = res.data.length ? 'true' : 'false';
+                updateSearchResults( res.data, hasResults );
             }).catch(err => console.log(err));
 
         } else if ( category === 'Posters' ) {
 
             axios.get(`/api/search/posters?search=${ userInput }&category=${ subcategory }`)
             .then( res => {
-                updateSearchResults( res.data );
+                const hasResults = res.data.length ? 'true' : 'false';
+                updateSearchResults( res.data, hasResults );
             }).catch(err => console.log(err));
             
         } else if ( category === 'Creators' ) {
 
             axios.get(`/api/search/users?search=${ userInput }`)
             .then( res => {
-                updateSearchResults( res.data );
+                const hasResults = res.data.length ? 'true' : 'false';
+                updateSearchResults( res.data, hasResults );
             }).catch(err => console.log(err));
 
         }
@@ -106,14 +113,17 @@ class SearchBar extends Component {
         // If the user is not on the search page, they will be redirected
         this.searchRedirect();
 
-        // If there is a toggleMenu prop, it will be toggled off ( This is for the responive menu )
-        if ( this.props.toggleMenu ) this.props.toggleMenu();
+        // If the user is on the search page and the component has a toggleMenu prop, the menu will toggle off after a search ( This is for the responive menu )
+        if ( this.props.toggleMenu && this.props.match.url === '/search' ) {
+            this.props.toggleMenu();
+        }
     }
 
 
     render () {
         const { categories, category, subcategory, searchRedirect } = this.state;
 
+        // console.log('Has search results ->', this.props.hasSearchResults);
         // console.log( 'Categories ->', categories );
         // console.log( 'Category ->', category );
         
@@ -138,9 +148,11 @@ class SearchBar extends Component {
 
 const mapStateToProps = ( state ) => {
     return {
+        productCategories: state.productCategories,
         productSubcategories: state.productSubcategories,
         searchCategory: state.searchCategory,
-        searchResults: state.searchResults
+        searchResults: state.searchResults,
+        hasSearchResults: state.hasSearchResults,
     };
 };
 

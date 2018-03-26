@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class Followers extends Component {
-    
     render () {
         const { followers } = this.props;
         
