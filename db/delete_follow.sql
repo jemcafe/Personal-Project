@@ -1,2 +1,2 @@
 DELETE FROM Follows
-WHERE userId = $1 AND followerId = $2;
+WHERE user_id = $1 AND follower_id = $2;

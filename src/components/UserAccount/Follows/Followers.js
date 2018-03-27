@@ -20,14 +20,11 @@ class Followers extends Component {
     }
 
     render () {
-        const { followers } = this.state;
-        const listOfFollowers = followers.map( follower => {
-            return (
-                <li key={ follower.id }>
-                    <div><Link to={`/${follower.username}`}><img className="profile-img" src={ follower.imageurl } alt="Profile pic"/></Link></div>
-                    <div><Link to={`/${follower.username}`}>{ follower.username }</Link></div>
-                </li>
-            )
+        const listOfFollowers = this.state.followers.map( follower => {
+            return <li key={ follower.id }>
+                <div><Link to={`/${follower.username}`}><img className="profile-img" src={ follower.image_url } alt="Profile pic"/></Link></div>
+                <div><Link to={`/${follower.username}`}>{ follower.username }</Link></div>
+            </li>
         });
             
         return (
@@ -36,7 +33,9 @@ class Followers extends Component {
 
                     <h3>Following</h3>
 
-                    { listOfFollowers.length ? <ul className="follows-list">{ listOfFollowers }</ul> : <h5>You aren't following anyone</h5> }
+                    { listOfFollowers.length 
+                      ? <ul className="follows-list">{ listOfFollowers }</ul> 
+                      : <h5>You aren't following anyone</h5> }
 
                 </div>
             </div>

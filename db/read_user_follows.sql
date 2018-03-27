@@ -1,4 +1,4 @@
-SELECT Follows.id, userId, username, imageUrl, profileUrl FROM Follows
-JOIN Users ON Follows.userId = Users.id
-WHERE followerId = $1
-ORDER BY Follows.id DESC;
+SELECT follower_id, user_id, username, avatar, profile_url FROM Follows f
+JOIN Users u ON f.user_id = u.id
+WHERE follower_id = $1
+ORDER BY f.id DESC;

@@ -21,7 +21,7 @@ class Poster extends Component {
             <li key={ poster.id }>
                 <div className="poster">
 
-                    <div className="thumbnail" onClick={this.toggleCloseUp} style={{background: `center / cover no-repeat url(${poster.imageurl})`}}>
+                    <div className="thumbnail" onClick={this.toggleCloseUp} style={{background: `center / cover no-repeat url(${poster.image_url})`}}>
                         <div className="overlay overlay-fade">
                             <div className="poster-name">{ poster.name }</div>
                         </div>
@@ -34,7 +34,7 @@ class Poster extends Component {
                             <div className="close-icon">
                                 <i className="fas fa-times" onClick={this.toggleCloseUp} style={{cursor: 'pointer'}}></i>
                             </div>
-                            <img src={ poster.imageurl } alt={ poster.name }/>
+                            <img src={ poster.image_url } alt={ poster.name }/>
                         </div>
                     </div> }
                     

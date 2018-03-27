@@ -2,12 +2,13 @@ module.exports = {
     follow ( req, res ) {
         const db = req.app.get('db');
         const { session } = req;
-        const { userId } = req.body;
+        const { user_id } = req.body;
 
-        db.create_follow( [userId, session.user.id] ).then( follow => {
+        db.create_follow( [user_id, session.user.id] )
+        .then( follow => {
             res.status(200).json( follow );
         }).catch( err => {
-            console.log(err)
+            console.log('follow', err)
             res.status(500).send(err);
         });
     },
@@ -15,12 +16,13 @@ module.exports = {
     unfollow ( req, res ) {
         const db = req.app.get('db');
         const { session } = req;
-        const { userId } = req.params;
+        const { user_id } = req.params;
 
-        db.delete_follow( [userId, session.user.id] ).then( follow => {
+        db.delete_follow( [user_id, session.user.id] )
+        .then( follow => {
             res.status(200).json('Follow removed');
         }).catch( err => {
-            console.log(err)
+            console.log('unfollow', err)
             res.status(500).send(err);
         });
     },
@@ -29,10 +31,11 @@ module.exports = {
         const db = req.app.get('db');
         const { session } =req;
 
-        db.read_user_follows( [session.user.id] ).then( follows => {
+        db.read_user_follows( [session.user.id] )
+        .then( follows => {
             res.status(200).json( follows );
         }).catch( err => {
-            console.log(err)
+            console.log('getFollows', err)
             res.status(500).send(err);
         });
     },
@@ -41,11 +44,12 @@ module.exports = {
         const db = req.app.get('db');
         const { session } =req;
 
-        db.read_user_followers( [session.user.id] ).then( followers => {
+        db.read_user_followers( [session.user.id] )
+        .then( followers => {
             res.status(200).json( followers );
         }).catch( err => {
-            console.log(err);
+            console.log('getFollowers', err);
             res.status(500).send(err);
         });
-    }
+    },
 }

@@ -2,22 +2,19 @@ module.exports = {
     createPoster ( req, res ) {
         const db = req.app.set('db');
         const { session } = req;
-        const { name, description, price, postercategoryid, imageurl } = req.body;
+        const { name, description, price, poster_category_id, image_url } = req.body;
 
-        const date = new Date();
-        const dd = date.getDate();
-        const mm = date.getMonth() + 1; // Months start at 0
-        const yyyy = date.getFullYear();
-        const currentDate = `${mm} / ${dd} / ${yyyy}`;
-
-        // const categoryId = category === 'Digital Art' ? 1 : category === 'Traditional Art' ? 2 : 3;
+        const date_posted = new Date(),
+              product_category_id = 3,
+              likes = 0;
 
         if ( session.user.id ) {
 
-            db.create_poster( [name, description, currentDate, price, postercategoryid, 3, session.user.id, imageurl] ).then( poster => {
+            db.create_poster( [name, description, date_posted, price, poster_category_id, product_category_id, image_url, likes, session.user.id] )
+            .then( poster => {
                 res.status(200).json( poster );
             }).catch( err => {
-                console.log(err);
+                console.log('creatPoster', err);
                 res.status(500).send('Poster not created');
             });
 
@@ -30,13 +27,15 @@ module.exports = {
         const db = req.app.set('db');
         const { session } = req;
         const { id } = req.params;
-        const { name, description, price, postercategoryid, imageurl } = req.body;
+        const { name, description, price, poster_category_id, image_url } = req.body;
         
         if ( session.user.id ) {
 
-            db.update_poster( [id, name, description, price, postercategoryid, session.user.id, imageurl] ).then( poster => {
+            db.update_poster( [id, name, description, price, poster_category_id, image_url, session.user.id] )
+            .then( poster => {
                 res.status(200).send( poster );
             }).catch( err => {
+                console.log('updatePoster', err);
                 res.status(500).send('Poster not updated');
             });
 
@@ -56,7 +55,7 @@ module.exports = {
                 // Nothing happens to the data
                 res.status(200).send('Poster deleted');
             }).catch( err => {
-                console.log(err);
+                console.log('deletePoster', err);
                 res.status(500).send('Poster not deleted');
             });
 
@@ -72,8 +71,8 @@ module.exports = {
         db.read_user_posters( [session.user.id] ).then( posters => {
             res.status(200).json( posters );
         }).catch( err => {
-            console.log(err);
-            res.status(500).send('Poster not deleted');
+            console.log('getPosters', err);
+            res.status(500).send(err);
         });
     },
 
@@ -92,8 +91,8 @@ module.exports = {
             res.status(200).json( recentPosters );
 
         }).catch( err => {
-            console.log(err);
-            res.status(500).send('Poster not deleted');
+            console.log('getRecentPosters', err);
+            res.status(500).send(err);
         });
     },
 
@@ -107,7 +106,7 @@ module.exports = {
             db.read_user_poster( [id, session.user.id] ).then( poster => {
                 res.status(200).json( poster );
             }).catch( err => {
-                console.log(err);
+                console.log('getPoster', err);
                 res.status(404).send('No poster found');
             });
 

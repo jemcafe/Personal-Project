@@ -1,1 +1,2 @@
-DELETE FROM Posters WHERE Posters.id = $1 AND userId = $2;
+DELETE FROM Posters 
+WHERE id = $1 AND user_id = $2;

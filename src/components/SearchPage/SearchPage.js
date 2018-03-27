@@ -81,12 +81,12 @@ class SearchPage extends Component {
 
     addItem ( item ) {
         axios.post('/api/cart/add', {
-            productId: item.id,
+            product_id: item.id,
             name: item.name,
             price: item.price,
-            productCategoryId: item.productcategoryid,
+            product_category_id: item.product_category_id,
             quantity: 1,
-            image: item.imageurl
+            image_url: item.image_url
         }).then( () => {
             axios.get('/api/cart').then( cart => {
                 this.props.updateCartItems( cart.data );
@@ -109,13 +109,13 @@ class SearchPage extends Component {
                 <div className="container">
 
                     <div className="img-container">
-                        <Link to={`/product/${item.productcategory.toLowerCase()}/${item.name.split(' ').join('_')}`} className="img-fade-in">
-                            <img src={ item.imageurl } alt="cover" onClick={ () => this.getProduct(item) }/>
+                        <Link to={`/product/${item.product_category.toLowerCase()}/${item.name.split(' ').join('_')}`} className="img-fade-in">
+                            <img src={ item.image_url } alt="cover" onClick={ () => this.getProduct(item) }/>
                         </Link>
                     </div>
 
                     <div className="item-info-container">
-                        <Link to={`/product/${item.productcategory.toLowerCase()}/${item.name.split(' ').join('_')}`} className="title" onClick={ () => this.getProduct(item) }>
+                        <Link to={`/product/${item.product_category.toLowerCase()}/${item.name.split(' ').join('_')}`} className="title" onClick={ () => this.getProduct(item) }>
                             { item.name.length > 26 ? `${item.name.slice(0,26).trim()}...` : item.name }
                         </Link>
 
@@ -125,7 +125,7 @@ class SearchPage extends Component {
                                     <Aux>
                                         <span style={{color: '#ffcdb6'}}><i className="fas fa-heart"></i></span> {Math.floor((Math.random() * (150 - 50)) + 50)}
                                     </Aux>
-                                ) : ( 
+                                ) : category === 'books' ? (
                                     <Aux>
                                         <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
                                         <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
@@ -133,6 +133,10 @@ class SearchPage extends Component {
                                         <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
                                         <span style={{color: 'lightgrey'}}><i className="fas fa-star"></i></span>
                                     </Aux> 
+                                ) : (
+                                    <Aux>
+                                        <span>{ item.rating }</span>
+                                    </Aux>
                                 ) }
                             </div>
                             <div>${ item.price }</div>
@@ -154,7 +158,7 @@ class SearchPage extends Component {
 
                     <div className="img-container">
                         <Link to={`/${item.username}`} className="img-fade-in" style={{width: '100%', height: '100%'}}>
-                            <div className="avatar" style={{background: `center / cover no-repeat url(${item.imageurl})`}}></div>
+                            <div className="avatar" style={{background: `center / cover no-repeat url(${item.avatar})`}}></div>
                         </Link>
                     </div>
 

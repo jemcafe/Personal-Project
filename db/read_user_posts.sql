@@ -1,4 +1,4 @@
-SELECT Posts.id, Posts.title, Posts.text, Posts.imageUrl, Posts.datePosted, username FROM Posts
-JOIN Users ON Posts.userId = Users.id
-WHERE userId = $1 
-ORDER BY Posts.id DESC;
+SELECT p.id, p.title, p.text, p.image_url, p.date_posted, u.username FROM Posts p
+JOIN Users u ON p.user_id = u.id
+WHERE user_id = $1 
+ORDER BY p.id DESC;

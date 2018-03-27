@@ -16,7 +16,8 @@ class Posters extends Component {
     }
 
     componentDidMount () {
-        axios.get(`/api/profile/${this.props.profileUser.username}/posters`).then( posters => {
+        axios.get(`/api/profile/${this.props.profileUser.username}/posters`)
+        .then( posters => {
             this.setState({ 
                 posters: posters.data,
                 hasPosters: posters.data.length ? 'true' : 'false'

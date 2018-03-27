@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './UserProfile.css';
 import axios from 'axios';
 import { Link, Route, Switch } from 'react-router-dom';
-
+// Redux
 import { connect } from 'react-redux';
-
+// Components
 import Header from '../Header/Header';
 import Posts from './Posts/Posts';
 import Posters from './Posters/Posters';
@@ -17,7 +17,6 @@ class Profile extends Component {
         super();
         this.state = {
             profileUser: {},
-            headerBkgdImg: '',
             follows: [],
             followers: [],
             isFollowing: false,
@@ -25,7 +24,7 @@ class Profile extends Component {
     }
 
     componentWillReceiveProps ( nextProps ) {
-        console.log('Profile receive props', nextProps);
+        // console.log('Profile receive props', nextProps);
         // The component will receive the new props when switching to different user's profile
         const { username } = nextProps.match.params;
 
@@ -34,7 +33,7 @@ class Profile extends Component {
             axios.get(`/api/profile/${username}/follows`),
             axios.get(`/api/profile/${username}/followers`)
         ]).then( axios.spread( (userRes, followsRes, followersRes) => {
-
+            
             this.setState(prevState => ({ 
                 profileUser: userRes.data,
                 follows: followsRes.data,
@@ -57,15 +56,15 @@ class Profile extends Component {
     }
 
     follow = () => {
-        const userId = this.state.profileUser.id;
-        axios.post('/api/follow', { userId }).then( res => {
+        const user_id = this.state.profileUser.id;
+        axios.post('/api/follow', { user_id }).then( res => {
             this.setState(prevState => ({ isFollowing: !prevState.isFollowing }));
         }).catch(err => console.log(err));
     }
 
     unfollow = () => {
-        const userId = this.state.profileUser.id;
-        axios.delete(`/api/unfollow/${ userId }`).then( res => {
+        const user_id = this.state.profileUser.id;
+        axios.delete(`/api/unfollow/${ user_id }`).then( res => {
             this.setState( prevState => ({ isFollowing: !prevState.isFollowing }));
         }).catch(err => console.log(err));
     }
@@ -73,8 +72,7 @@ class Profile extends Component {
     render () {
         const { user } = this.props;
         const { profileUser, follows, followers, isFollowing } = this.state;
-        // This is needed for checking if the user is on their profile page
-        const { username } = this.props.match.params;
+        const { username } = this.props.match.params; // This is needed for checking if the user is on their profile page
         
         return (
             <div className="profile">
@@ -83,8 +81,8 @@ class Profile extends Component {
                 { profileUser.username &&
                 <div className="container">
                     <div className="header-bkgd">
-                        { profileUser.headerbkgdimgurl && 
-                        <img src={profileUser.headerbkgdimgurl} alt="Profile header pic"/> }
+                        { profileUser.header_bkgd_img && 
+                        <img src={profileUser.header_bkgd_img} alt="Profile header pic"/> }
                         {/* <Uploader /> */}
                     </div>
 
@@ -94,9 +92,7 @@ class Profile extends Component {
                             <div className="container">
                                 <div className="avatar-name">
                                     <Link to={`/${profileUser.username}`}>
-                                        <div className="avatar" style={{background: `center / cover no-repeat url(${profileUser.imageurl})`}}>
-                                            {/* <img src={profileUser.imageurl} alt="Profile pic"/> */}
-                                        </div>
+                                        <div className="avatar" style={{background: `center / cover no-repeat url(${profileUser.avatar})`}}></div>
                                     </Link>
                                     <h3>{ profileUser.username }</h3>
                                 </div>

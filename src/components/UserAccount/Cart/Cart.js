@@ -39,23 +39,23 @@ class Cart extends Component {
         }).catch(err => console.log(err));
     }
 
-    updateQuantity ( id ) {
-        const { quantity } = this.state;
-        axios.patch(`/api/cart/update/quantity/${id}`, { quantity }).then( res => {
-            axios.get('/api/cart').then( cart => {
+    // updateQuantity ( id ) {
+    //     const { quantity } = this.state;
+    //     axios.patch(`/api/cart/update/quantity/${id}`, { quantity }).then( res => {
+    //         axios.get('/api/cart').then( cart => {
 
-                this.props.updateCartItems( cart.data );
+    //             this.props.updateCartItems( cart.data );
 
-            }).catch(err => console.log(err));
-        }).catch(err => console.log(err));
-    }
+    //         }).catch(err => console.log(err));
+    //     }).catch(err => console.log(err));
+    // }
 
     removeAllItems = () => {
         // Removes all items from the cart
         axios.delete('/api/cart/remove-all').then( cart => {
 
-                this.props.updateCartItems( cart.data );
-                this.props.history.push(`/useraccount/cart`);
+            this.props.updateCartItems( cart.data );
+            this.props.history.push(`/useraccount/cart`);
 
         }).catch(err => console.log(err));
     }
@@ -71,7 +71,7 @@ class Cart extends Component {
                     <div className="item-container">
 
                         <div className="item-img">
-                            <img src={ item.imageurl } alt="Product"/>
+                            <img src={ item.image_url } alt="Product"/>
                         </div>
 
                         <div className="item-info">
@@ -79,7 +79,7 @@ class Cart extends Component {
                                 { item.name.length > 28 ? `${item.name.slice(0,28).trim()}...` : item.name }
                             </h4>
                             <div className="info">
-                                <div>Category: { item.productcategory }</div>
+                                <div>Category: { item.product_category }</div>
                                 <div>Quantity: <span>{ item.quantity }</span></div>
                                 <div>Price: <span>${ item.price }</span></div>
                             </div>

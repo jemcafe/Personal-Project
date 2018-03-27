@@ -16,7 +16,7 @@ class Posts extends Component {
             hasPosters: '',
             title: '',
             text: '',
-            imageurl: ''
+            image_url: ''
         }
         // Methods do not need to be binded if they are function expressions
     }
@@ -41,9 +41,9 @@ class Posts extends Component {
 
     createPost = (e) => {
         e.preventDefault();
-        const { title, text, imageurl } = this.state;
+        const { title, text, image_url } = this.state;
         if ( title && text ) {
-            axios.post('/api/post', { title, text, imageurl }).then( res => {
+            axios.post('/api/post', { title, text, image_url }).then(() => {
                 axios.get(`/api/posts`).then( posts => {
 
                     this.setState({ 
@@ -51,7 +51,7 @@ class Posts extends Component {
                         hasPosts: 'true',
                         title: '', 
                         text: '', 
-                        imageurl: '' 
+                        image_url: '' 
                     });
 
                 }).catch(err => console.log(err));
@@ -59,8 +59,8 @@ class Posts extends Component {
         }
     }
 
-    editPost = ( id, title, text, imageurl ) => {
-        axios.put(`/api/post/${id}/edit`, { title, text, imageurl }).then( () => {
+    editPost = ( id, title, text, image_url ) => {
+        axios.put(`/api/post/${id}/edit`, { title, text, image_url }).then(() => {
             axios.get(`/api/posts`).then( posts => {
 
                 this.setState({ posts: posts.data });
@@ -71,7 +71,7 @@ class Posts extends Component {
     
 
     deletePost = ( id ) => {
-        axios.delete(`/api/post/${id}/delete`).then( () => {
+        axios.delete(`/api/post/${id}/delete`).then(() => {
             axios.get(`/api/posts`).then( posts => {
 
                 this.setState({
@@ -84,7 +84,7 @@ class Posts extends Component {
     }
 
     render () {
-        const { posts, hasPosts, recentPosters, hasPosters, title, text, imageurl } = this.state;
+        const { posts, hasPosts, recentPosters, hasPosters, title, text, image_url } = this.state;
         const { user, profileUser, paramsUsername } = this.props;
 
         const listOfPosts = posts.map( post => {
@@ -99,7 +99,7 @@ class Posts extends Component {
         const listOfRecentPosters = recentPosters.map( poster => {
             return (
                 <li key={ poster.id } className="fade-in">
-                    <span style={{background: `center / cover no-repeat url(${poster.imageurl})`}}></span>
+                    <span style={{background: `center / cover no-repeat url(${poster.image_url})`}}></span>
                 </li>
             )
         });
@@ -114,7 +114,7 @@ class Posts extends Component {
                             { user.username === paramsUsername &&
                             <form className="new-post" onSubmit={ this.createPost }>
                                 <input className="input" value={ title } placeholder="Title" onChange={ (e) => this.handleChange('title', e.target.value) }/>
-                                <input className="input" value={ imageurl } placeholder="Image Url" onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
+                                <input className="input" value={ image_url } placeholder="Image Url" onChange={ (e) => this.handleChange('image_url', e.target.value) }/>
                                 <textarea className="input" rows="1" value={ text } placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }></textarea>
                                 <button className="red-btn" type="submit">Post</button>
                             </form> }

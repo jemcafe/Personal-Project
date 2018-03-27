@@ -33,12 +33,12 @@ class ProductPage extends Component {
     addItem () {
         const { productInfo } = this.props;
         axios.post('/api/cart/add', {
-            productId: productInfo.id,
+            product_id: productInfo.id,
             name: productInfo.name,
             price: productInfo.price,
-            productCategoryId: productInfo.productcategoryid,
+            product_category_id: productInfo.product_category_id,
             quantity: 1,
-            image: productInfo.imageurl
+            image_url: productInfo.image_url
         }).then( () => {
             axios.get('/api/cart').then( cart => {
 
@@ -59,7 +59,7 @@ class ProductPage extends Component {
                 { productInfo ? (
                     <div className="product">
                         <div className="product-img">
-                            <img src={ productInfo.imageurl } alt="Product pic"/>
+                            <img src={ productInfo.image_url } alt="Product pic"/>
                         </div>
                         <div className="info-container">
                             <h3>{ productInfo.name }</h3>

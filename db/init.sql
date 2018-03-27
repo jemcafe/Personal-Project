@@ -1,80 +1,80 @@
-DROP TABLE IF EXISTS Posters, GamePlatforms, BookSubjects, PosterCategories, Cart, Posts, Followers, PostComments, ProductCategories, Users CASCADE;
-
+DROP TABLE IF EXISTS 
+Posters, 
+GamePlatforms, 
+BookSubjects, 
+PosterCategories, 
+Cart, 
+Posts, 
+Follows, 
+PostComments, 
+ProductCategories, 
+Users, 
+UserAccountsMade CASCADE;
 
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
-    authId TEXT,
-    email TEXT,
+    auth_id TEXT,
+    email TEXT NOT NULL,
     name TEXT NOT NULL,
     avatar TEXT,
-    headerBkgdImg TEXT
+    header_bkgd_img TEXT,
+    profile_url TEXT
 );
--- INSERT INTO Users (username, password, authId, name, imageUrl, headerImageUrl, profileUrl) VALUES
--- ('a',      'b',        null, 'A',               null,                                                                                                                                 null),
--- ('Goku',   'dbz',      null, 'Son Goku',        'https://i.pinimg.com/736x/ed/1d/73/ed1d7355a9bb9460f4085b5ef695740f.jpg',                                                            'https://images5.alphacoders.com/677/677262.png'),
--- ('Ichigo', 'bleach',   null, 'Ichigo Kurosaki', 'https://pbs.twimg.com/profile_images/640284910326972416/IOChu2E1_400x400.jpg',                                                       'https://static.pexels.com/photos/572688/pexels-photo-572688.jpeg'),
--- ('Luffy',  'onepiece', null, 'Monkey D. Luffy', 'https://vignette.wikia.nocookie.net/manga/images/0/01/Monkey_D._Luffy_-_TPS15.png/revision/latest?cb=20150503204141&path-prefix=es', 'https://kids.nationalgeographic.com/content/dam/kids/photos/articles/Nature/H-P/Habitats/Ocean/wave.ngsversion.1500050062134.adapt.1900.1.jpg');
 
-
--- CREATE TABLE Accounts_Made (
---     id SERIAL PRIMARY KEY,
---     username TEXT UNIQUE NOT NULL,
---     password TEXT NOT NULL,
---     authId TEXT,
---     email TEXT,
---     name TEXT NOT NULL,
---     avatar TEXT,
---     headerBkgdImg TEXT
--- )
+CREATE TABLE UserAccountsMade (
+    id SERIAL PRIMARY KEY,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    auth_id TEXT,
+    email TEXT NOT NULL,
+    name TEXT NOT NULL,
+    avatar TEXT,
+    header_bkgd_img TEXT,
+    profile_url TEXT
+);
 
 CREATE TABLE Posts (
     id SERIAL PRIMARY KEY,
     title TEXT,
     text TEXT,
-    datePosted TEXT,
-    userId INTEGER REFERENCES Users (id),
-    imageUrl TEXT
+    image_url TEXT,
+    date_posted TEXT,
+    user_id INTEGER REFERENCES Users (id)
 );
-
 
 CREATE TABLE Follows (
     id SERIAL PRIMARY KEY,
-    userId INTEGER REFERENCES Users (id),
-    followerId INTEGER REFERENCES Users (id)
+    user_id INTEGER REFERENCES Users (id),
+    follower_id INTEGER REFERENCES Users (id)
 );
-
 
 CREATE TABLE PostComments (
     id SERIAL PRIMARY KEY,
     text TEXT,
-    datePosted TEXT,
-    postId INTEGER REFERENCES Posts (id),
-    userId INTEGER REFERENCES Users (id)
+    date_posted TEXT,
+    post_id INTEGER REFERENCES Posts (id),
+    user_id INTEGER REFERENCES Users (id)
 );
 
 
 
--- Search Categories will be the new table name ( Creators aren't products )
 CREATE TABLE ProductCategories (
     id SERIAL PRIMARY KEY,
-    productCategory TEXT
+    product_category TEXT
 );
-INSERT INTO ProductCategories (productCategory) VALUES
+INSERT INTO ProductCategories (product_category) VALUES
 ('Games'),
 ('Books'),
-('Posters'),
-('Creators');
-
-
+('Posters');
 
 CREATE TABLE GamePlatforms (
     id SERIAL PRIMARY KEY,
-    gbId INTEGER,
+    gb_id INTEGER,
     platform TEXT
 );
-INSERT INTO GamePlatforms (gbId, platform) VALUES
+INSERT INTO GamePlatforms (gb_id, platform) VALUES
 (null, 'All' ),
 (117, 'Nintendo 3Ds'),
 (157, 'Nintendo Switch'),
@@ -89,8 +89,6 @@ INSERT INTO GamePlatforms (gbId, platform) VALUES
 (32,  'Xbox'),
 (20,  'Xbox 360'),
 (145, 'Xbox One');
-
-
 
 CREATE TABLE BookSubjects (
     id SERIAL PRIMARY KEY,
@@ -130,8 +128,6 @@ INSERT INTO BookSubjects (subject) VALUES
 ('Technology & Engineering'),
 ('Young Adult Fiction');
 
-
-
 CREATE TABLE PosterCategories (
     id SERIAL PRIMARY KEY,
     category TEXT
@@ -142,55 +138,35 @@ INSERT INTO PosterCategories (category) VALUES
 ('Traditional Art'),
 ('Photography');
 
-
-
 CREATE TABLE Posters (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     description TEXT,
-    datePosted TEXT NOT NULL,
+    date_posted TEXT NOT NULL,
     price DECIMAL NOT NULL,
-    posterCategoryId INTEGER REFERENCES PosterCategories (id),
-    productCategoryId INTEGER REFERENCES ProductCategories (id),
-    imageUrl TEXT NOT NULL,
+    poster_category_id INTEGER REFERENCES PosterCategories (id),
+    product_category_id INTEGER REFERENCES ProductCategories (id),
+    image_url TEXT NOT NULL,
     likes INTEGER NOT NULL,
-    userId INTEGER REFERENCES Users (id),
+    user_id INTEGER REFERENCES Users (id)
 );
--- INSERT INTO Posters (name, description, datePosted, price, posterCategoryId, productCategoryId, userId, imageURL) VALUES
--- ('Drift No.10',                 'Abstract art',                '1 / 20 / 2018', 30.00, 2, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/006/943/174/large/jem-brown-20170713-150515-edited-sml3.jpg?1502436122'),
--- ('Drift No.9',                  'Abstract art',                '1 / 20 / 2018', 30.00, 2, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/007/588/014/large/jem-brown-20170909-120941-edited-b-sml3b.jpg?1507148669'),
--- ('Drift No.8',                  'Abstract art',                '1 / 20 / 2018', 30.00, 2, 3, 4, 'https://cdna.artstation.com/p/assets/images/images/008/678/704/large/jem-brown-20171224-101641-edited-sml-2.jpg?1514500897'),
--- ('Jin Saotome Typhoon',         'Fanart of Jin Saotome.',      '1 / 18 / 2018', 39.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/004/752/517/large/jem-brown-jinsaotome-screenshot-04c-sml.jpg?1488844564'),
--- ('Scar (Fullmetal Alchemist)',  'Fanart of Scar',              '1 / 22 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/005/728/353/large/jem-brown-scar-screenshot-01e.jpg?1493320471'),
--- ('Falco',                       'Fanart of Falco',             '1 / 22 / 2018', 40.00, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/004/869/300/large/jem-brown-2016-09-falco-2-sml1.jpg?1486876194'),
--- ('Lust (Fullmetal Alchemist)',  'Fanart of Lust.',             '1 / 19 / 2018', 40.00, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/005/429/016/large/jem-brown-lust-screenshot-01d.jpg?1491396935'),
--- ('Ieyasu Tokugawa',             'Fanart of Ieyasu Tokugawa',   '1 / 22 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/005/352/385/large/jem-brown-ieyasu-screenshot-5c.jpg?1506238580'),
--- ('Garra of the Sand (Neutral)', 'Fanart of Garra (neutral)',   '1 / 19 / 2018', 44.99, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/007/291/402/large/jem-brown-garra-screenshot-03b-700x700.jpg?1505110523'),
--- ('Garra of the Sand',           'Fanart of Garra.',            '1 / 19 / 2018', 49.99, 1, 3, 3, 'https://cdna.artstation.com/p/assets/images/images/007/290/560/large/jem-brown-garra-screenshot-02-700x700-2.jpg?1505327332'),
--- ('Zabuza Momochi',              'Fanart of Zabuza Momochi.',   '1 / 19 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/006/050/959/large/jem-brown-zabuza-screenshot-02-sml.jpg?1495666567'),
--- ('Kisame Hoshigaki',            'Fanart of Kisame Hoshigaki.', '1 / 19 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/007/889/865/large/jem-brown-kisame-01-screenshot-smla.jpg?1509157762'),
--- ('Ulquiorra Cifer',             'Fanart of Ulquiorra Cifer.',  '1 / 19 / 2018', 49.99, 1, 3, 3, 'https://cdnb.artstation.com/p/assets/images/images/007/624/631/large/jem-brown-ulquiorra-screenshot-6-700x700.jpg?1507427752');
-
-
--- CREATE TABLE Games (
---     id SERIAL PRIMARY KEY,
--- );
-
-
-
--- CREATE TABLE Books (
---     id SERIAL PRIMARY KEY,
--- );
-
-
 
 CREATE TABLE Cart (
     id SERIAL PRIMARY KEY,
-    productId VARCHAR(50) NOT NULL,
+    product_id VARCHAR(50) NOT NULL,
     name TEXT NOT NULL,
     price DECIMAL NOT NULL,
-    productCategoryId INTEGER REFERENCES ProductCategories (id) NOT NULL,
+    product_category_id INTEGER REFERENCES ProductCategories (id) NOT NULL,
     quantity INTEGER NOT NULL,
-    customerId INTEGER REFERENCES Users (id) NOT NULL,
-    imageUrl TEXT
+    image_url TEXT,
+    customer_id INTEGER REFERENCES Users (id) NOT NULL
 );
+
+
+SELECT * FROM Users;
+SELECT * FROM UserAccountsMade;
+SELECT * FROM Posts;
+SELECT * FROM PostComments;
+SELECT * FROM Posters;
+SELECT * FROM Cart;
+SELECT * FROM Follows;

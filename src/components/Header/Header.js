@@ -4,10 +4,10 @@ import Aux from '../../hoc/Aux';
 import FaSignOut from 'react-icons/lib/fa/sign-out';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+// Redux
 import { connect } from 'react-redux';
 import { logout, updateCartItems, getProductCategories } from '../../redux/ducks/reducer';
-
+// Components
 import SearchBar from './SearchBar/SearchBar';
 
 class Header extends Component {
@@ -69,7 +69,7 @@ class Header extends Component {
                             ) : (
                                 <div className="user-dropdown link">
                                     <Link to={`/${user.username}`} className="user-droplink">
-                                        <div className="avatar" style={{background: `center / cover no-repeat url(${user.imageurl})`}}></div>
+                                        <div className="avatar" style={{background: `center / cover no-repeat url(${user.avatar})`}}></div>
                                         <div className="arrow-icon"><i className="fas fa-angle-down"></i></div>
                                     </Link>
                                     <div className="content">

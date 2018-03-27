@@ -1,1 +1,2 @@
-DELETE FROM Cart WHERE customerId = $1;
+DELETE FROM Cart 
+WHERE customer_id = $1;

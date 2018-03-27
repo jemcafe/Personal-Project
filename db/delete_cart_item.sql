@@ -1,1 +1,2 @@
-DELETE FROM Cart WHERE id = $1 AND customerId = $2;
+DELETE FROM Cart 
+WHERE id = $1 AND customer_id = $2;

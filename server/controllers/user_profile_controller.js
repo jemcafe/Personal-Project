@@ -10,9 +10,9 @@ module.exports = {
                     id: user[0].id,
                     username: user[0].username,
                     name: user[0].name,
-                    imageurl: user[0].imageurl,
-                    headerbkgdimgurl: user[0].headerbkgdimgurl,
-                    profileurl: user[0].profileurl
+                    avatar: user[0].avatar,
+                    header_bkgd_img: user[0].header_bkgd_img,
+                    profile_url: user[0].profile_url
                 }
                 res.status(200).json( userData );
             } else {
@@ -20,7 +20,7 @@ module.exports = {
             }
 
         }).catch( err => {
-            console.log(err);
+            console.log('profile getUser', err);
             res.status(500).send(err);
         });
     },
@@ -36,7 +36,7 @@ module.exports = {
             }).catch(err => console.log(err));
 
         }).catch( err => {
-            console.log(err);
+            console.log('profile getPosts', err);
             res.status(500).send(err);
         });
     },
@@ -52,7 +52,7 @@ module.exports = {
             }).catch(err => console.log(err));
 
         }).catch( err => {
-            console.log(err);
+            console.log('profile getPosters', err);
             res.status(500).send(err);
         });
     },
@@ -76,7 +76,7 @@ module.exports = {
             }).catch(err => console.log(err));
 
         }).catch( err => {
-            console.log(err);
+            console.log('profile getRecentPosters', err);
             res.status(500).send(err);
         });
     },
@@ -92,7 +92,7 @@ module.exports = {
             }).catch(err => console.log(err));
 
         }).catch( err => {
-            console.log(err);
+            console.log('profile getFollows', err);
             res.status(500).send(err);
         });
     },
@@ -108,7 +108,7 @@ module.exports = {
             }).catch(err => console.log(err));
 
         }).catch( err => {
-            console.log(err);
+            console.log('profile getFollowers', err);
             res.status(500).send(err);
         }); 
     }

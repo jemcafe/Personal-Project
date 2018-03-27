@@ -9,8 +9,8 @@ class Poster extends Component {
             name: props.poster.name,
             description: props.poster.description,
             price: props.poster.price,
-            postercategoryid: props.poster.postercategoryid,
-            imageurl: props.poster.imageurl,
+            poster_category_id: props.poster.poster_category_id,
+            image_url: props.poster.image_url,
             editMode: false
         }
     }
@@ -50,26 +50,26 @@ class Poster extends Component {
     }
 
     toggleEdit = () => {
-        const { name, description, price, postercategoryid, imageurl } = this.props.poster;
+        const { name, description, price, poster_category_id, image_url } = this.props.poster;
         this.setState(prevState => ({
             name,
             description,
             price,
-            postercategoryid,
-            imageurl,
+            poster_category_id,
+            image_url,
             editMode: !prevState.editMode 
         }));
     }
 
     saveEdit = () => {
-        const { name, description, price, postercategoryid, imageurl } = this.state;
+        const { name, description, price, poster_category_id, image_url } = this.state;
         const { editPoster, poster } = this.props;
-        editPoster(poster.id, name, description, price, postercategoryid, imageurl);
+        editPoster(poster.id, name, description, price, poster_category_id, image_url);
         this.toggleEdit();
     }
 
     render () {
-        const { name, description, price, postercategoryid, imageurl, editMode } = this.state;
+        const { name, description, price, poster_category_id, image_url, editMode } = this.state;
         const { poster, posterCategories, deletePoster } = this.props;
         
         return (
@@ -79,10 +79,10 @@ class Poster extends Component {
                 <div className="edit-overlay">
                     <div className="edit">
                         <div className="container">
-                            <img src={ poster.imageurl } alt="Poster"/>
+                            <img src={ poster.image_url } alt="Poster"/>
                             <div>
                                 <h4>Image</h4>
-                                <input className="input" value={ imageurl } placeholder="Image (url)" onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
+                                <input className="input" value={ image_url } placeholder="Image (url)" onChange={ (e) => this.handleChange('image_url', e.target.value) }/>
                             </div>
                             <div>
                                 <h4>Title</h4>
@@ -100,7 +100,7 @@ class Poster extends Component {
                             </div>
                             <div>
                                 <h4>Category</h4>
-                                <select value={ postercategoryid } name="categories" onChange={ (e) => this.handleChange('postercategoryid', e.target.value) }>
+                                <select value={ poster_category_id } name="categories" onChange={ (e) => this.handleChange('poster_category_id', e.target.value) }>
                                     { posterCategories }
                                 </select>
                             </div>
@@ -113,7 +113,7 @@ class Poster extends Component {
                 </div>
                 }
 
-                <div className="thumbnail" style={{background: `center / cover no-repeat url(${poster.imageurl})`}}>
+                <div className="thumbnail" style={{background: `center / cover no-repeat url(${poster.image_url})`}}>
                     <div className="overlay overlay-fade">
                         <div className="poster-name">
                             { poster.name.length > 36 ? `${poster.name.slice(0,36).trim()}...` : poster.name }

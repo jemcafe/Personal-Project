@@ -15,8 +15,8 @@ class Posters extends Component {
             name: '',
             description: '',
             price: '0.00',
-            postercategoryid: 1,
-            imageurl: ''
+            poster_category_id: 1,
+            image_url: ''
         }
         // Methods do not need to be binded if they are function expressions
     }
@@ -66,12 +66,12 @@ class Posters extends Component {
     }
 
     addPoster = () => {
-        const { name, description, price, postercategoryid, imageurl } = this.state;
+        const { name, description, price, poster_category_id, image_url } = this.state;
 
         // The user must have input for these fields in order to add the poster
-        if ( name && description && price && postercategoryid && imageurl) {
+        if ( name && description && price && poster_category_id && image_url) {
             axios.post('/api/poster', { 
-                name, description, price, postercategoryid, imageurl 
+                name, description, price, poster_category_id, image_url 
             }).then( () => {
                 axios.get(`/api/posters`).then( posters => {
 
@@ -81,7 +81,7 @@ class Posters extends Component {
                         name: '', 
                         description: '', 
                         price: '',
-                        imageurl: '' 
+                        image_url: '' 
                     });
 
                 }).catch(err => console.log(err));
@@ -102,9 +102,9 @@ class Posters extends Component {
         }).catch(err => console.log(err));
     }
 
-    editPoster = ( id, name, description, price, postercategoryid, imageurl ) => {
+    editPoster = ( id, name, description, price, poster_category_id, image_url ) => {
         axios.put(`/api/poster/${id}/edit`, { 
-            name, description, price, postercategoryid, imageurl 
+            name, description, price, poster_category_id, image_url 
         }).then( () => {
             axios.get(`/api/posters`).then( posters => {
 
@@ -115,7 +115,7 @@ class Posters extends Component {
     }
 
     render () {
-        const { posters, hasPosters, name, description, price, category, imageurl } = this.state;
+        const { posters, hasPosters, name, description, price, category, image_url } = this.state;
         const { productSubcategories } = this.props;
 
         // If there are subcategories, the first category ('All') is removed from the list
@@ -140,13 +140,13 @@ class Posters extends Component {
                     <div className="new-poster">
                         <div className="container">
                             <div>
-                                <input className="input" value={ imageurl } placeholder="Image (url)" onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
+                                <input className="input" value={ image_url } placeholder="Image (url)" onChange={ (e) => this.handleChange('image_url', e.target.value) }/>
                                 <input className="input" value={ name } placeholder="Title" onChange={ (e) => this.handleChange('name', e.target.value) }/>
                                 <textarea className="input" row="1" value={ description } placeholder="Description" onChange={ (e) => this.handleChange('description', e.target.value) }></textarea>
                                 <span className="price">
                                     $&nbsp;<input className="input" value={ price } placeholder="price" onChange={ (e) => this.handlePriceChange(e.target.value) }/>
                                 </span>
-                                <select value={ category } name="categories" onChange={ (e) => this.handleChange('postercategoryid', e.target.value) }>
+                                <select value={ category } name="categories" onChange={ (e) => this.handleChange('poster_category_id', e.target.value) }>
                                     { posterCategories }
                                 </select>
                                 <button className="red-btn" onClick={ this.addPoster }>Save</button>

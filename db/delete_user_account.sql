@@ -1,6 +1,7 @@
-DELETE FROM Posts WHERE userId = $1;
-DELETE FROM Posters WHERE userId = $1;
-DELETE FROM Cart WHERE customerId = $1;
-DELETE FROM Follows WHERE followerId = $1;
-DELETE FROM Follows WHERE userId = $1;
+DELETE FROM Posts WHERE user_id = $1;
+-- DELETE FROM PostComments WHERE user_id = $1;
+DELETE FROM Posters WHERE user_id = $1;
+DELETE FROM Cart WHERE customer_id = $1;
+DELETE FROM Follows WHERE follower_id = $1;
+DELETE FROM Follows WHERE user_id = $1;
 DELETE FROM Users WHERE id = $1;

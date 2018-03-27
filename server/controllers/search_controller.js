@@ -7,9 +7,13 @@ module.exports = {
         const db = req.app.get('db');
 
         db.read_productCategories().then( categories => {
-            res.status(200).json( categories );
+            const creators = {
+                id: categories.length+1,
+                product_category: 'Creators'
+            };
+            res.status(200).json( [...categories, creators] );
         }).catch( err => {
-            console.log(err);
+            console.log('search productCategories', err);
             res.status(500).send('No Platforms');
         });
     },
@@ -53,9 +57,10 @@ module.exports = {
                         releasedate: e.original_release_date,
                         price: Math.floor( Math.random() * (59 - 10) + 10 ) + 0.99,
                         platform: platform,
-                        productcategoryid: 1,
-                        productcategory: 'Games',
-                        imageurl: e.image.thumb_url ? e.image.thumb_url : ''
+                        product_category_id: 1,
+                        product_category: 'Games',
+                        image_url: e.image.thumb_url ? e.image.thumb_url : '',
+                        rating: (Math.random() * (10 - 4) + 4).toFixed(1)
                     }));
                     res.status(200).json( data );
                 } else {
@@ -83,12 +88,12 @@ module.exports = {
                         id: e.id,
                         name: e.volumeInfo.title,
                         description: e.volumeInfo.description,
-                        publisheddate: e.volumeInfo.publishedDate,
+                        published_date: e.volumeInfo.publishedDate,
                         price: Math.floor( Math.random() * (30 - 10) + 10 ) + 0.99,
                         subject: subject,
-                        productcategoryid: 2,
-                        productcategory: 'Books',
-                        imageurl: e.volumeInfo.imageLinks ? e.volumeInfo.imageLinks.thumbnail : '',
+                        product_category_id: 2,
+                        product_category: 'Books',
+                        image_url: e.volumeInfo.imageLinks ? e.volumeInfo.imageLinks.thumbnail : ''
                     }
                 });
                 res.status(200).json( data );
@@ -111,7 +116,7 @@ module.exports = {
             res.status(200).json( allPosters );
 
         }).catch( err => {
-            console.log(err);
+            console.log('search getPosters', err);
             res.status(500).send('No posters');
         });
     },
@@ -129,14 +134,14 @@ module.exports = {
                     id: user.id,
                     username: user.username,
                     name: user.name,
-                    imageurl: user.imageurl,
-                    headerbkgdimgurl: user.headerbkgdimgurl,
-                    profileurl: user.profileurl
+                    avatar: user.avatar,
+                    header_bkgd_img: user.header_bkgd_img,
+                    profile_url: user.profile_url
                 }));
             res.status(200).json( filteredUsers );
 
         }).catch( err => {
-            console.log(err); 
+            console.log('search getUsers', err); 
             res.status(500).send(err); 
         });
     },
@@ -158,9 +163,9 @@ module.exports = {
                     //     releasedate: games[0].original_release_date,
                     //     price: Math.floor( Math.random() * (59 - 10) + 10 ) + 0.99,
                     //     platform: platform,
-                    //     productcategoryid: 1,
-                    //     productcategory: 'Games',
-                    //     imageurl: games[0].image.thumb_url ? games[0].image.thumb_url : '',
+                    //     product_category_id: 1,
+                    //     product_category: 'Games',
+                    //     image_url: games[0].image.thumb_url ? games[0].image.thumb_url : '',
                     // });
                     res.status(200).json( games.data );
                 } else {
@@ -185,9 +190,9 @@ module.exports = {
                     //     publisheddate: e.volumeInfo.publishedDate,
                     //     price: Math.floor( Math.random() * (30 - 10) + 10 ) + 0.99,
                     //     subject: subject,
-                    //     productcategoryid: 2,
-                    //     productcategory: 'Books',
-                    //     imageurl: e.volumeInfo.imageLinks ? e.volumeInfo.imageLinks.thumbnail : ''
+                    //     product_category_id: 2,
+                    //     product_category: 'Books',
+                    //     image_url: e.volumeInfo.imageLinks ? e.volumeInfo.imageLinks.thumbnail : ''
                     // });
                     res.status(200).json( resp.data );
                 } else {

@@ -11,7 +11,7 @@ class Post extends Component {
         this.state = {
             title: props.post.title,
             text: props.post.text,
-            imageurl: props.post.imageurl,
+            image_url: props.post.image_url,
             editMode: false
         }
     }
@@ -20,22 +20,22 @@ class Post extends Component {
         this.setState({ [property]: value });
     }
 
-    toggleEdit () {
+    toggleEdit = () => {
         this.setState(prevState => ({ editMode: !prevState.editMode }));
     }
 
-    saveEdit () {
-        const { title, text, imageurl } = this.state;
-        this.props.editPost(this.props.post.id, title, text, imageurl);
+    saveEdit = () => {
+        const { title, text, image_url } = this.state;
+        this.props.editPost(this.props.post.id, title, text, image_url);
         this.toggleEdit();
     }
 
     render () {
-        const { id, title, text, imageurl, dateposted, username } = this.props.post;
+        const { id, title, text, image_url, date_posted, username } = this.props.post;
         const { user, profileUser, paramsUsername } = this.props;
 
         // If there is an image url, the image will be displayed if the input begins with the proper http
-        const imageurlCheck = imageurl && (imageurl.slice(0,7) === 'http://' || imageurl.slice(0,8) === 'https://') ? true : false;
+        const image_urlCheck = image_url && (image_url.slice(0,7) === 'http://' || image_url.slice(0,8) === 'https://') ? true : false;
 
         return (
             <li className="post fade-in">
@@ -43,16 +43,16 @@ class Post extends Component {
                     <div className="container">
 
                         <div className="avatar-name">
-                            <Link to={`/${username}`} className="avatar"><img src={ profileUser.imageurl} alt="Proifle pic"/></Link>
+                            <Link to={`/${username}`} className="avatar"><img src={ profileUser.avatar} alt="Proifle pic"/></Link>
                         </div>
-                        { imageurlCheck && <div className="image"><img src={ imageurl } alt="Url not found"/></div> }
+                        { image_urlCheck && <div className="image"><img src={ image_url } alt="Url not found"/></div> }
                         <input className="input" placeholder="Title" defaultValue={ title } onChange={ (e) => this.handleChange('title', e.target.value) }/>
-                        <input className="input" placeholder="Url" defaultValue={ imageurl } onChange={ (e) => this.handleChange('imageurl', e.target.value) }/>
+                        <input className="input" placeholder="Url" defaultValue={ image_url } onChange={ (e) => this.handleChange('image_url', e.target.value) }/>
                         <textarea className="input" rows="1" cols="10" defaultValue={ text } placeholder="Text" onChange={ (e) => this.handleChange('text', e.target.value) }></textarea>
                         <span className="btns">
-                            <button className="gray-btn" onClick={ () => this.toggleEdit() }>Cancel</button>
+                            <button className="gray-btn" onClick={ this.toggleEdit }>Cancel</button>
                             <button className="gray-btn" onClick={ () => this.props.deletePost( id ) }>Delete</button>
-                            <button className="red-btn" onClick={ () => this.saveEdit() }>Save</button>
+                            <button className="red-btn" onClick={ this.saveEdit }>Save</button>
                         </span>
 
                     </div>
@@ -60,13 +60,13 @@ class Post extends Component {
                     <div className="container fade-in">
 
                         <div className="avatar-name">
-                            <Link to={`/${profileUser.username}`} className="avatar"><img src={ profileUser.imageurl} alt="Proifle pic"/></Link>
+                            <Link to={`/${profileUser.username}`} className="avatar"><img src={ profileUser.avatar} alt="Proifle pic"/></Link>
                         </div>
                         <h3>{ title }</h3>
-                        { imageurlCheck && <div className="image"><img src={ imageurl } alt="Url not found"/></div> }
+                        { image_urlCheck && <div className="image"><img src={ image_url } alt="Url not found"/></div> }
                         <div className="text" >{ text }</div>
                         <div className="date-edit">
-                            <div>{ dateposted }</div>
+                            <div>{ date_posted }</div>
                             { user.username === paramsUsername && <div><FaEdit className="fa-edit" onClick={ () => this.toggleEdit() } size={25} color="gray" /></div> }
                         </div>
 

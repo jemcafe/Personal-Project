@@ -10,13 +10,17 @@ class Settings extends Component {
         super();
         this.state = {
             avatar: '',
-            headerBkgdImgUrl: '',
+            header_bkgd_img: '',
+
             oldPwd: '',
-            newPwd: '',
-            confirmedPwd: '',
+            oldPwdGiven: true,
             isOldPwd: true,
+            newPwd: '',
+            newPwdGiven: true,
+            confirmedPwd: '',
             newPwdConfirmed: true,
             pwdChanged: false,
+
             isDeletingAccount: false
         }
     }
@@ -46,11 +50,11 @@ class Settings extends Component {
     }
 
     changeHeaderImage = () => {
-        const { headerBkgdImgUrl } = this.state;
+        const { header_bkgd_img } = this.state;
 
         // The protocol is checked
-        if ( headerBkgdImgUrl.slice(0,8) === 'https://' || headerBkgdImgUrl.slice(0,7) === 'http://' ) {
-            axios.put(`/api/header-image/update`, { headerBkgdImgUrl })
+        if ( header_bkgd_img.slice(0,8) === 'https://' || header_bkgd_img.slice(0,7) === 'http://' ) {
+            axios.put(`/api/header-image/update`, { header_bkgd_img })
             .then( user => {
                 this.props.getUser( user.data );
             }).catch(err => console.log(err));
@@ -58,7 +62,7 @@ class Settings extends Component {
     }
 
     removeHeaderImage = () => {
-        axios.put(`/api/header-image/update`, { headerBkgdImgUrl: '' })
+        axios.put(`/api/header-image/update`, { header_bkgd_img: '' })
         .then( user => {
             this.props.getUser( user.data );
         }).catch(err => console.log(err));
@@ -71,32 +75,54 @@ class Settings extends Component {
         const { oldPwd, newPwd, confirmedPwd } = this.state;
 
         // update password
-        if ( oldPwd && newPwd && confirmedPwd ) {
-            axios.put(`/api/password/update`, { 
-                oldPwd, newPwd, confirmedPwd 
-            }).then( () => {
-                this.setState({
-                    isOldPwd: true,
-                    newPwdConfirmed: true,
-                    pwdChanged: true
-                });
-            }).catch( err => {
-                console.log(err);
-                if ( err.response.status === 403) {
+        axios.put(`/api/password/update`, { 
+            oldPwd, newPwd, confirmedPwd 
+        }).then( () => {
+            this.setState({
+                oldPwdGiven: true,
+                isOldPwd: true,
+                newPwdGiven: true,
+                newPwdConfirmed: true,
+                pwdChanged: true
+            });
+        }).catch( err => {
+            console.log(err);
+            if ( err.response.status === 412 ) {
+                if ( err.response.data === 'old password' ) {
                     this.setState({
-                        isOldPwd: false,
-                        newPwdConfirmed: true,
-                        pwdChanged: false
-                    });
-                } else if ( err.response.status === 404) {
-                    this.setState({ 
+                        oldPwdGiven: false,
                         isOldPwd: true,
-                        newPwdConfirmed: false,
+                        newPwdGiven: true,
+                        newPwdConfirmed: true,
                         pwdChanged: false,
                     });
-                } 
-            });
-        }
+                } else if ( err.response.data === 'new password' ) {
+                    this.setState({
+                        oldPwdGiven: true,
+                        isOldPwd: true,
+                        newPwdGiven: false,
+                        newPwdConfirmed: true,
+                        pwdChanged: false,
+                    });
+                }
+            } else if ( err.response.status === 403 ) {
+                this.setState({
+                    oldPwdGiven: true,
+                    isOldPwd: false,
+                    newPwdGiven: true,
+                    newPwdConfirmed: true,
+                    pwdChanged: false,
+                });
+            } else if ( err.response.status === 404 ) {
+                this.setState({ 
+                    oldPwdGiven: true,
+                    isOldPwd: true,
+                    newPwdGiven: true,
+                    newPwdConfirmed: false,
+                    pwdChanged: false,
+                });
+            } 
+        });
     }
 
     toggleDeleteConfirm = () => {
@@ -106,7 +132,7 @@ class Settings extends Component {
     }
 
     render () {
-        const { isOldPwd, newPwdConfirmed, pwdChanged, isDeletingAccount } = this.state;
+        const { oldPwdGiven, isOldPwd, newPwdGiven, newPwdConfirmed, pwdChanged, isDeletingAccount } = this.state;
         const { user, deleteAccount } = this.props;
         
         return (
@@ -115,9 +141,7 @@ class Settings extends Component {
                     {/* <h4>SETTINGS</h4> */}
                     {/* The avatar and header image change sections will eventually be dropzones */}
                     <div>
-                        <div className="avatar" style={{background: `center / cover no-repeat url(${user.imageurl})`}}>
-                            {/* <img src={ user.imageurl } alt="avatar"/> */}
-                        </div>
+                        <div className="avatar" style={{background: `center / cover no-repeat url(${user.avatar})`}}></div>
                         <button className="remove-btn" onClick={ this.removeAvatar }>Remove image</button>
                         <div className="change-input">
                             <input className="input" placeholder="Avatar (url)" onChange={(e) => this.handleChange('avatar', e.target.value)}/>
@@ -127,11 +151,11 @@ class Settings extends Component {
 
                     <div>
                         <div className="header-bkgd">
-                            { user.headerbkgdimgurl && <img src={ user.headerbkgdimgurl } alt="header background"/> }
+                            { user.header_bkgd_img && <img src={ user.header_bkgd_img } alt="header background"/> }
                         </div>
                         <button className="remove-btn" onClick={ this.removeHeaderImage }>Remove image</button>
                         <div className="change-input">
-                            <input className="input" placeholder="Header image (url)" onChange={(e) => this.handleChange('headerBkgdImgUrl', e.target.value)}/>
+                            <input className="input" placeholder="Header image (url)" onChange={(e) => this.handleChange('header_bkgd_img', e.target.value)}/>
                             <button className="red-btn-2" onClick={ this.changeHeaderImage }>Save image</button>
                         </div>
                     </div>
@@ -139,8 +163,10 @@ class Settings extends Component {
                     <div>
                         <h4>Change Password</h4>
 
+                        { !oldPwdGiven && <div style={{color: 'red', fontSize: '12px'}}>* Old password</div> }
                         { !isOldPwd && <div style={{color: 'red', fontSize: '12px'}}>* Wrong password</div> }
-                        { !newPwdConfirmed && <div style={{color: 'red', fontSize: '12px'}}>* Passwords do not match</div> }
+                        { !newPwdGiven && <div style={{color: 'red', fontSize: '12px'}}>* New password</div> }
+                        { !newPwdConfirmed && <div style={{color: 'red', fontSize: '12px'}}>* New password unconfirmed</div> }
                         { pwdChanged && <div style={{color: 'green', fontSize: '12px'}}>* Password updated</div> }
 
                         <form className="change-pwd-form" onSubmit={ this.changePassword }>

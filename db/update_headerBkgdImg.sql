@@ -1,4 +1,4 @@
 UPDATE Users
-SET headerBkgdImgUrl = $1
+SET header_bkgd_img = $1
 WHERE id = $2
 RETURNING *;
