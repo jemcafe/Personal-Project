@@ -12,7 +12,8 @@ module.exports = {
                 let newQuantity = quantity;
 
                 for ( let i = 0; i < cart.length; i++ ) {
-                    if ( product_id === cart[i].product_id && product_category_id === cart[i].product_category_id ) {
+                    // The product_id comparison uses a loose equal because the product id could be an integer or a string (Google Books). The product_id is a varchar.
+                    if ( product_id == cart[i].product_id && product_category_id === cart[i].product_category_id ) {
 
                         newQuantity += cart[i].quantity;
 

@@ -17,11 +17,11 @@ class Register extends Component {
             email: '',
             name: '',
             image_url: '',
-            hasUsername: true,
-            hasPassword: true,
+            usernameGiven: true,
+            passwordGiven: true,
             usernameAvailable: true,
             emailIsValid: true,
-            hasName: true
+            nameGiven: true
         }
     }
 
@@ -50,44 +50,44 @@ class Register extends Component {
             console.log(err);
             if ( err.response.status === 401) {
                 this.setState({
-                    hasUsername: true,
-                    hasPassword: true,
+                    usernameGiven: true,
+                    passwordGiven: true,
                     usernameAvailable: false,
                     emailIsValid: true,
-                    hasName: true
+                    nameGiven: true
                 });
             } else if ( err.response.status === 406) {
                 this.setState({
-                    hasUsername: true,
-                    hasPassword: true,
+                    usernameGiven: true,
+                    passwordGiven: true,
                     usernameAvailable: true,
                     emailIsValid: false,
-                    hasName: true
+                    nameGiven: true
                 });
             } else if ( err.response.status === 412 ) {
                 if ( err.response.data === 'username' ) {
                     this.setState({
-                        hasUsername: false,
-                        hasPassword: true,
+                        usernameGiven: false,
+                        passwordGiven: true,
                         usernameAvailable: true,
                         emailIsValid: true,
-                        hasName: true,
+                        nameGiven: true,
                     });
                 } else if ( err.response.data === 'password' ) {
                     this.setState({
-                        hasUsername: true,
-                        hasPassword: false,
+                        usernameGiven: true,
+                        passwordGiven: false,
                         usernameAvailable: true,
                         emailIsValid: true,
-                        hasName: true,
+                        nameGiven: true,
                     });
                 } else if ( err.response.data === 'name' ) {
                     this.setState({
-                        hasUsername: true,
-                        hasPassword: true,
+                        usernameGiven: true,
+                        passwordGiven: true,
                         usernameAvailable: true,
                         emailIsValid: true,
-                        hasName: false,
+                        nameGiven: false,
                     });
                 }
             }
@@ -95,7 +95,7 @@ class Register extends Component {
     }
 
     render () {
-        const { hasUsername, hasPassword, usernameAvailable, emailIsValid, hasName } = this.state;
+        const { usernameGiven, passwordGiven, usernameAvailable, emailIsValid, nameGiven } = this.state;
         
         return (
             <div className="login-reg">
@@ -106,11 +106,11 @@ class Register extends Component {
                         <form onSubmit={ this.register }>
                             <h3>Sign Up</h3>
 
-                            { !hasUsername && <div style={{color: 'red', fontSize: '12px'}}>* No username</div> }
+                            { !usernameGiven && <div style={{color: 'red', fontSize: '12px'}}>* No username</div> }
                             { !usernameAvailable && <div style={{color: 'red', fontSize: '12px'}}>* Username is unavailable</div> }
-                            { !hasPassword && <div style={{color: 'red', fontSize: '12px'}}>* No password</div> }
+                            { !passwordGiven && <div style={{color: 'red', fontSize: '12px'}}>* No password</div> }
                             { !emailIsValid && <div style={{color: 'red', fontSize: '12px'}}>* Email is invalid</div> }
-                            { !hasName && <div style={{color: 'red', fontSize: '12px'}}>* No Name</div> }
+                            { !nameGiven && <div style={{color: 'red', fontSize: '12px'}}>* No Name</div> }
 
                             <div className="input-info">
                                 {/* <div className="info">Username</div> */}

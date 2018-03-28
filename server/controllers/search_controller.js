@@ -105,6 +105,7 @@ module.exports = {
     getPosters ( req, res, next ) {
         const db = req.app.set('db');
         const { search, category } = req.query;
+        // const maxResults = 27;
 
         db.read_posters().then( posters => {
 
@@ -147,71 +148,77 @@ module.exports = {
     },
 
 
-    getProduct () {
+    getProduct (req, res ) {
         const db = req.app.get('db');
-        const { category, id, name } = req.query;
+        const { category, product_id, name } = req.query;
+        console.log({ category, product_id, name: name.split('-').join(' ') });
 
         if ( category === 'games' ) {
-
-            axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=name:${ name }&limit=1`)
+            
+            axios.get(`https://www.giantbomb.com/api/games/?api_key=${process.env.GIANT_BOMB_KEY}&format=json&filter=name:${ name.split('-').join(' ') }&limit=1`)
             .then( games => {
-                if ( games.length ) {
-                    // res.status(200).json({
-                    //     id: games[0].id,
-                    //     name: games[0].name,
-                    //     description: games[0].deck,
-                    //     releasedate: games[0].original_release_date,
-                    //     price: Math.floor( Math.random() * (59 - 10) + 10 ) + 0.99,
-                    //     platform: platform,
-                    //     product_category_id: 1,
-                    //     product_category: 'Games',
-                    //     image_url: games[0].image.thumb_url ? games[0].image.thumb_url : '',
-                    // });
-                    res.status(200).json( games.data );
-                } else {
-                    res.status(404).json('Product not found');
-                }
+                if ( games.data.results.length ) {
+
+                    const g = games.data.results[0];
+                    const game = {
+                        id: g.id,
+                        name: g.name,
+                        deck_description: g.deck,
+                        description: g.description,
+                        releasedate: g.original_release_date,
+                        price: Math.floor( Math.random() * (59 - 10) + 10 ) + 0.99,
+                        platforms: g.platforms ? g.platforms.map(e => e.name) : [],
+                        product_category_id: 1,
+                        product_category: 'Games',
+                        image_url: g.image.thumb_url ? g.image.thumb_url : '',
+                    };
+                    console.log('game ->', game);
+                    res.status(200).json( game );
+
+                } else res.status(404).send('Game not found');
             }).catch( err => {
                 console.error(err);
                 res.status(200).json(err);
             });
 
         } else if ( category === 'books' ) {
-
-            // axios.get(`https://www.googleapis.com/books/v1/volumes/${ volumeId }`)
-            axios.get(`https://www.googleapis.com/books/v1/volumes?q=${ name }&maxResults=1`)
+            
+            axios.get(`https://www.googleapis.com/books/v1/volumes/${ product_id }`)
             .then( books => {
-                if ( books.data.items.length ) {
-                    // const books = resp.data.items;
-                    // res.status(200).json({
-                    //     id: bookId,
-                    //     name: e.volumeInfo.title,
-                    //     description: e.volumeInfo.description,
-                    //     publisheddate: e.volumeInfo.publishedDate,
-                    //     price: Math.floor( Math.random() * (30 - 10) + 10 ) + 0.99,
-                    //     subject: subject,
-                    //     product_category_id: 2,
-                    //     product_category: 'Books',
-                    //     image_url: e.volumeInfo.imageLinks ? e.volumeInfo.imageLinks.thumbnail : ''
-                    // });
-                    res.status(200).json( resp.data );
-                } else {
-                    res.status(404).json('Product not found');
-                }
-            }).catch(err => console.error(err));
+
+                    const b = books.data;
+                    const book = {
+                        id: b.id,
+                        name: b.volumeInfo.title,
+                        description: b.volumeInfo.description ? b.volumeInfo.description : '',
+                        publisher: b.volumeInfo.publisher,
+                        publisheddate: b.volumeInfo.publishedDate,
+                        price: Math.floor( Math.random() * (30 - 10) + 10 ) + 0.99,
+                        subject: '',
+                        product_category_id: 2,
+                        product_category: 'Books',
+                        image_url: b.volumeInfo.imageLinks ? b.volumeInfo.imageLinks.thumbnail : ''
+                    };
+                    console.log('book ->', book);
+                    res.status(200).json( book );
+
+            }).catch(err => {
+                console.error(err);
+                res.status(404).send('Book not found');
+            });
 
         } else if ( category === 'posters' ) {
+            
+            db.read_poster( [product_id] ).then( poster => {
+                if ( poster.length ) {
 
-            db.read_posters().then( posters => {
+                    console.log( 'poster ->', poster[0] );
+                    res.status(200).json( poster[0] );
 
-                const filteredPosters = posters
-                    .filter( poster => poster.name.toLowerCase().includes( search.toLowerCase() ) ? poster : false )
-                const allPosters = !search && !category ? posters : filteredPosters;
-                res.status(200).json( allPosters );
-    
+                } else res.status(404).json('Poster not found');
             }).catch( err => {
-                console.log(err);
-                res.status(500).send('No posters');
+                console.log('getProduct', err);
+                res.status(500).send(err);
             });
             
         }

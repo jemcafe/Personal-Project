@@ -29,7 +29,7 @@ module.exports = {
         const { session } = req;
         const { header_bkgd_img } = req.body;
 
-        db.update_headerBkgdImg( [header_bkgd_img, session.user.id] )
+        db.update_headerBkgdImg( [header_bkgd_img , session.user.id] )
         .then( user => {
             session.user.header_bkgd_img = user[0].header_bkgd_img;
             res.status(200).json( session.user );
@@ -54,9 +54,9 @@ module.exports = {
                 } else {
 
                     bcrypt.compare( oldPwd, users[0].password ).then( passwordMatch => {
-                        if ( !passwordMatch ) {                 // old passwords don't match
+                        if ( !passwordMatch ) {                 // old passwords do not match
                             res.status(403).json('old password');
-                        } else if ( newPwd !== confirmedPwd ) { // New passwords don't match ( new password not confirmed )
+                        } else if ( newPwd !== confirmedPwd ) { // New passwords do not match ( new password not confirmed )
                             res.status(404).json('New password not confirmed');
                         } else {
 

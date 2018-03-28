@@ -11,6 +11,7 @@ import { updateCartItems, getProduct } from '../../redux/ducks/reducer';
 //Components
 import Loading from '../Loading/Loading';
 import Header from '../Header/Header';
+import List from './List/List';
 
 class SearchPage extends Component {
     constructor () {
@@ -79,23 +80,27 @@ class SearchPage extends Component {
         });
     }
 
-    addItem ( item ) {
-        axios.post('/api/cart/add', {
-            product_id: item.id,
-            name: item.name,
-            price: item.price,
-            product_category_id: item.product_category_id,
-            quantity: 1,
-            image_url: item.image_url
-        }).then( () => {
-            axios.get('/api/cart').then( cart => {
-                this.props.updateCartItems( cart.data );
-            }).catch(err => console.log(err));
-        }).catch(err => console.log(err));
-    }
+    // addItem ( item ) {
+    //     axios.post('/api/cart/add', {
+    //         product_id: item.id,
+    //         name: item.name,
+    //         price: item.price,
+    //         product_category_id: item.product_category_id,
+    //         quantity: 1,
+    //         image_url: item.image_url
+    //     }).then( () => {
+    //         axios.get('/api/cart').then( cart => {
+    //             this.props.updateCartItems( cart.data );
+    //         }).catch(err => console.log(err));
+    //     }).catch(err => console.log(err));
+    // }
 
-    getProduct ( product ) {
+    productRedirect ( product ) {
         this.props.getProduct( product );
+        const category = product.product_category.toLowerCase(),
+              name = product.name.split(' ').join('-'),
+              id = product.id;
+        this.props.history.push(`/product/${category}/${name}?id=${id}`);
     }
 
     render () {
@@ -109,15 +114,15 @@ class SearchPage extends Component {
                 <div className="container">
 
                     <div className="img-container">
-                        <Link to={`/product/${item.product_category.toLowerCase()}/${item.name.split(' ').join('_')}`} className="img-fade-in">
-                            <img src={ item.image_url } alt="cover" onClick={ () => this.getProduct(item) }/>
-                        </Link>
+                        <a className="img-fade-in" onClick={ () => this.productRedirect(item) }>
+                            <img src={ item.image_url } alt="cover"/>
+                        </a>
                     </div>
 
                     <div className="item-info-container">
-                        <Link to={`/product/${item.product_category.toLowerCase()}/${item.name.split(' ').join('_')}`} className="title" onClick={ () => this.getProduct(item) }>
+                        <a className="title" onClick={ () => this.productRedirect(item) }>
                             { item.name.length > 26 ? `${item.name.slice(0,26).trim()}...` : item.name }
-                        </Link>
+                        </a>
 
                         <div className="rating-price">
                             <div className="rating">
@@ -142,9 +147,9 @@ class SearchPage extends Component {
                             <div>${ item.price }</div>
                         </div>
 
-                        { user.username
+                        {/* { user.username
                         ? <button className="add-btn red-btn-2" onClick={ () => this.addItem( item ) }>Add To Cart</button>
-                        : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn red-btn-2">Add To Cart</button></Link> }
+                        : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn red-btn-2">Add To Cart</button></Link> } */}
                     </div>
 
                 </div>
@@ -174,6 +179,7 @@ class SearchPage extends Component {
             <div className="search-page">
                 <Header match={this.props.match} history={this.props.history} />
                 <div className="container panel">
+                    
                     <div style={{ padding: '11px', color: '#7b727c' }}>Search Results:</div>
 
                     <div className="results">
@@ -205,14 +211,14 @@ class SearchPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user,
-        cartItems: state.cartItems,
+        // user: state.user,
+        // cartItems: state.cartItems,
         product: state.product
     };
 };
 
 const mapDispatchToProps = {
-    updateCartItems: updateCartItems,
+    // updateCartItems: updateCartItems,
     getProduct: getProduct
 }
 

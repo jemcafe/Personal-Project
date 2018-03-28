@@ -101,7 +101,7 @@ massive( process.env.CONNECTION_STRING )
     app.get('/api/search/books', searchCntrl.getVolumes);
     app.get('/api/search/posters', searchCntrl.getPosters);
     app.get('/api/search/users', searchCntrl.getUsers);
-    // app.get('/api/product', searchCntrl.getProduct);
+    app.get('/api/product', searchCntrl.getProduct);
 
 // Stripe payment
     app.post('/save-stripe-token', stripeCntrl.paymentApi);

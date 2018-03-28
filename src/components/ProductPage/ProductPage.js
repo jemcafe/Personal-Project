@@ -9,28 +9,33 @@ import { updateCartItems } from '../../redux/ducks/reducer';
 import Header from '../Header/Header';
 
 class ProductPage extends Component {
-    // constructor () {
-    //     super();
-    //     this.state = {
-    //         product: {}
-    //     }
-    // }
-
-    componentDidMount () {
-        const url = this.props.match.url.split('/');
-        const category = url[2];
-        const name = url[3].split('_').join(' ');
-        console.log( 'Product category ->', category );
-        console.log( 'Product name ->', name );
-        // Should also search by subcategory ( author, platform, creator, etc. )
-        // axios.get(`/api/product?category=${ category }&name=${ name }`)
-        // .then( product => {
-        //    console.log( 'Product ->', product );
-        // //    this.setState({ product: product.data });
-        // }).catch(err => console.log(err));
+    constructor () {
+        super();
+        this.state = {
+            product: {}
+        }
     }
 
-    addItem () {
+    componentDidMount () {
+        console.log( 'Props match ->', this.props.match );
+        console.log( 'Props history ->', this.props.history );
+        const { match, history } = this.props;
+        
+        const category = match.params.category;
+        const name = match.params.name;
+        const id = history.location.search.slice(4, history.location.search.length);
+
+        console.log({ category, name, id });
+
+        // Should later search by subcategory as well ( author, platform, creator, etc. )
+        axios.get(`/api/product?category=${ category }&product_id=${ id }&name=${ name }`)
+        .then( product => {
+           console.log( 'Product ->', product.data );
+        //    this.setState({ product: product.data });
+        }).catch(err => console.log(err));
+    }
+
+    addItem  = () => {
         const { productInfo } = this.props;
         axios.post('/api/cart/add', {
             product_id: productInfo.id,
@@ -65,7 +70,7 @@ class ProductPage extends Component {
                             <h3>{ productInfo.name }</h3>
                             <div>${ productInfo.price }</div>
                             { user.username
-                            ? <button className="add-btn red-btn-2" onClick={ () => this.addItem() }>Add To Cart</button>
+                            ? <button className="add-btn red-btn-2" onClick={ this.addItem }>Add To Cart</button>
                             : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn red-btn-2">Add To Cart</button></Link> 
                             }
                             <div className="description">

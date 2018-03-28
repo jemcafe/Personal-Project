@@ -43,7 +43,7 @@ class Settings extends Component {
     }
 
     removeAvatar = () => {
-        axios.put(`/api/avatar/update`, { avatar: '' })
+        axios.put(`/api/avatar/update`)
         .then( user => {
             this.props.getUser( user.data );
         }).catch(err => console.log(err));
@@ -62,7 +62,7 @@ class Settings extends Component {
     }
 
     removeHeaderImage = () => {
-        axios.put(`/api/header-image/update`, { header_bkgd_img: '' })
+        axios.put(`/api/header-image/update`)
         .then( user => {
             this.props.getUser( user.data );
         }).catch(err => console.log(err));
