@@ -80,7 +80,7 @@ class Posters extends Component {
                         hasPosters: 'true',
                         name: '', 
                         description: '', 
-                        price: '',
+                        price: '0.00',
                         image_url: '' 
                     });
 

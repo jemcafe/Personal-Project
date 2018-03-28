@@ -16,7 +16,7 @@ class Register extends Component {
             password: '',
             email: '',
             name: '',
-            image_url: '',
+            avatar: '',
             usernameGiven: true,
             passwordGiven: true,
             usernameAvailable: true,
@@ -37,10 +37,10 @@ class Register extends Component {
 
     register = (e) => {
         e.preventDefault();
-        const { username, password, email, name, image_url } = this.state;
+        const { username, password, email, name, avatar } = this.state;
 
         axios.post(`/api/register`, {
-            username, password, email, name, image_url
+            username, password, email, name, avatar
         }).then( user => {
             if ( user.data ) {
                 this.props.register( user.data );
@@ -130,7 +130,7 @@ class Register extends Component {
                                 </div>
                             <div className="input-info">
                                 {/* <div className="info">Profile Picture (url)</div> */}
-                                <input className="input" placeholder="Profile picture (url)" onChange={ (e) => this.handleChange('image_url', e.target.value) } />
+                                <input className="input" placeholder="Profile picture (url)" onChange={ (e) => this.handleChange('avatar', e.target.value) } />
                             </div>
                             <div className="btns">
                                 <button className="red-btn" type="submit" value="Submit">Create Account</button>

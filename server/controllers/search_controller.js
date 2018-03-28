@@ -66,7 +66,10 @@ module.exports = {
                 } else {
                     res.status(200).json('No results');
                 }
-            }).catch(err => console.error(err));
+            }).catch(err => {
+                console.error(err);
+                res.status(500).json('GiantBomb error');
+            });
 
         }).catch( err => {
             console.log(err);
@@ -98,7 +101,10 @@ module.exports = {
                 });
                 res.status(200).json( data );
             }
-        }).catch(err => console.error(err));
+        }).catch(err => {
+            console.error(err);
+            res.status(500).send('GoogleBooks error');
+        });
     },
 
 
@@ -151,7 +157,7 @@ module.exports = {
     getProduct (req, res ) {
         const db = req.app.get('db');
         const { category, product_id, name } = req.query;
-        console.log({ category, product_id, name: name.split('-').join(' ') });
+        // console.log({ category, product_id, name: name.split('-').join(' ') });
 
         if ( category === 'games' ) {
             
@@ -163,16 +169,16 @@ module.exports = {
                     const game = {
                         id: g.id,
                         name: g.name,
-                        deck_description: g.deck,
-                        description: g.description,
+                        description: g.deck,
                         releasedate: g.original_release_date,
                         price: Math.floor( Math.random() * (59 - 10) + 10 ) + 0.99,
                         platforms: g.platforms ? g.platforms.map(e => e.name) : [],
                         product_category_id: 1,
                         product_category: 'Games',
                         image_url: g.image.thumb_url ? g.image.thumb_url : '',
+                        image_url_sml: g.image.small_url ? g.image.small_url : g.image.thumb_url
                     };
-                    console.log('game ->', game);
+                    // console.log('game ->', g);
                     res.status(200).json( game );
 
                 } else res.status(404).send('Game not found');
@@ -199,7 +205,7 @@ module.exports = {
                         product_category: 'Books',
                         image_url: b.volumeInfo.imageLinks ? b.volumeInfo.imageLinks.thumbnail : ''
                     };
-                    console.log('book ->', book);
+                    // console.log('book ->', book);
                     res.status(200).json( book );
 
             }).catch(err => {
@@ -212,7 +218,7 @@ module.exports = {
             db.read_poster( [product_id] ).then( poster => {
                 if ( poster.length ) {
 
-                    console.log( 'poster ->', poster[0] );
+                    // console.log( 'poster ->', poster[0] );
                     res.status(200).json( poster[0] );
 
                 } else res.status(404).json('Poster not found');

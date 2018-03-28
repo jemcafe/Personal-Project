@@ -6,13 +6,16 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateCartItems } from '../../redux/ducks/reducer';
 // Components
+import Loading from '../Loading/Loading';
 import Header from '../Header/Header';
 
 class ProductPage extends Component {
     constructor () {
         super();
         this.state = {
-            product: {}
+            product: {},
+            hasProduct: 'loading',
+            hasImage_url: 'loading',
         }
     }
 
@@ -27,15 +30,19 @@ class ProductPage extends Component {
 
         console.log({ category, name, id });
 
-        // Should later search by subcategory as well ( author, platform, creator, etc. )
         axios.get(`/api/product?category=${ category }&product_id=${ id }&name=${ name }`)
         .then( product => {
            console.log( 'Product ->', product.data );
-        //    this.setState({ product: product.data });
+           this.setState({ 
+               product: product.data,
+               hasProduct: product.data.length ? 'true' : 'false',
+               hasImage_url: product.data.image_url ? 'true' : 'false'
+            });
         }).catch(err => console.log(err));
     }
 
     addItem  = () => {
+        const { product } = this.state;
         const { productInfo } = this.props;
         axios.post('/api/cart/add', {
             product_id: productInfo.id,
@@ -54,28 +61,36 @@ class ProductPage extends Component {
     }
 
     render () {
-        const { user, productInfo } = this.props;
+        const { product, hasProduct, hasImage_url } = this.state;
+        const { match, user, productInfo } = this.props;
+        console.log('State product ->', product);
+
+        const image_url = match.params.category === 'games' ? product.image_url_sml : product.image_url;
 
         return (
             <div className="product-page">
                 <Header match={this.props.match} history={this.props.history} />
                 <div className="container panel">
 
-                { productInfo ? (
+                { product ? (
                     <div className="product">
                         <div className="product-img">
-                            <img src={ productInfo.image_url } alt="Product pic"/>
+                            { hasImage_url === 'loading' ? (
+                                <Loading />
+                            ) : (
+                                <img src={ image_url } alt="Product pic"/>
+                            ) }
                         </div>
                         <div className="info-container">
-                            <h3>{ productInfo.name }</h3>
-                            <div>${ productInfo.price }</div>
+                            <h3>{ product.name }</h3>
+                            <div>${ product.price }</div>
                             { user.username
                             ? <button className="add-btn red-btn-2" onClick={ this.addItem }>Add To Cart</button>
                             : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn red-btn-2">Add To Cart</button></Link> 
                             }
                             <div className="description">
                                 <h4>Description</h4>
-                                { productInfo.description }
+                                { product.description }
                             </div>
                         </div>
                     </div>

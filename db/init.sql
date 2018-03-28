@@ -170,3 +170,16 @@ SELECT * FROM PostComments;
 SELECT * FROM Posters;
 SELECT * FROM Cart;
 SELECT * FROM Follows;
+
+-- Goku
+-- https://i.pinimg.com/236x/ed/1d/73/ed1d7355a9bb9460f4085b5ef695740f.jpg
+-- https://images5.alphacoders.com/677/677262.png
+-- Ichigo
+-- https://pbs.twimg.com/profile_images/640284910326972416/IOChu2E1_400x400.jpg
+-- https://static.pexels.com/photos/572688/pexels-photo-572688.jpeg
+-- Luffy
+-- https://jovemnerd.com.br/wp-content/uploads/2017/12/one-piece-mangas-mais-vendidos-de-2017.jpg
+-- http://www.myfreetextures.com/wp-content/uploads/2014/11/blue-ocean-waves.jpg
+-- Eddy
+-- https://eng.tekkenpedia.com/images/3/3b/TK7_prof_%2810%29.png
+-- https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Brazilian_amazon_rainforest.jpg/1200px-Brazilian_amazon_rainforest.jpg

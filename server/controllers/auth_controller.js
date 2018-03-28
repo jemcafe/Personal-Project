@@ -59,7 +59,6 @@ module.exports = {
         // The '$' signals the end of the string.
         const emailReg = /^([A-Za-z0-9_\-\.]){1,}\@([A-Za-z0-9_\-\.]){1,}\.([A-Za-z]){2,4}$/;
         const emailIsValid = emailReg.test( email );
-        console.log( 'Email is valid', emailIsValid );
 
         db.find_user( [username] ).then( user => {
             
