@@ -11,9 +11,9 @@ class Posts extends Component {
         super();
         this.state = {
             posts: [],
-            hasPosts: '',
+            hasPosts: 'loading',
             recentPosters: [],
-            hasPosters: '',
+            hasPosters: 'loading',
             title: '',
             text: '',
             image_url: ''
@@ -120,7 +120,7 @@ class Posts extends Component {
                             </form> }
                             
                             <div>
-                                { !listOfPosts.length && !hasPosts.length ? ( 
+                                { !listOfPosts.length && hasPosts === 'loading' ? ( 
                                     <Loading />
                                 ) : (
                                     hasPosts === 'true'
@@ -139,7 +139,7 @@ class Posts extends Component {
                             <h4>Recent Posters</h4>
                             
                             <ul>
-                                { !listOfRecentPosters.length && !hasPosters.length ? (
+                                { !listOfRecentPosters.length && hasPosters === 'loading' ? (
                                     <Loading />
                                 ) : (
                                     hasPosters === 'true'

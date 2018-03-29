@@ -16,7 +16,8 @@ class ProductPage extends Component {
             product: {},
             hasProduct: 'loading',
             hasImage_url: 'loading',
-            hasDescription: 'loading'
+            hasDescription: 'loading',
+            notifyAdded: false
         }
     }
 
@@ -43,28 +44,37 @@ class ProductPage extends Component {
         }).catch(err => console.log(err));
     }
 
+    closeAddedNotification () {
+        setTimeout(() => {
+            this.setState({ notifyAdded: false });
+        }, 3000);
+    }
+
     addItem  = () => {
         const { product } = this.state;
-        const { productInfo } = this.props;
         axios.post('/api/cart/add', {
-            product_id: productInfo.id,
-            name: productInfo.name,
-            price: productInfo.price,
-            product_category_id: productInfo.product_category_id,
+            product_id: product.id,
+            name: product.name,
+            price: product.price,
+            product_category_id: product.product_category_id,
             quantity: 1,
-            image_url: productInfo.image_url
+            image_url: product.image_url
         }).then( () => {
             axios.get('/api/cart').then( cart => {
 
                 this.props.updateCartItems( cart.data );
+                this.setState({ notifyAdded: true });
 
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
+
+        this.closeAddedNotification();
     }
 
     render () {
-        const { product } = this.state;
-        const { match, user, productInfo } = this.props;
+        const { product, notifyAdded } = this.state;
+        const { match, user } = this.props;
+        console.log('Added', notifyAdded);
 
         const image_url = product.image_url_sml ? product.image_url_sml : product.image_url;
 
@@ -72,6 +82,8 @@ class ProductPage extends Component {
             <div className="product-page">
                 <Header match={this.props.match} history={this.props.history} />
                 <div className="container panel">
+
+                { notifyAdded && <div>ITEM ADDED</div> }
 
                 { product ? (
                     <div className="product">
@@ -113,8 +125,7 @@ class ProductPage extends Component {
 const mapStateToProps = ( state ) => {
     return {
         user: state.user,
-        cartItems: state.cartItems,
-        productInfo: state.productInfo
+        cartItems: state.cartItems
     };
 };
 

@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import { updateCartItems, getProduct } from '../../../redux/ducks/reducer';
 
 class Item extends Component {
-
     addItem () {
         const { item } = this.props;
         axios.post('/api/cart/add', {
@@ -20,7 +19,9 @@ class Item extends Component {
             image_url: item.image_url
         }).then( () => {
             axios.get('/api/cart').then( cart => {
+
                 this.props.updateCartItems( cart.data );
+
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
     }
