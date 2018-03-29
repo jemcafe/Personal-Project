@@ -73,7 +73,7 @@ class Item extends Component {
                                     <div className="rating">
                                         { category === 'posters' ? (
                                             <Aux>
-                                                <span style={{color: '#ffcdb6'}}><i className="fas fa-heart"></i></span> {Math.floor((Math.random() * (150 - 50)) + 50)}
+                                                <span style={{color: '#ffcdb6'}}><i className="fas fa-heart"></i></span> { item.likes }
                                             </Aux>
                                         ) : category === 'books' ? (
                                             <Aux>
