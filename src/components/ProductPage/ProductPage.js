@@ -83,7 +83,7 @@ class ProductPage extends Component {
                 <Header match={this.props.match} history={this.props.history} />
                 <div className="container panel">
 
-                { notifyAdded && <div>ITEM ADDED</div> }
+                { notifyAdded && <div className="notification">Added to cart</div> }
 
                 { product ? (
                     <div className="product">

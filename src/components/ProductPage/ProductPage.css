@@ -7,6 +7,17 @@
     /* background-color: #cbe4fc; */
 }
 
+.product-page .notification {
+    position: absolute;
+    right: 0;
+    margin: 20px;
+    padding: 14px;
+    font-size: 16px;
+    color: #8f7bc7;
+    background: #f1ecff;
+}
+
+
 .product-page .product {
     display: flex;
     /* justify-content: space-between; */
@@ -49,7 +60,7 @@
     color: #7b727c;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     .product-page > .container > .product {
         flex-direction: column;
         align-items: center;
