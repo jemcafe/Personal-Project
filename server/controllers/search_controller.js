@@ -203,9 +203,10 @@ module.exports = {
                         subject: '',
                         product_category_id: 2,
                         product_category: 'Books',
-                        image_url: b.volumeInfo.imageLinks ? b.volumeInfo.imageLinks.thumbnail : ''
+                        image_url: b.volumeInfo.imageLinks ? b.volumeInfo.imageLinks.thumbnail : '',
+                        image_url_sml: b.volumeInfo.imageLinks ? b.volumeInfo.imageLinks.small : ''
                     };
-                    // console.log('book ->', book);
+                    console.log('book ->', b.volumeInfo);
                     res.status(200).json( book );
 
             }).catch(err => {

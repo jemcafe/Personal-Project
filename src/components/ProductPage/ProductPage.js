@@ -20,19 +20,19 @@ class ProductPage extends Component {
     }
 
     componentDidMount () {
-        console.log( 'Props match ->', this.props.match );
-        console.log( 'Props history ->', this.props.history );
+        // console.log( 'Props match ->', this.props.match );
+        // console.log( 'Props history ->', this.props.history );
         const { match, history } = this.props;
         
         const category = match.params.category;
         const name = match.params.name;
         const id = history.location.search.slice(4, history.location.search.length);
 
-        console.log({ category, name, id });
+        // console.log({ category, name, id });
 
         axios.get(`/api/product?category=${ category }&product_id=${ id }&name=${ name }`)
         .then( product => {
-           console.log( 'Product ->', product.data );
+        //    console.log( 'Product ->', product.data );
            this.setState({ 
                product: product.data,
                hasProduct: product.data.length ? 'true' : 'false',
@@ -63,9 +63,9 @@ class ProductPage extends Component {
     render () {
         const { product, hasProduct, hasImage_url } = this.state;
         const { match, user, productInfo } = this.props;
-        console.log('State product ->', product);
+        // console.log('State product ->', product);
 
-        const image_url = match.params.category === 'games' ? product.image_url_sml : product.image_url;
+        const image_url = product.image_url_sml ? product.image_url_sml : product.image_url;
 
         return (
             <div className="product-page">

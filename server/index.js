@@ -23,7 +23,7 @@ const stripeCntrl = require('./controllers/stripe_controller');
 
 const app = express();
 
-// app.use( express.static( `${__dirname}/../build` ) );  // Needed for hosting. Points to the build folder.
+app.use( express.static( `${__dirname}/../build` ) );  // Build
 app.use( bodyParser.json() );
 app.use( cors() );
 app.use( session({
@@ -111,6 +111,11 @@ massive( process.env.CONNECTION_STRING )
 // app.get('/api/get-games', searchCntrl.getGamesForDatabase);
 // app.get('/api/get-books', searchCntrl.getBooksForDatabase);
 
+// Build
+const path = require('path')
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+})
 
 const port = process.env.SERVER_PORT || 3030;
 app.listen( port, () => console.log(`Listening on port: ${port}`) );
