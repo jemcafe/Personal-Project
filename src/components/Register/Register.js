@@ -122,7 +122,7 @@ class Register extends Component {
                             </div>
                             <div className="input-info">
                                 {/* <div className="info">Password</div> */}
-                                <input className="input" placeholder="Email" onChange={ (e) => this.handleChange('email', e.target.value) } />
+                                <input className="input" placeholder="Email (email@email.com)" onChange={ (e) => this.handleChange('email', e.target.value) } />
                             </div>
                             <div className="input-info">
                                 {/* <div className="info">Name</div> */}

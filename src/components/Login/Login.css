@@ -38,6 +38,7 @@
     font-weight: normal;
 }
 .login-reg .input {
+    width: 190px;
     margin: 12px 0;
     /* border: none; */
 }
