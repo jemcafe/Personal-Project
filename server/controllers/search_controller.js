@@ -1,6 +1,5 @@
 const axios = require('axios');
 require('dotenv').config();
-let bookId = 0;
 
 module.exports = {
     getProductCategories ( req, res, next ) {
@@ -64,16 +63,16 @@ module.exports = {
                     }));
                     res.status(200).json( data );
                 } else {
-                    res.status(200).json('No results');
+                    res.status(200).send('No results');
                 }
             }).catch(err => {
                 console.error(err);
-                res.status(500).json('GiantBomb error');
+                res.status(500).send('GiantBomb error');
             });
 
         }).catch( err => {
             console.log(err);
-            res.status(500).send(err);
+            res.status(500).send('No platforms');
         });
     },
 
@@ -85,8 +84,8 @@ module.exports = {
         axios.get(`https://www.googleapis.com/books/v1/volumes?q=${ search }+subject:${ sub }&maxResults=27&startIndex=0`)
         .then( books => {
             if ( books.data.items.length ) {
+
                 const data = books.data.items.map( e => {
-                    bookId++;
                     return {
                         id: e.id,
                         name: e.volumeInfo.title,
@@ -99,8 +98,9 @@ module.exports = {
                         image_url: e.volumeInfo.imageLinks ? e.volumeInfo.imageLinks.thumbnail : ''
                     }
                 });
+
                 res.status(200).json( data );
-            }
+            } else res.status(404).send('No books');
         }).catch(err => {
             console.error(err);
             res.status(500).send('GoogleBooks error');
@@ -111,9 +111,10 @@ module.exports = {
     getPosters ( req, res, next ) {
         const db = req.app.set('db');
         const { search, category } = req.query;
-        // const maxResults = 27;
+        const maxResults = 27,
+              offset = 0;
 
-        db.read_posters().then( posters => {
+        db.read_posters( [maxResults, offset] ).then( posters => {
 
             const filteredPosters = posters
                 .filter( poster => poster.name.toLowerCase().includes( search.toLowerCase() ) ? poster : false )
@@ -206,7 +207,7 @@ module.exports = {
                         image_url: b.volumeInfo.imageLinks ? b.volumeInfo.imageLinks.thumbnail : '',
                         image_url_sml: b.volumeInfo.imageLinks ? b.volumeInfo.imageLinks.small : ''
                     };
-                    console.log('book ->', b.volumeInfo);
+                    // console.log('book ->', books);
                     res.status(200).json( book );
 
             }).catch(err => {

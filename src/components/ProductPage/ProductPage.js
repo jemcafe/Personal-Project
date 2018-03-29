@@ -16,6 +16,7 @@ class ProductPage extends Component {
             product: {},
             hasProduct: 'loading',
             hasImage_url: 'loading',
+            hasDescription: 'loading'
         }
     }
 
@@ -36,7 +37,8 @@ class ProductPage extends Component {
            this.setState({ 
                product: product.data,
                hasProduct: product.data.length ? 'true' : 'false',
-               hasImage_url: product.data.image_url ? 'true' : 'false'
+               hasImage_url: product.data.image_url ? 'true' : 'false',
+               hasDescription: product.data.description ? 'true' : 'false'
             });
         }).catch(err => console.log(err));
     }
@@ -61,7 +63,7 @@ class ProductPage extends Component {
     }
 
     render () {
-        const { product, hasProduct, hasImage_url } = this.state;
+        const { product } = this.state;
         const { match, user, productInfo } = this.props;
         // console.log('State product ->', product);
 
@@ -75,22 +77,26 @@ class ProductPage extends Component {
                 { product ? (
                     <div className="product">
                         <div className="product-img">
-                            { hasImage_url === 'loading' ? (
-                                <Loading />
-                            ) : (
-                                <img src={ image_url } alt="Product pic"/>
-                            ) }
+                            { this.state.hasImage_url === 'loading' 
+                              ? <Loading />
+                              : <img src={ image_url } alt="Product pic"/> }
                         </div>
                         <div className="info-container">
                             <h3>{ product.name }</h3>
                             <div>${ product.price }</div>
                             { user.username
-                            ? <button className="add-btn red-btn-2" onClick={ this.addItem }>Add To Cart</button>
-                            : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn red-btn-2">Add To Cart</button></Link> 
+                              ? <button className="add-btn red-btn-2" onClick={ this.addItem }>Add To Cart</button>
+                              : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn red-btn-2">Add To Cart</button></Link> 
                             }
                             <div className="description">
                                 <h4>Description</h4>
-                                { product.description }
+                                { this.state.product.hasDescription === 'loading'
+                                  ? <Loading />
+                                  : (
+                                    product.description
+                                    ? product.description
+                                    : <h5>No description</h5> 
+                                  ) }
                             </div>
                         </div>
                     </div>

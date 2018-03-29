@@ -64,9 +64,10 @@ class SearchPage extends Component {
         axios.get(`/api/search/${ c === 'creators' ? 'users' : c }?search=${ q }${ subcategory }`)
         .then( res => {
             console.log(lifecycle, res.data);
+            // The 'No Results' part of the ternary is for Google Books
             this.setState({
                 category: c,
-                searchResults: c !== 'creators' ? res.data : [],
+                searchResults: res.data === 'No results' ? [] : c !== 'creators' ? res.data : [],
                 userResults: c === 'creators' ? res.data : [],
                 hasSearchResults: res.data.length ? 'true' : 'false',
             });
