@@ -4,14 +4,10 @@ import Aux from '../../hoc/Aux';
 import FaAngleLeft from 'react-icons/lib/fa/angle-left';
 import FaAngleRight from 'react-icons/lib/fa/angle-right';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-// Redux
-import { connect } from 'react-redux';
-import { updateCartItems, getProduct } from '../../redux/ducks/reducer';
 //Components
 import Loading from '../Loading/Loading';
 import Header from '../Header/Header';
-import List from './List/List';
+import Item from './Item/Item';
 
 class SearchPage extends Component {
     constructor () {
@@ -19,12 +15,12 @@ class SearchPage extends Component {
         this.state = {
             category: '',
             searchResults: [],
-            userResults: [],
-            hasSearchResults: ''
+            hasSearchResults: 'loading'
         }
     }
 
     componentWillReceiveProps (nextProps) {
+        // console.log(nextProps);
         const { search } = nextProps.location;
         this.search( search, 'WillReceiveProps results ->' );
     }
@@ -39,8 +35,7 @@ class SearchPage extends Component {
         if ( this.state.hasSearchResults === 'true' ) {
             this.setState({ 
                 searchResults: [],
-                userResults: [],
-                hasSearchResults: ''
+                hasSearchResults: 'loading'
             });
         }
     }
@@ -63,117 +58,39 @@ class SearchPage extends Component {
         // Search request
         axios.get(`/api/search/${ c === 'creators' ? 'users' : c }?search=${ q }${ subcategory }`)
         .then( res => {
-            console.log(lifecycle, res.data);
-            // The 'No Results' part of the ternary is for Google Books
+            // console.log(lifecycle, res.data);
+            // The 'No results' condition of the ternary is for Google Books
             this.setState({
                 category: c,
-                searchResults: res.data === 'No results' ? [] : c !== 'creators' ? res.data : [],
-                userResults: c === 'creators' ? res.data : [],
+                searchResults: res.data === 'No results' ? [] : res.data,
                 hasSearchResults: res.data.length ? 'true' : 'false',
             });
         }).catch(err => {
             console.log(err)
             this.setState({
                 searchResults: [],
-                userResults: [],
                 hasSearchResults: 'false'
             });
         });
     }
 
-    // addItem ( item ) {
-    //     axios.post('/api/cart/add', {
-    //         product_id: item.id,
-    //         name: item.name,
-    //         price: item.price,
-    //         product_category_id: item.product_category_id,
-    //         quantity: 1,
-    //         image_url: item.image_url
-    //     }).then( () => {
-    //         axios.get('/api/cart').then( cart => {
-    //             this.props.updateCartItems( cart.data );
-    //         }).catch(err => console.log(err));
-    //     }).catch(err => console.log(err));
-    // }
-
-    productRedirect ( product ) {
-        this.props.getProduct( product );
-        const category = product.product_category.toLowerCase(),
-              name = product.name.split(' ').join('-'),
-              id = product.id;
-        this.props.history.push(`/product/${category}/${name}?id=${id}`);
-    }
-
     render () {
-        const { category, searchResults, userResults, hasSearchResults } = this.state;
-        const { user } = this.props;
+        const { category, searchResults, hasSearchResults } = this.state;
 
-        // List of products
-        const listOfProducts = searchResults.map( (item, i) => {
-            // Using i for the key is fine since the items aren't changing order
-            return <li key={i} className="item">
-                <div className="container">
-
-                    <div className="img-container">
-                        <a className="img-fade-in" onClick={ () => this.productRedirect(item) }>
-                            <img src={ item.image_url } alt="cover"/>
-                        </a>
-                    </div>
-
-                    <div className="item-info-container">
-                        <a className="title" onClick={ () => this.productRedirect(item) }>
-                            { item.name.length > 26 ? `${item.name.slice(0,26).trim()}...` : item.name }
-                        </a>
-
-                        <div className="rating-price">
-                            <div className="rating">
-                                { category === 'posters' ? (
-                                    <Aux>
-                                        <span style={{color: '#ffcdb6'}}><i className="fas fa-heart"></i></span> {Math.floor((Math.random() * (150 - 50)) + 50)}
-                                    </Aux>
-                                ) : category === 'books' ? (
-                                    <Aux>
-                                        <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
-                                        <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
-                                        <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
-                                        <span style={{color: '#ffcdb6'}}><i className="fas fa-star"></i></span>
-                                        <span style={{color: 'lightgrey'}}><i className="fas fa-star"></i></span>
-                                    </Aux> 
-                                ) : (
-                                    <Aux>
-                                        <span>{ item.rating }</span>
-                                    </Aux>
-                                ) }
-                            </div>
-                            <div>${ item.price }</div>
-                        </div>
-
-                        {/* { user.username
-                        ? <button className="add-btn red-btn-2" onClick={ () => this.addItem( item ) }>Add To Cart</button>
-                        : <Link to="/login" style={{alignSelf: 'center'}}><button className="add-btn red-btn-2">Add To Cart</button></Link> } */}
-                    </div>
-
-                </div>
-            </li>
+        // List of Products
+        const listOfProducts = searchResults.map((item, i) => {
+            return <Item key={i}
+                         history={this.props.history}
+                         category={category} 
+                         item={item} />
         });
 
-        // List of users
-        const listOfUsers = userResults.map( item => {
-            return <li key={ item.id } className="item">
-                <div className="container panel">
-
-                    <div className="img-container">
-                        <Link to={`/${item.username}`} className="img-fade-in" style={{width: '100%', height: '100%'}}>
-                            <div className="avatar" style={{background: `center / cover no-repeat url(${item.avatar})`}}></div>
-                        </Link>
-                    </div>
-
-                    <div className="item-info-container">
-                        <Link to={`/${item.username}`} className="title">{ item.username }</Link>
-                    </div>
-
-                </div>
-            </li>
+        // List of Users
+        const listOfUsers = searchResults.map((item, i) => {
+            return <Item key={i} 
+                         category={category} 
+                         item={item} 
+                         productRedirect={this.productRedirect} />
         });
 
         return (
@@ -185,7 +102,7 @@ class SearchPage extends Component {
 
                     <div className="results">
                     
-                        { !searchResults.length && hasSearchResults === '' ? (
+                        { !searchResults.length && hasSearchResults === 'loading' ? (
                             <Loading /> 
                         ) : ( 
                             hasSearchResults === 'true' ? (
@@ -210,17 +127,4 @@ class SearchPage extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        // user: state.user,
-        // cartItems: state.cartItems,
-        product: state.product
-    };
-};
-
-const mapDispatchToProps = {
-    // updateCartItems: updateCartItems,
-    getProduct: getProduct
-}
-
-export default connect( mapStateToProps, mapDispatchToProps )( SearchPage );
+export default SearchPage;

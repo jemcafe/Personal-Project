@@ -114,14 +114,14 @@ module.exports = {
         const maxResults = 27,
               offset = 0;
 
-        db.read_posters( [maxResults, offset] ).then( posters => {
+        db.read_posters( [maxResults, offset] ).then( p => {
 
-            const filteredPosters = posters
-                .filter( poster => poster.name.toLowerCase().includes( search.toLowerCase() ) ? poster : false )
-                .filter( poster => category === 'All' || category === '' ? poster : category === poster.category ? poster : false);
-            const allPosters = !search && !category ? posters : filteredPosters;
+            const filteredPosters = p
+                .filter(poster => poster.name.toLowerCase().includes( search.toLowerCase() ) ? poster : false)
+                .filter(poster => category === 'All' || category === '' ? poster : category === poster.category ? poster : false);
+            const posters = !search && !category ? p : filteredPosters;
             
-            res.status(200).json( allPosters );
+            res.status(200).json( posters );
 
         }).catch( err => {
             console.log('search getPosters', err);

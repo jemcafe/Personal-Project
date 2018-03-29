@@ -65,7 +65,6 @@ class ProductPage extends Component {
     render () {
         const { product } = this.state;
         const { match, user, productInfo } = this.props;
-        // console.log('State product ->', product);
 
         const image_url = product.image_url_sml ? product.image_url_sml : product.image_url;
 
@@ -90,7 +89,7 @@ class ProductPage extends Component {
                             }
                             <div className="description">
                                 <h4>Description</h4>
-                                { this.state.product.hasDescription === 'loading'
+                                { this.state.hasDescription === 'loading'
                                   ? <Loading />
                                   : (
                                     product.description
