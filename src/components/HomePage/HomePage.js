@@ -24,13 +24,13 @@ class HomePage extends Component {
                             <h3>Latest</h3>
                             <ul>
                                 <li style={{display: 'flex', padding: '10px'}}>
-                                    <img style={{maxHeight: '100px'}} src="https://thumbor.forbes.com/thumbor/960x0/smart/https%3A%2F%2Fblogs-images.forbes.com%2Finsertcoin%2Ffiles%2F2017%2F05%2Fwitcher-geralt.jpg" alt="pic"/>
+                                    <img style={{maxHeight: '100px'}} src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.gamerant.com%2Fwp-content%2Fuploads%2Ffinal-fantasy-15-first-40-minutes-gameplay.jpg.optimal.jpg&f=1" alt="pic"/>
                                     <p style={{padding: '0 10px', textAlign: 'left'}}>
                                         Ipsum donec eros a rutrum nisl elementum, maecenas id fusce wisi urna diam nunc. Montes parturient ornare eleifend vel.
                                     </p>
                                 </li>
                                 <li style={{display: 'flex', padding: '10px'}}>
-                                    <img style={{maxHeight: '100px'}} src="https://thumbor.forbes.com/thumbor/960x0/smart/https%3A%2F%2Fblogs-images.forbes.com%2Finsertcoin%2Ffiles%2F2017%2F05%2Fwitcher-geralt.jpg" alt="pic"/>
+                                    <img style={{maxHeight: '100px'}} src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.gamerant.com%2Fwp-content%2Fuploads%2Ffinal-fantasy-15-first-40-minutes-gameplay.jpg.optimal.jpg&f=1" alt="pic"/>
                                     <p style={{padding: '0 10px', textAlign: 'left'}}>
                                         Ipsum donec eros a rutrum nisl elementum, maecenas id fusce wisi urna diam nunc. Montes parturient ornare eleifend vel.
                                     </p>
@@ -41,13 +41,13 @@ class HomePage extends Component {
                             <h3>Exclusive</h3>
                             <ul>
                                 <li style={{display: 'flex', padding: '10px'}}>
-                                    <img style={{maxHeight: '100px'}} src="https://thumbor.forbes.com/thumbor/960x0/smart/https%3A%2F%2Fblogs-images.forbes.com%2Finsertcoin%2Ffiles%2F2017%2F05%2Fwitcher-geralt.jpg" alt="pic"/>
+                                    <img style={{maxHeight: '100px'}} src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.gamerant.com%2Fwp-content%2Fuploads%2Ffinal-fantasy-15-first-40-minutes-gameplay.jpg.optimal.jpg&f=1" alt="pic"/>
                                     <p style={{padding: '0 10px', textAlign: 'left'}}>
                                         Ipsum donec eros a rutrum nisl elementum, maecenas id fusce wisi urna diam nunc. Montes parturient ornare eleifend vel.
                                     </p>
                                 </li>
                                 <li style={{display: 'flex', padding: '10px'}}>
-                                    <img style={{maxHeight: '100px'}} src="https://thumbor.forbes.com/thumbor/960x0/smart/https%3A%2F%2Fblogs-images.forbes.com%2Finsertcoin%2Ffiles%2F2017%2F05%2Fwitcher-geralt.jpg" alt="pic"/>
+                                    <img style={{maxHeight: '100px'}} src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.gamerant.com%2Fwp-content%2Fuploads%2Ffinal-fantasy-15-first-40-minutes-gameplay.jpg.optimal.jpg&f=1" alt="pic"/>
                                     <p style={{padding: '0 10px', textAlign: 'left'}}>
                                         Ipsum donec eros a rutrum nisl elementum, maecenas id fusce wisi urna diam nunc. Montes parturient ornare eleifend vel.
                                     </p>

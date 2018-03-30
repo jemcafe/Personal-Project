@@ -123,6 +123,8 @@ select {
   border-radius: 0;
   font-size: 14px;
   height: 30px;
+  -moz-appearance:none; /* Firefox */
+  -webkit-appearance:none; /* Safari and Chrome */
 }
 
 /*  Footer  */
