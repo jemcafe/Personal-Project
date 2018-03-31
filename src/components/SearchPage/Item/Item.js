@@ -43,11 +43,9 @@ class Item extends Component {
                     <li className="item">
                         <div className="container panel">
 
-                            <div className="img-container">
-                                <Link to={`/${item.username}`} className="img-fade-in" style={{width: '100%', height: '100%'}}>
-                                    <div className="avatar" style={{background: `center / cover no-repeat url(${item.avatar})`}}></div>
-                                </Link>
-                            </div>
+                            <Link to={`/${item.username}`} className="img-container img-fade-in">
+                                <div className="avatar" style={{background: `center / cover no-repeat url(${item.avatar})`}}></div>
+                            </Link>
 
                             <div className="item-info-container">
                                 <Link to={`/${item.username}`} className="title">{ item.username }</Link>
