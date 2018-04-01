@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './SearchPage.css';
-import Aux from '../../hoc/Aux';
+// import Aux from '../../hoc/Aux';
 import FaAngleLeft from 'react-icons/lib/fa/angle-left';
 import FaAngleRight from 'react-icons/lib/fa/angle-right';
 import axios from 'axios';

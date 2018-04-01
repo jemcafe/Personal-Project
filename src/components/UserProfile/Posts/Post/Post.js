@@ -43,7 +43,9 @@ class Post extends Component {
                     <div className="container">
 
                         <div className="avatar-name">
-                            <Link to={`/${username}`} className="avatar"><img src={ profileUser.avatar} alt="Proifle pic"/></Link>
+                            <Link to={`/${username}`} className="avatar">
+                                <img src={ profileUser.avatar} alt="Proifle pic"/>
+                            </Link>
                         </div>
                         { image_urlCheck && <div className="image"><img src={ image_url } alt="Url not found"/></div> }
                         <input className="input" placeholder="Title" defaultValue={ title } onChange={ (e) => this.handleChange('title', e.target.value) }/>

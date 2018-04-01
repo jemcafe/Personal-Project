@@ -80,9 +80,7 @@ class Profile extends Component {
 
                 { profileUser.username &&
                 <div className="container">
-                    <div className="header-bkgd">
-                        { profileUser.header_bkgd_img && 
-                        <img src={profileUser.header_bkgd_img} alt="Profile header pic"/> }
+                    <div className="header-bkgd" style={{background: `center / cover no-repeat url(${profileUser.header_bkgd_img})`}}>
                         {/* <Uploader /> */}
                     </div>
 

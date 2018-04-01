@@ -73,7 +73,7 @@ class ProductPage extends Component {
 
     render () {
         const { product, notifyAdded } = this.state;
-        const { match, user } = this.props;
+        const { user } = this.props;
 
         const image_url = product.image_url_sml ? product.image_url_sml : product.image_url;
 

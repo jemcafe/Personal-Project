@@ -116,7 +116,6 @@
   height: 100px;
   margin: 0 0 10px;
   background: linear-gradient(0deg, #fff, #e4dcfc);
-  /* border: 3px solid pink; */
   /* background-color: #ebb3dd; */
 }
 .search-page .users-list .img-container .avatar {  /*  The image stays within the container  */

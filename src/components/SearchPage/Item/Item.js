@@ -35,7 +35,7 @@ class Item extends Component {
     }
 
     render () {
-        const { user, category, item, productRedirect } = this.props;
+        const { category, item } = this.props;
 
         return (
             <Aux>

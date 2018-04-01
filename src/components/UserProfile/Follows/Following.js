@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 class Following extends Component {
     render () {
         const listOfFollows = this.props.follows.map( follow => {
-            return <li key={ follow.id }>
+            return <li key={ follow.user_id }>
                 <Link to={`/${follow.username}`} className="avatar" style={{background: `center / cover no-repeat url(${follow.avatar})`}}></Link>
                 <Link to={`/${follow.username}`} className="username">{ follow.username }</Link>
             </li>

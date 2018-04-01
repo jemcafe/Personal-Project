@@ -31,6 +31,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    background: linear-gradient(0deg, #fff, #e4dcfc);
 }
 .post > .container > .avatar-name .avatar > img {
     max-width: 100%;
