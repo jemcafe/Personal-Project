@@ -142,10 +142,10 @@
   .profile .header-menu {
     max-width: 100%;
   }
-  .profile .profile-nav {
+  .profile .header-menu .profile-nav {
     flex-direction: row;
   }
-  .profile .profile-nav a {
+  .profile .header-menu .profile-nav a {
     margin-left: 10px;
   }
 }
