@@ -67,8 +67,10 @@
       /* background: #e7ffc0; */
     }
   .latest-container > ul > li {
-      width: 100%;
-      padding: 100% 0 0 0; /* 1:1 Aspect Ratio */
+      width: 128.8px;
+      height: 128.8px;
+      /* width: 100%; */
+      /* padding: 100% 0 0 0; 1:1 Aspect Ratio */
       position: relative;
       margin: 10px 0 0 0;
   }
