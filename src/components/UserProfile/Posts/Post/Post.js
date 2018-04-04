@@ -43,9 +43,10 @@ class Post extends Component {
                     <div className="container">
 
                         <div className="avatar-name">
-                            <Link to={`/${username}`} className="avatar">
-                                <img src={ profileUser.avatar} alt="Proifle pic"/>
+                            <Link to={`/${username}`}>
+                                <div className="avatar" style={{background: `center / cover no-repeat url(${profileUser.avatar})`}}></div>
                             </Link>
+                            <h4>{ profileUser.username }</h4>
                         </div>
                         { image_urlCheck && <div className="image"><img src={ image_url } alt="Url not found"/></div> }
                         <input className="input" placeholder="Title" defaultValue={ title } onChange={ (e) => this.handleChange('title', e.target.value) }/>
@@ -62,7 +63,10 @@ class Post extends Component {
                     <div className="container fade-in">
 
                         <div className="avatar-name">
-                            <Link to={`/${profileUser.username}`} className="avatar"><img src={ profileUser.avatar} alt="Proifle pic"/></Link>
+                            <Link to={`/${username}`}>
+                                <div className="avatar" style={{background: `center / cover no-repeat url(${profileUser.avatar})`}}></div>
+                            </Link>
+                            <h4>{ profileUser.username }</h4>
                         </div>
                         <h3>{ title }</h3>
                         { image_urlCheck && <div className="image"><img src={ image_url } alt="Url not found"/></div> }

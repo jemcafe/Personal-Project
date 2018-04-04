@@ -29,7 +29,7 @@
   color: #fff;
   margin: 10px;
 }
-.profile > .container > .header-bkgd > .uploader{
+.profile > .container > .header-bkgd > .uploader {
   position: absolute;
   right: 0;
 }
@@ -67,41 +67,40 @@
         /* background-color: #ffd5d0; */
         /* background-color: #fccbd9; */
     }
-    .profile .avatar-name {
+    .profile .header-menu .avatar-name {
         display: flex;
         flex-direction: column;
     }
-    .profile .avatar-name > h3 {
+    .profile .header-menu .avatar-name > h3 {
         font-size: 20px;
         font-weight: bold;
         margin: 18px 0 8px 0;
         color: #66569b;
     }
         /* Fills the thumbnail div with the image */
-    .profile .avatar-name > a {
+    .profile .header-menu .avatar-name > a {
       width: 100px;
       height: 100px;
-      background: linear-gradient(0deg, #fff, #e4dcfc);
       border-radius: 50%;
+      background: linear-gradient(0deg, #fff, #e4dcfc);
     }
-    .profile .avatar-name > a > .avatar {
+    .profile .header-menu .avatar-name > a > .avatar {
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
         width: 100%;
         height: 100%;
         border-radius: 50%;
         /* border-radius: 20px; */
         background: #fff;
     }
-    .profile .profile-nav {
+    .profile .header-menu .profile-nav {
         display: flex;
         flex-direction: column;
         margin-top: 10px;
         /* background-color: #ddecfd; */
     }
-    .profile .profile-nav a {
+    .profile .header-menu .profile-nav a {
         margin: 0;
         padding: 3px;
         box-sizing: border-box;
