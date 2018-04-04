@@ -124,7 +124,7 @@ class Posts extends Component {
                                     <Loading />
                                 ) : (
                                     hasPosts === 'true'
-                                    ? <ul >{ listOfPosts }</ul>
+                                    ? <ul>{ listOfPosts }</ul>
                                     : user.username === paramsUsername 
                                     ? <h5>You haven't made any posts</h5>
                                     : <h5>No posts</h5>
