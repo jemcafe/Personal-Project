@@ -171,6 +171,8 @@ SELECT * FROM Posters;
 SELECT * FROM Cart;
 SELECT * FROM Follows;
 
+SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';
+
 -- Goku
 -- https://i.pinimg.com/236x/ed/1d/73/ed1d7355a9bb9460f4085b5ef695740f.jpg
 -- https://images5.alphacoders.com/677/677262.png

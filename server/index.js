@@ -4,22 +4,21 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const session = require('express-session');
 const massive = require('massive');
-// const multer = require('multer');  // local storage
-// const AWS = require('aws-sdk');
 
 // Middlewares
 const checkForSession = require('./middlewares/checkForSession');
 
 // Controllers
-const authCntrl = require('./controllers/auth_controller');
-const searchCntrl = require('./controllers/search_controller');
-const postsCntrl = require('./controllers/posts_controller');
-const postersCntrl = require('./controllers/posters_controller');
-const followsCntrl = require('./controllers/follows_controller');
-const cartCntrl = require('./controllers/cart_controller');
-const settingsCntrl = require('./controllers/settings_controller');
-const userProfileCntrl = require('./controllers/user_profile_controller');
-const stripeCntrl = require('./controllers/stripe_controller');
+const authCtrl = require('./controllers/auth_controller');
+const searchCtrl = require('./controllers/search_controller');
+const postsCtrl = require('./controllers/posts_controller');
+const commentsCtrl = require('./controllers/comments_controller');
+const postersCtrl = require('./controllers/posters_controller');
+const followsCtrl = require('./controllers/follows_controller');
+const cartCtrl = require('./controllers/cart_controller');
+const settingsCtrl = require('./controllers/settings_controller');
+const userProfileCtrl = require('./controllers/user_profile_controller');
+const stripeCtrl = require('./controllers/stripe_controller');
 
 const app = express();
 
@@ -36,80 +35,72 @@ massive( process.env.CONNECTION_STRING )
     .then(db => app.set('db', db))
     .catch(err => console.log('DB error', err));
 
-// AWS
-// AWS.config.update({
-//     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-//     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-//     region: process.env.AWS_REGION,
-// });
-// const s3 = new AWS.S3();
-// var upload = multer({
-//     storage: storage,
-//     limits: { fileSize: 1000000 } // bytes
-// }).single('image');
-// app.post('/api/upload');
-
 // Auth
-    app.post('/api/login', authCntrl.login);
-    app.post('/api/register', authCntrl.register);
-    app.post('/api/logout', authCntrl.logout);
-    app.get('/api/user', authCntrl.getUser);
+    app.post('/api/login', authCtrl.login);
+    app.post('/api/register', authCtrl.register);
+    app.post('/api/logout', authCtrl.logout);
+    app.get('/api/user', authCtrl.getUser);
 
 // User 
     // Posts
-    app.post('/api/post', postsCntrl.createPost);
-    app.put('/api/post/:id/edit', postsCntrl.updatePost);
-    app.delete('/api/post/:id/delete', postsCntrl.deletePost);
-    app.get('/api/post/:id', postsCntrl.getPost);
-    app.get('/api/posts', postsCntrl.getPosts);
+    app.post('/api/post', postsCtrl.createPost);
+    app.put('/api/post/:id/edit', postsCtrl.updatePost);
+    app.delete('/api/post/:id/delete', postsCtrl.deletePost);
+    app.get('/api/post/:id', postsCtrl.getPost);
+    app.get('/api/posts', postsCtrl.getPosts);
+    // Comments
+    app.post('/api/comment', commentsCtrl.createComment);
+    app.put('/api/comment/:id/edit', commentsCtrl.updateComment);
+    app.delete('/api/comment/:id/delete', commentsCtrl.deleteComment);
+    app.get('/api/post/:post_id/comments', commentsCtrl.getComments);
     // Posters
-    app.post('/api/poster', postersCntrl.createPoster);
-    app.put('/api/poster/:id/edit', postersCntrl.updatePoster);
-    app.delete('/api/poster/:id/delete', postersCntrl.deletePoster);
-    app.get('/api/posters', postersCntrl.getPosters);
+    app.post('/api/poster', postersCtrl.createPoster);
+    app.put('/api/poster/:id/edit', postersCtrl.updatePoster);
+    app.delete('/api/poster/:id/delete', postersCtrl.deletePoster);
+    app.get('/api/posters', postersCtrl.getPosters);
     // Follows
-    app.post('/api/follow', followsCntrl.follow);
-    app.delete('/api/unfollow/:user_id', followsCntrl.unfollow);
-    app.get('/api/follows', followsCntrl.getFollows);
-    app.get('/api/followers', followsCntrl.getFollowers);
+    app.post('/api/follow', followsCtrl.follow);
+    app.delete('/api/unfollow/:user_id', followsCtrl.unfollow);
+    app.get('/api/follows', followsCtrl.getFollows);
+    app.get('/api/followers', followsCtrl.getFollowers);
     // Cart
-    app.post('/api/cart/add', cartCntrl.addItem);
-    app.delete('/api/cart/remove/:id', cartCntrl.removeItem);
-    // app.patch('/api/cart/update/quantity/:id', cartCntrl.updateQuantity);
-    app.get('/api/cart', cartCntrl.getCart);
-    app.delete('/api/cart/remove-all', cartCntrl.removeAllItems);
+    app.post('/api/cart/add', cartCtrl.addItem);
+    app.delete('/api/cart/remove/:id', cartCtrl.removeItem);
+    // app.patch('/api/cart/update/quantity/:id', cartCtrl.updateQuantity);
+    app.get('/api/cart', cartCtrl.getCart);
+    app.delete('/api/cart/remove-all', cartCtrl.removeAllItems);
     // Settings
-    app.put('/api/avatar/update', settingsCntrl.updateAvatar);
-    app.put('/api/header-image/update', settingsCntrl.updateHeaderBkgdImg);
-    app.put('/api/password/update', settingsCntrl.updatePassword);
-    app.delete('/api/delete-account', settingsCntrl.deleteAccount);
+    app.put('/api/avatar/update', settingsCtrl.updateAvatar);
+    app.put('/api/header-image/update', settingsCtrl.updateHeaderBkgdImg);
+    app.put('/api/password/update', settingsCtrl.updatePassword);
+    app.delete('/api/delete-account', settingsCtrl.deleteAccount);
 
 // User Profiles
-    app.get('/api/profile/:username', userProfileCntrl.getUser);
-    app.get('/api/profile/:username/posts', userProfileCntrl.getPosts);
-    app.get('/api/profile/:username/posters', userProfileCntrl.getPosters);
-    app.get('/api/profile/:username/posters/recent', userProfileCntrl.getRecentPosters);
-    app.get('/api/profile/:username/follows', userProfileCntrl.getFollows);
-    app.get('/api/profile/:username/followers', userProfileCntrl.getFollowers);
+    app.get('/api/profile/:username', userProfileCtrl.getUser);
+    app.get('/api/profile/:username/posts', userProfileCtrl.getPosts);
+    app.get('/api/profile/:username/posters', userProfileCtrl.getPosters);
+    app.get('/api/profile/:username/posters/recent', userProfileCtrl.getRecentPosters);
+    app.get('/api/profile/:username/follows', userProfileCtrl.getFollows);
+    app.get('/api/profile/:username/followers', userProfileCtrl.getFollowers);
 
 // Search
     // Categories
-    app.get('/api/product/categories', searchCntrl.getProductCategories);
-    app.get('/api/product/subcategories', searchCntrl.getProductSubcategories);
+    app.get('/api/product/categories', searchCtrl.getProductCategories);
+    app.get('/api/product/subcategories', searchCtrl.getProductSubcategories);
     // Search
-    app.get('/api/search/games', searchCntrl.getGames);
-    app.get('/api/search/books', searchCntrl.getVolumes);
-    app.get('/api/search/posters', searchCntrl.getPosters);
-    app.get('/api/search/users', searchCntrl.getUsers);
-    app.get('/api/product', searchCntrl.getProduct);
+    app.get('/api/search/games', searchCtrl.getGames);
+    app.get('/api/search/books', searchCtrl.getVolumes);
+    app.get('/api/search/posters', searchCtrl.getPosters);
+    app.get('/api/search/users', searchCtrl.getUsers);
+    app.get('/api/product', searchCtrl.getProduct);
 
 // Stripe payment
-    app.post('/save-stripe-token', stripeCntrl.paymentApi);
+    app.post('/save-stripe-token', stripeCtrl.paymentApi);
 
 
 // This is just for getting the 3rd party api data to my database, so searching and finding products is easier than search 3 seperate APIs (two 3rd parties and my own)
-// app.get('/api/get-games', searchCntrl.getGamesForDatabase);
-// app.get('/api/get-books', searchCntrl.getBooksForDatabase);
+// app.get('/api/get-games', searchCtrl.getGamesForDatabase);
+// app.get('/api/get-books', searchCtrl.getBooksForDatabase);
 
 // Build
 const path = require('path')
@@ -117,5 +108,5 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
 })
 
-const port = process.env.SERVER_PORT || 80;
+const port = process.env.SERVER_PORT || 3030;
 app.listen( port, () => console.log(`Listening on port: ${port}`) );

@@ -1,6 +1,6 @@
 module.exports = {
     addItem ( req, res ) {
-        const db = req.app.set('db');
+        const db = req.app.get('db');
         const { session } = req;
         const { product_id, name, price, product_category_id, quantity, image_url } = req.body;
 
@@ -50,7 +50,7 @@ module.exports = {
     },
 
     removeItem ( req, res ) {
-        const db = req.app.set('db');
+        const db = req.app.get('db');
         const { session } = req;
         const { id } = req.params;
 
@@ -90,7 +90,7 @@ module.exports = {
     // },
 
     getCart ( req, res ) {
-        const db = req.app.set('db');
+        const db = req.app.get('db');
         const { session } = req;
 
         if ( session.user.id ) {
@@ -108,7 +108,7 @@ module.exports = {
     },
 
     removeAllItems ( req, res ) {
-        const db = req.app.set('db');
+        const db = req.app.get('db');
         const { session } = req;
 
         if ( session.user.id ) {

@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import './Post.css';
 import FaEdit from 'react-icons/lib/fa/edit';
 import { Link } from 'react-router-dom';
-
+// Redux
 import { connect } from 'react-redux';
+// Components
+import Comments from '../Comments/Comments';
 
 class Post extends Component {
     constructor (props) {
@@ -78,6 +80,8 @@ class Post extends Component {
 
                     </div>
                 ) }
+
+                <Comments post={this.props.post} profileUser={profileUser} paramsUsername={paramsUsername} />
             </li>
         )
     }
