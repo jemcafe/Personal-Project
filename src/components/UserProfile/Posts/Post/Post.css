@@ -3,7 +3,8 @@
     box-sizing: border-box;
     margin-bottom: 15px;
     border-radius: 4px;
-    background-color: #ffb6b6b0;
+    background: #ffe0cc;
+    /* background-color: #ffb6b6b0; */
 }
 .post > .container {
     display: flex;

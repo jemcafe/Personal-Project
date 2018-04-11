@@ -11,15 +11,18 @@ import Posters from './Posters/Posters';
 import Following from './Follows/Following';
 import Followers from './Follows/Followers';
 // import Uploader from '../Uploader/Uploader';
+import PageNotFound from '../PageNotFound/PageNotFound';
+import Loading from '../Loading/Loading';
 
 class Profile extends Component {
     constructor () {
         super();
         this.state = {
             profileUser: {},
+            foundUser: 'loading',
             follows: [],
             followers: [],
-            isFollowing: false,
+            isFollowing: false
         }
     }
 
@@ -36,22 +39,40 @@ class Profile extends Component {
             
             this.setState(prevState => ({ 
                 profileUser: userRes.data,
+                foundUser: 'true',
                 follows: followsRes.data,
                 followers: followersRes.data,
                 isFollowing: followersRes.data.find( e => e.username === this.props.user.username ) ? true : false
             }));
 
-        })).catch(err => console.log(err));
+        })).catch(err => {
+            console.log(err);
+            this.setState({
+                profileUser: {},
+                foundUser: 'false',
+                follows: [],
+                followers: [],
+                isFollowing: false
+            });
+        });
     }
 
     componentDidMount () {
-        // If the page is visited directly and there is no profile data for the user specified in the url, the user's profile data will be retrieved
         const { username } = this.props.match.params;
 
+        // If the page is visited directly and there is no profile data, the profile user's data will be retrieved
         if ( !this.state.profileUser.username ) {
             axios.get(`/api/profile/${username}`).then( user => {
-                this.setState({ profileUser: user.data });
-            }).catch(err => console.log(err) );
+                this.setState({ 
+                    profileUser: user.data,
+                    foundUser: 'true'
+                });
+            }).catch(err => {
+                console.log(err);
+                this.setState({
+                    foundUser: 'false'
+                });
+            });
         }
     }
 
@@ -71,60 +92,64 @@ class Profile extends Component {
 
     render () {
         const { user } = this.props;
-        const { profileUser, follows, followers, isFollowing } = this.state;
+        const { profileUser, foundUser, follows, followers, isFollowing } = this.state;
         const { username } = this.props.match.params; // This is needed for checking if the user is on their profile page
         
         return (
             <div className="profile">
                 <Header match={this.props.match} history={this.props.history} />
 
-                { profileUser.username &&
-                <div className="container">
-                    <div className="header-bkgd">
-                        <div className="img" style={{background: `center / cover no-repeat url(${profileUser.header_bkgd_img})`}}></div>
-                        {/* <Uploader /> */}
-                    </div>
-
-                    <div className="profile-container panel">
-
-                        <div className="header-menu">
-                            <div className="container">
-                                <div className="avatar-name">
-                                    <Link to={`/${profileUser.username}`}>
-                                        <div className="avatar" style={{background: `center / cover no-repeat url(${profileUser.avatar})`}}></div>
-                                    </Link>
-                                    <h3>{ profileUser.username }</h3>
-                                </div>
-
-                                <div className="profile-nav">
-                                    <Link to={`/${profileUser.username}`}>Posts</Link>
-                                    <Link to={`/${profileUser.username}/posters`}>Posters</Link>
-                                    <Link to={`/${profileUser.username}/following`}>Following</Link>
-                                    <Link to={`/${profileUser.username}/followers`}>Followers</Link>
-                                </div>
-
-                                <div className="follow-btn-container panel">
-                                { user.username !== username && (
-                                    !user.username
-                                    ? <Link to="/login"><button className="red-btn">Follow</button></Link> 
-                                    : isFollowing
-                                    ? <button className="gray-btn" onClick={ this.unfollow }>Unfollow</button>
-                                    : <button className="red-btn" onClick={ this.follow }>Follow</button>
-                                ) }
-                                </div>
-                            </div>
+                { foundUser === 'loading' ? (
+                    <Loading/>
+                ) : foundUser === 'true' ? (
+                    <div className="container">
+                        <div className="header-bkgd">
+                            <div className="img" style={{background: `center / cover no-repeat url(${profileUser.header_bkgd_img})`}}></div>
+                            {/* <Uploader /> */}
                         </div>
 
-                        <Switch>
-                            <Route exact path={`/${profileUser.username}`} render={ () => <Posts profileUser={ profileUser } paramsUsername={ username }/> } />
-                            <Route path={`/${profileUser.username}/posters`} render={ () => <Posters profileUser={ profileUser } paramsUsername={ username }/> } />
-                            <Route path={`/${profileUser.username}/following`} render={ () => <Following profileUser={ profileUser } paramsUsername={ username } follows={follows} /> } />
-                            <Route path={`/${profileUser.username}/followers`} render={ () => <Followers profileUser={ profileUser } paramsUsername={ username } followers={followers} /> } />
-                        </Switch>
+                        <div className="profile-container panel">
 
-                    </div>
-                </div>
-                }
+                            <div className="header-menu">
+                                <div className="container">
+                                    <div className="avatar-name">
+                                        <Link to={`/${profileUser.username}`}>
+                                            <div className="avatar" style={{background: `center / cover no-repeat url(${profileUser.avatar})`}}></div>
+                                        </Link>
+                                        <h3>{ profileUser.username }</h3>
+                                    </div>
+
+                                    <div className="profile-nav">
+                                        <Link to={`/${profileUser.username}`}>Posts</Link>
+                                        <Link to={`/${profileUser.username}/posters`}>Posters</Link>
+                                        <Link to={`/${profileUser.username}/following`}>Following</Link>
+                                        <Link to={`/${profileUser.username}/followers`}>Followers</Link>
+                                    </div>
+
+                                    <div className="follow-btn-container panel">
+                                    { user.username !== username && (
+                                        !user.username
+                                        ? <Link to="/login"><button className="red-btn">Follow</button></Link> 
+                                        : isFollowing
+                                        ? <button className="gray-btn" onClick={ this.unfollow }>Unfollow</button>
+                                        : <button className="red-btn" onClick={ this.follow }>Follow</button>
+                                    ) }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <Switch>
+                                <Route exact path={`/${profileUser.username}`} render={ () => <Posts profileUser={ profileUser } paramsUsername={ username }/> } />
+                                <Route path={`/${profileUser.username}/posters`} render={ () => <Posters profileUser={ profileUser } paramsUsername={ username }/> } />
+                                <Route path={`/${profileUser.username}/following`} render={ () => <Following profileUser={ profileUser } paramsUsername={ username } follows={follows} /> } />
+                                <Route path={`/${profileUser.username}/followers`} render={ () => <Followers profileUser={ profileUser } paramsUsername={ username } followers={followers} /> } />
+                            </Switch>
+
+                        </div>
+                    </div> 
+                ) : (
+                    <PageNotFound />
+                ) }
                 
             </div>
         )

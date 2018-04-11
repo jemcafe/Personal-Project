@@ -1,6 +1,24 @@
 /* .profile .comments {
     
 } */
-.profile .comments > .container {
+.comments > .container {
     background: pink;
+}
+
+.comments .new-comment {
+    background: lightblue;
+}
+
+.comments .new-comment .input {
+    width: 100%;
+}
+
+.comments > .container > ul avatar {
+    width: 30px;
+    height: 30px;
+    background: rgb(228, 255, 228)
+}
+.comments > .container > ul avatar > div {
+    width: 100%;
+    height: 100%;
 }

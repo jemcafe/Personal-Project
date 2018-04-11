@@ -16,7 +16,7 @@ module.exports = {
                 }
                 res.status(200).json( userData );
             } else {
-                res.status(401).json( 'User not found' );
+                res.status(404).json( 'User not found' );
             }
 
         }).catch( err => {
@@ -37,7 +37,7 @@ module.exports = {
 
         }).catch( err => {
             console.log('profile getPosts', err);
-            res.status(500).send(err);
+            res.status(404).send(err);
         });
     },
 
@@ -53,7 +53,7 @@ module.exports = {
 
         }).catch( err => {
             console.log('profile getPosters', err);
-            res.status(500).send(err);
+            res.status(404).send(err);
         });
     },
 
@@ -77,7 +77,7 @@ module.exports = {
 
         }).catch( err => {
             console.log('profile getRecentPosters', err);
-            res.status(500).send(err);
+            res.status(404).send(err);
         });
     },
 
@@ -93,7 +93,7 @@ module.exports = {
 
         }).catch( err => {
             console.log('profile getFollows', err);
-            res.status(500).send(err);
+            res.status(404).send(err);
         });
     },
 
@@ -109,7 +109,7 @@ module.exports = {
 
         }).catch( err => {
             console.log('profile getFollowers', err);
-            res.status(500).send(err);
+            res.status(404).send(err);
         }); 
     }
 }

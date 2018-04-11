@@ -50,7 +50,7 @@ massive( process.env.CONNECTION_STRING )
     app.get('/api/posts', postsCtrl.getPosts);
     // Comments
     app.post('/api/comment', commentsCtrl.createComment);
-    app.put('/api/comment/:id/edit', commentsCtrl.updateComment);
+    app.put('/api/comment/edit', commentsCtrl.updateComment);
     app.delete('/api/comment/:id/delete', commentsCtrl.deleteComment);
     app.get('/api/post/:post_id/comments', commentsCtrl.getComments);
     // Posters

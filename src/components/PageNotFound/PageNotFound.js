@@ -1,9 +1,19 @@
 import React from 'react';
+import './PageNotFound.css';
+// Components
+// import Header from '../Header/Header';
 
-function PageNotFound () {
+function PageNotFound (props) {
     return (
         <div className="page-not-found">
-            PAGE NOT FOUND
+            {/* <Header match={props.match} history={props.history} /> */}
+            <div className="container">
+
+                <h1 style={{fontWeight:'normal',letterSpacing:'1px',wordSpacing:'2px',color: '#7b727c'}}>
+                    WHERE ARE YOU?
+                </h1>
+
+            </div>
         </div>
     )
 }

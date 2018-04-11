@@ -10,7 +10,12 @@ class Comments extends Component {
     constructor () {
         super();
         this.state = {
-            comments: [{id: 1, text: 'Text 1'}, {id: 2, text: 'Text 2'}]
+            comments: [{id: 1, text: 'This is a comment', avatar: 'https://jovemnerd.com.br/wp-content/uploads/2017/12/one-piece-mangas-mais-vendidos-de-2017.jpg', username: 'Luffy'}],
+            hasComments: 'loading',
+            showComments: false,
+            showCommentForm: false,
+            text: ''
+
         }
     }
 
@@ -18,27 +23,42 @@ class Comments extends Component {
         this.setState({ [property]: value });
     }
 
+    toggleComments = () => {
+        this.setState(prevState => ({ 
+            showComments: !prevState.showComments 
+        }));
+    }
+
     showComments = () => {
-        // axios.get('/api/comments').then( comments => {
+        this.toggleComments();
+        // axios.get('/api/post/${this.props.post.id}/comments')
+        // .then( comments => {
         //     this.setState({ 
         //         comments: comments
+        //         hasComments: comments.data.length ? 'true' : 'false'
         //     });
         // }).catch(err => console.log(err));
     }
 
-    createComment = ( ) => {
+    toggleCommentForm = () => {
+        this.setState(prevState => ({ 
+            showCommentForm: !prevState.showCommentForm 
+        }));
+    }
+
+    createComment = () => {
         // e.preventDefault();
-        // const { title, text, image_url } = this.state;
-        // if ( title && text ) {
-        //     axios.post('/api/post', { title, text, image_url }).then(() => {
-        //         axios.get(`/api/posts`).then( posts => {
+        // const { text } = this.state;
+        // const { id } = this.props.post;
+
+        // if ( text ) {
+        //     axios.post('/api/comment', { text }).then( () => {
+        //         axios.get(`/api/post/${id}/comments`).then( comments => {
 
         //             this.setState({ 
-        //                 posts: posts.data,
-        //                 hasPosts: 'true',
-        //                 title: '', 
-        //                 text: '', 
-        //                 image_url: '' 
+        //                 comments: comments.data,
+        //                 hasComments: 'true',
+        //                 text: ''
         //             });
 
         //         }).catch(err => console.log(err));
@@ -46,11 +66,11 @@ class Comments extends Component {
         // }
     }
 
-    editComment = ( ) => {
-        // axios.put(`/api/post/${id}/edit`, { title, text, image_url }).then(() => {
-        //     axios.get(`/api/posts`).then( posts => {
+    editComment = () => {
+        // axios.put(`/api/comment/edit`, { id, text }).then(() => {
+        //     axios.get(`/api/post/${id}/comments`).then( comments => {
 
-        //         this.setState({ posts: posts.data });
+        //         this.setState({ comments: comments.data });
 
         //     }).catch(err => console.log(err));
         // }).catch(err => console.log(err));
@@ -58,12 +78,12 @@ class Comments extends Component {
     
 
     deleteComment = ( ) => {
-        // axios.delete(`/api/post/${id}/delete`).then(() => {
-        //     axios.get(`/api/posts`).then( posts => {
+        // axios.delete(`/api/comment/delete/${id}`).then(() => {
+        //     axios.get(`/api/comments`).then( comments => {
 
         //         this.setState({
-        //             posts: posts.data,
-        //             hasPosts: posts.data.length ? 'true' : 'false'
+        //             comments: comments.data,
+        //             hasComments: comments.data.length ? 'true' : 'false'
         //         });
 
         //     }).catch(err => console.log(err));
@@ -71,11 +91,14 @@ class Comments extends Component {
     }
 
     render () {
+        const { comments, hasComments, showComments, showCommentForm, text } = this.state;
         const { user, profileUser, paramsUsername } = this.props;
 
-        const listOfComments = this.state.comments.map( comment => {
+        const listOfComments = comments.map( comment => {
             return <li key={comment.id}>
-                <div>{comment.text}</div>
+                <avatar><div style={{background:`url(center / cover no-repeat url(${comment.avatar})`}}></div></avatar>
+                <username>{comment.username}</username>
+                <p>{comment.text}</p>
             </li>
         })
 
@@ -83,12 +106,19 @@ class Comments extends Component {
             <div className="comments">
                 <div className="container">
 
-                    COMMENTS
-                    <ul>{ listOfComments }</ul>
+                    <a onClick={ this.showComments }>Show {comments.length} comments</a>
+                    <a onClick={ this.toggleCommentForm }>Comment</a>
 
-                    <div className="new-comment">
-                        NEW COMMENT
-                    </div>
+                    { showComments && 
+                    <ul>{ listOfComments }</ul> }
+
+                    { showCommentForm &&
+                    <form className="new-comment">
+                        <textarea className="input" value={ text } placeholder="Comment" onChange={(e) => this.handleChange('text', e.target.value)}></textarea>
+                        <div className="submit-btn">
+                            <button className="red-btn">Comment</button>
+                        </div>
+                    </form> }
 
                 </div>
             </div>

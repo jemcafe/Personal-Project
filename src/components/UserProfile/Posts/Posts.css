@@ -22,8 +22,8 @@
       margin-bottom: 18px;
       box-sizing: border-box;
       border-radius: 0 0 4px 4px;
-      /* background-color: #fce1c8; */
-      background-color: #ffe6d7;
+      /* background: #ffe6d7; */
+      background: #ffe0cc;
     }
     .new-post .input  {
       font-size: 15px;
