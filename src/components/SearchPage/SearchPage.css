@@ -48,7 +48,7 @@
 .search-page .product-list .img-container {
   width: 220px;
   height: 220px;
-  background: linear-gradient(0deg, transparent, #e4dcfc);
+  background: linear-gradient(0deg, #fff, #e4dcfc);
 }
 .search-page .product-list .img-container a {
   width: 100%;

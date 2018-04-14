@@ -12,6 +12,7 @@ class Posts extends Component {
         this.state = {
             posts: [],
             hasPosts: 'loading',
+            comments: [],
             recentPosters: [],
             hasPosters: 'loading',
             title: '',

@@ -94,3 +94,29 @@
     margin: 0 10px 5px 0;
     cursor: pointer;
 }
+
+
+/* .profile .comments {
+    
+} */
+.post .comments > .container {
+    display: flex;
+    flex-direction: column;
+    /* background: pink; */
+}
+
+.post .comments > .container > div {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+    /* background: #daffda; */
+}
+
+.post .comments > container .comment-form {
+    margin: 10px 0 0 0;
+    /* background: lightblue; */
+}
+
+.post .comments > .container > .comment-form .input {
+    width: 100%;
+}

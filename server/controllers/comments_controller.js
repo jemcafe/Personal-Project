@@ -57,15 +57,11 @@ module.exports = {
         const { session } = req;
         const { post_id } = req.params;
 
-        if ( session.user.id ) {
-
-            db.read_user_comments([post_id, session.user.id]).then( comments => {
-                res.status(200).json(comments);
-            }).catch(err => {
-                console.log(err);
-                res.status(500).send(err);
-            });
-
-        } else res.status(404).send('No user');
+        db.read_user_comments([post_id]).then( comments => {
+            res.status(200).json(comments);
+        }).catch(err => {
+            console.log(err);
+            res.status(500).send(err);
+        });
     }
 }
