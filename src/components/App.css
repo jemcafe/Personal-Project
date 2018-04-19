@@ -125,6 +125,7 @@ select {
   height: 30px;
   -moz-appearance: none; /* Firefox */
   -webkit-appearance: none; /* Safari and Chrome */
+  cursor: pointer;
 }
 
 /*  Footer  */
