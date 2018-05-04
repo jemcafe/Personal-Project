@@ -24,4 +24,6 @@ The site is also fully responsive.
 * Giant Bomb (Games)
 * Google Books (Books)
 
-If I did not use third party APIs, there would be one SQL table for all the products, i
+If I did not use third party APIs, there would only need to be one products table for all the products.
+
+[Website]('http://creationbasin.com')
