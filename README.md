@@ -26,4 +26,4 @@ The site is also fully responsive.
 
 If I did not use third party APIs, there would only need to be one products table for all the products.
 
-[Live site](http://creationbasin.com/)
+[Live site](http://creationbasin.com/#/login)
